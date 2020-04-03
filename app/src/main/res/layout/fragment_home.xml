@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.qh.wanandroid.ui.home.HomeFragment">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.appbar.AppBarLayout
+                    android:id="@+id/appBarLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="215dp"
+                    android:background="@color/transparent"
+                    app:elevation="0dp">
+
+                    <com.youth.banner.Banner
+                        android:id="@+id/banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        app:layout_scrollFlags="scroll" />
+
+                </com.google.android.material.appbar.AppBarLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvHomeList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/rlSearch"
+            android:layout_width="match_parent"
+            android:layout_height="84dp"
+            android:alpha="0"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/set_padding"
+                android:text="首页"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="40dp"
+                style="@style/text_title" />
+
+            <ImageView
+                android:id="@+id/ivSearch"
+                android:layout_width="40dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="38dp"
+                android:layout_marginRight="@dimen/padding"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:padding="7dp"
+                android:src="@mipmap/home_search" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+
+</layout>

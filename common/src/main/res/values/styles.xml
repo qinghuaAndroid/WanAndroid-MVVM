@@ -1,0 +1,45 @@
+<resources>
+
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="text_1">
+        <item name="android:textColor">@color/text_1</item>
+        <item name="android:textSize">@dimen/text_1</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="text_2">
+        <item name="android:textColor">@color/text_2</item>
+        <item name="android:textSize">@dimen/text_2</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="text_3">
+        <item name="android:textColor">@color/text_3</item>
+        <item name="android:textSize">@dimen/text_3</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+    
+    <style name="text_title">
+        <item name="android:textColor">@color/text_1</item>
+        <item name="android:textSize">@dimen/text_title</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+    
+    <style name="sep_line_horizontal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/division_line_thickening</item>
+    </style>
+
+</resources>
