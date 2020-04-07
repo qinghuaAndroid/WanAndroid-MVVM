@@ -26,6 +26,7 @@ class HomeFragment :
     private val articleAdapter by lazy { ArticleAdapter(articleList) }
     private var isRefresh = false
     private var pageNum = 0
+    private var curPosition = 0
 
     override fun createPresenter(): HomeContract.Presenter = HomePresenter()
 
@@ -38,21 +39,32 @@ class HomeFragment :
     override fun initView(view: View) {
         super.initView(view)
         initRecyclerView()
-        swipeRefresh.setOnRefreshListener { loadData() }
-        appBarLayout.addOnOffsetChangedListener(
+        mBinding.swipeRefresh.setOnRefreshListener { loadData() }
+        mBinding.appBarLayout.addOnOffsetChangedListener(
             AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
-                swipeRefresh.isEnabled = verticalOffset >= 0
+                mBinding.swipeRefresh.isEnabled = verticalOffset >= 0
             })
     }
 
     private fun initRecyclerView() {
-        rvHomeList.layoutManager = LinearLayoutManager(context)
-        rvHomeList.adapter = articleAdapter
+        mBinding.rvHomeList.layoutManager = LinearLayoutManager(context)
+        mBinding.rvHomeList.adapter = articleAdapter
         articleAdapter.loadMoreModule.loadMoreView = LoadMoreView()
         articleAdapter.loadMoreModule.setOnLoadMoreListener { loadMore() }
         articleAdapter.loadMoreModule.isAutoLoadMore = true
         //当自动加载开启，同时数据不满一屏时，是否继续执行自动加载更多(默认为true)
         articleAdapter.loadMoreModule.isEnableLoadMoreIfNotFullPage = false
+        articleAdapter.addChildClickViewIds(R.id.ivCollect)
+        articleAdapter.setOnItemChildClickListener { _, view, position ->
+            val datasBean = articleAdapter.data[position]
+            curPosition = position
+            when(view.id){
+                R.id.ivCollect -> {
+                    if (datasBean.collect) mPresenter?.unCollect(datasBean.id)
+                     else mPresenter?.collect(datasBean.id)
+                }
+            }
+        }
     }
 
     override fun loadData() {
@@ -77,7 +89,7 @@ class HomeFragment :
     }
 
     override fun showArticlesList(list: MutableList<ArticleEntity.DatasBean>) {
-        swipeRefresh.isRefreshing = false
+        mBinding.swipeRefresh.isRefreshing = false
         articleAdapter.loadMoreModule.isEnableLoadMore = true
         articleAdapter.addData(list)
         if (list.size < Const.PAGE_SIZE) {
@@ -89,32 +101,34 @@ class HomeFragment :
     }
 
     override fun showBanner(bannerList: MutableList<BannerEntity>) {
-        banner.adapter = ImageNetAdapter(bannerList)
+        mBinding.banner.adapter = ImageNetAdapter(bannerList)
     }
 
     override fun collectSuccess() {
-
+        articleAdapter.data[curPosition].collect = true
+        articleAdapter.notifyItemChanged(curPosition)
     }
 
     override fun unCollectSuccess() {
-
+        articleAdapter.data[curPosition].collect = false
+        articleAdapter.notifyItemChanged(curPosition)
     }
 
     override fun showError(errorMsg: String) {
         super.showError(errorMsg)
-        swipeRefresh.isRefreshing = false
+        mBinding.swipeRefresh.isRefreshing = false
         articleAdapter.loadMoreModule.isEnableLoadMore = (true)
         articleAdapter.loadMoreModule.loadMoreFail()
     }
 
     override fun onStart() {
         super.onStart()
-        banner.start()
+        mBinding.banner.start()
     }
 
     override fun onStop() {
         super.onStop()
-        banner.stop()
+        mBinding.banner.stop()
     }
 
 }

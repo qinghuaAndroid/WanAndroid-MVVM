@@ -20,11 +20,12 @@ class TabListFragment :
 
     private val articleList: MutableList<ArticleEntity.DatasBean> = mutableListOf()
     private val articleAdapter by lazy { ArticleAdapter(articleList) }
-    private var isRefresh = false
-    private var pageNum = 0
     private var projectId: Int = 0
     private var name: String? = null
     private var type: Int? = null
+    private var isRefresh = false
+    private var pageNum = 0
+    private var curPosition = 0
 
     override fun attachLayoutRes(): Int = R.layout.fragment_article_list
 
@@ -37,17 +38,28 @@ class TabListFragment :
     override fun initView(view: View) {
         super.initView(view)
         initRecyclerView()
-        swipeRefresh.setOnRefreshListener { loadData() }
+        mBinding.swipeRefresh.setOnRefreshListener { loadData() }
     }
 
     private fun initRecyclerView() {
+        mBinding.rvTabList.layoutManager = LinearLayoutManager(context)
+        mBinding.rvTabList.adapter = articleAdapter
         articleAdapter.loadMoreModule.setOnLoadMoreListener { loadMore() }
         articleAdapter.loadMoreModule.loadMoreView = LoadMoreView()
         articleAdapter.loadMoreModule.isAutoLoadMore = true
         //当自动加载开启，同时数据不满一屏时，是否继续执行自动加载更多(默认为true)
         articleAdapter.loadMoreModule.isEnableLoadMoreIfNotFullPage = false
-        rvTabList.layoutManager = LinearLayoutManager(context)
-        rvTabList.adapter = articleAdapter
+        articleAdapter.addChildClickViewIds(R.id.ivCollect)
+        articleAdapter.setOnItemChildClickListener { _, view, position ->
+            val datasBean = articleAdapter.data[position]
+            curPosition = position
+            when(view.id){
+                R.id.ivCollect -> {
+                    if (datasBean.collect) mPresenter?.unCollect(datasBean.id)
+                    else mPresenter?.collect(datasBean.id)
+                }
+            }
+        }
     }
 
     override fun loadData() {
@@ -70,7 +82,7 @@ class TabListFragment :
     }
 
     override fun showList(list: MutableList<ArticleEntity.DatasBean>) {
-        swipeRefresh.isRefreshing = false
+        mBinding.swipeRefresh.isRefreshing = false
         articleAdapter.loadMoreModule.isEnableLoadMore = true
         if (isRefresh) {
             articleAdapter.setList(list)
@@ -87,16 +99,18 @@ class TabListFragment :
 
     override fun showError(errorMsg: String) {
         super.showError(errorMsg)
-        swipeRefresh.isRefreshing = false
+        mBinding.swipeRefresh.isRefreshing = false
         articleAdapter.loadMoreModule.isEnableLoadMore = (true)
         articleAdapter.loadMoreModule.loadMoreFail()
     }
 
     override fun collectSuccess() {
-
+        articleAdapter.data[curPosition].collect = true
+        articleAdapter.notifyItemChanged(curPosition)
     }
 
     override fun unCollectSuccess() {
-
+        articleAdapter.data[curPosition].collect = false
+        articleAdapter.notifyItemChanged(curPosition)
     }
 }

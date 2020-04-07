@@ -9,21 +9,23 @@ import androidx.databinding.ViewDataBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
+import java.lang.RuntimeException
 
 /**
  * Created by Cy on 2018/9/27.
  */
-abstract class BaseFragment<B : ViewDataBinding?> : RxFragment(), CoroutineScope by MainScope() {
-    protected var mBinding: B? = null
+abstract class BaseFragment<B : ViewDataBinding> : RxFragment(), CoroutineScope by MainScope() {
+    protected lateinit var mBinding: B
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        if (attachLayoutRes() != 0) {
-            mBinding = DataBindingUtil.inflate<B>(inflater, attachLayoutRes(), container, false)
+        if (attachLayoutRes() == 0) {
+            throw RuntimeException("Please set the page layout")
         }
-        return mBinding!!.root
+        mBinding = DataBindingUtil.inflate<B>(inflater, attachLayoutRes(), container, false)
+        return mBinding.root
     }
 
     override fun onViewCreated(

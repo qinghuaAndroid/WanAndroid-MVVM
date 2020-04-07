@@ -47,8 +47,8 @@ class TabFragment : BaseMvpFragment<TabContract.View, TabContract.Presenter, Fra
             it.name?.let { it1 -> titleList.add(it1) }
         }
         activity?.let {
-            viewPager.adapter = ViewPagerAdapter(it, fragmentList)
-            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            mBinding.viewPager.adapter = ViewPagerAdapter(it, fragmentList)
+            TabLayoutMediator(mBinding.tabLayout, mBinding.viewPager) { tab, position ->
                 tab.text = titleList[position]
             }.attach()
         }

@@ -32,14 +32,12 @@ interface ApiService {
     /**
      * 收藏
      */
-    @FormUrlEncoded
     @POST("/lg/collect/{id}/json")
     fun collect(@Path("id") id: Int): Observable<HttpResult<Any>>
 
     /**
      * 取消收藏
      */
-    @FormUrlEncoded
     @POST("/lg/uncollect_originId/{id}/json")
     fun unCollect(@Path("id") id: Int): Observable<HttpResult<Any>>
 

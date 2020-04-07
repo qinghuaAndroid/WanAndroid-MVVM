@@ -47,11 +47,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     private fun initViewPager() {
-        viewPager.isUserInputEnabled = false
-        viewPager.adapter = ViewPagerAdapter(this, fragments)
-        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        mBinding.viewPager.isUserInputEnabled = false
+        mBinding.viewPager.adapter = ViewPagerAdapter(this, fragments)
+        mBinding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                btmNavigation.selectedItemId = when (position) {
+                mBinding.btmNavigation.selectedItemId = when (position) {
                     0 -> R.id.menu_home
                     1 -> R.id.menu_project
                     2 -> R.id.menu_square
@@ -68,14 +68,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     private fun initBottom() {
-        btmNavigation.run {
+        mBinding.btmNavigation.run {
             setOnNavigationItemSelectedListener { item ->
                 when (item.itemId) {
-                    R.id.menu_home -> viewPager.currentItem = 0
-                    R.id.menu_project -> viewPager.currentItem = 1
-                    R.id.menu_square -> viewPager.currentItem = 2
-                    R.id.menu_official_account -> viewPager.currentItem = 3
-                    R.id.menu_mine -> viewPager.currentItem = 4
+                    R.id.menu_home -> mBinding.viewPager.currentItem = 0
+                    R.id.menu_project -> mBinding.viewPager.currentItem = 1
+                    R.id.menu_square -> mBinding.viewPager.currentItem = 2
+                    R.id.menu_official_account -> mBinding.viewPager.currentItem = 3
+                    R.id.menu_mine -> mBinding.viewPager.currentItem = 4
                 }
                 // 这里注意返回true,否则点击失效
                 true
