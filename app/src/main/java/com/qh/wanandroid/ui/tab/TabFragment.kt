@@ -9,7 +9,6 @@ import com.qh.wanandroid.adapter.ViewPagerAdapter
 import com.qh.wanandroid.bean.TabEntity
 import com.qh.wanandroid.constant.Const
 import com.qh.wanandroid.databinding.FragmentTabBinding
-import kotlinx.android.synthetic.main.fragment_tab.*
 
 /**
  * @author FQH

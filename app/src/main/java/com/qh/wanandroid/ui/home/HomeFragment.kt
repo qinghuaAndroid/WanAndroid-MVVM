@@ -2,6 +2,7 @@ package com.qh.wanandroid.ui.home
 
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.common.constant.Const
 import com.example.devlibrary.mvp.BaseMvpFragment
 import com.example.devlibrary.widget.LoadMoreView
 import com.google.android.material.appbar.AppBarLayout
@@ -47,16 +48,18 @@ class HomeFragment :
     private fun initRecyclerView() {
         rvHomeList.layoutManager = LinearLayoutManager(context)
         rvHomeList.adapter = articleAdapter
-        articleAdapter.setOnLoadMoreListener({ loadMore() }, rvHomeList)
-        articleAdapter.setLoadMoreView(LoadMoreView())
+        articleAdapter.loadMoreModule.loadMoreView = LoadMoreView()
+        articleAdapter.loadMoreModule.setOnLoadMoreListener { loadMore() }
+        articleAdapter.loadMoreModule.isAutoLoadMore = true
+        //当自动加载开启，同时数据不满一屏时，是否继续执行自动加载更多(默认为true)
+        articleAdapter.loadMoreModule.isEnableLoadMoreIfNotFullPage = false
     }
 
     override fun loadData() {
+        // 这里的作用是防止下拉刷新的时候还可以上拉加载
+        articleAdapter.loadMoreModule.isEnableLoadMore = false
+        // 下拉刷新，需要重置页数
         pageNum = 0
-        //这里的作用是防止下拉刷新的时候还可以上拉加载
-        articleAdapter.setEnableLoadMore(false)
-        articleList.clear()
-        articleAdapter.setNewData(articleList)
         isRefresh = true
         mPresenter?.loadBanner()
         mPresenter?.loadTopArticles()
@@ -70,16 +73,19 @@ class HomeFragment :
 
     override fun showTopArticlesList(list: MutableList<ArticleEntity.DatasBean>) {
         mPresenter?.loadArticles(pageNum)
-        articleAdapter.addData(list)
+        articleAdapter.setList(list)
     }
 
     override fun showArticlesList(list: MutableList<ArticleEntity.DatasBean>) {
-        if (isRefresh) {
-            swipeRefresh.isRefreshing = false
-            articleAdapter.setEnableLoadMore(true)
-        }
+        swipeRefresh.isRefreshing = false
+        articleAdapter.loadMoreModule.isEnableLoadMore = true
         articleAdapter.addData(list)
-        articleAdapter.loadMoreComplete()
+        if (list.size < Const.PAGE_SIZE) {
+            //如果不够一页,显示没有更多数据布局
+            articleAdapter.loadMoreModule.loadMoreEnd()
+        } else {
+            articleAdapter.loadMoreModule.loadMoreComplete()
+        }
     }
 
     override fun showBanner(bannerList: MutableList<BannerEntity>) {
@@ -96,12 +102,9 @@ class HomeFragment :
 
     override fun showError(errorMsg: String) {
         super.showError(errorMsg)
-        if (isRefresh) {
-            swipeRefresh.isRefreshing = false
-            articleAdapter.setEnableLoadMore(true)
-        } else {
-            articleAdapter.loadMoreFail()
-        }
+        swipeRefresh.isRefreshing = false
+        articleAdapter.loadMoreModule.isEnableLoadMore = (true)
+        articleAdapter.loadMoreModule.loadMoreFail()
     }
 
     override fun onStart() {

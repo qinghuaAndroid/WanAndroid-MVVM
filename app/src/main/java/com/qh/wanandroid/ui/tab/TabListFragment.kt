@@ -9,7 +9,6 @@ import com.qh.wanandroid.adapter.ArticleAdapter
 import com.qh.wanandroid.bean.ArticleEntity
 import com.qh.wanandroid.constant.Const
 import com.qh.wanandroid.databinding.FragmentArticleListBinding
-import kotlinx.android.synthetic.main.fragment_article_list.*
 
 /**
  * @author FQH
@@ -42,18 +41,20 @@ class TabListFragment :
     }
 
     private fun initRecyclerView() {
+        articleAdapter.loadMoreModule.setOnLoadMoreListener { loadMore() }
+        articleAdapter.loadMoreModule.loadMoreView = LoadMoreView()
+        articleAdapter.loadMoreModule.isAutoLoadMore = true
+        //当自动加载开启，同时数据不满一屏时，是否继续执行自动加载更多(默认为true)
+        articleAdapter.loadMoreModule.isEnableLoadMoreIfNotFullPage = false
         rvTabList.layoutManager = LinearLayoutManager(context)
         rvTabList.adapter = articleAdapter
-        articleAdapter.setOnLoadMoreListener({ loadMore() }, rvTabList)
-        articleAdapter.setLoadMoreView(LoadMoreView())
     }
 
     override fun loadData() {
+        // 这里的作用是防止下拉刷新的时候还可以上拉加载
+        articleAdapter.loadMoreModule.isEnableLoadMore = false
+        // 下拉刷新，需要重置页数
         pageNum = 0
-        //这里的作用是防止下拉刷新的时候还可以上拉加载
-        articleAdapter.setEnableLoadMore(false)
-        articleList.clear()
-        articleAdapter.setNewData(articleList)
         isRefresh = true
         type?.let { mPresenter?.loadData(it, projectId, pageNum) }
     }
@@ -69,22 +70,26 @@ class TabListFragment :
     }
 
     override fun showList(list: MutableList<ArticleEntity.DatasBean>) {
+        swipeRefresh.isRefreshing = false
+        articleAdapter.loadMoreModule.isEnableLoadMore = true
         if (isRefresh) {
-            swipeRefresh.isRefreshing = false
-            articleAdapter.setEnableLoadMore(true)
+            articleAdapter.setList(list)
+        } else {
+            articleAdapter.addData(list)
         }
-        articleAdapter.addData(list)
-        articleAdapter.loadMoreComplete()
+        if (list.size < com.example.common.constant.Const.PAGE_SIZE) {
+            //如果不够一页,显示没有更多数据布局
+            articleAdapter.loadMoreModule.loadMoreEnd()
+        } else {
+            articleAdapter.loadMoreModule.loadMoreComplete()
+        }
     }
 
     override fun showError(errorMsg: String) {
         super.showError(errorMsg)
-        if (isRefresh) {
-            swipeRefresh.isRefreshing = false
-            articleAdapter.setEnableLoadMore(true)
-        } else {
-            articleAdapter.loadMoreFail()
-        }
+        swipeRefresh.isRefreshing = false
+        articleAdapter.loadMoreModule.isEnableLoadMore = (true)
+        articleAdapter.loadMoreModule.loadMoreFail()
     }
 
     override fun collectSuccess() {

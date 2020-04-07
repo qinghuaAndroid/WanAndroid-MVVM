@@ -12,7 +12,6 @@ import com.qh.wanandroid.ui.home.HomeFragment
 import com.qh.wanandroid.ui.me.MineFragment
 import com.qh.wanandroid.ui.system.SystemFragment
 import com.qh.wanandroid.ui.tab.TabFragment
-import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {

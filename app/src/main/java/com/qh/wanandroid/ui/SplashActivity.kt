@@ -9,7 +9,6 @@ import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.jetbrains.anko.startActivity
 
 /**
  * @author FQH

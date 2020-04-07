@@ -52,7 +52,7 @@ ext {
     glideokhttpVersion = '1.3.1'
     loggerVersion = '2.2.0'
     circleImageviewVersion = '3.0.0'
-    BaseRecyclerViewAdapterHelperVersion = '2.9.46'
+    BaseRecyclerViewAdapterHelperVersion = '3.0.2'
     SwtichButtonVersion = '2.0.0'
     PhotoViewVersion = '2.1.4'
     glideTransformationVersion = '4.0.1'
