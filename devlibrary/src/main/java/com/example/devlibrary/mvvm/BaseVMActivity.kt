@@ -17,4 +17,11 @@ abstract class BaseVMActivity<VM : BaseViewModel, B : ViewDataBinding> : BaseAct
 
     abstract fun startObserve()
 
+    open fun showProgressDialog() {
+
+    }
+
+    open fun dismissProgressDialog() {
+
+    }
 }

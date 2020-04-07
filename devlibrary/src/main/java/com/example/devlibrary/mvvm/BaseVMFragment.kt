@@ -18,4 +18,11 @@ abstract class BaseVMFragment<VM : BaseViewModel, B : ViewDataBinding> : BaseFra
 
     abstract fun startObserve()
 
+    open fun showProgressDialog() {
+
+    }
+
+    open fun dismissProgressDialog() {
+
+    }
 }

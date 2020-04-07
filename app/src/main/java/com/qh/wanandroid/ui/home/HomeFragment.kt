@@ -12,7 +12,6 @@ import com.qh.wanandroid.adapter.ImageNetAdapter
 import com.qh.wanandroid.bean.ArticleEntity
 import com.qh.wanandroid.bean.BannerEntity
 import com.qh.wanandroid.databinding.FragmentHomeBinding
-import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
  * @author FQH

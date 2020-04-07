@@ -9,7 +9,6 @@ import androidx.databinding.ViewDataBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
-import java.lang.RuntimeException
 
 /**
  * Created by Cy on 2018/9/27.

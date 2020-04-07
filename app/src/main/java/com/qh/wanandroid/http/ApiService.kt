@@ -94,6 +94,12 @@ interface ApiService {
     fun getRank(@Path("pageNum") pageNum: Int): Observable<HttpResult<RankEntity>>
 
     /**
+     * 获取个人积分
+     */
+    @GET("/lg/coin/userinfo/json")
+    suspend fun getIntegral():HttpResult<IntegralEntity>
+
+    /**
      * 积分记录
      */
     @GET("/lg/coin/list/{pageNum}/json")
@@ -119,6 +125,14 @@ interface ApiService {
         @Query("title") title: String,
         @Query("link") link: String
     ): Observable<HttpResult<Any>>
+
+    /**
+     * 登录
+     */
+    @FormUrlEncoded
+    @POST("/user/login")
+    suspend fun login(@Field("username") username: String,
+              @Field("password") password: String): HttpResult<UserEntity>
 
     /**
      * 注册

@@ -8,7 +8,6 @@ import com.example.devlibrary.utils.AutoDensityUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
-import java.lang.RuntimeException
 
 /**
  *
