@@ -20,38 +20,38 @@ public class SpUtils {
     /**
      * 清楚全部数据
      */
-    public static void clearPreference() {
-        getsPreferences().edit().clear().apply();
+    public static void clearAll() {
+        getSp().edit().clear().apply();
     }
 
-    private static SharedPreferences getsPreferences() {
+    private static SharedPreferences getSp() {
         return SpHolder.sPreferences;
     }
 
     /**
      * 删除指定key对应的数据
      */
-    public static void clearPreference(String key) {
-        getsPreferences().edit().remove(key).apply();
+    public static void clear(String key) {
+        getSp().edit().remove(key).apply();
     }
 
     /**
      * 查询某个key是否存在
      */
     public static boolean contains(String key) {
-        return getsPreferences().contains(key);
+        return getSp().contains(key);
     }
 
     /**
      * 获取所有存储数据
      */
     public static Map<String, ?> getAll() {
-        return getsPreferences().getAll();
+        return getSp().getAll();
     }
 
 
-    public static void putSharedPreferences(String key, Object value) {
-        SharedPreferences.Editor editor = getsPreferences().edit();
+    public static void put(String key, Object value) {
+        SharedPreferences.Editor editor = getSp().edit();
         if (value instanceof Integer) {
             editor.putInt(key, (Integer) value);
         } else if (value instanceof Float) {
@@ -86,20 +86,20 @@ public class SpUtils {
         return serStr;
     }
 
-    public static <T> T getSharedPreferences(String key, T defValue) {
+    public static <T> T get(String key, T defValue) {
         Object value = null;
         if (defValue instanceof Integer) {
-            value = getsPreferences().getInt(key, (Integer) defValue);
+            value = getSp().getInt(key, (Integer) defValue);
         } else if (defValue instanceof Float) {
-            value = getsPreferences().getFloat(key, (Float) defValue);
+            value = getSp().getFloat(key, (Float) defValue);
         } else if (defValue instanceof Long) {
-            value = getsPreferences().getLong(key, (Long) defValue);
+            value = getSp().getLong(key, (Long) defValue);
         } else if (defValue instanceof Boolean) {
-            value = getsPreferences().getBoolean(key, (Boolean) defValue);
+            value = getSp().getBoolean(key, (Boolean) defValue);
         } else if (defValue instanceof String) {
-            value = getsPreferences().getString(key, (String) defValue);
+            value = getSp().getString(key, (String) defValue);
         } else {
-            value = deSerialization(getsPreferences().getString(key, serialize(defValue)));
+            value = deSerialization(getSp().getString(key, serialize(defValue)));
         }
         return (T) value;
     }

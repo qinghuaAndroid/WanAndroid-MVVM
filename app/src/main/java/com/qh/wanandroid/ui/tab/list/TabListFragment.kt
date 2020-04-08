@@ -1,7 +1,9 @@
 package com.qh.wanandroid.ui.tab.list
 
+import android.content.Intent
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.example.devlibrary.mvp.BaseMvpFragment
 import com.example.devlibrary.widget.LoadMoreView
 import com.qh.wanandroid.R
@@ -9,6 +11,7 @@ import com.qh.wanandroid.adapter.ArticleAdapter
 import com.qh.wanandroid.bean.ArticleEntity
 import com.qh.wanandroid.constant.Const
 import com.qh.wanandroid.databinding.FragmentArticleListBinding
+import com.qh.wanandroid.ui.BrowserNormalActivity
 
 /**
  * @author FQH
@@ -49,15 +52,27 @@ class TabListFragment :
         articleAdapter.loadMoreModule.isAutoLoadMore = true
         //当自动加载开启，同时数据不满一屏时，是否继续执行自动加载更多(默认为true)
         articleAdapter.loadMoreModule.isEnableLoadMoreIfNotFullPage = false
+        articleAdapter.setOnItemClickListener(mOnItemClickListener)
         articleAdapter.addChildClickViewIds(R.id.ivCollect)
         articleAdapter.setOnItemChildClickListener { _, view, position ->
             val datasBean = articleAdapter.data[position]
             curPosition = position
-            when(view.id){
+            when (view.id) {
                 R.id.ivCollect -> {
                     if (datasBean.collect) mPresenter?.unCollect(datasBean.id)
                     else mPresenter?.collect(datasBean.id)
                 }
+            }
+        }
+    }
+
+    private val mOnItemClickListener = OnItemClickListener { _, _, position ->
+        val datasBean = articleAdapter.data[position]
+        activity?.let {
+            Intent(it, BrowserNormalActivity::class.java).run {
+                putExtra(com.example.common.constant.Const.WEB_TITLE, datasBean.title)
+                putExtra(com.example.common.constant.Const.WEB_URL, datasBean.link)
+                it.startActivity(this)
             }
         }
     }

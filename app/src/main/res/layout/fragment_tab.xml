@@ -14,11 +14,12 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:background="@color/colorAccent"
             app:tabMode="scrollable"
             app:tabIndicatorColor="@color/theme"
             app:tabIndicatorFullWidth="false"
             app:tabSelectedTextColor="@color/theme"
-            app:tabTextColor="@color/black" />
+            app:tabTextColor="@color/white" />
 
         <View style="@style/sep_line_horizontal" />
 

@@ -7,6 +7,9 @@ import androidx.core.content.ContextCompat;
 
 import com.example.devlibrary.app.App;
 
+/**
+ * @author FQH
+ */
 public class ResourcesUtils {
     /**
      * 获取strings.xml资源文件字符串

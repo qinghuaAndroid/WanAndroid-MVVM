@@ -4,6 +4,8 @@ import com.qh.wanandroid.ui.login.LoginRepository
 import com.qh.wanandroid.ui.login.LoginViewModel
 import com.qh.wanandroid.ui.me.MineRepository
 import com.qh.wanandroid.ui.me.MineViewModel
+import com.qh.wanandroid.ui.system.act.SystemRepository
+import com.qh.wanandroid.ui.system.act.SystemViewModel
 import com.qh.wanandroid.ui.system.list.SystemListRepository
 import com.qh.wanandroid.ui.system.list.SystemListViewModel
 import com.qh.wanandroid.ui.system.navigation.NavigationRepository
@@ -21,6 +23,7 @@ val viewModelModule = module {
     viewModel { LoginViewModel(get()) }
     viewModel { SystemListViewModel(get()) }
     viewModel { NavigationViewModel(get()) }
+    viewModel { SystemViewModel(get()) }
 }
 
 val repositoryModule = module {
@@ -28,6 +31,7 @@ val repositoryModule = module {
     single { LoginRepository() }
     single { SystemListRepository() }
     single { NavigationRepository() }
+    single { SystemRepository() }
 }
 
 val appModule = listOf(viewModelModule, repositoryModule)

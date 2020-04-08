@@ -43,6 +43,7 @@ class LoginActivity : BaseVMActivity<LoginViewModel, ActivityLoginBinding>() {
     }
 
     override fun initView() {
+        setPageTitle(getString(R.string.login))
         mBinding.lifecycleOwner = this
         mBinding.viewModel = mViewModel
         mBinding.ivClear.onClick {
@@ -51,13 +52,13 @@ class LoginActivity : BaseVMActivity<LoginViewModel, ActivityLoginBinding>() {
         }
         mBinding.ivPasswordVisibility.onClick {
             mBinding.etPassword.requestFocus()
-            mBinding.etPassword.transformationMethod = if (isPasswordShow){
+            mBinding.etPassword.transformationMethod = if (isPasswordShow) {
                 isPasswordShow = false
                 //显示密码状态
                 mBinding.ivPasswordVisibility.setImageResource(R.mipmap.password_show)
                 PasswordTransformationMethod.getInstance()
 
-            }else {
+            } else {
                 isPasswordShow = true
                 //显示明文状态,手动将光标移到最后
                 mBinding.ivPasswordVisibility.setImageResource(R.mipmap.password_hide)

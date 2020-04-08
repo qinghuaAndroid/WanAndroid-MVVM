@@ -9,4 +9,6 @@ object Const {
     const val IS_LOGIN = "isLogin"
     const val USER_GSON = "userGson"
     const val LOGIN_SUCCESS = "loginSuccess"
+    const val WEB_URL = "webUrl"
+    const val WEB_TITLE = "webTitle"
 }
