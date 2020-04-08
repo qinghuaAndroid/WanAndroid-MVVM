@@ -3,7 +3,6 @@ package com.example.devlibrary.network
 import com.example.devlibrary.BuildConfig
 import com.example.devlibrary.app.App
 import com.example.devlibrary.network.cookies.NovateCookieManger
-import com.example.devlibrary.network.interceptor.CacheInterceptor
 import com.example.devlibrary.network.interceptor.HeaderInterceptor
 import okhttp3.Cache
 import okhttp3.ConnectionPool
@@ -50,7 +49,8 @@ object HttpsUtils {
             .addInterceptor(HeaderInterceptor())
             .cookieJar(NovateCookieManger(App.sContext))
             .cache(cache)
-            .addNetworkInterceptor(CacheInterceptor(App.sContext))
+                //下面缓存拦截器会拦截网络请求，可能导致请求参数一致请求的只走缓存，不走服务器
+//            .addNetworkInterceptor(CacheInterceptor(App.sContext))
             .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)

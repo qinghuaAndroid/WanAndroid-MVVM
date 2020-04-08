@@ -78,7 +78,7 @@ class HomePresenter : BasePresenter<HomeContract.Model, HomeContract.View>(),
                 RxObserver<Any>() {
                 override fun onSuccess(t: Any?) {
                     mView?.hideLoading()
-                    t?.let { mView?.collectSuccess() }
+                    mView?.collectSuccess()
                 }
 
                 override fun onFail(errorCode: Int, errorMsg: String?) {
@@ -96,7 +96,7 @@ class HomePresenter : BasePresenter<HomeContract.Model, HomeContract.View>(),
                 RxObserver<Any>() {
                 override fun onSuccess(t: Any?) {
                     mView?.hideLoading()
-                    t?.let { mView?.unCollectSuccess() }
+                    mView?.unCollectSuccess()
                 }
 
                 override fun onFail(errorCode: Int, errorMsg: String?) {

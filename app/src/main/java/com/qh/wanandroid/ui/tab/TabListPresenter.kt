@@ -19,18 +19,19 @@ class TabListPresenter : BasePresenter<TabListContract.Model, TabListContract.Vi
     override fun loadData(type: Int, id: Int, pageNum: Int) {
         mView?.showLoading()
         val disposableObserver =
-            mModel?.loadData(type, id, pageNum)?.compose(RxHelper.handleResult())?.subscribeWith(object :
-                RxObserver<ArticleEntity>() {
-                override fun onSuccess(t: ArticleEntity?) {
-                    mView?.hideLoading()
-                    t?.datas?.let { mView?.showList(it) }
-                }
+            mModel?.loadData(type, id, pageNum)?.compose(RxHelper.handleResult())
+                ?.subscribeWith(object :
+                    RxObserver<ArticleEntity>() {
+                    override fun onSuccess(t: ArticleEntity?) {
+                        mView?.hideLoading()
+                        t?.datas?.let { mView?.showList(it) }
+                    }
 
-                override fun onFail(errorCode: Int, errorMsg: String?) {
-                    mView?.hideLoading()
-                    errorMsg?.let { mView?.showError(it) }
-                }
-            })
+                    override fun onFail(errorCode: Int, errorMsg: String?) {
+                        mView?.hideLoading()
+                        errorMsg?.let { mView?.showError(it) }
+                    }
+                })
         addDisposable(disposableObserver)
     }
 
@@ -41,7 +42,7 @@ class TabListPresenter : BasePresenter<TabListContract.Model, TabListContract.Vi
                 RxObserver<Any>() {
                 override fun onSuccess(t: Any?) {
                     mView?.hideLoading()
-                    t?.let { mView?.collectSuccess() }
+                    mView?.collectSuccess()
                 }
 
                 override fun onFail(errorCode: Int, errorMsg: String?) {
@@ -59,7 +60,7 @@ class TabListPresenter : BasePresenter<TabListContract.Model, TabListContract.Vi
                 RxObserver<Any>() {
                 override fun onSuccess(t: Any?) {
                     mView?.hideLoading()
-                    t?.let { mView?.unCollectSuccess() }
+                    mView?.unCollectSuccess()
                 }
 
                 override fun onFail(errorCode: Int, errorMsg: String?) {

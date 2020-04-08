@@ -3,6 +3,8 @@ package com.qh.wanandroid.ui.login
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import androidx.lifecycle.Observer
+import com.example.common.constant.Const
+import com.example.devlibrary.helper.LiveEventBusHelper
 import com.example.devlibrary.mvvm.BaseVMActivity
 import com.example.devlibrary.utils.ToastUtils
 import com.qh.wanandroid.R
@@ -24,6 +26,7 @@ class LoginActivity : BaseVMActivity<LoginViewModel, ActivityLoginBinding>() {
             Observer {
                 if (it.showProgress) showProgressDialog()
                 it.showSuccess?.let {
+                    LiveEventBusHelper.post(Const.LOGIN_SUCCESS, true)
                     dismissProgressDialog()
                     finish()
                 }

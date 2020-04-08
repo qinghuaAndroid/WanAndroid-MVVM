@@ -2,6 +2,8 @@ package com.qh.wanandroid.ui.me
 
 import android.view.View
 import androidx.lifecycle.Observer
+import com.example.common.constant.Const
+import com.example.devlibrary.helper.LiveEventBusHelper
 import com.example.devlibrary.mvvm.BaseVMFragment
 import com.example.devlibrary.utils.StringUtils
 import com.qh.wanandroid.R
@@ -32,7 +34,8 @@ class MineFragment : BaseVMFragment<MineViewModel, FragmentMineBinding>() {
     override fun attachLayoutRes(): Int = R.layout.fragment_mine
 
     override fun initData() {
-
+        LiveEventBusHelper.observe(Const.LOGIN_SUCCESS, Boolean::class.java, this,
+            Observer<Boolean> { loadData() })
     }
 
     override fun initView(view: View) {
