@@ -63,5 +63,7 @@ dependencies {
     //DoraemonKit
     debugImplementation 'com.didichuxing.doraemonkit:doraemonkit:2.2.2'
     releaseImplementation 'com.didichuxing.doraemonkit:doraemonkit-no-op:2.2.2'
+    //标签控件
+    implementation 'com.github.donkingliang:LabelsView:1.6.1'
 
 }

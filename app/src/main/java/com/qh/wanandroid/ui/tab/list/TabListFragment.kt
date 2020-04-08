@@ -1,4 +1,4 @@
-package com.qh.wanandroid.ui.tab
+package com.qh.wanandroid.ui.tab.list
 
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager

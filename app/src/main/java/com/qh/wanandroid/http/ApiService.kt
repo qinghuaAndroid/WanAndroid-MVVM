@@ -71,7 +71,7 @@ interface ApiService {
      * 体系
      */
     @GET("/tree/json")
-    fun getSystemList(): Observable<HttpResult<MutableList<SystemListEntity>>>
+    suspend fun getSystemList(): HttpResult<MutableList<SystemListEntity>>
 
 
     /**
@@ -85,7 +85,7 @@ interface ApiService {
      * 导航
      */
     @GET("/navi/json")
-    fun getNavigation(): Observable<HttpResult<MutableList<NavigationEntity>>>
+    suspend fun getNavigation(): HttpResult<MutableList<NavigationEntity>>
 
     /**
      * 排名
@@ -97,7 +97,7 @@ interface ApiService {
      * 获取个人积分
      */
     @GET("/lg/coin/userinfo/json")
-    suspend fun getIntegral():HttpResult<IntegralEntity>
+    suspend fun getIntegral(): HttpResult<IntegralEntity>
 
     /**
      * 积分记录
@@ -131,8 +131,10 @@ interface ApiService {
      */
     @FormUrlEncoded
     @POST("/user/login")
-    suspend fun login(@Field("username") username: String,
-              @Field("password") password: String): HttpResult<UserEntity>
+    suspend fun login(
+        @Field("username") username: String,
+        @Field("password") password: String
+    ): HttpResult<UserEntity>
 
     /**
      * 注册

@@ -1,4 +1,4 @@
-package com.qh.wanandroid.ui.tab
+package com.qh.wanandroid.ui.tab.list
 
 import com.example.devlibrary.mvp.IModel
 import com.example.devlibrary.mvp.IPresenter

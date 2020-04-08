@@ -5,4 +5,6 @@
     <string name="tab_3">广场</string>
     <string name="tab_4">公众号</string>
     <string name="tab_5">我</string>
+    <string name="system">体系</string>
+    <string name="navigation">导航</string>
 </resources>

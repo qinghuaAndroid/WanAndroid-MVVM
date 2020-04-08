@@ -9,6 +9,7 @@ import com.qh.wanandroid.adapter.ViewPagerAdapter
 import com.qh.wanandroid.bean.TabEntity
 import com.qh.wanandroid.constant.Const
 import com.qh.wanandroid.databinding.FragmentTabBinding
+import com.qh.wanandroid.ui.tab.list.TabListFragment
 
 /**
  * @author FQH
