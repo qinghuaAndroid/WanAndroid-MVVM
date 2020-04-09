@@ -2,6 +2,7 @@ package com.qh.wanandroid.ui.girl
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.example.devlibrary.mvp.BaseMvpActivity
 import com.example.devlibrary.widget.LoadMoreView
 import com.qh.wanandroid.R
@@ -24,11 +25,10 @@ class GirlActivity :
     override fun createPresenter(): GirlContract.Presenter = GirlPresenter()
 
     override fun setMeiziList(resultBeanList: List<GankIoDataBean.ResultBean>) {
-        if (page == 1) {
-            girlAdapter.setList(resultBeanList)
-        } else {
-            girlAdapter.addData(resultBeanList)
+        val filter = resultBeanList.filter {
+            it.url.endsWith(".jpg", true)
         }
+        girlAdapter.addData(filter)
         if (resultBeanList.size < limit) {
             girlAdapter.loadMoreModule.loadMoreEnd(false)
         } else {
@@ -37,10 +37,7 @@ class GirlActivity :
     }
 
     override fun loadMeiziListFail(errorMsg: String) {
-        --page
-        if (page > 0) {
-            girlAdapter.loadMoreModule.loadMoreFail()
-        }
+        girlAdapter.loadMoreModule.loadMoreFail()
     }
 
     override fun attachLayoutRes(): Int = R.layout.activity_girl
@@ -51,7 +48,7 @@ class GirlActivity :
 
     override fun initView() {
         super.initView()
-        mBinding.rvGirl.layoutManager = LinearLayoutManager(this)
+        mBinding.rvGirl.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         mBinding.rvGirl.adapter = girlAdapter
         PagerSnapHelper().attachToRecyclerView(mBinding.rvGirl)
         girlAdapter.loadMoreModule.loadMoreView = LoadMoreView()

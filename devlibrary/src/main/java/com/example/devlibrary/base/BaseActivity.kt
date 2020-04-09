@@ -53,7 +53,7 @@ abstract class BaseActivity<B : ViewDataBinding> : RxActivity(), CoroutineScope 
         val themeColor = if (!SettingUtil.getIsNightMode()) {
             SettingUtil.getColor()
         } else {
-            ResourcesUtils.getColor(R.color.colorAccent)
+            ResourcesUtils.getColor(R.color.colorPrimary)
         }
         StatusBarUtil.setColor(this, themeColor, 0)
         if (this.supportActionBar != null) {

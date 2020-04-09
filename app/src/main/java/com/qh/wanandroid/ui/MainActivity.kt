@@ -51,7 +51,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         mBinding.viewPager.adapter = ViewPagerAdapter(this, fragments)
         mBinding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                setPageTitle(mBinding.btmNavigation.menu.getItem(position).title)
                 mBinding.btmNavigation.selectedItemId = when (position) {
                     0 -> R.id.menu_home
                     1 -> R.id.menu_project

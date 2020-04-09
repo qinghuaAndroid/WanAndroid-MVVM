@@ -32,7 +32,8 @@
 
         <activity android:name=".ui.BrowserNormalActivity"/>
 
-        <activity android:name=".ui.girl.GirlActivity"/>
+        <activity android:name=".ui.girl.GirlActivity"
+            android:theme="@style/SplashTheme"/>
     </application>
 
 </manifest>

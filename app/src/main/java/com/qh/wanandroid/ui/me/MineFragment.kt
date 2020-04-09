@@ -10,7 +10,6 @@ import com.qh.wanandroid.R
 import com.qh.wanandroid.databinding.FragmentMineBinding
 import com.qh.wanandroid.ui.girl.GirlActivity
 import com.qh.wanandroid.ui.login.LoginActivity
-import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.support.v4.startActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

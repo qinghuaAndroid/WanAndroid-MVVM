@@ -3,20 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.qh.wanandroid.ui.girl.GirlActivity">
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/white">
-
-        <include layout="@layout/toolbar" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/rvGirl"
-            android:overScrollMode="never" />
-
-    </LinearLayout>
+        android:id="@+id/rvGirl"
+        android:overScrollMode="never" />
 
 </layout>

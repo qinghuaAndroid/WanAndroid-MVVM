@@ -26,7 +26,7 @@ object SettingUtil {
      * 获取主题颜色
      */
     fun getColor(): Int {
-        val defaultColor = ResourcesUtils.getColor(R.color.colorAccent)
+        val defaultColor = ResourcesUtils.getColor(R.color.colorPrimary)
         val color = SpUtils.get("color", defaultColor)
         return if (color != 0 && Color.alpha(color) != 255) {
             defaultColor
