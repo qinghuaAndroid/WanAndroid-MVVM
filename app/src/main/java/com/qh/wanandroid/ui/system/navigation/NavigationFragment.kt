@@ -1,5 +1,6 @@
 package com.qh.wanandroid.ui.system.navigation
 
+import android.content.Intent
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,6 +11,7 @@ import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.NavigationAdapter
 import com.qh.wanandroid.databinding.FragmentSystemListBinding
 import com.qh.wanandroid.listener.OnLabelClickListener
+import com.qh.wanandroid.ui.BrowserNormalActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -33,7 +35,14 @@ class NavigationFragment : BaseVMFragment<NavigationViewModel, FragmentSystemLis
         mBinding.rvSystem.adapter = navigationAdapter
         navigationAdapter.setOnLabelClickListener(object : OnLabelClickListener {
             override fun onLabelClick(helper: BaseViewHolder, i: Int, j: Int) {
-
+                val datasBean = navigationAdapter.data[i].articles[j]
+                activity?.let {
+                    Intent(it, BrowserNormalActivity::class.java).run {
+                        putExtra(com.example.common.constant.Const.WEB_TITLE, datasBean.title)
+                        putExtra(com.example.common.constant.Const.WEB_URL, datasBean.link)
+                        it.startActivity(this)
+                    }
+                }
             }
         })
     }

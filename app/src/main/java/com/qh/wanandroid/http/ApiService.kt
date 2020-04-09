@@ -78,8 +78,8 @@ interface ApiService {
      * 获取项目tab
      */
     @GET("/article/list/{pageNum}/json")
-    fun getSystemArticle(@Path("pageNum") pageNum: Int, @Query("cid") cid: Int)
-            : Observable<HttpResult<ArticleEntity>>
+    suspend fun getSystemArticle(@Path("pageNum") pageNum: Int, @Query("cid") cid: Int)
+            : HttpResult<ArticleEntity>
 
     /**
      * 导航

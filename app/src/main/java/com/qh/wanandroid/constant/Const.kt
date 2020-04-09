@@ -25,4 +25,6 @@ object Const {
     const val TYPE = "type"
     const val ID = "id"
     const val NAME = "name"
+    const val SYSTEM_ID = "systemId"
+    const val SYSTEM_TITLE = "systemTitle"
 }

@@ -1,5 +1,6 @@
 package com.qh.wanandroid.ui.system.list
 
+import android.content.Intent
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -8,8 +9,10 @@ import com.example.devlibrary.ext.showToast
 import com.example.devlibrary.mvvm.BaseVMFragment
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.SystemListAdapter
+import com.qh.wanandroid.constant.Const
 import com.qh.wanandroid.databinding.FragmentSystemListBinding
 import com.qh.wanandroid.listener.OnLabelClickListener
+import com.qh.wanandroid.ui.system.act.SystemActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -33,7 +36,16 @@ class SystemListFragment : BaseVMFragment<SystemListViewModel, FragmentSystemLis
         mBinding.rvSystem.adapter = systemListAdapter
         systemListAdapter.setOnLabelClickListener(object : OnLabelClickListener {
             override fun onLabelClick(helper: BaseViewHolder, i: Int, j: Int) {
-
+                val childrenBean = systemListAdapter.data[i].children[j]
+                val id = childrenBean.id
+                val title = childrenBean.name
+                activity?.let {
+                    Intent(it, SystemActivity::class.java).run {
+                        putExtra(Const.SYSTEM_ID, id)
+                        putExtra(Const.SYSTEM_TITLE, title)
+                        it.startActivity(this)
+                    }
+                }
             }
         })
     }
