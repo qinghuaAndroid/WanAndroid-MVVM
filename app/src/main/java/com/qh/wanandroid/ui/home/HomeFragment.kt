@@ -3,6 +3,7 @@ package com.qh.wanandroid.ui.home
 import android.content.Intent
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.example.common.constant.Const
 import com.example.devlibrary.mvp.BaseMvpFragment
@@ -54,20 +55,10 @@ class HomeFragment :
         articleAdapter.loadMoreModule.loadMoreView = LoadMoreView()
         articleAdapter.loadMoreModule.setOnLoadMoreListener { loadMore() }
         articleAdapter.loadMoreModule.isAutoLoadMore = true
-        //当自动加载开启，同时数据不满一屏时，是否继续执行自动加载更多(默认为true)
         articleAdapter.loadMoreModule.isEnableLoadMoreIfNotFullPage = false
         articleAdapter.setOnItemClickListener(mOnItemClickListener)
         articleAdapter.addChildClickViewIds(R.id.ivCollect)
-        articleAdapter.setOnItemChildClickListener { _, view, position ->
-            val datasBean = articleAdapter.data[position]
-            curPosition = position
-            when (view.id) {
-                R.id.ivCollect -> {
-                    if (datasBean.collect) mPresenter?.unCollect(datasBean.id)
-                    else mPresenter?.collect(datasBean.id)
-                }
-            }
-        }
+        articleAdapter.setOnItemChildClickListener(mOnItemChildClickListener)
     }
 
     private val mOnItemClickListener = OnItemClickListener { _, _, position ->
@@ -77,6 +68,17 @@ class HomeFragment :
                 putExtra(Const.WEB_TITLE, datasBean.title)
                 putExtra(Const.WEB_URL, datasBean.link)
                 it.startActivity(this)
+            }
+        }
+    }
+
+    private val mOnItemChildClickListener = OnItemChildClickListener { _, view, position ->
+        val datasBean = articleAdapter.data[position]
+        curPosition = position
+        when (view.id) {
+            R.id.ivCollect -> {
+                if (datasBean.collect) mPresenter?.unCollect(datasBean.id)
+                else mPresenter?.collect(datasBean.id)
             }
         }
     }

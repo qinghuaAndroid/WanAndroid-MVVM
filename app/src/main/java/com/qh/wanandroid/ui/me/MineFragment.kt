@@ -8,6 +8,7 @@ import com.example.devlibrary.mvvm.BaseVMFragment
 import com.example.devlibrary.utils.StringUtils
 import com.qh.wanandroid.R
 import com.qh.wanandroid.databinding.FragmentMineBinding
+import com.qh.wanandroid.ui.girl.GirlActivity
 import com.qh.wanandroid.ui.login.LoginActivity
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.support.v4.startActivity
@@ -40,6 +41,14 @@ class MineFragment : BaseVMFragment<MineViewModel, FragmentMineBinding>() {
 
     override fun initView(view: View) {
         mBinding.tvUserName.onClick { startActivity<LoginActivity>() }
+        mBinding.llHistory.onClick {  }//足迹
+        mBinding.llRanking.onClick {  }//排名
+        mBinding.rlIntegral.onClick {  }//我的积分
+        mBinding.rlCollect.onClick {  }//我的收藏
+        mBinding.rlArticle.onClick {  }//我的文章
+        mBinding.rlWebsite.onClick {  }//网站
+        mBinding.rlGirl.onClick { startActivity<GirlActivity>() }//轻松一下
+        mBinding.rlSet.onClick {  }//设置
     }
 
     override fun loadData() {
