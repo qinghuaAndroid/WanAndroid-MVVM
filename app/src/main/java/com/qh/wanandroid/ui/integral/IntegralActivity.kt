@@ -1,6 +1,7 @@
 package com.qh.wanandroid.ui.integral
 
 import android.animation.ValueAnimator
+import android.view.View
 import android.view.animation.DecelerateInterpolator
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +24,7 @@ class IntegralActivity : BaseVMActivity<IntegralViewModel, ActivityIntegralBindi
     private val mineViewModel by viewModel<MineViewModel>()
     private val integralViewModel by viewModel<IntegralViewModel>()
     private val integralAdapter by lazy { IntegralAdapter(R.layout.item_integral) }
+    private lateinit var headerView:View
 
     override fun startObserve() {
         mineViewModel.integralData.observe(this, Observer {
@@ -72,12 +74,18 @@ class IntegralActivity : BaseVMActivity<IntegralViewModel, ActivityIntegralBindi
     }
 
     private fun initRecyclerView() {
-        mBinding.rvIntegralList.layoutManager = LinearLayoutManager(this)
-        mBinding.rvIntegralList.adapter = integralAdapter
-        integralAdapter.loadMoreModule.loadMoreView = LoadMoreView()
-        integralAdapter.loadMoreModule.setOnLoadMoreListener { loadMore() }
-        integralAdapter.loadMoreModule.isAutoLoadMore = true
-        integralAdapter.loadMoreModule.isEnableLoadMoreIfNotFullPage = false
+        mBinding.rvIntegralList.run {
+            layoutManager = LinearLayoutManager(this@IntegralActivity)
+            adapter = integralAdapter
+            headerView = layoutInflater.inflate(R.layout.header_integral, this, false)
+        }
+        integralAdapter.run {
+            addHeaderView(headerView)
+            loadMoreModule.loadMoreView = LoadMoreView()
+            loadMoreModule.setOnLoadMoreListener { loadMore() }
+            loadMoreModule.isAutoLoadMore = true
+            loadMoreModule.isEnableLoadMoreIfNotFullPage = false
+        }
     }
 
     override fun loadData() {

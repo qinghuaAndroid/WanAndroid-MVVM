@@ -11,5 +11,4 @@ object HttpHelper {
 
     val apiService : ApiService by lazy { HttpsUtils.getRetrofit(Const.BASE_URL).create(ApiService::class.java) }
     val gankService : ApiService by lazy { HttpsUtils.getRetrofit(Const.GANK_URL).create(ApiService::class.java) }
-    val sogouService : ApiService by lazy { HttpsUtils.getRetrofit(Const.SOGOU_URL).create(ApiService::class.java) }
 }

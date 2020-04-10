@@ -60,6 +60,9 @@ dependencies {
     api "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttploggingVersion"
     api "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
 
+    //PersistentCookieJar
+    api 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
+
     // RxJava
     api "io.reactivex.rxjava2:rxjava:$rootProject.rxjavaVersion"
     api "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"

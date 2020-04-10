@@ -2,8 +2,11 @@ package com.example.devlibrary.network
 
 import com.example.devlibrary.BuildConfig
 import com.example.devlibrary.app.App
-import com.example.devlibrary.network.cookies.NovateCookieManger
 import com.example.devlibrary.network.interceptor.HeaderInterceptor
+import com.franmontiel.persistentcookiejar.ClearableCookieJar
+import com.franmontiel.persistentcookiejar.PersistentCookieJar
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 import okhttp3.Cache
 import okhttp3.ConnectionPool
 import okhttp3.OkHttpClient
@@ -17,6 +20,7 @@ import java.security.cert.CertificateException
 import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
 import javax.net.ssl.*
+
 
 /**
  * Description: 网络请求，主要用于获取Retrofit
@@ -41,13 +45,16 @@ object HttpsUtils {
         sslContext.init(null, trustAllCerts, SecureRandom())
         val sslSocketFactory = sslContext.socketFactory
 
-        val client = OkHttpClient.Builder()
+        val cookieJar: ClearableCookieJar =
+            PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(App.sContext))
+
+        return OkHttpClient.Builder()
             //信任所有证书，不安全！！！谨记
             .sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
             .hostnameVerifier(hostnameVerifier)
             .addNetworkInterceptor(loggingInterceptor)
             .addInterceptor(HeaderInterceptor())
-            .cookieJar(NovateCookieManger(App.sContext))
+            .cookieJar(cookieJar)
             .cache(cache)
                 //下面缓存拦截器会拦截网络请求，可能导致请求参数一致请求的只走缓存，不走服务器
 //            .addNetworkInterceptor(CacheInterceptor(App.sContext))
@@ -57,7 +64,6 @@ object HttpsUtils {
             .retryOnConnectionFailure(true)
             .connectionPool(ConnectionPool(8, 15, TimeUnit.SECONDS))
             .build()
-        return client
     }
 
     fun getRetrofit(apiUrl: String): Retrofit {

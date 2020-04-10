@@ -50,39 +50,25 @@
                     <com.google.android.material.appbar.AppBarLayout
                         android:id="@+id/appBar"
                         android:layout_width="match_parent"
-                        android:layout_height="270dp"
-                        app:elevation="0dp"
+                        android:layout_height="215dp"
                         android:background="@color/transparent">
 
-                        <LinearLayout
+                        <com.google.android.material.appbar.CollapsingToolbarLayout
+                            android:id="@+id/toolbar_layout"
                             android:layout_width="match_parent"
-                            android:layout_height="55dp"
-                            android:layout_marginTop="215dp"
-                            android:background="@drawable/home_top_bg"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            app:layout_scrollFlags="scroll">
+                            android:layout_height="match_parent"
+                            app:contentScrim="@color/transparent"
+                            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-                            <ImageView
-                                android:layout_width="42dp"
-                                android:layout_height="42dp"
-                                android:layout_marginStart="10dp"
-                                android:padding="10dp"
-                                android:src="@mipmap/integral_icon" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="积分记录"
-                                style="@style/text_title" />
-                        </LinearLayout>
+                        </com.google.android.material.appbar.CollapsingToolbarLayout>
                     </com.google.android.material.appbar.AppBarLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvIntegralList"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
+                        android:layout_height="match_parent"
+                        android:elevation="10dp"
+                        android:background="@drawable/home_top_bg"
                         android:overScrollMode="never"
                         android:paddingLeft="@dimen/padding"
                         android:paddingRight="@dimen/padding"
