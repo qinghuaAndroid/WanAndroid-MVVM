@@ -36,6 +36,8 @@
             android:theme="@style/SplashTheme"/>
 
         <activity android:name=".ui.integral.IntegralActivity"/>
+
+        <activity android:name=".ui.setting.SettingActivity"/>
     </application>
 
 </manifest>

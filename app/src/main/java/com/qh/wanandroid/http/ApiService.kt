@@ -112,7 +112,7 @@ interface ApiService {
     fun getMyArticle(@Path("pageNum") pageNum: Int): Observable<HttpResult<MyArticleEntity>>
 
     /**
-     * 我分享的文章
+     * 删除我分享的文章
      */
     @POST("/lg/user_article/delete/{id}/json")
     fun deleteMyArticle(@Path("id") id: Int): Observable<HttpResult<Any>>
@@ -145,6 +145,12 @@ interface ApiService {
         @Query("password") password: String,
         @Query("repassword") repassword: String
     ): Observable<HttpResult<Any>>
+
+    /**
+     * 退出登录
+     */
+    @GET("/user/logout/json")
+    fun logout(): Observable<HttpResult<Any>>
 
     /**
      * 分类数据: http://gank.io/api/data/数据类型/请求个数/第几页

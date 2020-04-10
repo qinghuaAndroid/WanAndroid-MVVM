@@ -12,6 +12,7 @@ import com.qh.wanandroid.databinding.FragmentMineBinding
 import com.qh.wanandroid.ui.girl.GirlActivity
 import com.qh.wanandroid.ui.integral.IntegralActivity
 import com.qh.wanandroid.ui.login.LoginActivity
+import com.qh.wanandroid.ui.setting.SettingActivity
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.support.v4.startActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -40,6 +41,15 @@ class MineFragment : BaseVMFragment<MineViewModel, FragmentMineBinding>() {
     override fun initData() {
         LiveEventBusHelper.observe(Const.LOGIN_SUCCESS, Boolean::class.java, this,
             Observer<Boolean> { loadData() })
+        LiveEventBusHelper.observe(Const.LOGOUT_SUCCESS, Boolean::class.java, this,
+            Observer<Boolean> { logout() })
+    }
+
+    private fun logout() {
+        mBinding.tvUserName.text = "请先登录"
+        mBinding.tvId.text = StringUtils.format("id:%s", "---")
+        mBinding.tvRanking.text = "0"
+        mBinding.tvIntegral.text = "0"
     }
 
     override fun initView(view: View) {
@@ -53,7 +63,7 @@ class MineFragment : BaseVMFragment<MineViewModel, FragmentMineBinding>() {
         mBinding.rlArticle.onClick { }//我的文章
         mBinding.rlWebsite.onClick { }//网站
         mBinding.rlGirl.onClick { startActivity<GirlActivity>() }//轻松一下
-        mBinding.rlSet.onClick { }//设置
+        mBinding.rlSet.onClick { startActivity<SettingActivity>() }//设置
     }
 
     override fun loadData() {
