@@ -16,8 +16,9 @@ interface HomeContract {
 
     interface View : IView {
         fun showTopArticlesList(list: MutableList<ArticleEntity.DatasBean>)
-        fun showArticlesList(list: MutableList<ArticleEntity.DatasBean>)
+        fun showArticlesList(articleEntity: ArticleEntity)
         fun showBanner(bannerList: MutableList<BannerEntity>)
+        fun loadArticlesFail()
         fun collectSuccess()
         fun unCollectSuccess()
     }

@@ -55,12 +55,10 @@ class SystemListFragment : BaseVMFragment<SystemListViewModel, FragmentSystemLis
     }
 
     override fun startObserve() {
-        mViewModel.systemListData.observe(this,
-            Observer {
-                systemListAdapter.setList(it)
+        mViewModel.uiState.observe(this,
+            Observer { uiModel ->
+                uiModel.showSuccess?.let { systemListAdapter.setList(it) }
+                uiModel.showError?.let { showToast(it) }
             })
-        mViewModel.errorData.observe(this, Observer {
-            showToast(it)
-        })
     }
 }

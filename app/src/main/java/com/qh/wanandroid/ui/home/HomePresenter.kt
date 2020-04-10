@@ -29,7 +29,7 @@ class HomePresenter : BasePresenter<HomeContract.Model, HomeContract.View>(),
 
                 override fun onFail(errorCode: Int, errorMsg: String?) {
                     mView?.hideLoading()
-                    mView?.showError(errorCode, errorMsg)
+                    mView?.showError(errorMsg)
                 }
             })
         addDisposable(disposableObserver)
@@ -42,12 +42,13 @@ class HomePresenter : BasePresenter<HomeContract.Model, HomeContract.View>(),
                 RxObserver<ArticleEntity>() {
                 override fun onSuccess(t: ArticleEntity?) {
                     mView?.hideLoading()
-                    t?.datas?.let { mView?.showArticlesList(it) }
+                    t?.let { mView?.showArticlesList(it) }
                 }
 
                 override fun onFail(errorCode: Int, errorMsg: String?) {
                     mView?.hideLoading()
-                    mView?.showError(errorCode, errorMsg)
+                    mView?.showError(errorMsg)
+                    mView?.loadArticlesFail()
                 }
             })
         addDisposable(disposableObserver)
@@ -65,7 +66,7 @@ class HomePresenter : BasePresenter<HomeContract.Model, HomeContract.View>(),
 
                 override fun onFail(errorCode: Int, errorMsg: String?) {
                     mView?.hideLoading()
-                    mView?.showError(errorCode, errorMsg)
+                    mView?.showError(errorMsg)
                 }
             })
         addDisposable(disposableObserver)

@@ -1,35 +1,36 @@
-package com.qh.wanandroid.ui.system.act
+package com.qh.wanandroid.ui.integral
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.devlibrary.mvvm.BaseViewModel
 import com.example.devlibrary.mvvm.Result
-import com.qh.wanandroid.bean.ArticleEntity
+import com.qh.wanandroid.bean.IntegralRecordEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 /**
  * @author FQH
- * Create at 2020/4/8.
+ * Create at 2020/4/10.
  */
-class SystemViewModel(private val mRepository: SystemRepository) : BaseViewModel() {
+class IntegralViewModel(private val mRepository: IntegralRepository) :
+    BaseViewModel() {
 
-    private val _uiState = MutableLiveData<ArticleUiModel>()
-    val uiState: LiveData<ArticleUiModel>
+    private val _uiState = MutableLiveData<IntegralUiModel>()
+    val uiState: LiveData<IntegralUiModel>
         get() = _uiState
 
     private var pageNum = 1
 
-    fun getSystemArticle(isRefresh: Boolean, cid: Int) {
+    fun getIntegralRecord(isRefresh: Boolean) {
         viewModelScope.launch(Dispatchers.Main) {
             emitArticleUiState(showLoading = true)
             if (isRefresh) {
                 pageNum = 1
                 emitArticleUiState(isEnableLoadMore = false)
             }
-            val result = withContext(Dispatchers.IO) { mRepository.getSystemArticle(pageNum, cid) }
+            val result = withContext(Dispatchers.IO) { mRepository.getIntegralRecord(pageNum) }
             if (result is Result.Success) {
                 val data = result.data
                 emitArticleUiState(
@@ -56,13 +57,13 @@ class SystemViewModel(private val mRepository: SystemRepository) : BaseViewModel
     private fun emitArticleUiState(
         showLoading: Boolean = false,
         showError: String? = null,
-        showSuccess: ArticleEntity? = null,
+        showSuccess: IntegralRecordEntity? = null,
         showEnd: Boolean = false,
         isRefresh: Boolean = false,
         isEnableLoadMore: Boolean = false
     ) {
         val uiModel =
-            ArticleUiModel(
+            IntegralUiModel(
                 showLoading,
                 showError,
                 showSuccess,
@@ -72,12 +73,13 @@ class SystemViewModel(private val mRepository: SystemRepository) : BaseViewModel
             )
         _uiState.value = uiModel
     }
+
 }
 
-data class ArticleUiModel(
+data class IntegralUiModel(
     val showLoading: Boolean,
     val showError: String?,
-    val showSuccess: ArticleEntity?,
+    val showSuccess: IntegralRecordEntity?,
     val showEnd: Boolean, // 加载更多
     val isRefresh: Boolean, // 刷新
     val isEnableLoadMore: Boolean

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.example.devlibrary.mvp.BaseMvpFragment
+import com.example.devlibrary.network.exception.ErrorStatus
 import com.example.devlibrary.widget.LoadMoreView
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.ArticleAdapter
@@ -13,6 +14,8 @@ import com.qh.wanandroid.bean.ArticleEntity
 import com.qh.wanandroid.constant.Const
 import com.qh.wanandroid.databinding.FragmentArticleListBinding
 import com.qh.wanandroid.ui.BrowserNormalActivity
+import com.qh.wanandroid.ui.login.LoginActivity
+import org.jetbrains.anko.support.v4.startActivity
 
 /**
  * @author FQH
@@ -22,13 +25,12 @@ class TabListFragment :
     BaseMvpFragment<TabListContract.View, TabListContract.Presenter, FragmentArticleListBinding>(),
     TabListContract.View {
 
-    private val articleList: MutableList<ArticleEntity.DatasBean> = mutableListOf()
-    private val articleAdapter by lazy { ArticleAdapter(articleList) }
+    private val articleAdapter by lazy { ArticleAdapter() }
     private var projectId: Int = 0
     private var name: String? = null
     private var type: Int? = null
     private var isRefresh = false
-    private var pageNum = 0
+    private var pageNum = 1
     private var curPosition = 0
 
     override fun attachLayoutRes(): Int = R.layout.fragment_article_list
@@ -51,7 +53,7 @@ class TabListFragment :
         articleAdapter.loadMoreModule.setOnLoadMoreListener { loadMore() }
         articleAdapter.loadMoreModule.loadMoreView = LoadMoreView()
         articleAdapter.loadMoreModule.isAutoLoadMore = true
-        articleAdapter.loadMoreModule.isEnableLoadMoreIfNotFullPage = false
+        articleAdapter.loadMoreModule.isEnableLoadMoreIfNotFullPage = true
         articleAdapter.setOnItemClickListener(mOnItemClickListener)
         articleAdapter.addChildClickViewIds(R.id.ivCollect)
         articleAdapter.setOnItemChildClickListener(mOnItemChildClickListener)
@@ -68,7 +70,7 @@ class TabListFragment :
         }
     }
 
-    private val mOnItemChildClickListener = OnItemChildClickListener{ _, view, position ->
+    private val mOnItemChildClickListener = OnItemChildClickListener { _, view, position ->
         val datasBean = articleAdapter.data[position]
         curPosition = position
         when (view.id) {
@@ -83,7 +85,7 @@ class TabListFragment :
         // 这里的作用是防止下拉刷新的时候还可以上拉加载
         articleAdapter.loadMoreModule.isEnableLoadMore = false
         // 下拉刷新，需要重置页数
-        pageNum = 0
+        pageNum = 1
         isRefresh = true
         type?.let { mPresenter?.loadData(it, projectId, pageNum) }
     }
@@ -98,15 +100,17 @@ class TabListFragment :
         return TabListPresenter()
     }
 
-    override fun showList(list: MutableList<ArticleEntity.DatasBean>) {
+    override fun showList(articleEntity: ArticleEntity) {
         mBinding.swipeRefresh.isRefreshing = false
         articleAdapter.loadMoreModule.isEnableLoadMore = true
-        if (isRefresh) {
-            articleAdapter.setList(list)
-        } else {
-            articleAdapter.addData(list)
+        articleEntity.datas?.let {
+            if (isRefresh) {
+                articleAdapter.setList(it)
+            } else {
+                articleAdapter.addData(it)
+            }
         }
-        if (list.size < com.example.common.constant.Const.PAGE_SIZE) {
+        if (articleEntity.curPage >= articleEntity.pageCount) {
             //如果不够一页,显示没有更多数据布局
             articleAdapter.loadMoreModule.loadMoreEnd()
         } else {
@@ -114,11 +118,18 @@ class TabListFragment :
         }
     }
 
-    override fun showError(errorCode: Int, errorMsg: String?) {
-        super.showError(errorCode, errorMsg)
+    override fun showError(errorMsg: String?) {
+        super.showError(errorMsg)
         mBinding.swipeRefresh.isRefreshing = false
         articleAdapter.loadMoreModule.isEnableLoadMore = (true)
         articleAdapter.loadMoreModule.loadMoreFail()
+    }
+
+    override fun showError(errorCode: Int, errorMsg: String?) {
+        super.showError(errorCode, errorMsg)
+        if (errorCode == ErrorStatus.LOGOUT_ERROR) {
+            startActivity<LoginActivity>()
+        }
     }
 
     override fun collectSuccess() {

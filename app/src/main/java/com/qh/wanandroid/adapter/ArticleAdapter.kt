@@ -15,9 +15,9 @@ import com.qh.wanandroid.bean.ArticleEntity
  * @author zs
  * @date 2020-03-16修改
  */
-class ArticleAdapter(list: MutableList<ArticleEntity.DatasBean>?) :
-    BaseQuickAdapter<ArticleEntity.DatasBean,
-            BaseViewHolder>(R.layout.item_home_article, list), LoadMoreModule {
+class ArticleAdapter :
+    BaseQuickAdapter<ArticleEntity.DatasBean, BaseViewHolder>(R.layout.item_home_article),
+    LoadMoreModule {
 
     override fun convert(holder: BaseViewHolder, item: ArticleEntity.DatasBean) {
 

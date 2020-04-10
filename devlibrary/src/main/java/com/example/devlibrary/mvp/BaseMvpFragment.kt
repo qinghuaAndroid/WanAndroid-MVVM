@@ -38,6 +38,10 @@ abstract class BaseMvpFragment<in V : IView, P : IPresenter<V>, B : ViewDataBind
     override fun hideLoading() {
     }
 
+    override fun showError(errorMsg: String?) {
+        errorMsg?.let { showToast(it) }
+    }
+
     override fun showError(errorCode: Int, errorMsg: String?) {
         errorMsg?.let { showToast(it) }
     }

@@ -5,10 +5,12 @@ import androidx.lifecycle.Observer
 import com.example.common.constant.Const
 import com.example.devlibrary.helper.LiveEventBusHelper
 import com.example.devlibrary.mvvm.BaseVMFragment
+import com.example.devlibrary.utils.Preference
 import com.example.devlibrary.utils.StringUtils
 import com.qh.wanandroid.R
 import com.qh.wanandroid.databinding.FragmentMineBinding
 import com.qh.wanandroid.ui.girl.GirlActivity
+import com.qh.wanandroid.ui.integral.IntegralActivity
 import com.qh.wanandroid.ui.login.LoginActivity
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.support.v4.startActivity
@@ -20,6 +22,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  */
 class MineFragment : BaseVMFragment<MineViewModel, FragmentMineBinding>() {
 
+    private val isLogin by Preference(Const.IS_LOGIN, false)
     private val mViewModel: MineViewModel by viewModel()
 
     override fun startObserve() {
@@ -41,14 +44,16 @@ class MineFragment : BaseVMFragment<MineViewModel, FragmentMineBinding>() {
 
     override fun initView(view: View) {
         mBinding.tvUserName.onClick { startActivity<LoginActivity>() }
-        mBinding.llHistory.onClick {  }//足迹
-        mBinding.llRanking.onClick {  }//排名
-        mBinding.rlIntegral.onClick {  }//我的积分
-        mBinding.rlCollect.onClick {  }//我的收藏
-        mBinding.rlArticle.onClick {  }//我的文章
-        mBinding.rlWebsite.onClick {  }//网站
+        mBinding.llHistory.onClick { }//足迹
+        mBinding.llRanking.onClick { }//排名
+        mBinding.rlIntegral.onClick { //我的积分
+            if (isLogin) startActivity<IntegralActivity>() else startActivity<LoginActivity>()
+        }
+        mBinding.rlCollect.onClick { }//我的收藏
+        mBinding.rlArticle.onClick { }//我的文章
+        mBinding.rlWebsite.onClick { }//网站
         mBinding.rlGirl.onClick { startActivity<GirlActivity>() }//轻松一下
-        mBinding.rlSet.onClick {  }//设置
+        mBinding.rlSet.onClick { }//设置
     }
 
     override fun loadData() {

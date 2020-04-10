@@ -103,7 +103,7 @@ interface ApiService {
      * 积分记录
      */
     @GET("/lg/coin/list/{pageNum}/json")
-    fun getIntegralRecord(@Path("pageNum") pageNum: Int): Observable<HttpResult<IntegralRecordEntity>>
+    suspend fun getIntegralRecord(@Path("pageNum") pageNum: Int): HttpResult<IntegralRecordEntity>
 
     /**
      * 我分享的文章

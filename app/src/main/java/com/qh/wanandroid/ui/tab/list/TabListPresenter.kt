@@ -24,12 +24,12 @@ class TabListPresenter : BasePresenter<TabListContract.Model, TabListContract.Vi
                     RxObserver<ArticleEntity>() {
                     override fun onSuccess(t: ArticleEntity?) {
                         mView?.hideLoading()
-                        t?.datas?.let { mView?.showList(it) }
+                        t?.let { mView?.showList(it) }
                     }
 
                     override fun onFail(errorCode: Int, errorMsg: String?) {
                         mView?.hideLoading()
-                        mView?.showError(errorCode, errorMsg)
+                        mView?.showError(errorMsg)
                     }
                 })
         addDisposable(disposableObserver)

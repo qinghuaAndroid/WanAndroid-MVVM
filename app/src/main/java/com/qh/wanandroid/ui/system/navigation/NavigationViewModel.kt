@@ -16,20 +16,28 @@ import kotlinx.coroutines.withContext
  */
 class NavigationViewModel(private val mRepository: NavigationRepository) : BaseViewModel() {
 
-    private val _navigationData = MutableLiveData<MutableList<NavigationEntity>>()
-    private val _errorData = MutableLiveData<String>()
-
-    val navigationData: LiveData<MutableList<NavigationEntity>>
-        get() = _navigationData
-
-    val errorData: LiveData<String>
-        get() = _errorData
+    private val _uiState = MutableLiveData<NavigationUiModel>()
+    val uiState: LiveData<NavigationUiModel>
+        get() = _uiState
 
     fun getNavigation() {
         viewModelScope.launch(Dispatchers.Main) {
             val result = withContext(Dispatchers.IO) { mRepository.getNavigation() }
-            if (result is Result.Success) _navigationData.value = result.data
-            else if (result is Result.Error) _errorData.value = result.exception.message
+            if (result is Result.Success) emitNavigationUiState(showSuccess = result.data)
+            else if (result is Result.Error) emitNavigationUiState(showError = result.exception.message)
         }
     }
+
+    private fun emitNavigationUiState(
+        showError: String? = null,
+        showSuccess: MutableList<NavigationEntity>? = null
+    ) {
+        val uiModel = NavigationUiModel(showError, showSuccess)
+        _uiState.value = uiModel
+    }
 }
+
+data class NavigationUiModel(
+    val showError: String?,
+    val showSuccess: MutableList<NavigationEntity>?
+)

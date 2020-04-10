@@ -34,6 +34,8 @@
 
         <activity android:name=".ui.girl.GirlActivity"
             android:theme="@style/SplashTheme"/>
+
+        <activity android:name=".ui.integral.IntegralActivity"/>
     </application>
 
 </manifest>

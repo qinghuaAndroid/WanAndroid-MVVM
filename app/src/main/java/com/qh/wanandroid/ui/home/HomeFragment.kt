@@ -7,6 +7,7 @@ import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.example.common.constant.Const
 import com.example.devlibrary.mvp.BaseMvpFragment
+import com.example.devlibrary.network.exception.ErrorStatus
 import com.example.devlibrary.widget.LoadMoreView
 import com.google.android.material.appbar.AppBarLayout
 import com.qh.wanandroid.R
@@ -16,6 +17,8 @@ import com.qh.wanandroid.bean.ArticleEntity
 import com.qh.wanandroid.bean.BannerEntity
 import com.qh.wanandroid.databinding.FragmentHomeBinding
 import com.qh.wanandroid.ui.BrowserNormalActivity
+import com.qh.wanandroid.ui.login.LoginActivity
+import org.jetbrains.anko.support.v4.startActivity
 
 /**
  * @author FQH
@@ -25,10 +28,9 @@ class HomeFragment :
     BaseMvpFragment<HomeContract.View, HomeContract.Presenter, FragmentHomeBinding>(),
     HomeContract.View {
 
-    private val articleList: MutableList<ArticleEntity.DatasBean> = mutableListOf()
-    private val articleAdapter by lazy { ArticleAdapter(articleList) }
+    private val articleAdapter by lazy { ArticleAdapter() }
     private var isRefresh = false
-    private var pageNum = 0
+    private var pageNum = 1
     private var curPosition = 0
 
     override fun createPresenter(): HomeContract.Presenter = HomePresenter()
@@ -55,7 +57,7 @@ class HomeFragment :
         articleAdapter.loadMoreModule.loadMoreView = LoadMoreView()
         articleAdapter.loadMoreModule.setOnLoadMoreListener { loadMore() }
         articleAdapter.loadMoreModule.isAutoLoadMore = true
-        articleAdapter.loadMoreModule.isEnableLoadMoreIfNotFullPage = false
+        articleAdapter.loadMoreModule.isEnableLoadMoreIfNotFullPage = true
         articleAdapter.setOnItemClickListener(mOnItemClickListener)
         articleAdapter.addChildClickViewIds(R.id.ivCollect)
         articleAdapter.setOnItemChildClickListener(mOnItemChildClickListener)
@@ -87,7 +89,7 @@ class HomeFragment :
         // 这里的作用是防止下拉刷新的时候还可以上拉加载
         articleAdapter.loadMoreModule.isEnableLoadMore = false
         // 下拉刷新，需要重置页数
-        pageNum = 0
+        pageNum = 1
         isRefresh = true
         mPresenter?.loadBanner()
         mPresenter?.loadTopArticles()
@@ -104,11 +106,11 @@ class HomeFragment :
         articleAdapter.setList(list)
     }
 
-    override fun showArticlesList(list: MutableList<ArticleEntity.DatasBean>) {
+    override fun showArticlesList(articleEntity: ArticleEntity) {
         mBinding.swipeRefresh.isRefreshing = false
         articleAdapter.loadMoreModule.isEnableLoadMore = true
-        articleAdapter.addData(list)
-        if (list.size < Const.PAGE_SIZE) {
+        articleEntity.datas?.let { articleAdapter.addData(it) }
+        if (articleEntity.curPage >= articleEntity.pageCount) {
             //如果不够一页,显示没有更多数据布局
             articleAdapter.loadMoreModule.loadMoreEnd()
         } else {
@@ -130,11 +132,17 @@ class HomeFragment :
         articleAdapter.notifyItemChanged(curPosition)
     }
 
-    override fun showError(errorCode: Int, errorMsg: String?) {
-        super.showError(errorCode, errorMsg)
+    override fun loadArticlesFail() {
         mBinding.swipeRefresh.isRefreshing = false
         articleAdapter.loadMoreModule.isEnableLoadMore = (true)
         articleAdapter.loadMoreModule.loadMoreFail()
+    }
+
+    override fun showError(errorCode: Int, errorMsg: String?) {
+        super.showError(errorCode, errorMsg)
+        if (errorCode == ErrorStatus.LOGOUT_ERROR) {
+            startActivity<LoginActivity>()
+        }
     }
 
     override fun onStart() {

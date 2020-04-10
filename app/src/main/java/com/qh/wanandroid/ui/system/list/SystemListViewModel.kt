@@ -16,20 +16,28 @@ import kotlinx.coroutines.withContext
  */
 class SystemListViewModel(private val mRepository: SystemListRepository) : BaseViewModel() {
 
-    private val _systemListData = MutableLiveData<MutableList<SystemListEntity>>()
-    private val _errorData = MutableLiveData<String>()
-
-    val systemListData: LiveData<MutableList<SystemListEntity>>
-        get() = _systemListData
-
-    val errorData: LiveData<String>
-        get() = _errorData
+    private val _uiState = MutableLiveData<SystemListUiModel>()
+    val uiState: LiveData<SystemListUiModel>
+        get() = _uiState
 
     fun getSystemList() {
         viewModelScope.launch(Dispatchers.Main) {
             val result = withContext(Dispatchers.IO) { mRepository.getSystemList() }
-            if (result is Result.Success) _systemListData.value = result.data
-            else if (result is Result.Error) _errorData.value = result.exception.message
+            if (result is Result.Success) emitSystemListUiState(showSuccess = result.data)
+            else if (result is Result.Error) emitSystemListUiState(showError = result.exception.message)
         }
     }
+
+    private fun emitSystemListUiState(
+        showError: String? = null,
+        showSuccess: MutableList<SystemListEntity>? = null
+    ) {
+        val uiModel = SystemListUiModel(showError, showSuccess)
+        _uiState.value = uiModel
+    }
 }
+
+data class SystemListUiModel(
+    val showError: String?,
+    val showSuccess: MutableList<SystemListEntity>?
+)

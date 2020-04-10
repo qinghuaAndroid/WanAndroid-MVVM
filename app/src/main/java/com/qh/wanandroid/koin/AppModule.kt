@@ -1,5 +1,7 @@
 package com.qh.wanandroid.koin
 
+import com.qh.wanandroid.ui.integral.IntegralRepository
+import com.qh.wanandroid.ui.integral.IntegralViewModel
 import com.qh.wanandroid.ui.login.LoginRepository
 import com.qh.wanandroid.ui.login.LoginViewModel
 import com.qh.wanandroid.ui.me.MineRepository
@@ -24,6 +26,7 @@ val viewModelModule = module {
     viewModel { SystemListViewModel(get()) }
     viewModel { NavigationViewModel(get()) }
     viewModel { SystemViewModel(get()) }
+    viewModel { IntegralViewModel(get()) }
 }
 
 val repositoryModule = module {
@@ -32,6 +35,7 @@ val repositoryModule = module {
     single { SystemListRepository() }
     single { NavigationRepository() }
     single { SystemRepository() }
+    single { IntegralRepository() }
 }
 
 val appModule = listOf(viewModelModule, repositoryModule)

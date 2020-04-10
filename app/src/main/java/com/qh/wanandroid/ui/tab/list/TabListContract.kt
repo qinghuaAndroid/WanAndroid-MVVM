@@ -14,7 +14,7 @@ import io.reactivex.Observable
 interface TabListContract {
 
     interface View : IView {
-        fun showList(list: MutableList<ArticleEntity.DatasBean>)
+        fun showList(articleEntity: ArticleEntity)
         fun collectSuccess()
         fun unCollectSuccess()
     }

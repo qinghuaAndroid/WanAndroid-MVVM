@@ -21,7 +21,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class SystemActivity : BaseVMActivity<SystemViewModel, ActivitySystemBinding>() {
 
     private val viewModel by viewModel<SystemViewModel>()
-    private val articleAdapter by lazy { ArticleAdapter(null) }
+    private val articleAdapter by lazy { ArticleAdapter() }
     private var cid: Int = 0
     private var title: String? = null
 
