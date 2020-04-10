@@ -1,5 +1,7 @@
 package com.qh.wanandroid.ui.setting
 
+import android.content.Intent
+import android.view.View
 import com.example.common.constant.Const
 import com.example.devlibrary.helper.LiveEventBusHelper
 import com.example.devlibrary.mvp.BaseMvpActivity
@@ -8,6 +10,7 @@ import com.example.devlibrary.utils.Preference
 import com.example.devlibrary.utils.StringUtils
 import com.qh.wanandroid.R
 import com.qh.wanandroid.databinding.ActivitySettingBinding
+import com.qh.wanandroid.ui.BrowserNormalActivity
 import kotlinx.android.synthetic.main.activity_setting.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
@@ -34,7 +37,17 @@ class SettingActivity :
         super.initView()
         tvClearValue.text = CacheUtils.getTotalCacheSize(this)
         tvClearValue.onClick { clearCache() }
+        tvLogout.visibility = if (isLogin) View.VISIBLE else View.GONE
         tvLogout.onClick { mPresenter?.logout() }
+        tvProject.onClick { github() }
+    }
+
+    private fun github() {
+        Intent(this, BrowserNormalActivity::class.java).run {
+            putExtra(Const.WEB_TITLE, "WanAndroid-qh")
+            putExtra(Const.WEB_URL, "https://github.com/qinghuaAndroid/WanAndroid-qh")
+            startActivity(this)
+        }
     }
 
     override fun loadData() {
