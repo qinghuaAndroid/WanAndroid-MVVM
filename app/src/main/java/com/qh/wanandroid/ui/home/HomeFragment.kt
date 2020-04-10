@@ -130,8 +130,8 @@ class HomeFragment :
         articleAdapter.notifyItemChanged(curPosition)
     }
 
-    override fun showError(errorMsg: String) {
-        super.showError(errorMsg)
+    override fun showError(errorCode: Int, errorMsg: String?) {
+        super.showError(errorCode, errorMsg)
         mBinding.swipeRefresh.isRefreshing = false
         articleAdapter.loadMoreModule.isEnableLoadMore = (true)
         articleAdapter.loadMoreModule.loadMoreFail()

@@ -29,7 +29,7 @@ class TabListPresenter : BasePresenter<TabListContract.Model, TabListContract.Vi
 
                     override fun onFail(errorCode: Int, errorMsg: String?) {
                         mView?.hideLoading()
-                        errorMsg?.let { mView?.showError(it) }
+                        mView?.showError(errorCode, errorMsg)
                     }
                 })
         addDisposable(disposableObserver)
@@ -47,7 +47,7 @@ class TabListPresenter : BasePresenter<TabListContract.Model, TabListContract.Vi
 
                 override fun onFail(errorCode: Int, errorMsg: String?) {
                     mView?.hideLoading()
-                    errorMsg?.let { mView?.showMsg(it) }
+                    mView?.showError(errorCode, errorMsg)
                 }
             })
         addDisposable(disposableObserver)
@@ -65,7 +65,7 @@ class TabListPresenter : BasePresenter<TabListContract.Model, TabListContract.Vi
 
                 override fun onFail(errorCode: Int, errorMsg: String?) {
                     mView?.hideLoading()
-                    errorMsg?.let { mView?.showMsg(it) }
+                    mView?.showError(errorCode, errorMsg)
                 }
             })
         addDisposable(disposableObserver)

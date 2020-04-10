@@ -29,7 +29,6 @@ class GirlPresenter : BasePresenter<GirlContract.Model, GirlContract.View>(),
                     override fun onError(e: Throwable) {
                         mView?.hideLoading()
                         e.message?.let { mView?.loadMeiziListFail(it) }
-                        e.message?.let { mView?.showError(it) }
                     }
 
                 })

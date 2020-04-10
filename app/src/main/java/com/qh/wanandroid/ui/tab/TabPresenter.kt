@@ -25,7 +25,7 @@ class TabPresenter : BasePresenter<TabContract.Model, TabContract.View>(), TabCo
 
                 override fun onFail(errorCode: Int, errorMsg: String?) {
                     mView?.hideLoading()
-                    errorMsg?.let { mView?.showError(it) }
+                    mView?.showError(errorCode, errorMsg)
                 }
             })
         addDisposable(disposableObserver)
