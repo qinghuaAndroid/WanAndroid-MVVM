@@ -11,17 +11,7 @@ import kotlinx.coroutines.*
  */
 open class BaseViewModel : ViewModel() {
 
-    open class BaseUiModel<T>(
-            var showLoading: Boolean = false,
-            var showError: String? = null,
-            var showSuccess: T? = null,
-            var showEnd: Boolean = false, // 加载更多
-            var isRefresh: Boolean = false // 刷新
-
-    )
-
     val mException: MutableLiveData<Throwable> = MutableLiveData()
-
 
     private fun launchOnUI(block: suspend CoroutineScope.() -> Unit) {
 

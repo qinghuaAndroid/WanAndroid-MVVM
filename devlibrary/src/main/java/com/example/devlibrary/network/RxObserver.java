@@ -22,6 +22,11 @@ public abstract class RxObserver<T> extends DisposableObserver<HttpResult<T>> {
         onSuccess(tBaseModel.getData());
     }
 
+    /**
+     * 网络请求成功回调
+     *
+     * @param t 响应对象
+     */
     protected abstract void onSuccess(T t);
 
     @Override
@@ -36,6 +41,12 @@ public abstract class RxObserver<T> extends DisposableObserver<HttpResult<T>> {
         }
     }
 
+    /**
+     * 网络请求失败回调
+     *
+     * @param errorCode 错误码
+     * @param errorMsg  错误信息
+     */
     protected abstract void onFail(int errorCode, String errorMsg);
 
     @Override

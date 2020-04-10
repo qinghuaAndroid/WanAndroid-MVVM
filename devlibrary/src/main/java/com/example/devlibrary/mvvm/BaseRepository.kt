@@ -1,9 +1,9 @@
 package com.example.devlibrary.mvvm
 
 import com.example.devlibrary.network.HttpResult
+import com.example.devlibrary.network.exception.ApiException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
-import java.io.IOException
 
 /**
  * Created by luyao
@@ -15,15 +15,12 @@ open class BaseRepository {
         return call.invoke()
     }
 
-    suspend fun <T : Any> safeApiCall(
-        call: suspend () -> Result<T>,
-        errorMessage: String
-    ): Result<T> {
+    suspend fun <T : Any> safeApiCall(call: suspend () -> Result<T>): Result<T> {
         return try {
             call()
         } catch (e: Exception) {
             // An exception was thrown when calling the API so we're converting this to an IOException
-            Result.Error(IOException(errorMessage, e))
+            Result.Error(ApiException(e.message))
         }
     }
 
@@ -37,10 +34,9 @@ open class BaseRepository {
                 Result.Success(response.data)
             } else {
                 errorBlock?.let { it() }
-                Result.Error(IOException(response.errorMsg))
+                Result.Error(ApiException(response.errorCode, response.errorMsg))
             }
         }
     }
-
 
 }

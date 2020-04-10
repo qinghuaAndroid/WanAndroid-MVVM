@@ -35,8 +35,8 @@ class SystemActivity : BaseVMActivity<SystemViewModel, ActivitySystemBinding>() 
                 }
                 articleAdapter.loadMoreModule.loadMoreComplete()
             }
-            it.showError?.let {
-                showToast(it)
+            it.showError?.let { errorMsg ->
+                showToast(errorMsg)
                 articleAdapter.loadMoreModule.loadMoreFail()
             }
             if (it.showEnd) articleAdapter.loadMoreModule.loadMoreEnd()

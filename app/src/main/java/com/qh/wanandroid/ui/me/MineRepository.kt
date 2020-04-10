@@ -12,10 +12,7 @@ import com.qh.wanandroid.http.HttpHelper
 class MineRepository : BaseRepository() {
 
     suspend fun getIntegral(): Result<IntegralEntity> {
-        return safeApiCall(
-            call = { requestIntegral() },
-            errorMessage = ""
-        )
+        return safeApiCall(call = { requestIntegral() })
     }
 
     private suspend fun requestIntegral(): Result<IntegralEntity> {

@@ -12,7 +12,7 @@ import com.qh.wanandroid.http.HttpHelper
 class SystemListRepository: BaseRepository() {
 
     suspend fun getSystemList():Result<MutableList<SystemListEntity>>{
-        return safeApiCall({requestSystemList()}, "")
+        return safeApiCall {requestSystemList()}
     }
 
     private suspend fun requestSystemList():Result<MutableList<SystemListEntity>> {

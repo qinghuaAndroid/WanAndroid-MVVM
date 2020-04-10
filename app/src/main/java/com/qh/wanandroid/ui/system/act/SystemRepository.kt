@@ -12,7 +12,7 @@ import com.qh.wanandroid.http.HttpHelper
 class SystemRepository : BaseRepository() {
 
     suspend fun getSystemArticle(pageNum: Int, cid: Int): Result<ArticleEntity> {
-        return safeApiCall({ requestSystemArticle(pageNum, cid) }, "")
+        return safeApiCall { requestSystemArticle(pageNum, cid) }
     }
 
     private suspend fun requestSystemArticle(pageNum: Int, cid: Int): Result<ArticleEntity> {

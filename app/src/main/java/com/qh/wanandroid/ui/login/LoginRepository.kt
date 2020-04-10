@@ -18,7 +18,7 @@ class LoginRepository : BaseRepository() {
     private var userJson by Preference(Const.USER_GSON, "")
 
     suspend fun login(username: String, password: String): Result<UserEntity> {
-        return safeApiCall(call = { requestLogin(username, password) }, errorMessage = "登录失败!")
+        return safeApiCall(call = { requestLogin(username, password) })
     }
 
     private suspend fun requestLogin(username: String, password: String): Result<UserEntity> {

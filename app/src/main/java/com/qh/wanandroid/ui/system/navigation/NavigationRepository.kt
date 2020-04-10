@@ -12,7 +12,7 @@ import com.qh.wanandroid.http.HttpHelper
 class NavigationRepository: BaseRepository() {
 
     suspend fun getNavigation():Result<MutableList<NavigationEntity>>{
-        return safeApiCall({requestNavigation()}, "")
+        return safeApiCall {requestNavigation()}
     }
 
     private suspend fun requestNavigation():Result<MutableList<NavigationEntity>> {
