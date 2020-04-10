@@ -8,10 +8,8 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Cy on 2017/5/11.
@@ -25,7 +23,7 @@ public class RxHelper {
      * @return
      */
     public static <T> ObservableTransformer<HttpResult<T>, HttpResult<T>> handleResult() {
-        return new ObservableTransformer<HttpResult<T>, HttpResult<T>>(){
+        return new ObservableTransformer<HttpResult<T>, HttpResult<T>>() {
             @Override
             public ObservableSource<HttpResult<T>> apply(@NonNull Observable<HttpResult<T>> observable) {
                 return observable.flatMap(new Function<HttpResult<T>, ObservableSource<HttpResult<T>>>() {
@@ -43,11 +41,11 @@ public class RxHelper {
                                     }
                                 }
                             });
-                        }else {
+                        } else {
                             return Observable.error(new ApiException(result.getErrorCode(), result.getErrorMsg()));
                         }
                     }
-                }).retryWhen(new RetryWithDelay()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+                }).retryWhen(new RetryWithDelay()).compose(SchedulerUtils.<HttpResult<T>>ioToMain());
             }
         };
     }

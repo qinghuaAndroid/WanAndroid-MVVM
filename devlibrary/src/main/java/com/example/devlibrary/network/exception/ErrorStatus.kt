@@ -33,7 +33,7 @@ object ErrorStatus {
      * 未登录
      */
     @JvmField
-    val LOGOUT_ERROR = 1005
+    val LOGOUT_ERROR = 1001
 
     /**
      * 其它服务器定义的错误

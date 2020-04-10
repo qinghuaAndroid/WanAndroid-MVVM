@@ -37,12 +37,8 @@ abstract class BaseMvpActivity<in V : IView, P : IPresenter<V>, B : ViewDataBind
     override fun hideLoading() {
     }
 
-    override fun showError(errorMsg: String) {
-        showToast(errorMsg)
-    }
-
-    override fun showDefaultMsg(msg: String) {
-        showToast(msg)
+    override fun showError(errorCode: Int, errorMsg: String?) {
+        errorMsg?.let { showToast(it) }
     }
 
     override fun showMsg(msg: String) {
