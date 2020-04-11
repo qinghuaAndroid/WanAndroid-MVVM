@@ -65,5 +65,8 @@ dependencies {
     releaseImplementation 'com.didichuxing.doraemonkit:doraemonkit-no-op:2.2.2'
     //标签控件
     implementation 'com.github.donkingliang:LabelsView:1.6.1'
+    //颜色对话框，【https://github.com/afollestad/material-dialogs】
+    implementation 'com.afollestad.material-dialogs:color:3.3.0'
+    implementation 'com.afollestad.material-dialogs:lifecycle:3.3.0'
 
 }

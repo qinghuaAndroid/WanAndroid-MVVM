@@ -28,16 +28,17 @@
 
         <activity android:name=".ui.login.LoginActivity" />
 
-        <activity android:name=".ui.system.act.SystemActivity"/>
+        <activity android:name=".ui.system.act.SystemActivity" />
 
-        <activity android:name=".ui.BrowserNormalActivity"/>
+        <activity android:name=".ui.BrowserNormalActivity" />
 
-        <activity android:name=".ui.girl.GirlActivity"
-            android:theme="@style/SplashTheme"/>
+        <activity
+            android:name=".ui.girl.GirlActivity"
+            android:theme="@style/SplashTheme" />
 
-        <activity android:name=".ui.integral.IntegralActivity"/>
+        <activity android:name=".ui.integral.IntegralActivity" />
 
-        <activity android:name=".ui.setting.SettingActivity"/>
+        <activity android:name=".ui.setting.SettingActivity" />
     </application>
 
 </manifest>

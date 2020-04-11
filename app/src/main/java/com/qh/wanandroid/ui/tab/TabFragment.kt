@@ -1,7 +1,11 @@
 package com.qh.wanandroid.ui.tab
 
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import com.example.devlibrary.ext.getThemeColor
+import com.example.devlibrary.helper.LiveEventBusHelper
 import com.example.devlibrary.mvp.BaseMvpFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.qh.wanandroid.R
@@ -10,6 +14,7 @@ import com.qh.wanandroid.bean.TabEntity
 import com.qh.wanandroid.constant.Const
 import com.qh.wanandroid.databinding.FragmentTabBinding
 import com.qh.wanandroid.ui.tab.list.TabListFragment
+import org.jetbrains.anko.backgroundColor
 
 /**
  * @author FQH
@@ -24,6 +29,12 @@ class TabFragment : BaseMvpFragment<TabContract.View, TabContract.Presenter, Fra
 
     override fun initData() {
         type = arguments?.getInt(Const.TYPE)
+        receiveNotice()
+    }
+
+    override fun initView(view: View) {
+        super.initView(view)
+        setThemeColor()
     }
 
     override fun loadData() {
@@ -53,5 +64,16 @@ class TabFragment : BaseMvpFragment<TabContract.View, TabContract.Presenter, Fra
                 tab.text = titleList[position]
             }.attach()
         }
+    }
+
+    private fun receiveNotice() {
+        LiveEventBusHelper.observe(com.example.common.constant.Const.THEME_COLOR,
+            Int::class.java, this, Observer<Int> {
+                setThemeColor()
+            })
+    }
+
+    private fun setThemeColor() {
+        mBinding.tabLayout.backgroundColor = getThemeColor()
     }
 }

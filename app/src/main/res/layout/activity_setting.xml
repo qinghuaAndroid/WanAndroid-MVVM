@@ -118,6 +118,31 @@
 
         <TextView
             android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ripple_bg"
+            android:paddingStart="@dimen/padding_left"
+            android:gravity="center_vertical"
+            style="@style/text_1"
+            android:drawableEnd="@mipmap/arrow_right"
+            android:paddingEnd="@dimen/padding_right"
+            android:text="主题颜色"
+            app:layout_constraintTop_toBottomOf="@+id/tvProject"
+            android:id="@+id/tvColor" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:id="@+id/tvNext"
+            app:layout_constraintTop_toTopOf="@+id/tvColor"
+            app:layout_constraintBottom_toBottomOf="@+id/tvColor"
+            app:layout_constraintRight_toRightOf="@+id/tvColor"
+            android:gravity="center_vertical"
+            android:layout_marginEnd="50dp"
+            style="@style/text_2" />
+
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:id="@+id/tvLogout"
             android:textSize="@dimen/text_1"
@@ -126,6 +151,6 @@
             android:background="@drawable/ripple_bg"
             android:layout_marginTop="8dp"
             android:text="退出登录"
-            app:layout_constraintTop_toBottomOf="@+id/tvCopyright" />
+            app:layout_constraintTop_toBottomOf="@+id/tvColor" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -2,13 +2,12 @@ package com.example.devlibrary.base
 
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import androidx.annotation.StringRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.example.devlibrary.R
 import com.example.devlibrary.app.App
+import com.example.devlibrary.ext.getThemeColor
 import com.example.devlibrary.utils.AutoDensityUtils
-import com.example.devlibrary.utils.ResourcesUtils
-import com.example.devlibrary.utils.SettingUtil
 import com.example.devlibrary.utils.StatusBarUtil
 import kotlinx.android.synthetic.main.toolbar.*
 import kotlinx.coroutines.CoroutineScope
@@ -32,8 +31,12 @@ abstract class BaseActivity<B : ViewDataBinding> : RxActivity(), CoroutineScope 
         initData()
         initToolbar()
         initView()
-        initColor()
         loadData()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initColor()
     }
 
     private fun initToolbar() {
@@ -45,16 +48,16 @@ abstract class BaseActivity<B : ViewDataBinding> : RxActivity(), CoroutineScope 
         }
     }
 
-    fun setPageTitle(charSequence: CharSequence){
+    fun setPageTitle(charSequence: CharSequence) {
         tv_title?.let { it.text = charSequence }
     }
 
+    fun setPageTitle(@StringRes resId: Int) {
+        tv_title?.let { it.text = getString(resId) }
+    }
+
     open fun initColor() {
-        val themeColor = if (!SettingUtil.getIsNightMode()) {
-            SettingUtil.getColor()
-        } else {
-            ResourcesUtils.getColor(R.color.colorPrimary)
-        }
+        val themeColor = getThemeColor()
         StatusBarUtil.setColor(this, themeColor, 0)
         if (this.supportActionBar != null) {
             this.supportActionBar?.setBackgroundDrawable(ColorDrawable(themeColor))
