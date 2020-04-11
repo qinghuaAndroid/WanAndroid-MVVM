@@ -6,6 +6,7 @@ import android.content.Context;
 
 import com.bumptech.glide.Glide;
 import com.example.devlibrary.utils.AutoDensityUtils;
+import com.tencent.mmkv.MMKV;
 
 public class App extends Application {
 
@@ -18,6 +19,7 @@ public class App extends Application {
         sInstance = this;
         sContext = getApplicationContext();
         AutoDensityUtils.init();
+        MMKV.initialize(this);
     }
 
     @Override

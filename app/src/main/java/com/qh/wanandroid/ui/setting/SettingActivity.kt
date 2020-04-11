@@ -6,12 +6,12 @@ import com.example.common.constant.Const
 import com.example.devlibrary.helper.LiveEventBusHelper
 import com.example.devlibrary.mvp.BaseMvpActivity
 import com.example.devlibrary.utils.CacheUtils
-import com.example.devlibrary.utils.Preference
 import com.example.devlibrary.utils.StringUtils
 import com.example.devlibrary.utils.versionCode
 import com.qh.wanandroid.R
 import com.qh.wanandroid.databinding.ActivitySettingBinding
 import com.qh.wanandroid.ui.BrowserNormalActivity
+import com.tencent.mmkv.MMKV
 import kotlinx.android.synthetic.main.activity_setting.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
@@ -23,8 +23,8 @@ class SettingActivity :
     BaseMvpActivity<SettingContract.View, SettingContract.Presenter, ActivitySettingBinding>(),
     SettingContract.View {
 
-    private var isLogin by Preference(Const.IS_LOGIN, false)
-    private var userJson by Preference(Const.USER_GSON, "")
+    private val mmkv by lazy { MMKV.defaultMMKV() }
+    private val isLogin by lazy { mmkv.decodeBool(Const.IS_LOGIN, false) }
 
     override fun createPresenter(): SettingContract.Presenter = SettingPresenter()
 
@@ -62,8 +62,8 @@ class SettingActivity :
     }
 
     override fun logoutSuccess() {
-        isLogin = false
-        userJson = ""
+        mmkv.encode(Const.IS_LOGIN, false)
+        mmkv.removeValueForKey(Const.USER_GSON)
         LiveEventBusHelper.post(Const.LOGOUT_SUCCESS, true)
         finish()
     }

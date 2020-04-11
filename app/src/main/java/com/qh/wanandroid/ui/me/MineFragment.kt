@@ -5,7 +5,6 @@ import androidx.lifecycle.Observer
 import com.example.common.constant.Const
 import com.example.devlibrary.helper.LiveEventBusHelper
 import com.example.devlibrary.mvvm.BaseVMFragment
-import com.example.devlibrary.utils.Preference
 import com.example.devlibrary.utils.StringUtils
 import com.qh.wanandroid.R
 import com.qh.wanandroid.databinding.FragmentMineBinding
@@ -13,6 +12,7 @@ import com.qh.wanandroid.ui.girl.GirlActivity
 import com.qh.wanandroid.ui.integral.IntegralActivity
 import com.qh.wanandroid.ui.login.LoginActivity
 import com.qh.wanandroid.ui.setting.SettingActivity
+import com.tencent.mmkv.MMKV
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.support.v4.startActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -23,7 +23,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  */
 class MineFragment : BaseVMFragment<MineViewModel, FragmentMineBinding>() {
 
-    private val isLogin by Preference(Const.IS_LOGIN, false)
+    private val isLogin by lazy { MMKV.defaultMMKV().decodeBool(Const.IS_LOGIN, false) }
     private val mViewModel: MineViewModel by viewModel()
 
     override fun startObserve() {
