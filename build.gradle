@@ -48,7 +48,7 @@ ext {
     rxbindingVersion = '2.1.0'
     rxPerssionsVersion = '0.9.5@aar'
     rxLifecycleVersion = '2.2.2'
-    glideVersion = '4.10.0'
+    glideVersion = '4.11.0'
     glideokhttpVersion = '1.3.1'
     loggerVersion = '2.2.0'
     circleImageviewVersion = '3.0.0'

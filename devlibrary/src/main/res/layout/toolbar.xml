@@ -4,7 +4,7 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    app:navigationIcon="@drawable/ic_ab_back_material"
+    app:navigationIcon="@drawable/ic_back_white"
     app:popupTheme="@style/AppTheme.PopupOverlay">
 
     <TextView

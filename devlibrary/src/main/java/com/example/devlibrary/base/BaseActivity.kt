@@ -48,11 +48,11 @@ abstract class BaseActivity<B : ViewDataBinding> : RxActivity(), CoroutineScope 
         }
     }
 
-    fun setPageTitle(charSequence: CharSequence) {
+    override fun setTitle(charSequence: CharSequence) {
         tv_title?.let { it.text = charSequence }
     }
 
-    fun setPageTitle(@StringRes resId: Int) {
+    override fun setTitle(@StringRes resId: Int) {
         tv_title?.let { it.text = getString(resId) }
     }
 

@@ -43,7 +43,7 @@ class LoginActivity : BaseVMActivity<LoginViewModel, ActivityLoginBinding>() {
     }
 
     override fun initView() {
-        setPageTitle(getString(R.string.login))
+        title = getString(R.string.login)
         mBinding.lifecycleOwner = this
         mBinding.viewModel = mViewModel
         mBinding.ivClear.onClick {

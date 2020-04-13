@@ -54,7 +54,7 @@ class SystemActivity : BaseVMActivity<SystemViewModel, ActivitySystemBinding>() 
     }
 
     override fun initView() {
-        title?.let { setPageTitle(it) }
+        title?.let { setTitle(it) }
         initRecyclerView()
         mBinding.swipeRefresh.setOnRefreshListener { loadData() }
     }

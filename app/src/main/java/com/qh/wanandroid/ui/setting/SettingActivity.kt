@@ -41,7 +41,7 @@ class SettingActivity :
 
     override fun initView() {
         super.initView()
-        setPageTitle(R.string.setting)
+        setTitle(R.string.setting)
         tvClearValue.text = CacheUtils.getTotalCacheSize(this)
         tvClearValue.onClick { clearCache() }
         tvVersionValue.text = versionCode.toString()

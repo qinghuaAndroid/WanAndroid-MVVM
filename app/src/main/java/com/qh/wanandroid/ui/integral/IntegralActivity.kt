@@ -64,7 +64,7 @@ class IntegralActivity : BaseVMActivity<IntegralViewModel, ActivityIntegralBindi
     }
 
     override fun initView() {
-        setPageTitle(getString(R.string.my_integral))
+        title = getString(R.string.my_integral)
         initRecyclerView()
         mBinding.swipeRefresh.setOnRefreshListener { loadData() }
         mBinding.appBar.addOnOffsetChangedListener(

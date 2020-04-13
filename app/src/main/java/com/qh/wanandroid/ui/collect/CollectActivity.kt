@@ -36,7 +36,7 @@ class CollectActivity :
 
     override fun initView() {
         super.initView()
-        setPageTitle("我的收藏")
+        title = "我的收藏"
         initRecyclerView()
         mBinding.swipeRefresh.setOnRefreshListener { loadData() }
     }

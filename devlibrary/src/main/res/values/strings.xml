@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DevLibrary</string>
+    <string name="back">返回</string>
 </resources>

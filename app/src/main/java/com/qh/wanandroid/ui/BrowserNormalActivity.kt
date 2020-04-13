@@ -34,7 +34,7 @@ class BrowserNormalActivity : BaseActivity<ActivityBrowserNormalBinding>() {
     }
 
     override fun initView() {
-        setPageTitle(this@BrowserNormalActivity.title)
+        setTitle(this@BrowserNormalActivity.title)
         mAgentWeb = AgentWeb.with(this)
             .setAgentWebParent(mBinding.container, LinearLayout.LayoutParams(-1, -1))
             .useDefaultIndicator()
