@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.devlibrary.base.BaseActivity
+import com.example.devlibrary.utils.StatusBarUtil
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.ViewPagerAdapter
 import com.qh.wanandroid.constant.Const
@@ -61,6 +62,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 }
             }
         })
+    }
+
+    override fun initColor() {
+        StatusBarUtil.setTransparentForWindow(this)
+        StatusBarUtil.setDarkMode(this)
     }
 
     override fun loadData() {

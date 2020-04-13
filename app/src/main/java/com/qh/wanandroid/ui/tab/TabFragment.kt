@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import com.example.devlibrary.ext.getThemeColor
 import com.example.devlibrary.helper.LiveEventBusHelper
 import com.example.devlibrary.mvp.BaseMvpFragment
+import com.example.devlibrary.utils.StatusBarUtil
 import com.google.android.material.tabs.TabLayoutMediator
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.ViewPagerAdapter
@@ -35,6 +36,7 @@ class TabFragment : BaseMvpFragment<TabContract.View, TabContract.Presenter, Fra
     override fun initView(view: View) {
         super.initView(view)
         setThemeColor()
+        StatusBarUtil.setPaddingTop(context, mBinding.tabLayout)
     }
 
     override fun loadData() {

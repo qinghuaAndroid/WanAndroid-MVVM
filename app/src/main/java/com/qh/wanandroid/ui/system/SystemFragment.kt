@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import com.example.devlibrary.base.BaseFragment
 import com.example.devlibrary.ext.getThemeColor
 import com.example.devlibrary.helper.LiveEventBusHelper
+import com.example.devlibrary.utils.StatusBarUtil
 import com.google.android.material.tabs.TabLayoutMediator
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.ViewPagerAdapter
@@ -28,6 +29,7 @@ class SystemFragment : BaseFragment<FragmentSystemBinding>() {
 
     override fun initView(view: View) {
         setThemeColor()
+        StatusBarUtil.setPaddingTop(context, mBinding.tabLayout)
         val fragmentList = mutableListOf<Fragment>()
         fragmentList.add(SystemListFragment())
         fragmentList.add(NavigationFragment())
