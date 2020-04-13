@@ -2,6 +2,7 @@ package com.qh.wanandroid.http
 
 import com.example.devlibrary.network.HttpResult
 import com.qh.wanandroid.bean.*
+import com.zs.wanandroid.entity.CollectEntity
 import io.reactivex.Observable
 import retrofit2.http.*
 
@@ -125,6 +126,13 @@ interface ApiService {
         @Query("title") title: String,
         @Query("link") link: String
     ): Observable<HttpResult<Any>>
+
+    /**
+     * 获取收藏文章数据
+     */
+    @GET("/lg/collect/list/{page}/json")
+    fun getCollectData(@Path("page") pageNo: Int):
+            Observable<HttpResult<CollectEntity>>
 
     /**
      * 登录

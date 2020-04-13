@@ -39,6 +39,8 @@
         <activity android:name=".ui.integral.IntegralActivity" />
 
         <activity android:name=".ui.setting.SettingActivity" />
+
+        <activity android:name=".ui.collect.CollectActivity"/>
     </application>
 
 </manifest>

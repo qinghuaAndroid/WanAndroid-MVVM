@@ -8,6 +8,8 @@ import com.example.devlibrary.mvvm.BaseVMFragment
 import com.example.devlibrary.utils.StringUtils
 import com.qh.wanandroid.R
 import com.qh.wanandroid.databinding.FragmentMineBinding
+import com.qh.wanandroid.ext.startActivity
+import com.qh.wanandroid.ui.collect.CollectActivity
 import com.qh.wanandroid.ui.girl.GirlActivity
 import com.qh.wanandroid.ui.integral.IntegralActivity
 import com.qh.wanandroid.ui.login.LoginActivity
@@ -56,10 +58,8 @@ class MineFragment : BaseVMFragment<MineViewModel, FragmentMineBinding>() {
         mBinding.tvUserName.onClick { startActivity<LoginActivity>() }
         mBinding.llHistory.onClick { }//足迹
         mBinding.llRanking.onClick { }//排名
-        mBinding.rlIntegral.onClick { //我的积分
-            if (isLogin) startActivity<IntegralActivity>() else startActivity<LoginActivity>()
-        }
-        mBinding.rlCollect.onClick { }//我的收藏
+        mBinding.rlIntegral.onClick { startActivity(IntegralActivity::class.java, true) }//我的积分
+        mBinding.rlCollect.onClick {startActivity(CollectActivity::class.java, true) }//我的收藏
         mBinding.rlArticle.onClick { }//我的文章
         mBinding.rlWebsite.onClick { }//网站
         mBinding.rlGirl.onClick { startActivity<GirlActivity>() }//轻松一下
