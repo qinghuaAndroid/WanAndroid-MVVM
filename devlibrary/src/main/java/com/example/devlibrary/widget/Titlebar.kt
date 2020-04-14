@@ -29,7 +29,7 @@ class Titlebar(context: Context?, attrs: AttributeSet? = null, defStyleAttr: Int
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        tvLeft.onClick { if (context is Activity) (context as Activity).finish()}
+        tvLeft.onClick { if (context is Activity) (context as Activity).finish() }
     }
 
     fun setTitle(charSequence: CharSequence) {
@@ -38,5 +38,9 @@ class Titlebar(context: Context?, attrs: AttributeSet? = null, defStyleAttr: Int
 
     fun setTitle(@StringRes resId: Int) {
         tvTitle.text = getString(resId)
+    }
+
+    fun getTitle(): CharSequence {
+        return tvTitle.text
     }
 }

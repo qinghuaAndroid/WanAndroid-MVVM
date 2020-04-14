@@ -49,11 +49,11 @@ abstract class BaseActivity<B : ViewDataBinding> : RxActivity(), CoroutineScope 
     }
 
     override fun setTitle(charSequence: CharSequence) {
-        tv_title?.let { it.text = charSequence }
+        toolbar?.title = charSequence
     }
 
     override fun setTitle(@StringRes resId: Int) {
-        tv_title?.let { it.text = getString(resId) }
+        toolbar?.setTitle(resId)
     }
 
     open fun initColor() {
