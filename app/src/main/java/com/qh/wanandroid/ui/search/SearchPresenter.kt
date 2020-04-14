@@ -17,11 +17,9 @@ class SearchPresenter : BasePresenter<SearchContract.Model, SearchContract.View>
     override fun createModel(): SearchContract.Model? = SearchModel()
 
     override fun deleteByKey(key: String) {
-        val result = realm.where(SearchHistoryBean::class.java).equalTo("key", key).findFirst()
-        result.isNull<SearchHistoryBean> {
-            realm.executeTransaction {
-                result?.deleteFromRealm()
-            }
+        val results = realm.where(SearchHistoryBean::class.java).equalTo("key", key).findAll()
+        realm.executeTransaction {
+            results.deleteAllFromRealm()
         }
     }
 

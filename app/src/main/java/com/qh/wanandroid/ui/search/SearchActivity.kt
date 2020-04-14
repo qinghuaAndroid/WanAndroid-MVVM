@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.example.devlibrary.ext.listener.queryTextListener
+import com.example.devlibrary.helper.RealmHelper
 import com.example.devlibrary.mvp.BaseMvpActivity
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.SearchHistoryAdapter
@@ -133,5 +134,10 @@ class SearchActivity :
     private fun initStyle(searchView: SearchView) {
         val goButton = searchView.findViewById<ImageView>(androidx.appcompat.R.id.search_go_btn)
         goButton.setImageResource(R.drawable.ic_search_white_24dp)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        RealmHelper.realm.close()
     }
 }
