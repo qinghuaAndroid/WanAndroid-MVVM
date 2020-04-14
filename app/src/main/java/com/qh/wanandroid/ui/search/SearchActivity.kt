@@ -73,6 +73,8 @@ class SearchActivity :
         OnItemChildClickListener { _, view, position ->
             if (view.id == R.id.iv_clear) {
                 mPresenter?.deleteByKey(searchHistoryAdapter.data[position].key)
+                searchHistoryAdapter.data.removeAt(position)
+                searchHistoryAdapter.notifyItemRemoved(position)
             }
         }
 
@@ -86,6 +88,11 @@ class SearchActivity :
 
     override fun loadData() {
         mPresenter?.getHotSearchData()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mPresenter?.queryHistory()
     }
 
     override fun showHistoryData(historyBeans: MutableList<SearchHistoryBean>) {
