@@ -25,4 +25,5 @@ object Const {
     const val NAME = "name"
     const val SYSTEM_ID = "systemId"
     const val SYSTEM_TITLE = "systemTitle"
+    const val SEARCH_KEY = "searchKey"
 }

@@ -174,4 +174,22 @@ interface ApiService {
         @Path("page") page: Int
     ): Observable<GankIoDataBean>
 
+    /**
+     * 搜索热词
+     * http://www.wanandroid.com/hotkey/json
+     */
+    @GET("hotkey/json")
+    fun getHotSearchData(): Observable<HttpResult<MutableList<HotSearchEntity>>>
+
+    /**
+     * 搜索
+     * http://www.wanandroid.com/article/query/0/json
+     * @param page
+     * @param key
+     */
+    @POST("article/query/{page}/json")
+    @FormUrlEncoded
+    suspend fun queryBySearchKey(@Path("page") page: Int,
+                         @Field("k") key: String): HttpResult<ArticleEntity>
+
 }

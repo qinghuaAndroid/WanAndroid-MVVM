@@ -41,6 +41,10 @@
         <activity android:name=".ui.setting.SettingActivity" />
 
         <activity android:name=".ui.collect.CollectActivity"/>
+
+        <activity android:name=".ui.search.SearchActivity"/>
+
+        <activity android:name=".ui.search.list.SearchListActivity"/>
     </application>
 
 </manifest>

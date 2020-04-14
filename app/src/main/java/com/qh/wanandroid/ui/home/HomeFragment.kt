@@ -8,6 +8,8 @@ import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.example.common.constant.Const
 import com.example.devlibrary.mvp.BaseMvpFragment
 import com.example.devlibrary.network.exception.ErrorStatus
+import com.example.devlibrary.utils.DisplayUtils
+import com.example.devlibrary.utils.StatusBarUtil
 import com.example.devlibrary.widget.LoadMoreView
 import com.google.android.material.appbar.AppBarLayout
 import com.qh.wanandroid.R
@@ -18,6 +20,8 @@ import com.qh.wanandroid.bean.BannerEntity
 import com.qh.wanandroid.databinding.FragmentHomeBinding
 import com.qh.wanandroid.ui.BrowserNormalActivity
 import com.qh.wanandroid.ui.login.LoginActivity
+import com.qh.wanandroid.ui.search.SearchActivity
+import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.support.v4.startActivity
 
 /**
@@ -28,6 +32,7 @@ class HomeFragment :
     BaseMvpFragment<HomeContract.View, HomeContract.Presenter, FragmentHomeBinding>(),
     HomeContract.View {
 
+    private var criticalValue: Int = 0
     private val articleAdapter by lazy { ArticleAdapter() }
     private var isRefresh = false
     private var pageNum = 1
@@ -38,16 +43,25 @@ class HomeFragment :
     override fun attachLayoutRes(): Int = R.layout.fragment_home
 
     override fun initData() {
-
+        val statusBarHeight = StatusBarUtil.getStatusBarHeight(context)
+        criticalValue = DisplayUtils.dp2px(215F) - statusBarHeight
     }
 
     override fun initView(view: View) {
         super.initView(view)
         initRecyclerView()
         mBinding.swipeRefresh.setOnRefreshListener { loadData() }
+        StatusBarUtil.setPaddingTop(context, mBinding.rlSearch)
+        mBinding.ivSearch.onClick { startActivity<SearchActivity>() }
         mBinding.appBarLayout.addOnOffsetChangedListener(
             AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
                 mBinding.swipeRefresh.isEnabled = verticalOffset >= 0
+                if (verticalOffset > -criticalValue) {
+                    val rate = kotlin.math.abs(verticalOffset) / criticalValue.toFloat()
+                    mBinding.rlSearch.alpha = rate
+                } else {
+                    mBinding.rlSearch.alpha = 1.0F
+                }
             })
     }
 
