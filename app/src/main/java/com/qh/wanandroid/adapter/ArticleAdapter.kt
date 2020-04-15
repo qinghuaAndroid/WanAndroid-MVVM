@@ -11,9 +11,9 @@ import com.qh.wanandroid.R
 import com.qh.wanandroid.bean.ArticleEntity
 
 /**
+ * @author FQH
+ * Create at 2020/4/9.
  * 文章适配器
- * @author zs
- * @date 2020-03-16修改
  */
 class ArticleAdapter :
     BaseQuickAdapter<ArticleEntity.DatasBean, BaseViewHolder>(R.layout.item_home_article),

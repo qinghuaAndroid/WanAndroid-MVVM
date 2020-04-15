@@ -3,9 +3,8 @@ package com.qh.wanandroid.bean
 import java.io.Serializable
 
 /**
- * des 个人积分
- * @author zs
- * @date 2020-03-17
+ * @author FQH
+ * Create at 2020/4/14.
  */
 class IntegralEntity: Serializable {
 

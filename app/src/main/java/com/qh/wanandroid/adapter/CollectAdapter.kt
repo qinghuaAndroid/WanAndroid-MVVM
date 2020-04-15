@@ -7,12 +7,10 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.qh.wanandroid.R
 import com.zs.wanandroid.entity.CollectEntity
 
-
 /**
- * des 收藏适配器
- *
- * @author zs
- * @date 2020-03-13
+ * @author FQH
+ * Create at 2020/4/9.
+ * 收藏适配器
  */
 class CollectAdapter(layoutId: Int) :
     BaseQuickAdapter<CollectEntity.DatasBean, BaseViewHolder>(layoutId), LoadMoreModule {

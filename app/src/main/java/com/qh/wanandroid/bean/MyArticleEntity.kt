@@ -1,9 +1,8 @@
 package com.qh.wanandroid.bean
 
 /**
- * des 我的文章
- * @author zs
- * @date 2020-03-17
+ * @author FQH
+ * Create at 2020/4/14.
  */
 class MyArticleEntity {
     /**

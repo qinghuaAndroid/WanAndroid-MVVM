@@ -8,8 +8,8 @@ import com.example.devlibrary.utils.ImageLoader
 import com.qh.wanandroid.R
 
 /**
- * Created by luyao
- * on 2019/12/18 16:16
+ * @author FQH
+ * Create at 2020/4/4.
  */
 @BindingAdapter(value = ["afterTextChanged"])
 fun EditText.afterTextChanged(action: (String) -> Unit) {

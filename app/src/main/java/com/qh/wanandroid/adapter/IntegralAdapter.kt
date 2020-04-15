@@ -7,9 +7,8 @@ import com.qh.wanandroid.R
 import com.qh.wanandroid.bean.IntegralRecordEntity
 
 /**
- * 积分增加记录
- * @author zs
- * @date 2020-03-17
+ * @author FQH
+ * Create at 2020/4/14.
  */
 class IntegralAdapter(layoutId:Int) : BaseQuickAdapter<IntegralRecordEntity.DatasBean, BaseViewHolder>(layoutId),LoadMoreModule {
 

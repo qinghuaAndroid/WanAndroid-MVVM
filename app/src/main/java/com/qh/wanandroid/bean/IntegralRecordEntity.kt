@@ -1,9 +1,8 @@
 package com.qh.wanandroid.bean
 
 /**
- * des 获取积分记录
- * @author zs
- * @date 2020-03-17
+ * @author FQH
+ * Create at 2020/4/14.
  */
 class IntegralRecordEntity {
 
