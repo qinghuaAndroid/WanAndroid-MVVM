@@ -20,13 +20,13 @@ class SystemViewModel(private val mRepository: SystemRepository) : BaseViewModel
     val uiState: LiveData<ArticleUiModel>
         get() = _uiState
 
-    private var pageNum = 1
+    private var pageNum = 0
 
     fun getSystemArticle(isRefresh: Boolean, cid: Int) {
         viewModelScope.launch(Dispatchers.Main) {
             emitArticleUiState(showLoading = true)
             if (isRefresh) {
-                pageNum = 1
+                pageNum = 0
                 emitArticleUiState(isEnableLoadMore = false)
             }
             val result = withContext(Dispatchers.IO) { mRepository.getSystemArticle(pageNum, cid) }

@@ -20,13 +20,13 @@ class SearchListViewModel(private val mRepository: SearchListRepository) : BaseV
     val uiState: LiveData<ArticleUiModel>
         get() = _uiState
 
-    private var pageNum = 1
+    private var pageNum = 0
 
     fun getSystemArticle(isRefresh: Boolean, key: String) {
         viewModelScope.launch(Dispatchers.Main) {
             emitArticleUiState(showLoading = true)
             if (isRefresh) {
-                pageNum = 1
+                pageNum = 0
                 emitArticleUiState(isEnableLoadMore = false)
             }
             val result = withContext(Dispatchers.IO) { mRepository.queryBySearchKey(pageNum, key) }

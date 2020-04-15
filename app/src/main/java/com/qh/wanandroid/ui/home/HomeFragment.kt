@@ -2,10 +2,13 @@ package com.qh.wanandroid.ui.home
 
 import android.content.Intent
 import android.view.View
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.example.common.constant.Const
+import com.example.devlibrary.ext.getThemeColor
+import com.example.devlibrary.helper.LiveEventBusHelper
 import com.example.devlibrary.mvp.BaseMvpFragment
 import com.example.devlibrary.network.exception.ErrorStatus
 import com.example.devlibrary.utils.DisplayUtils
@@ -21,6 +24,7 @@ import com.qh.wanandroid.databinding.FragmentHomeBinding
 import com.qh.wanandroid.ui.BrowserNormalActivity
 import com.qh.wanandroid.ui.login.LoginActivity
 import com.qh.wanandroid.ui.search.SearchActivity
+import org.jetbrains.anko.backgroundColor
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.support.v4.startActivity
 
@@ -35,7 +39,7 @@ class HomeFragment :
     private var criticalValue: Int = 0
     private val articleAdapter by lazy { ArticleAdapter() }
     private var isRefresh = false
-    private var pageNum = 1
+    private var pageNum = 0
     private var curPosition = 0
 
     override fun createPresenter(): HomeContract.Presenter = HomePresenter()
@@ -45,10 +49,12 @@ class HomeFragment :
     override fun initData() {
         val statusBarHeight = StatusBarUtil.getStatusBarHeight(context)
         criticalValue = DisplayUtils.dp2px(215F) - statusBarHeight
+        receiveNotice()
     }
 
     override fun initView(view: View) {
         super.initView(view)
+        setThemeColor()
         initRecyclerView()
         mBinding.swipeRefresh.setOnRefreshListener { loadData() }
         StatusBarUtil.setPaddingTop(context, mBinding.rlSearch)
@@ -103,7 +109,7 @@ class HomeFragment :
         // 这里的作用是防止下拉刷新的时候还可以上拉加载
         articleAdapter.loadMoreModule.isEnableLoadMore = false
         // 下拉刷新，需要重置页数
-        pageNum = 1
+        pageNum = 0
         isRefresh = true
         mPresenter?.loadBanner()
         mPresenter?.loadTopArticles()
@@ -169,4 +175,14 @@ class HomeFragment :
         mBinding.banner.stop()
     }
 
+    private fun receiveNotice() {
+        LiveEventBusHelper.observe(com.example.common.constant.Const.THEME_COLOR,
+            Int::class.java, this, Observer<Int> {
+                setThemeColor()
+            })
+    }
+
+    private fun setThemeColor() {
+        mBinding.rlSearch.backgroundColor = getThemeColor()
+    }
 }

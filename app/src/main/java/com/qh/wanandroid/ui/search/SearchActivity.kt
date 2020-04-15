@@ -4,15 +4,10 @@ import android.content.Intent
 import android.view.Menu
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
-import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.chad.library.adapter.base.listener.OnItemChildClickListener
-import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.example.devlibrary.ext.listener.queryTextListener
 import com.example.devlibrary.helper.RealmHelper
 import com.example.devlibrary.mvp.BaseMvpActivity
 import com.qh.wanandroid.R
-import com.qh.wanandroid.adapter.SearchHistoryAdapter
 import com.qh.wanandroid.bean.HotSearchEntity
 import com.qh.wanandroid.bean.SearchHistoryBean
 import com.qh.wanandroid.constant.Const
@@ -28,8 +23,6 @@ class SearchActivity :
     BaseMvpActivity<SearchContract.View, SearchContract.Presenter, ActivitySearchBinding>(),
     SearchContract.View {
 
-    private val searchHistoryAdapter by lazy { SearchHistoryAdapter() }
-
     override fun createPresenter(): SearchContract.Presenter = SearchPresenter()
 
     override fun attachLayoutRes(): Int = R.layout.activity_search
@@ -41,43 +34,15 @@ class SearchActivity :
     override fun initView() {
         super.initView()
         setTitle(R.string.search)
-        initRecyclerView()
         initListener()
     }
 
     private fun initListener() {
-        mBinding.tvClearAll.onClick {
+        mBinding.ivClearAll.onClick {
             mPresenter?.clearAllHistory()
-            searchHistoryAdapter.data.clear()
-            searchHistoryAdapter.notifyDataSetChanged()
+            mBinding.historyLabelsView.removeAllViews()
         }
     }
-
-    private fun initRecyclerView() {
-        mBinding.rvHistorySearch.run {
-            layoutManager = LinearLayoutManager(this@SearchActivity)
-            adapter = searchHistoryAdapter
-            itemAnimator = DefaultItemAnimator()
-        }
-        searchHistoryAdapter.run {
-            setOnItemClickListener(mOnItemClickListener)
-            addChildClickViewIds(R.id.iv_clear)
-            setOnItemChildClickListener(mOnItemChildClickListener)
-        }
-    }
-
-    private val mOnItemClickListener = OnItemClickListener { _, _, position ->
-        goToSearchList(searchHistoryAdapter.data[position].key)
-    }
-
-    private val mOnItemChildClickListener =
-        OnItemChildClickListener { _, view, position ->
-            if (view.id == R.id.iv_clear) {
-                mPresenter?.deleteByKey(searchHistoryAdapter.data[position].key)
-                searchHistoryAdapter.data.removeAt(position)
-                searchHistoryAdapter.notifyItemRemoved(position)
-            }
-        }
 
     private fun goToSearchList(key: String) {
         mPresenter?.saveSearchKey(key)
@@ -97,7 +62,14 @@ class SearchActivity :
     }
 
     override fun showHistoryData(historyBeans: MutableList<SearchHistoryBean>) {
-        searchHistoryAdapter.setList(historyBeans)
+        mBinding.historyLabelsView.run {
+            setLabels(historyBeans) { _, _, data ->
+                data.key
+            }
+            setOnLabelClickListener { _, _, position ->
+                onLabelClick(historyBeans[position].key)
+            }
+        }
     }
 
     override fun showHotSearchData(hotSearchDatas: MutableList<HotSearchEntity>) {
@@ -106,13 +78,13 @@ class SearchActivity :
                 data.name
             }
             setOnLabelClickListener { _, _, position ->
-                onLabelClick(hotSearchDatas[position])
+                onLabelClick(hotSearchDatas[position].name)
             }
         }
     }
 
-    private fun onLabelClick(hotSearchEntity: HotSearchEntity) {
-        goToSearchList(hotSearchEntity.name)
+    private fun onLabelClick(queryTxt: String) {
+        goToSearchList(queryTxt)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
