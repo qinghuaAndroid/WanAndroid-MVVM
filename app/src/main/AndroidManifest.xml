@@ -45,6 +45,8 @@
         <activity android:name=".ui.search.SearchActivity"/>
 
         <activity android:name=".ui.search.list.SearchListActivity"/>
+
+        <activity android:name=".ui.myarticle.MyArticleActivity"/>
     </application>
 
 </manifest>

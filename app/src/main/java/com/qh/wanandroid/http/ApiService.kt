@@ -107,10 +107,16 @@ interface ApiService {
     suspend fun getIntegralRecord(@Path("pageNum") pageNum: Int): HttpResult<IntegralRecordEntity>
 
     /**
+     * 广场列表
+     */
+    @GET("/user_article/list/{pageNum}/json")
+    suspend fun getShareArticle(@Path("pageNum") pageNum: Int): HttpResult<ArticleEntity>
+
+    /**
      * 我分享的文章
      */
     @GET("/user/lg/private_articles/{pageNum}/json")
-    fun getMyArticle(@Path("pageNum") pageNum: Int): Observable<HttpResult<MyArticleEntity>>
+    suspend fun getMyArticle(@Path("pageNum") pageNum: Int): HttpResult<MyArticleEntity>
 
     /**
      * 删除我分享的文章
@@ -189,7 +195,9 @@ interface ApiService {
      */
     @POST("article/query/{page}/json")
     @FormUrlEncoded
-    suspend fun queryBySearchKey(@Path("page") page: Int,
-                         @Field("k") key: String): HttpResult<ArticleEntity>
+    suspend fun queryBySearchKey(
+        @Path("page") page: Int,
+        @Field("k") key: String
+    ): HttpResult<ArticleEntity>
 
 }

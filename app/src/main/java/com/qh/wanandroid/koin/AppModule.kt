@@ -6,6 +6,8 @@ import com.qh.wanandroid.ui.login.LoginRepository
 import com.qh.wanandroid.ui.login.LoginViewModel
 import com.qh.wanandroid.ui.me.MineRepository
 import com.qh.wanandroid.ui.me.MineViewModel
+import com.qh.wanandroid.ui.myarticle.MyArticleRepository
+import com.qh.wanandroid.ui.myarticle.MyArticleViewModel
 import com.qh.wanandroid.ui.search.list.SearchListRepository
 import com.qh.wanandroid.ui.search.list.SearchListViewModel
 import com.qh.wanandroid.ui.system.act.SystemRepository
@@ -30,6 +32,7 @@ val viewModelModule = module {
     viewModel { SystemViewModel(get()) }
     viewModel { IntegralViewModel(get()) }
     viewModel { SearchListViewModel(get()) }
+    viewModel { MyArticleViewModel(get()) }
 }
 
 val repositoryModule = module {
@@ -40,6 +43,7 @@ val repositoryModule = module {
     single { SystemRepository() }
     single { IntegralRepository() }
     single { SearchListRepository() }
+    single { MyArticleRepository() }
 }
 
 val appModule = listOf(viewModelModule, repositoryModule)
