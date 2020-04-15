@@ -10,6 +10,8 @@ import com.qh.wanandroid.ui.myarticle.MyArticleRepository
 import com.qh.wanandroid.ui.myarticle.MyArticleViewModel
 import com.qh.wanandroid.ui.search.list.SearchListRepository
 import com.qh.wanandroid.ui.search.list.SearchListViewModel
+import com.qh.wanandroid.ui.share.ShareListRepository
+import com.qh.wanandroid.ui.share.ShareListViewModel
 import com.qh.wanandroid.ui.system.act.SystemRepository
 import com.qh.wanandroid.ui.system.act.SystemViewModel
 import com.qh.wanandroid.ui.system.list.SystemListRepository
@@ -33,6 +35,7 @@ val viewModelModule = module {
     viewModel { IntegralViewModel(get()) }
     viewModel { SearchListViewModel(get()) }
     viewModel { MyArticleViewModel(get()) }
+    viewModel { ShareListViewModel(get()) }
 }
 
 val repositoryModule = module {
@@ -44,6 +47,7 @@ val repositoryModule = module {
     single { IntegralRepository() }
     single { SearchListRepository() }
     single { MyArticleRepository() }
+    single { ShareListRepository() }
 }
 
 val appModule = listOf(viewModelModule, repositoryModule)

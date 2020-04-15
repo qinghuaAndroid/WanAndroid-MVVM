@@ -12,7 +12,7 @@ import com.example.devlibrary.mvp.BaseMvpActivity
 import com.example.devlibrary.utils.CacheUtils
 import com.example.devlibrary.utils.SettingUtil
 import com.example.devlibrary.utils.StringUtils
-import com.example.devlibrary.utils.versionCode
+import com.example.devlibrary.utils.versionName
 import com.qh.wanandroid.R
 import com.qh.wanandroid.databinding.ActivitySettingBinding
 import com.qh.wanandroid.ui.BrowserNormalActivity
@@ -44,7 +44,7 @@ class SettingActivity :
         setTitle(R.string.setting)
         tvClearValue.text = CacheUtils.getTotalCacheSize(this)
         tvClearValue.onClick { clearCache() }
-        tvVersionValue.text = versionCode.toString()
+        tvVersionValue.text = versionName
         tvLogout.visibility = if (isLogin) View.VISIBLE else View.GONE
         tvLogout.onClick { mPresenter?.logout() }
         tvProject.onClick { github() }
