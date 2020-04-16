@@ -11,6 +11,7 @@ import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.ArticleAdapter
 import com.qh.wanandroid.constant.Const
 import com.qh.wanandroid.databinding.ActivitySystemBinding
+import com.qh.wanandroid.ui.ArticleViewModel
 import com.qh.wanandroid.ui.BrowserNormalActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -18,9 +19,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  * @author FQH
  * Create at 2020/4/8.
  */
-class SystemActivity : BaseVMActivity<SystemViewModel, ActivitySystemBinding>() {
+class SystemActivity : BaseVMActivity<ArticleViewModel, ActivitySystemBinding>() {
 
-    private val viewModel by viewModel<SystemViewModel>()
+    private val viewModel by viewModel<ArticleViewModel>()
     private val articleAdapter by lazy { ArticleAdapter() }
     private var cid: Int = 0
     private var title: String? = null

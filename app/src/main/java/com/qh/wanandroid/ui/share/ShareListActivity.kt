@@ -8,15 +8,16 @@ import com.example.devlibrary.widget.LoadMoreView
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.ArticleAdapter
 import com.qh.wanandroid.databinding.ActivityShareListBinding
+import com.qh.wanandroid.ui.ArticleViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * @author FQH
  * Create at 2020/4/15.
  */
-class ShareListActivity : BaseVMActivity<ShareListViewModel, ActivityShareListBinding>() {
+class ShareListActivity : BaseVMActivity<ArticleViewModel, ActivityShareListBinding>() {
 
-    private val viewModel by viewModel<ShareListViewModel>()
+    private val viewModel by viewModel<ArticleViewModel>()
     private val articleAdapter by lazy { ArticleAdapter() }
 
     override fun startObserve() {
@@ -64,10 +65,10 @@ class ShareListActivity : BaseVMActivity<ShareListViewModel, ActivityShareListBi
     }
 
     override fun loadData() {
-        viewModel.getMyArticle(true)
+        viewModel.getShareArticle(true)
     }
 
     private fun loadMore() {
-        viewModel.getMyArticle(false)
+        viewModel.getShareArticle(false)
     }
 }
