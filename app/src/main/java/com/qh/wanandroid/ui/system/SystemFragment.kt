@@ -56,6 +56,6 @@ class SystemFragment : BaseFragment<FragmentSystemBinding>() {
     }
 
     private fun setThemeColor() {
-        mBinding.tabLayout.backgroundColor = getThemeColor()
+        mBinding.tabLayout.backgroundColor = getThemeColor(resources)
     }
 }
