@@ -1,6 +1,10 @@
 package com.qh.wanandroid.koin
 
 import com.qh.wanandroid.ui.ArticleViewModel
+import com.qh.wanandroid.ui.collect.CollectRepository
+import com.qh.wanandroid.ui.collect.CollectViewModel
+import com.qh.wanandroid.ui.home.HomeRepository
+import com.qh.wanandroid.ui.home.HomeViewModel
 import com.qh.wanandroid.ui.integral.IntegralRepository
 import com.qh.wanandroid.ui.integral.IntegralViewModel
 import com.qh.wanandroid.ui.login.LoginRepository
@@ -16,6 +20,7 @@ import com.qh.wanandroid.ui.system.list.SystemListRepository
 import com.qh.wanandroid.ui.system.list.SystemListViewModel
 import com.qh.wanandroid.ui.system.navigation.NavigationRepository
 import com.qh.wanandroid.ui.system.navigation.NavigationViewModel
+import com.qh.wanandroid.ui.tab.list.TabListRepository
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -31,7 +36,9 @@ val viewModelModule = module {
     viewModel { NavigationViewModel(get()) }
     viewModel { IntegralViewModel(get()) }
     viewModel { MyArticleViewModel(get()) }
-    viewModel { ArticleViewModel(get(),get(),get()) }
+    viewModel { ArticleViewModel(get(), get(), get(), get(), get(), get()) }
+    viewModel { CollectViewModel(get()) }
+    viewModel { HomeViewModel(get()) }
 }
 
 val repositoryModule = module {
@@ -44,6 +51,9 @@ val repositoryModule = module {
     single { SearchListRepository() }
     single { MyArticleRepository() }
     single { ShareListRepository() }
+    single { TabListRepository() }
+    single { CollectRepository() }
+    single { HomeRepository() }
 }
 
 val appModule = listOf(viewModelModule, repositoryModule)

@@ -1,32 +1,31 @@
 package com.qh.wanandroid.ui.collect
 
 import android.content.Intent
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.example.common.constant.Const
-import com.example.devlibrary.mvp.BaseMvpActivity
+import com.example.devlibrary.ext.showToast
+import com.example.devlibrary.mvvm.BaseVMActivity
 import com.example.devlibrary.widget.LoadMoreView
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.CollectAdapter
 import com.qh.wanandroid.databinding.ActivityCollectBinding
+import com.qh.wanandroid.ui.ArticleViewModel
 import com.qh.wanandroid.ui.BrowserNormalActivity
-import com.zs.wanandroid.entity.CollectEntity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * @author FQH
  * Create at 2020/4/13.
  */
 class CollectActivity :
-    BaseMvpActivity<CollectContract.View, CollectContract.Presenter, ActivityCollectBinding>(),
-    CollectContract.View {
-
+    BaseVMActivity<ArticleViewModel, ActivityCollectBinding>(){
+    private val articleViewModel by viewModel<ArticleViewModel>()
+    private val collectViewModel by viewModel<CollectViewModel>()
     private val collectAdapter by lazy { CollectAdapter(R.layout.item_home_article) }
-    private var isRefresh = false
-    private var pageNum = 0
     private var curPosition = 0
-
-    override fun createPresenter(): CollectContract.Presenter = CollectPresenter()
 
     override fun attachLayoutRes(): Int = R.layout.activity_collect
 
@@ -35,7 +34,6 @@ class CollectActivity :
     }
 
     override fun initView() {
-        super.initView()
         title = "我的收藏"
         initRecyclerView()
         mBinding.swipeRefresh.setOnRefreshListener { loadData() }
@@ -68,49 +66,41 @@ class CollectActivity :
         val datasBean = collectAdapter.data[position]
         curPosition = position
         when (view.id) {
-            R.id.ivCollect -> mPresenter?.cancelCollect(datasBean.id)
+            R.id.ivCollect -> {collectViewModel.unCollect(datasBean.id)}
         }
     }
 
     override fun loadData() {
-        // 这里的作用是防止下拉刷新的时候还可以上拉加载
-        collectAdapter.loadMoreModule.isEnableLoadMore = false
-        pageNum = 0 // 下拉刷新，需要重置页数
-        isRefresh = true
-        mPresenter?.loadData(pageNum)
+        articleViewModel.getCollectData(true)
     }
 
     private fun loadMore() {
-        ++pageNum
-        isRefresh = false
-        mPresenter?.loadData(pageNum)
+        articleViewModel.getCollectData(false)
     }
 
-    override fun showList(collectEntity: CollectEntity) {
-        mBinding.swipeRefresh.isRefreshing = false
-        collectAdapter.loadMoreModule.isEnableLoadMore = true
-        collectEntity.datas?.let {
-            if (isRefresh) {
-                collectAdapter.setList(it)
-            } else {
-                collectAdapter.addData(it)
+    override fun startObserve() {
+        articleViewModel.uiState.observe(this, Observer {
+            mBinding.swipeRefresh.isRefreshing = it.showLoading
+            it.showSuccess?.let { articleEntity ->
+                articleEntity.datas?.let { list ->
+                    if (it.isRefresh) collectAdapter.setList(list)
+                    else collectAdapter.addData(list)
+                }
+                collectAdapter.loadMoreModule.loadMoreComplete()
             }
-        }
-        if (collectEntity.curPage >= collectEntity.pageCount) {
-            //如果不够一页,显示没有更多数据布局
-            collectAdapter.loadMoreModule.loadMoreEnd()
-        } else {
-            collectAdapter.loadMoreModule.loadMoreComplete()
-        }
-    }
-
-    override fun loadDataFail() {
-        mBinding.swipeRefresh.isRefreshing = false
-        collectAdapter.loadMoreModule.isEnableLoadMore = (true)
-        collectAdapter.loadMoreModule.loadMoreFail()
-    }
-
-    override fun cancelCollectSuccess() {
-        collectAdapter.remove(curPosition)
+            it.showError?.let { errorMsg ->
+                showToast(errorMsg)
+                collectAdapter.loadMoreModule.loadMoreFail()
+            }
+            if (it.showEnd) collectAdapter.loadMoreModule.loadMoreEnd()
+            collectAdapter.loadMoreModule.isEnableLoadMore = it.isEnableLoadMore
+        })
+        collectViewModel.uiState.observe(this, Observer {
+            if (it.showLoading) showProgressDialog() else dismissProgressDialog()
+            it.showSuccess?.let {
+                collectAdapter.remove(curPosition)
+            }
+            it.showError?.let { errorMsg -> showToast(errorMsg) }
+        })
     }
 }

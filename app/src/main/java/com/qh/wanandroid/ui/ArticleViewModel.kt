@@ -4,9 +4,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.devlibrary.mvvm.Result
 import com.qh.wanandroid.base.BaseListViewModel
 import com.qh.wanandroid.bean.ArticleEntity
+import com.qh.wanandroid.ui.collect.CollectRepository
+import com.qh.wanandroid.ui.home.HomeRepository
 import com.qh.wanandroid.ui.search.list.SearchListRepository
 import com.qh.wanandroid.ui.share.ShareListRepository
 import com.qh.wanandroid.ui.system.act.SystemRepository
+import com.qh.wanandroid.ui.tab.list.TabListRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -16,30 +19,33 @@ import kotlinx.coroutines.withContext
  * Create at 2020/4/16.
  */
 class ArticleViewModel(
+    private val homeRepository: HomeRepository,
     private val shareListRepository: ShareListRepository,
     private val systemRepository: SystemRepository,
-    private val searchListRepository: SearchListRepository
+    private val searchListRepository: SearchListRepository,
+    private val tabListRepository: TabListRepository,
+    private val collectRepository: CollectRepository
 ) : BaseListViewModel<ArticleEntity>() {
 
     sealed class ArticleType {
-        //        object Home : ArticleType()                 // 首页
-        object shareList : ArticleType()            // 分享
-
-        //        object Square : ArticleType()               // 广场
-//        object LatestProject : ArticleType()        // 最新项目
-//        object ProjectDetailList : ArticleType()    // 项目列表
-//        object Collection : ArticleType()           // 收藏
+        object Home : ArticleType()                 // 首页
+        object ShareList : ArticleType()            // 分享
+        object Project : ArticleType()        //项目
+        object Collection : ArticleType()           // 收藏
         object System : ArticleType()           // 体系分类
-
-        //        object Blog : ArticleType()                 // 公众号
-        object searchList : ArticleType()           //搜索列表
+        object Blog : ArticleType()                 // 公众号
+        object SearchList : ArticleType()           //搜索列表
     }
 
     private var pageNum = 0
 
-    fun getShareArticle(isRefresh: Boolean) = getArticleList(ArticleType.shareList, isRefresh)
+    fun getArticles(isRefresh: Boolean) = getArticleList(ArticleType.Home, isRefresh)
+    fun getShareArticle(isRefresh: Boolean) = getArticleList(ArticleType.ShareList, isRefresh)
     fun getSystemArticle(isRefresh: Boolean, cid: Int) = getArticleList(ArticleType.System, isRefresh, cid = cid)
-    fun getSystemArticle(isRefresh: Boolean, queryTxt: String) = getArticleList(ArticleType.searchList, isRefresh, queryTxt = queryTxt)
+    fun queryBySearchKey(isRefresh: Boolean, queryTxt: String) = getArticleList(ArticleType.SearchList, isRefresh, queryTxt = queryTxt)
+    fun getProjectList(isRefresh: Boolean, cid: Int) = getArticleList(ArticleType.Project, isRefresh, cid = cid)
+    fun getAccountList(isRefresh: Boolean, cid: Int) = getArticleList(ArticleType.Blog, isRefresh, cid = cid)
+    fun getCollectData(isRefresh: Boolean) = getArticleList(ArticleType.Collection, isRefresh)
 
     private fun getArticleList(
         articleType: ArticleType,
@@ -48,19 +54,20 @@ class ArticleViewModel(
         queryTxt: String = ""
     ) {
         viewModelScope.launch(Dispatchers.Main) {
-            emitUiModel(showLoading = true)
             if (isRefresh) {
                 pageNum = 0
+                emitUiModel(showLoading = true)
                 emitUiModel(isEnableLoadMore = false)
             }
             val result = withContext(Dispatchers.IO) {
                 when (articleType) {
-                    ArticleType.shareList -> shareListRepository.getShareArticle(pageNum)
+                    ArticleType.Home -> homeRepository.loadArticles(pageNum)
+                    ArticleType.ShareList -> shareListRepository.getShareArticle(pageNum)
                     ArticleType.System -> systemRepository.getSystemArticle(pageNum, cid)
-                    ArticleType.searchList -> searchListRepository.queryBySearchKey(
-                        pageNum,
-                        queryTxt
-                    )
+                    ArticleType.SearchList -> searchListRepository.queryBySearchKey(pageNum, queryTxt)
+                    ArticleType.Project -> tabListRepository.getProjectList(pageNum, cid)
+                    ArticleType.Blog -> tabListRepository.getAccountList(cid, pageNum)
+                    ArticleType.Collection -> collectRepository.getCollectData(pageNum)
                 }
             }
             if (result is Result.Success) {
@@ -85,7 +92,14 @@ class ArticleViewModel(
                     isEnableLoadMore = true
                 )
             }
+        }
+    }
 
+    fun collect(id:Int){
+        launch {
+            withContext(Dispatchers.IO){
+                collectRepository.collect(id)
+            }
         }
     }
 }

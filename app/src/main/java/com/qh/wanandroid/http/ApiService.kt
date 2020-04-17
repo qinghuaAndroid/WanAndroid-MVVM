@@ -2,7 +2,6 @@ package com.qh.wanandroid.http
 
 import com.example.devlibrary.network.HttpResult
 import com.qh.wanandroid.bean.*
-import com.zs.wanandroid.entity.CollectEntity
 import io.reactivex.Observable
 import retrofit2.http.*
 
@@ -16,31 +15,31 @@ interface ApiService {
      * banner
      */
     @GET("/banner/json")
-    fun getBanner(): Observable<HttpResult<MutableList<BannerEntity>>>
+    suspend fun getBanner(): HttpResult<MutableList<BannerEntity>>
 
     /**
      * 获取首页置顶文章数据
      */
     @GET("/article/top/json")
-    fun getTopList(): Observable<HttpResult<MutableList<ArticleEntity.DatasBean>>>
+    suspend fun getTopList(): HttpResult<MutableList<ArticleEntity.DatasBean>>
 
     /**
      * 获取首页文章数据
      */
     @GET("/article/list/{page}/json")
-    fun getHomeList(@Path("page") pageNo: Int): Observable<HttpResult<ArticleEntity>>
+    suspend fun getHomeList(@Path("page") pageNo: Int): HttpResult<ArticleEntity>
 
     /**
      * 收藏
      */
     @POST("/lg/collect/{id}/json")
-    fun collect(@Path("id") id: Int): Observable<HttpResult<Any>>
+    suspend fun collect(@Path("id") id: Int): HttpResult<Any>
 
     /**
      * 取消收藏
      */
     @POST("/lg/uncollect_originId/{id}/json")
-    fun unCollect(@Path("id") id: Int): Observable<HttpResult<Any>>
+    suspend fun unCollect(@Path("id") id: Int): HttpResult<Any>
 
     /**
      * 获取项目tab
@@ -58,15 +57,15 @@ interface ApiService {
      * 获取项目列表
      */
     @GET("/project/list/{pageNum}/json")
-    fun getProjectList(@Path("pageNum") pageNum: Int, @Query("cid") cid: Int)
-            : Observable<HttpResult<ArticleEntity>>
+    suspend fun getProjectList(@Path("pageNum") pageNum: Int, @Query("cid") cid: Int)
+            : HttpResult<ArticleEntity>
 
     /**
      * 获取公众号列表
      */
     @GET("/wxarticle/list/{id}/{pageNum}/json")
-    fun getAccountList(@Path("id") cid: Int, @Path("pageNum") pageNum: Int)
-            : Observable<HttpResult<ArticleEntity>>
+    suspend fun getAccountList(@Path("id") cid: Int, @Path("pageNum") pageNum: Int)
+            : HttpResult<ArticleEntity>
 
     /**
      * 体系
@@ -137,8 +136,8 @@ interface ApiService {
      * 获取收藏文章数据
      */
     @GET("/lg/collect/list/{page}/json")
-    fun getCollectData(@Path("page") pageNo: Int):
-            Observable<HttpResult<CollectEntity>>
+    suspend fun getCollectData(@Path("page") pageNo: Int):
+            HttpResult<ArticleEntity>
 
     /**
      * 登录

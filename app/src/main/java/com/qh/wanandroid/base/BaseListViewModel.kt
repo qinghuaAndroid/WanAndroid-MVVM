@@ -33,12 +33,3 @@ open class BaseListViewModel<T> : BaseViewModel() {
         _uiState.value = uiModel
     }
 }
-
-data class ListUiModel<T>(
-    val showLoading: Boolean,
-    val showError: String?,
-    val showSuccess: T?,
-    val showEnd: Boolean, // 加载更多
-    val isRefresh: Boolean, // 刷新
-    val isEnableLoadMore: Boolean
-)

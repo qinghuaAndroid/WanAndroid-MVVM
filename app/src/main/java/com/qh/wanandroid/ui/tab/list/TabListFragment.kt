@@ -2,35 +2,35 @@ package com.qh.wanandroid.ui.tab.list
 
 import android.content.Intent
 import android.view.View
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
-import com.example.devlibrary.mvp.BaseMvpFragment
-import com.example.devlibrary.network.exception.ErrorStatus
+import com.example.devlibrary.ext.showToast
+import com.example.devlibrary.mvvm.BaseVMFragment
 import com.example.devlibrary.widget.LoadMoreView
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.ArticleAdapter
-import com.qh.wanandroid.bean.ArticleEntity
 import com.qh.wanandroid.constant.Const
 import com.qh.wanandroid.databinding.FragmentArticleListBinding
+import com.qh.wanandroid.ui.ArticleViewModel
 import com.qh.wanandroid.ui.BrowserNormalActivity
-import com.qh.wanandroid.ui.login.LoginActivity
-import org.jetbrains.anko.support.v4.startActivity
+import com.qh.wanandroid.ui.collect.CollectViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * @author FQH
  * Create at 2020/4/2.
  */
 class TabListFragment :
-    BaseMvpFragment<TabListContract.View, TabListContract.Presenter, FragmentArticleListBinding>(),
-    TabListContract.View {
+    BaseVMFragment<ArticleViewModel, FragmentArticleListBinding>() {
 
+    private val articleViewModel by viewModel<ArticleViewModel>()
+    private val collectViewModel by viewModel<CollectViewModel>()
     private val articleAdapter by lazy { ArticleAdapter() }
     private var projectId: Int = 0
     private var name: String? = null
     private var type: Int? = null
-    private var isRefresh = false
-    private var pageNum = 1
     private var curPosition = 0
 
     override fun attachLayoutRes(): Int = R.layout.fragment_article_list
@@ -42,7 +42,6 @@ class TabListFragment :
     }
 
     override fun initView(view: View) {
-        super.initView(view)
         initRecyclerView()
         mBinding.swipeRefresh.setOnRefreshListener { loadData() }
     }
@@ -75,70 +74,54 @@ class TabListFragment :
         curPosition = position
         when (view.id) {
             R.id.ivCollect -> {
-                if (datasBean.collect) mPresenter?.unCollect(datasBean.id)
-                else mPresenter?.collect(datasBean.id)
+                if (datasBean.collect) collectViewModel.unCollect(datasBean.id)
+                else collectViewModel.collect(datasBean.id)
             }
         }
     }
 
     override fun loadData() {
-        // 这里的作用是防止下拉刷新的时候还可以上拉加载
-        articleAdapter.loadMoreModule.isEnableLoadMore = false
-        // 下拉刷新，需要重置页数
-        pageNum = 1
-        isRefresh = true
-        type?.let { mPresenter?.loadData(it, projectId, pageNum) }
+        type?.let {
+            if (type == Const.PROJECT_TYPE)
+                articleViewModel.getProjectList(true, projectId)
+            else articleViewModel.getAccountList(true, projectId)
+        }
+
     }
 
     private fun loadMore() {
-        ++pageNum
-        isRefresh = false
-        type?.let { mPresenter?.loadData(it, projectId, pageNum) }
+        type?.let {
+            if (type == Const.PROJECT_TYPE)
+                articleViewModel.getProjectList(false, projectId)
+            else articleViewModel.getAccountList(false, projectId)
+        }
     }
 
-    override fun createPresenter(): TabListContract.Presenter {
-        return TabListPresenter()
-    }
-
-    override fun showList(articleEntity: ArticleEntity) {
-        mBinding.swipeRefresh.isRefreshing = false
-        articleAdapter.loadMoreModule.isEnableLoadMore = true
-        articleEntity.datas?.let {
-            if (isRefresh) {
-                articleAdapter.setList(it)
-            } else {
-                articleAdapter.addData(it)
+    override fun startObserve() {
+        articleViewModel.uiState.observe(this, Observer {
+            mBinding.swipeRefresh.isRefreshing = it.showLoading
+            it.showSuccess?.let { articleEntity ->
+                articleEntity.datas?.let { list ->
+                    if (it.isRefresh) articleAdapter.setList(list)
+                    else articleAdapter.addData(list)
+                }
+                articleAdapter.loadMoreModule.loadMoreComplete()
             }
-        }
-        if (articleEntity.curPage >= articleEntity.pageCount) {
-            //如果不够一页,显示没有更多数据布局
-            articleAdapter.loadMoreModule.loadMoreEnd()
-        } else {
-            articleAdapter.loadMoreModule.loadMoreComplete()
-        }
+            it.showError?.let { errorMsg ->
+                showToast(errorMsg)
+                articleAdapter.loadMoreModule.loadMoreFail()
+            }
+            if (it.showEnd) articleAdapter.loadMoreModule.loadMoreEnd()
+            articleAdapter.loadMoreModule.isEnableLoadMore = it.isEnableLoadMore
+        })
+        collectViewModel.uiState.observe(this, Observer {
+            if (it.showLoading) showProgressDialog() else dismissProgressDialog()
+            it.showSuccess?.let { collect ->
+                articleAdapter.data[curPosition].collect = collect
+                articleAdapter.notifyItemChanged(curPosition)
+            }
+            it.showError?.let { errorMsg -> showToast(errorMsg) }
+        })
     }
 
-    override fun showError(errorMsg: String?) {
-        super.showError(errorMsg)
-        mBinding.swipeRefresh.isRefreshing = false
-        articleAdapter.loadMoreModule.isEnableLoadMore = (true)
-        articleAdapter.loadMoreModule.loadMoreFail()
-    }
-
-    override fun showError(errorCode: Int, errorMsg: String?) {
-        super.showError(errorCode, errorMsg)
-        if (errorCode == ErrorStatus.LOGOUT_ERROR) {
-            startActivity<LoginActivity>()
-        }
-    }
-
-    override fun collectSuccess() {
-        articleAdapter.data[curPosition].collect = true
-        articleAdapter.notifyItemChanged(curPosition)
-    }
-
-    override fun unCollectSuccess() {
-        articleAdapter.data[curPosition].collect = false
-        articleAdapter.notifyItemChanged(curPosition)
-    }
 }

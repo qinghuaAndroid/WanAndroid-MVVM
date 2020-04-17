@@ -8,9 +8,9 @@ import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.example.common.constant.Const
 import com.example.devlibrary.ext.getThemeColor
+import com.example.devlibrary.ext.showToast
 import com.example.devlibrary.helper.LiveEventBusHelper
-import com.example.devlibrary.mvp.BaseMvpFragment
-import com.example.devlibrary.network.exception.ErrorStatus
+import com.example.devlibrary.mvvm.BaseVMFragment
 import com.example.devlibrary.utils.DisplayUtils
 import com.example.devlibrary.utils.StatusBarUtil
 import com.example.devlibrary.widget.LoadMoreView
@@ -18,31 +18,29 @@ import com.google.android.material.appbar.AppBarLayout
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.ArticleAdapter
 import com.qh.wanandroid.adapter.ImageNetAdapter
-import com.qh.wanandroid.bean.ArticleEntity
-import com.qh.wanandroid.bean.BannerEntity
 import com.qh.wanandroid.databinding.FragmentHomeBinding
+import com.qh.wanandroid.ui.ArticleViewModel
 import com.qh.wanandroid.ui.BrowserNormalActivity
-import com.qh.wanandroid.ui.login.LoginActivity
+import com.qh.wanandroid.ui.collect.CollectViewModel
 import com.qh.wanandroid.ui.search.SearchActivity
 import org.jetbrains.anko.backgroundColor
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.support.v4.startActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * @author FQH
  * Create at 2020/4/2.
  */
 class HomeFragment :
-    BaseMvpFragment<HomeContract.View, HomeContract.Presenter, FragmentHomeBinding>(),
-    HomeContract.View {
+    BaseVMFragment<ArticleViewModel, FragmentHomeBinding>(){
 
+    private val homeViewModel by viewModel<HomeViewModel>()
+    private val articleViewModel by viewModel<ArticleViewModel>()
+    private val collectViewModel by viewModel<CollectViewModel>()
     private var criticalValue: Int = 0
     private val articleAdapter by lazy { ArticleAdapter() }
-    private var isRefresh = false
-    private var pageNum = 0
     private var curPosition = 0
-
-    override fun createPresenter(): HomeContract.Presenter = HomePresenter()
 
     override fun attachLayoutRes(): Int = R.layout.fragment_home
 
@@ -53,7 +51,6 @@ class HomeFragment :
     }
 
     override fun initView(view: View) {
-        super.initView(view)
         setThemeColor()
         initRecyclerView()
         mBinding.swipeRefresh.setOnRefreshListener { loadData() }
@@ -99,70 +96,19 @@ class HomeFragment :
         curPosition = position
         when (view.id) {
             R.id.ivCollect -> {
-                if (datasBean.collect) mPresenter?.unCollect(datasBean.id)
-                else mPresenter?.collect(datasBean.id)
+                if (datasBean.collect) collectViewModel.unCollect(datasBean.id)
+                else collectViewModel.collect(datasBean.id)
             }
         }
     }
 
     override fun loadData() {
-        // 这里的作用是防止下拉刷新的时候还可以上拉加载
-        articleAdapter.loadMoreModule.isEnableLoadMore = false
-        // 下拉刷新，需要重置页数
-        pageNum = 0
-        isRefresh = true
-        mPresenter?.loadBanner()
-        mPresenter?.loadTopArticles()
+        homeViewModel.getBanner()
+        homeViewModel.getTopArticles()
     }
 
     private fun loadMore() {
-        ++pageNum
-        isRefresh = false
-        mPresenter?.loadArticles(pageNum)
-    }
-
-    override fun showTopArticlesList(list: MutableList<ArticleEntity.DatasBean>) {
-        mPresenter?.loadArticles(pageNum)
-        articleAdapter.setList(list)
-    }
-
-    override fun showArticlesList(articleEntity: ArticleEntity) {
-        mBinding.swipeRefresh.isRefreshing = false
-        articleAdapter.loadMoreModule.isEnableLoadMore = true
-        articleEntity.datas?.let { articleAdapter.addData(it) }
-        if (articleEntity.curPage >= articleEntity.pageCount) {
-            //如果不够一页,显示没有更多数据布局
-            articleAdapter.loadMoreModule.loadMoreEnd()
-        } else {
-            articleAdapter.loadMoreModule.loadMoreComplete()
-        }
-    }
-
-    override fun showBanner(bannerList: MutableList<BannerEntity>) {
-        mBinding.banner.adapter = ImageNetAdapter(bannerList)
-    }
-
-    override fun collectSuccess() {
-        articleAdapter.data[curPosition].collect = true
-        articleAdapter.notifyItemChanged(curPosition)
-    }
-
-    override fun unCollectSuccess() {
-        articleAdapter.data[curPosition].collect = false
-        articleAdapter.notifyItemChanged(curPosition)
-    }
-
-    override fun loadArticlesFail() {
-        mBinding.swipeRefresh.isRefreshing = false
-        articleAdapter.loadMoreModule.isEnableLoadMore = (true)
-        articleAdapter.loadMoreModule.loadMoreFail()
-    }
-
-    override fun showError(errorCode: Int, errorMsg: String?) {
-        super.showError(errorCode, errorMsg)
-        if (errorCode == ErrorStatus.LOGOUT_ERROR) {
-            startActivity<LoginActivity>()
-        }
+        articleViewModel.getArticles(false)
     }
 
     override fun onStart() {
@@ -184,5 +130,44 @@ class HomeFragment :
 
     private fun setThemeColor() {
         mBinding.rlSearch.backgroundColor = getThemeColor()
+    }
+
+    override fun startObserve() {
+        homeViewModel.bannerUiState.observe(this, Observer {
+            it.showSuccess?.let {list ->
+                mBinding.banner.adapter = ImageNetAdapter(list)
+            }
+            it.showError?.let { errorMsg -> showToast(errorMsg) }
+        })
+        homeViewModel.topArticleUiState.observe(this, Observer {
+            it.showSuccess?.let { list ->
+                articleAdapter.setList(list)
+            }
+            it.showError?.let { errorMsg -> showToast(errorMsg) }
+        })
+        articleViewModel.uiState.observe(this, Observer {
+            mBinding.swipeRefresh.isRefreshing = it.showLoading
+            it.showSuccess?.let { articleEntity ->
+                articleEntity.datas?.let { list ->
+                    if (it.isRefresh) articleAdapter.addData(list)
+                    else articleAdapter.addData(list)
+                }
+                articleAdapter.loadMoreModule.loadMoreComplete()
+            }
+            it.showError?.let { errorMsg ->
+                showToast(errorMsg)
+                articleAdapter.loadMoreModule.loadMoreFail()
+            }
+            if (it.showEnd) articleAdapter.loadMoreModule.loadMoreEnd()
+            articleAdapter.loadMoreModule.isEnableLoadMore = it.isEnableLoadMore
+        })
+        collectViewModel.uiState.observe(this, Observer {
+            if (it.showLoading) showProgressDialog() else dismissProgressDialog()
+            it.showSuccess?.let { collect ->
+                articleAdapter.data[curPosition].collect = collect
+                articleAdapter.notifyItemChanged(curPosition)
+            }
+            it.showError?.let { errorMsg -> showToast(errorMsg) }
+        })
     }
 }
