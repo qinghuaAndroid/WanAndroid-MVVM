@@ -26,7 +26,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tvIntegralAnim"
-                    android:textSize="60dp"
+                    android:textSize="60sp"
                     android:textColor="@color/theme"
                     android:text="0" />
 

@@ -4,8 +4,11 @@ import android.app.Application;
 import android.content.ComponentCallbacks2;
 import android.content.Context;
 
+import androidx.appcompat.app.AppCompatDelegate;
+
 import com.bumptech.glide.Glide;
 import com.example.devlibrary.utils.AutoDensityUtils;
+import com.example.devlibrary.utils.SettingUtil;
 import com.tencent.mmkv.MMKV;
 
 public class App extends Application {
@@ -20,6 +23,16 @@ public class App extends Application {
         sContext = getApplicationContext();
         AutoDensityUtils.init();
         MMKV.initialize(this);
+        initTheme();
+    }
+
+    private void initTheme() {
+        // 获取当前的主题
+        if (SettingUtil.getIsNightMode()) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
     }
 
     @Override

@@ -60,6 +60,7 @@ object SettingUtil {
     /**
      * 获取是否开启夜间模式
      */
+    @JvmStatic
     fun getIsNightMode(): Boolean {
         return mmkv.decodeBool("switch_nightMode", false)
     }

@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/division_line_thickening"
+        android:background="@color/viewBackground"
         android:fitsSystemWindows="true">
 
         <include layout="@layout/toolbar" />
@@ -74,69 +74,39 @@
             style="@style/text_1"
             android:drawableEnd="@mipmap/arrow_right"
             android:paddingEnd="@dimen/padding_right"
-            android:text="作者"
-            app:layout_constraintTop_toBottomOf="@+id/tvVersion"
-            android:id="@+id/tvAuthor" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:id="@+id/tvAuthorValue"
-            app:layout_constraintTop_toTopOf="@+id/tvAuthor"
-            app:layout_constraintBottom_toBottomOf="@+id/tvAuthor"
-            app:layout_constraintRight_toRightOf="@+id/tvAuthor"
-            android:gravity="center_vertical"
-            android:layout_marginEnd="50dp"
-            android:text="qinghua"
-            style="@style/text_2" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:paddingStart="@dimen/padding_left"
-            android:background="@drawable/ripple_bg"
-            android:gravity="center_vertical"
-            style="@style/text_1"
-            android:drawableEnd="@mipmap/arrow_right"
-            android:paddingEnd="@dimen/padding_right"
-            android:text="项目"
-            android:id="@+id/tvProject"
-            app:layout_constraintTop_toBottomOf="@+id/tvAuthor" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@drawable/ripple_bg"
-            android:paddingStart="@dimen/padding_left"
-            android:gravity="center_vertical"
-            style="@style/text_1"
-            android:drawableEnd="@mipmap/arrow_right"
-            android:paddingEnd="@dimen/padding_right"
-            android:text="版权声明"
-            android:id="@+id/tvCopyright"
-            app:layout_constraintTop_toBottomOf="@+id/tvProject" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/ripple_bg"
-            android:paddingStart="@dimen/padding_left"
-            android:gravity="center_vertical"
-            style="@style/text_1"
-            android:drawableEnd="@mipmap/arrow_right"
-            android:paddingEnd="@dimen/padding_right"
             android:text="主题颜色"
-            app:layout_constraintTop_toBottomOf="@+id/tvProject"
+            app:layout_constraintTop_toBottomOf="@+id/tvVersion"
             android:id="@+id/tvColor" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:id="@+id/tvNext"
             app:layout_constraintTop_toTopOf="@+id/tvColor"
             app:layout_constraintBottom_toBottomOf="@+id/tvColor"
             app:layout_constraintRight_toRightOf="@+id/tvColor"
+            android:gravity="center_vertical"
+            android:layout_marginEnd="50dp"
+            style="@style/text_2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/ripple_bg"
+            android:paddingStart="@dimen/padding_left"
+            android:gravity="center_vertical"
+            style="@style/text_1"
+            android:drawableEnd="@mipmap/arrow_right"
+            android:paddingEnd="@dimen/padding_right"
+            android:text="夜间模式"
+            app:layout_constraintTop_toBottomOf="@+id/tvColor"
+            android:id="@+id/tvNight" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            app:layout_constraintTop_toTopOf="@+id/tvNight"
+            app:layout_constraintBottom_toBottomOf="@+id/tvNight"
+            app:layout_constraintRight_toRightOf="@+id/tvNight"
             android:gravity="center_vertical"
             android:layout_marginEnd="50dp"
             style="@style/text_2" />
@@ -151,6 +121,6 @@
             android:background="@drawable/ripple_bg"
             android:layout_marginTop="8dp"
             android:text="退出登录"
-            app:layout_constraintTop_toBottomOf="@+id/tvColor" />
+            app:layout_constraintTop_toBottomOf="@+id/tvNight" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

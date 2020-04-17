@@ -8,12 +8,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:overScrollMode="never"
-        android:background="@color/white">
+        android:background="@color/viewBackground">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/ivHead"
@@ -33,7 +32,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/black"
-                android:textSize="17dp"
+                android:textSize="17sp"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toRightOf="@+id/ivHead"
                 app:layout_constraintTop_toTopOf="@+id/ivHead"
@@ -46,7 +45,7 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="3dp"
                 android:textColor="@color/text_1"
-                android:textSize="13dp"
+                android:textSize="13sp"
                 app:layout_constraintLeft_toRightOf="@+id/ivHead"
                 app:layout_constraintTop_toBottomOf="@+id/tvUserName"
                 android:text="id:---" />

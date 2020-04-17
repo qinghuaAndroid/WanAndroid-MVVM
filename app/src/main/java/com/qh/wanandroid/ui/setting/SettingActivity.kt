@@ -1,7 +1,7 @@
 package com.qh.wanandroid.ui.setting
 
-import android.content.Intent
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.color.ColorPalette
 import com.afollestad.materialdialogs.color.colorChooser
@@ -15,7 +15,6 @@ import com.example.devlibrary.utils.StringUtils
 import com.example.devlibrary.utils.versionName
 import com.qh.wanandroid.R
 import com.qh.wanandroid.databinding.ActivitySettingBinding
-import com.qh.wanandroid.ui.BrowserNormalActivity
 import com.tencent.mmkv.MMKV
 import kotlinx.android.synthetic.main.activity_setting.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
@@ -47,8 +46,20 @@ class SettingActivity :
         tvVersionValue.text = versionName
         tvLogout.visibility = if (isLogin) View.VISIBLE else View.GONE
         tvLogout.onClick { mPresenter?.logout() }
-        tvProject.onClick { github() }
         tvColor.onClick { setThemeColor() }
+        tvNight.onClick { switchNightMode() }
+    }
+
+    private fun switchNightMode() {
+        if (SettingUtil.getIsNightMode()) {
+            SettingUtil.setIsNightMode(false)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        } else {
+            SettingUtil.setIsNightMode(true)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+        window.setWindowAnimations(R.style.WindowAnimationFadeInOut)
+        recreate()
     }
 
     private fun setThemeColor() {
@@ -65,14 +76,6 @@ class SettingActivity :
             positiveButton(R.string.done)
             negativeButton(android.R.string.cancel)
             lifecycleOwner(this@SettingActivity)
-        }
-    }
-
-    private fun github() {
-        Intent(this, BrowserNormalActivity::class.java).run {
-            putExtra(Const.WEB_TITLE, "WanAndroid-qh")
-            putExtra(Const.WEB_URL, "https://github.com/qinghuaAndroid/WanAndroid-qh")
-            startActivity(this)
         }
     }
 
