@@ -49,6 +49,8 @@
         <activity android:name=".ui.myarticle.MyArticleActivity"/>
 
         <activity android:name=".ui.share.ShareListActivity"/>
+
+        <activity android:name=".ui.question.QuestionActivity"/>
     </application>
 
 </manifest>

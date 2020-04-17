@@ -199,4 +199,10 @@ interface ApiService {
         @Field("k") key: String
     ): HttpResult<ArticleEntity>
 
+    /**
+     * 问答
+     */
+    @GET("/wenda/list/{pageNum}/json")
+    suspend fun getQuestionList(@Path("pageNum") pageNum: Int): HttpResult<ArticleEntity>
+
 }

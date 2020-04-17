@@ -1,4 +1,4 @@
-package com.qh.wanandroid.ui.myarticle
+package com.qh.wanandroid.ui.question
 
 import android.content.Intent
 import androidx.lifecycle.Observer
@@ -11,7 +11,8 @@ import com.example.devlibrary.mvvm.BaseVMActivity
 import com.example.devlibrary.widget.LoadMoreView
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.ArticleAdapter
-import com.qh.wanandroid.databinding.ActivityMyArticleBinding
+import com.qh.wanandroid.databinding.ActivityQuestionListBinding
+import com.qh.wanandroid.ui.ArticleViewModel
 import com.qh.wanandroid.ui.BrowserNormalActivity
 import com.qh.wanandroid.ui.collect.CollectViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -20,9 +21,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  * @author FQH
  * Create at 2020/4/15.
  */
-class MyArticleActivity : BaseVMActivity<MyArticleViewModel, ActivityMyArticleBinding>() {
+class QuestionActivity : BaseVMActivity<ArticleViewModel, ActivityQuestionListBinding>() {
 
-    private val articleViewModel by viewModel<MyArticleViewModel>()
+    private val articleViewModel by viewModel<ArticleViewModel>()
     private val collectViewModel by viewModel<CollectViewModel>()
     private val articleAdapter by lazy { ArticleAdapter() }
     private var curPosition = 0
@@ -30,8 +31,8 @@ class MyArticleActivity : BaseVMActivity<MyArticleViewModel, ActivityMyArticleBi
     override fun startObserve() {
         articleViewModel.uiState.observe(this, Observer {
             mBinding.swipeRefresh.isRefreshing = it.showLoading
-            it.showSuccess?.let { myArticleEntity ->
-                myArticleEntity.shareArticles?.datas?.let { list ->
+            it.showSuccess?.let { articleEntity ->
+                articleEntity.datas?.let { list ->
                     if (it.isRefresh) articleAdapter.setList(list)
                     else articleAdapter.addData(list)
                 }
@@ -54,21 +55,21 @@ class MyArticleActivity : BaseVMActivity<MyArticleViewModel, ActivityMyArticleBi
         })
     }
 
-    override fun attachLayoutRes(): Int = R.layout.activity_my_article
+    override fun attachLayoutRes(): Int = R.layout.activity_question_list
 
     override fun initData() {
 
     }
 
     override fun initView() {
-        title = getString(R.string.my_article)
+        title = getString(R.string.question)
         initRecyclerView()
         mBinding.swipeRefresh.setOnRefreshListener { loadData() }
     }
 
     private fun initRecyclerView() {
-        mBinding.rvMyArticle.run {
-            layoutManager = LinearLayoutManager(this@MyArticleActivity)
+        mBinding.rvQuestionList.run {
+            layoutManager = LinearLayoutManager(this@QuestionActivity)
             adapter = articleAdapter
         }
         articleAdapter.run {
@@ -84,10 +85,10 @@ class MyArticleActivity : BaseVMActivity<MyArticleViewModel, ActivityMyArticleBi
 
     private val mOnItemClickListener = OnItemClickListener { _, _, position ->
         val datasBean = articleAdapter.data[position]
-        Intent(this, BrowserNormalActivity::class.java).run {
-            putExtra(Const.WEB_TITLE, datasBean.title)
-            putExtra(Const.WEB_URL, datasBean.link)
-            startActivity(this)
+            Intent(this, BrowserNormalActivity::class.java).run {
+                putExtra(Const.WEB_TITLE, datasBean.title)
+                putExtra(Const.WEB_URL, datasBean.link)
+                startActivity(this)
         }
     }
 
@@ -103,10 +104,10 @@ class MyArticleActivity : BaseVMActivity<MyArticleViewModel, ActivityMyArticleBi
     }
 
     override fun loadData() {
-        articleViewModel.getMyArticle(true)
+        articleViewModel.getQuestionList(true)
     }
 
     private fun loadMore() {
-        articleViewModel.getMyArticle(false)
+        articleViewModel.getQuestionList(false)
     }
 }

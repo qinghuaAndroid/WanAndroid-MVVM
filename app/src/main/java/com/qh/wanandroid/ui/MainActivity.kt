@@ -66,7 +66,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun initColor() {
         StatusBarUtil.setTransparentForWindow(this)
-        StatusBarUtil.setDarkMode(this)
     }
 
     override fun loadData() {

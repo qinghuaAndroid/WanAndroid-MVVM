@@ -6,6 +6,7 @@ import com.qh.wanandroid.base.BaseListViewModel
 import com.qh.wanandroid.bean.ArticleEntity
 import com.qh.wanandroid.ui.collect.CollectRepository
 import com.qh.wanandroid.ui.home.HomeRepository
+import com.qh.wanandroid.ui.question.QuestionRepository
 import com.qh.wanandroid.ui.search.list.SearchListRepository
 import com.qh.wanandroid.ui.share.ShareListRepository
 import com.qh.wanandroid.ui.system.act.SystemRepository
@@ -24,28 +25,31 @@ class ArticleViewModel(
     private val systemRepository: SystemRepository,
     private val searchListRepository: SearchListRepository,
     private val tabListRepository: TabListRepository,
-    private val collectRepository: CollectRepository
+    private val collectRepository: CollectRepository,
+    private val questionRepository: QuestionRepository
 ) : BaseListViewModel<ArticleEntity>() {
 
     sealed class ArticleType {
         object Home : ArticleType()                 // 首页
-        object ShareList : ArticleType()            // 分享
+        object Share : ArticleType()            // 分享
         object Project : ArticleType()        //项目
         object Collection : ArticleType()           // 收藏
         object System : ArticleType()           // 体系分类
         object Blog : ArticleType()                 // 公众号
-        object SearchList : ArticleType()           //搜索列表
+        object Search : ArticleType()           //搜索列表
+        object Question : ArticleType()           //搜索列表
     }
 
     private var pageNum = 0
 
     fun getArticles(isRefresh: Boolean) = getArticleList(ArticleType.Home, isRefresh)
-    fun getShareArticle(isRefresh: Boolean) = getArticleList(ArticleType.ShareList, isRefresh)
+    fun getShareArticle(isRefresh: Boolean) = getArticleList(ArticleType.Share, isRefresh)
     fun getSystemArticle(isRefresh: Boolean, cid: Int) = getArticleList(ArticleType.System, isRefresh, cid = cid)
-    fun queryBySearchKey(isRefresh: Boolean, queryTxt: String) = getArticleList(ArticleType.SearchList, isRefresh, queryTxt = queryTxt)
+    fun queryBySearchKey(isRefresh: Boolean, queryTxt: String) = getArticleList(ArticleType.Search, isRefresh, queryTxt = queryTxt)
     fun getProjectList(isRefresh: Boolean, cid: Int) = getArticleList(ArticleType.Project, isRefresh, cid = cid)
     fun getAccountList(isRefresh: Boolean, cid: Int) = getArticleList(ArticleType.Blog, isRefresh, cid = cid)
     fun getCollectData(isRefresh: Boolean) = getArticleList(ArticleType.Collection, isRefresh)
+    fun getQuestionList(isRefresh: Boolean) = getArticleList(ArticleType.Question, isRefresh)
 
     private fun getArticleList(
         articleType: ArticleType,
@@ -62,12 +66,13 @@ class ArticleViewModel(
             val result = withContext(Dispatchers.IO) {
                 when (articleType) {
                     ArticleType.Home -> homeRepository.loadArticles(pageNum)
-                    ArticleType.ShareList -> shareListRepository.getShareArticle(pageNum)
+                    ArticleType.Share -> shareListRepository.getShareArticle(pageNum)
                     ArticleType.System -> systemRepository.getSystemArticle(pageNum, cid)
-                    ArticleType.SearchList -> searchListRepository.queryBySearchKey(pageNum, queryTxt)
+                    ArticleType.Search -> searchListRepository.queryBySearchKey(pageNum, queryTxt)
                     ArticleType.Project -> tabListRepository.getProjectList(pageNum, cid)
                     ArticleType.Blog -> tabListRepository.getAccountList(cid, pageNum)
                     ArticleType.Collection -> collectRepository.getCollectData(pageNum)
+                    ArticleType.Question -> questionRepository.getQuestionList(pageNum)
                 }
             }
             if (result is Result.Success) {
