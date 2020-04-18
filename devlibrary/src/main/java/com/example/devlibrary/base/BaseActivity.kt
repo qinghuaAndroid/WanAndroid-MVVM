@@ -57,7 +57,7 @@ abstract class BaseActivity<B : ViewDataBinding> : RxActivity(), CoroutineScope 
     }
 
     open fun initColor() {
-        val themeColor = getThemeColor(resources)
+        val themeColor = getThemeColor(this)
         StatusBarUtil.setColor(this, themeColor, 0)
         if (this.supportActionBar != null) {
             this.supportActionBar?.setBackgroundDrawable(ColorDrawable(themeColor))

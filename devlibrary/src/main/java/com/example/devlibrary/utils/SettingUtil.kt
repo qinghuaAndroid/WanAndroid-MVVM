@@ -1,5 +1,6 @@
 package com.example.devlibrary.utils
 
+import android.content.Context
 import android.graphics.Color
 import com.example.devlibrary.R
 import com.tencent.mmkv.MMKV
@@ -28,8 +29,8 @@ object SettingUtil {
     /**
      * 获取主题颜色
      */
-    fun getColor(): Int {
-        val defaultColor = ResourcesUtils.getColor(R.color.colorPrimary)
+    fun getColor(context: Context): Int {
+        val defaultColor = ResourcesUtils.getColor(context, R.color.colorPrimary)
         val color = mmkv.decodeInt("color", defaultColor)
         return if (color != 0 && Color.alpha(color) != 255) {
             defaultColor

@@ -1,5 +1,6 @@
 package com.example.devlibrary.utils;
 
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 
@@ -48,8 +49,8 @@ public class ResourcesUtils {
      * @param id 资源文件id
      * @return 资源文件对应颜色值
      */
-    public static @ColorInt int getColor(int id) {
-        return ContextCompat.getColor(App.sContext, id);
+    public static @ColorInt int getColor(Context context, int id) {
+        return ContextCompat.getColor(context, id);
     }
 
     /**

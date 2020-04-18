@@ -24,7 +24,7 @@ class ArticleAdapter :
         item.run {
             if (type == 1) {
                 holder.setText(R.id.tvTag, "置顶 ")
-                holder.setTextColor(R.id.tvTag, ResourcesUtils.getColor(R.color.red))
+                holder.setTextColor(R.id.tvTag, ResourcesUtils.getColor(context,R.color.red))
             } else {
                 holder.setText(R.id.tvTag, "")
             }

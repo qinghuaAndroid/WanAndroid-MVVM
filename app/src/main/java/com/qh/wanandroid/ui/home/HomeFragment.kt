@@ -129,7 +129,7 @@ class HomeFragment :
     }
 
     private fun setThemeColor() {
-        mBinding.rlSearch.backgroundColor = getThemeColor(resources)
+        context?.let { mBinding.rlSearch.backgroundColor = getThemeColor(it) }
     }
 
     override fun startObserve() {
