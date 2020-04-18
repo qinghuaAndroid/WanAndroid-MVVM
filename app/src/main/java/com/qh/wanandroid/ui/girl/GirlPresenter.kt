@@ -11,18 +11,18 @@ class GirlPresenter : BasePresenter<GirlContract.Model, GirlContract.View>(),
         return GirlModel()
     }
 
-    override fun requestMeiziList(type: String, limit: Int, page: Int) {
+    override fun requestMeiziList(category: String, type: String, count: Int, page: Int) {
         mView?.showLoading()
         val disposableObserver =
-            mModel?.requestMeiziList(type, limit, page)?.compose(SchedulerUtils.ioToMain())
+            mModel?.requestMeiziList(category, type, count, page)?.compose(SchedulerUtils.ioToMain())
                 ?.subscribeWith(object : DisposableObserver<GankIoDataBean>() {
                     override fun onComplete() {
                         mView?.hideLoading()
                     }
 
                     override fun onNext(t: GankIoDataBean) {
-                        if (t.isError.not()) {
-                            mView?.setMeiziList(t.results)
+                        if (t.status == 100) {
+                            mView?.setMeiziList(t.data)
                         }
                     }
 

@@ -11,10 +11,29 @@
             type="com.qh.wanandroid.bean.GankIoDataBean.ResultBean" />
     </data>
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_girl"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:girlImgUrl="@{bean.url}"
-        android:scaleType="centerCrop" />
+        android:layout_height="match_parent">
+
+        <com.github.chrisbanes.photoview.PhotoView
+            android:id="@+id/iv_girl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:girlImgUrl="@{bean.images.get(0)}"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/tv_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/viewBackground"
+            android:layout_gravity="bottom"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:alpha="0.5"
+            android:textColor="@color/text_1"
+            android:textSize="@dimen/text_1"
+            android:text="@{bean.desc}" />
+
+    </FrameLayout>
 </layout>

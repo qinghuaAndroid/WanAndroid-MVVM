@@ -18,17 +18,14 @@ class GirlActivity :
     GirlContract.View {
 
     private val girlAdapter by lazy { GirlAdapter() }
-    private val limit = 20
+    private val count = 10
     private var page = 0
 
     override fun createPresenter(): GirlContract.Presenter = GirlPresenter()
 
     override fun setMeiziList(resultBeanList: List<GankIoDataBean.ResultBean>) {
-        val filter = resultBeanList.filter {
-            it.url.endsWith(".jpg", true)
-        }
-        girlAdapter.addData(filter)
-        if (resultBeanList.size < limit) {
+        girlAdapter.addData(resultBeanList)
+        if (resultBeanList.size < count) {
             girlAdapter.loadMoreModule.loadMoreEnd(false)
         } else {
             girlAdapter.loadMoreModule.loadMoreComplete()
@@ -55,10 +52,10 @@ class GirlActivity :
     }
 
     override fun loadData() {
-        mPresenter?.requestMeiziList("福利", limit, ++page)
+        mPresenter?.requestMeiziList("Girl","Girl", count, ++page)
     }
 
     fun loadMore() {
-        mPresenter?.requestMeiziList("福利", limit, ++page)
+        mPresenter?.requestMeiziList("Girl","Girl", count, ++page)
     }
 }

@@ -6,7 +6,7 @@ import com.qh.wanandroid.http.HttpHelper
 import io.reactivex.Observable
 
 class GirlModel : BaseModel(), GirlContract.Model {
-    override fun requestMeiziList(type: String, limit: Int, page: Int): Observable<GankIoDataBean> {
-        return HttpHelper.gankService.getGankIoData(type, limit, page)
+    override fun requestMeiziList(category: String, type: String, count: Int, page: Int): Observable<GankIoDataBean> {
+        return HttpHelper.gankService.getGankIoData(category,type, count, page)
     }
 }

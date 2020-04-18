@@ -17,13 +17,13 @@ interface GirlContract {
 
     interface Presenter : IPresenter<View> {
 
-        fun requestMeiziList(type: String, limit: Int, page: Int)
+        fun requestMeiziList(category: String, type: String, count: Int, page: Int)
 
     }
 
     interface Model : IModel {
 
-        fun requestMeiziList(type: String, limit: Int, page: Int): Observable<GankIoDataBean>
+        fun requestMeiziList(category: String, type: String, count: Int, page: Int): Observable<GankIoDataBean>
 
     }
 }

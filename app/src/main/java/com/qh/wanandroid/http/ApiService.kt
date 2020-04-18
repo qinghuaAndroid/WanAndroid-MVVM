@@ -166,16 +166,25 @@ interface ApiService {
     fun logout(): Observable<HttpResult<Any>>
 
     /**
-     * 分类数据: http://gank.io/api/data/数据类型/请求个数/第几页
-     * 数据类型： 福利 | Android | iOS | 休息视频 | 拓展资源 | 前端 | all
-     * 请求个数： 数字，大于0
-     * 第几页：数字，大于0
-     * eg: http://gank.io/api/data/Android/10/1
+     * 分类数据 API
+     * https://gank.io/api/v2/data/category/<category>/type/<type>/page/<page>/count/<count>
+     * 请求方式: GET
+     * 注:
+     * category 可接受参数 All(所有分类) | Article | GanHuo | Girl
+     * type 可接受参数 All(全部类型) | Android | iOS | Flutter | Girl ...，即分类API返回的类型数据
+     * count: [10, 50]
+     * page: >=1
+     * 示例:
+     * 获取妹子列表
+     * https://gank.io/api/v2/data/category/Girl/type/Girl/page/1/count/10
+     * 获取Android干货列表
+     * https://gank.io/api/v2/data/category/GanHuo/type/Android/page/1/count/10
      */
-    @GET("data/{type}/{limit}/{page}")
+    @GET("data/category/{category}/type/{type}/page/{page}/count/{count}")
     fun getGankIoData(
+        @Path("category") category: String,
         @Path("type") type: String,
-        @Path("limit") limit: Int,
+        @Path("count") count: Int,
         @Path("page") page: Int
     ): Observable<GankIoDataBean>
 
