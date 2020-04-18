@@ -27,7 +27,7 @@
             android:layout_marginStart="@dimen/padding"
             android:layout_marginTop="70dp"
             android:text="登录"
-            android:textColor="@color/black"
+            android:textColor="@color/text_1"
             android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
