@@ -5,6 +5,7 @@ import com.example.devlibrary.base.BaseActivity
 import com.example.devlibrary.utils.ToastUtils
 import com.qh.wanandroid.R
 import com.qh.wanandroid.databinding.ActivitySplashBinding
+import com.qh.wanandroid.ui.main.MainActivity
 import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay

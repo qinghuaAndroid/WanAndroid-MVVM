@@ -12,7 +12,6 @@ import com.google.android.material.appbar.AppBarLayout
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.IntegralAdapter
 import com.qh.wanandroid.databinding.ActivityIntegralBinding
-import com.qh.wanandroid.ui.me.MineViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -21,24 +20,24 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  */
 class IntegralActivity : BaseVMActivity<IntegralViewModel, ActivityIntegralBinding>() {
 
-    private val mineViewModel by viewModel<MineViewModel>()
+//    private val mineViewModel by viewModel<MineViewModel>()
     private val integralViewModel by viewModel<IntegralViewModel>()
     private val integralAdapter by lazy { IntegralAdapter(R.layout.item_integral) }
     private lateinit var headerView:View
 
     override fun startObserve() {
-        mineViewModel.integralData.observe(this, Observer {
-            val animator = ValueAnimator.ofInt(0, it.coinCount)
-            //播放时长
-            animator.duration = 1500
-            animator.interpolator = DecelerateInterpolator()
-            animator.addUpdateListener { animation ->
-                //获取改变后的值
-                val currentValue = animation.animatedValue as Int
-                mBinding.tvIntegralAnim.text = "$currentValue"
-            }
-            animator.start()
-        })
+//        mineViewModel.integralData.observe(this, Observer {
+//            val animator = ValueAnimator.ofInt(0, it.coinCount)
+//            //播放时长
+//            animator.duration = 1500
+//            animator.interpolator = DecelerateInterpolator()
+//            animator.addUpdateListener { animation ->
+//                //获取改变后的值
+//                val currentValue = animation.animatedValue as Int
+//                mBinding.tvIntegralAnim.text = "$currentValue"
+//            }
+//            animator.start()
+//        })
         integralViewModel.uiState.observe(this, Observer {
             mBinding.swipeRefresh.isRefreshing = it.showLoading
             it.showSuccess?.let { articleEntity ->
@@ -89,7 +88,7 @@ class IntegralActivity : BaseVMActivity<IntegralViewModel, ActivityIntegralBindi
     }
 
     override fun loadData() {
-        mineViewModel.getIntegral()
+//        mineViewModel.getIntegral()
         integralViewModel.getIntegralRecord(true)
     }
 

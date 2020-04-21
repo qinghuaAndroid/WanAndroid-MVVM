@@ -1,4 +1,4 @@
-package com.qh.wanandroid.ui.system.list
+package com.qh.wanandroid.ui.system
 
 import com.example.devlibrary.mvvm.BaseRepository
 import com.example.devlibrary.mvvm.Result

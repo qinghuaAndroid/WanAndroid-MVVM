@@ -6,7 +6,7 @@
     android:layout_height="?attr/actionBarSize"
     app:titleTextColor="@android:color/white"
     app:titleTextAppearance="?android:attr/textAppearanceMedium"
-    app:navigationIcon="@drawable/ic_back_white"
+    app:theme="@style/AppTheme.AppBarOverlay"
     app:popupTheme="@style/AppTheme.PopupOverlay">
 
 </androidx.appcompat.widget.Toolbar>

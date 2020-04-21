@@ -38,33 +38,21 @@ class HomeFragment :
     private val homeViewModel by viewModel<HomeViewModel>()
     private val articleViewModel by viewModel<ArticleViewModel>()
     private val collectViewModel by viewModel<CollectViewModel>()
-    private var criticalValue: Int = 0
     private val articleAdapter by lazy { ArticleAdapter() }
     private var curPosition = 0
 
     override fun attachLayoutRes(): Int = R.layout.fragment_home
 
     override fun initData() {
-        val statusBarHeight = StatusBarUtil.getStatusBarHeight(context)
-        criticalValue = DisplayUtils.dp2px(215F) - statusBarHeight
-        receiveNotice()
+
     }
 
     override fun initView(view: View) {
-        setThemeColor()
         initRecyclerView()
         mBinding.swipeRefresh.setOnRefreshListener { loadData() }
-        StatusBarUtil.setPaddingTop(context, mBinding.rlSearch)
-        mBinding.ivSearch.onClick { startActivity<SearchActivity>() }
         mBinding.appBarLayout.addOnOffsetChangedListener(
             AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
                 mBinding.swipeRefresh.isEnabled = verticalOffset >= 0
-                if (verticalOffset > -criticalValue) {
-                    val rate = kotlin.math.abs(verticalOffset) / criticalValue.toFloat()
-                    mBinding.rlSearch.alpha = rate
-                } else {
-                    mBinding.rlSearch.alpha = 1.0F
-                }
             })
     }
 
@@ -119,17 +107,6 @@ class HomeFragment :
     override fun onStop() {
         super.onStop()
         mBinding.banner.stop()
-    }
-
-    private fun receiveNotice() {
-        LiveEventBusHelper.observe(com.example.common.constant.Const.THEME_COLOR,
-            Int::class.java, this, Observer<Int> {
-                setThemeColor()
-            })
-    }
-
-    private fun setThemeColor() {
-        context?.let { mBinding.rlSearch.backgroundColor = getThemeColor(it) }
     }
 
     override fun startObserve() {

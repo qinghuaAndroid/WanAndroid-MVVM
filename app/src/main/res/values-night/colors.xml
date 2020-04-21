@@ -3,4 +3,12 @@
     <color name="colorPrimary">#35464e</color>
     <color name="colorPrimaryDark">#212a2f</color>
     <color name="colorAccent">#616161</color>
+    <color name="viewBackground">#424242</color>
+    <color name="text_1">#FFFFFF</color>
+    <color name="text_2">#FFFFFF</color>
+    <color name="text_3">#FFFFFF</color>
+    <color name="search_bg_gray">#999999</color>
+    <color name="division_line_thickening">#424242</color>
+
+    <color name="item_nav_color_tv">@color/Grey500</color>
 </resources>

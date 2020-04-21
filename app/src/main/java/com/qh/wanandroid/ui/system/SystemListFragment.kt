@@ -1,4 +1,4 @@
-package com.qh.wanandroid.ui.system.list
+package com.qh.wanandroid.ui.system
 
 import android.content.Intent
 import android.view.View

@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import androidx.fragment.app.Fragment
 import com.example.common.constant.Const
+import com.example.devlibrary.ext.showToast
+import com.qh.wanandroid.R
 import com.qh.wanandroid.ui.login.LoginActivity
 import com.tencent.mmkv.MMKV
 
@@ -14,6 +16,7 @@ import com.tencent.mmkv.MMKV
 internal fun Fragment.startActivity(clazz: Class<*>, needLogin: Boolean = false) {
     val isLogin = MMKV.defaultMMKV().decodeBool(Const.IS_LOGIN, false)
     if (needLogin && isLogin.not()) {
+        showToast(resources.getString(R.string.login_tint))
         startActivity(Intent(activity, LoginActivity::class.java))
     } else {
         startActivity(Intent(activity, clazz))
@@ -23,6 +26,7 @@ internal fun Fragment.startActivity(clazz: Class<*>, needLogin: Boolean = false)
 internal fun Activity.startActivity(clazz: Class<*>, needLogin: Boolean = false) {
     val isLogin = MMKV.defaultMMKV().decodeBool(Const.IS_LOGIN, false)
     if (needLogin && isLogin.not()) {
+        showToast(resources.getString(R.string.login_tint))
         startActivity(Intent(this, LoginActivity::class.java))
     } else {
         startActivity(Intent(this, clazz))

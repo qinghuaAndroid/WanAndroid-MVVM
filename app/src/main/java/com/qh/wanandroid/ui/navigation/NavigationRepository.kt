@@ -1,4 +1,4 @@
-package com.qh.wanandroid.ui.system.navigation
+package com.qh.wanandroid.ui.navigation
 
 import com.example.devlibrary.mvvm.BaseRepository
 import com.example.devlibrary.mvvm.Result

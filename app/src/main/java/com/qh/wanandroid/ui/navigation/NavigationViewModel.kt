@@ -1,4 +1,4 @@
-package com.qh.wanandroid.ui.system.navigation
+package com.qh.wanandroid.ui.navigation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

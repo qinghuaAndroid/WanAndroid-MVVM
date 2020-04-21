@@ -1,4 +1,4 @@
-package com.qh.wanandroid.ui.system.list
+package com.qh.wanandroid.ui.system
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -32,7 +32,8 @@ class SystemListViewModel(private val mRepository: SystemListRepository) : BaseV
         showError: String? = null,
         showSuccess: MutableList<SystemListEntity>? = null
     ) {
-        val uiModel = SystemListUiModel(showError, showSuccess)
+        val uiModel =
+            SystemListUiModel(showError, showSuccess)
         _uiState.value = uiModel
     }
 }

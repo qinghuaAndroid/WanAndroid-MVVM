@@ -6,19 +6,19 @@
         android:icon="@mipmap/home"
         android:title="@string/tab_1" />
     <item
-        android:id="@+id/menu_project"
-        android:icon="@mipmap/project"
+        android:id="@+id/menu_system"
+        android:icon="@mipmap/system"
         android:title="@string/tab_2" />
-    <item
-        android:id="@+id/menu_square"
-        android:icon="@mipmap/square"
-        android:title="@string/tab_3" />
     <item
         android:id="@+id/menu_official_account"
         android:icon="@mipmap/official_account"
+        android:title="@string/tab_3" />
+    <item
+        android:id="@+id/menu_navigation"
+        android:icon="@mipmap/navigation"
         android:title="@string/tab_4" />
     <item
-        android:id="@+id/menu_mine"
-        android:icon="@mipmap/mine"
+        android:id="@+id/menu_project"
+        android:icon="@mipmap/project"
         android:title="@string/tab_5" />
 </menu>

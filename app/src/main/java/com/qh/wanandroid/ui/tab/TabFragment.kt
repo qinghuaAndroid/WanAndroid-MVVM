@@ -36,7 +36,6 @@ class TabFragment : BaseMvpFragment<TabContract.View, TabContract.Presenter, Fra
     override fun initView(view: View) {
         super.initView(view)
         setThemeColor()
-        StatusBarUtil.setPaddingTop(context, mBinding.tabLayout)
     }
 
     override fun loadData() {

@@ -10,4 +10,6 @@
     <dimen name="set_padding">26dp</dimen>
     <dimen name="padding_left">20dp</dimen>
     <dimen name="padding_right">20dp</dimen>
+    <dimen name="avatar_width">80dp</dimen>
+    <dimen name="avatar_height">80dp</dimen>
 </resources>

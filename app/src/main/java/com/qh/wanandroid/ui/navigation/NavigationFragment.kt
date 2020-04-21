@@ -1,4 +1,4 @@
-package com.qh.wanandroid.ui.system.navigation
+package com.qh.wanandroid.ui.navigation
 
 import android.content.Intent
 import android.view.View

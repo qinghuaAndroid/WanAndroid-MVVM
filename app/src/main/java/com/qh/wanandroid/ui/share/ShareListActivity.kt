@@ -62,7 +62,7 @@ class ShareListActivity : BaseVMActivity<ArticleViewModel, ActivityShareListBind
     }
 
     override fun initView() {
-        title = getString(R.string.my_article)
+        title = getString(R.string.nav_square)
         initRecyclerView()
         mBinding.swipeRefresh.setOnRefreshListener { loadData() }
     }

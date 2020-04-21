@@ -9,18 +9,16 @@ import com.qh.wanandroid.ui.integral.IntegralRepository
 import com.qh.wanandroid.ui.integral.IntegralViewModel
 import com.qh.wanandroid.ui.login.LoginRepository
 import com.qh.wanandroid.ui.login.LoginViewModel
-import com.qh.wanandroid.ui.me.MineRepository
-import com.qh.wanandroid.ui.me.MineViewModel
 import com.qh.wanandroid.ui.myarticle.MyArticleRepository
 import com.qh.wanandroid.ui.myarticle.MyArticleViewModel
 import com.qh.wanandroid.ui.question.QuestionRepository
 import com.qh.wanandroid.ui.search.list.SearchListRepository
 import com.qh.wanandroid.ui.share.ShareListRepository
 import com.qh.wanandroid.ui.system.act.SystemRepository
-import com.qh.wanandroid.ui.system.list.SystemListRepository
-import com.qh.wanandroid.ui.system.list.SystemListViewModel
-import com.qh.wanandroid.ui.system.navigation.NavigationRepository
-import com.qh.wanandroid.ui.system.navigation.NavigationViewModel
+import com.qh.wanandroid.ui.system.SystemListRepository
+import com.qh.wanandroid.ui.system.SystemListViewModel
+import com.qh.wanandroid.ui.navigation.NavigationRepository
+import com.qh.wanandroid.ui.navigation.NavigationViewModel
 import com.qh.wanandroid.ui.tab.list.TabListRepository
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -31,7 +29,6 @@ import org.koin.dsl.module
  */
 
 val viewModelModule = module {
-    viewModel { MineViewModel(get()) }
     viewModel { LoginViewModel(get()) }
     viewModel { SystemListViewModel(get()) }
     viewModel { NavigationViewModel(get()) }
@@ -43,7 +40,6 @@ val viewModelModule = module {
 }
 
 val repositoryModule = module {
-    single { MineRepository() }
     single { LoginRepository() }
     single { SystemListRepository() }
     single { NavigationRepository() }
