@@ -42,31 +42,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="@drawable/ripple_bg"
-            style="@style/text_1"
-            android:paddingStart="@dimen/padding_left"
-            android:gravity="center_vertical"
-            android:text="版本"
-            android:id="@+id/tvVersion"
-            android:drawableEnd="@mipmap/arrow_right"
-            android:paddingEnd="@dimen/padding_right"
-            app:layout_constraintTop_toBottomOf="@id/tvClear" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:id="@+id/tvVersionValue"
-            app:layout_constraintTop_toTopOf="@+id/tvVersion"
-            app:layout_constraintBottom_toBottomOf="@+id/tvVersion"
-            app:layout_constraintRight_toRightOf="@+id/tvVersion"
-            android:gravity="center_vertical"
-            android:layout_marginEnd="50dp"
-            tools:text="v 0.0.1"
-            style="@style/text_2" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/ripple_bg"
             android:paddingStart="@dimen/padding_left"
@@ -75,7 +50,7 @@
             android:drawableEnd="@mipmap/arrow_right"
             android:paddingEnd="@dimen/padding_right"
             android:text="主题颜色"
-            app:layout_constraintTop_toBottomOf="@+id/tvVersion"
+            app:layout_constraintTop_toBottomOf="@+id/tvClear"
             android:id="@+id/tvColor" />
 
         <TextView
@@ -92,23 +67,25 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@drawable/ripple_bg"
+            style="@style/text_1"
             android:paddingStart="@dimen/padding_left"
             android:gravity="center_vertical"
-            style="@style/text_1"
+            android:text="版本"
+            android:id="@+id/tvVersion"
             android:drawableEnd="@mipmap/arrow_right"
             android:paddingEnd="@dimen/padding_right"
-            android:text="夜间模式"
-            app:layout_constraintTop_toBottomOf="@+id/tvColor"
-            android:id="@+id/tvNight" />
+            app:layout_constraintTop_toBottomOf="@id/tvColor" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="60dp"
-            app:layout_constraintTop_toTopOf="@+id/tvNight"
-            app:layout_constraintBottom_toBottomOf="@+id/tvNight"
-            app:layout_constraintRight_toRightOf="@+id/tvNight"
+            android:id="@+id/tvVersionValue"
+            app:layout_constraintTop_toTopOf="@+id/tvVersion"
+            app:layout_constraintBottom_toBottomOf="@+id/tvVersion"
+            app:layout_constraintRight_toRightOf="@+id/tvVersion"
             android:gravity="center_vertical"
             android:layout_marginEnd="50dp"
+            tools:text="v 0.0.1"
             style="@style/text_2" />
 
         <TextView
@@ -121,6 +98,6 @@
             android:background="@drawable/ripple_bg"
             android:layout_marginTop="8dp"
             android:text="退出登录"
-            app:layout_constraintTop_toBottomOf="@+id/tvNight" />
+            app:layout_constraintTop_toBottomOf="@+id/tvVersion" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

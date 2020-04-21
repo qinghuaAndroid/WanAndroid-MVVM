@@ -11,14 +11,14 @@ import com.qh.wanandroid.ui.login.LoginRepository
 import com.qh.wanandroid.ui.login.LoginViewModel
 import com.qh.wanandroid.ui.myarticle.MyArticleRepository
 import com.qh.wanandroid.ui.myarticle.MyArticleViewModel
+import com.qh.wanandroid.ui.navigation.NavigationRepository
+import com.qh.wanandroid.ui.navigation.NavigationViewModel
 import com.qh.wanandroid.ui.question.QuestionRepository
 import com.qh.wanandroid.ui.search.list.SearchListRepository
 import com.qh.wanandroid.ui.share.ShareListRepository
-import com.qh.wanandroid.ui.system.act.SystemRepository
 import com.qh.wanandroid.ui.system.SystemListRepository
 import com.qh.wanandroid.ui.system.SystemListViewModel
-import com.qh.wanandroid.ui.navigation.NavigationRepository
-import com.qh.wanandroid.ui.navigation.NavigationViewModel
+import com.qh.wanandroid.ui.system.act.SystemRepository
 import com.qh.wanandroid.ui.tab.list.TabListRepository
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module

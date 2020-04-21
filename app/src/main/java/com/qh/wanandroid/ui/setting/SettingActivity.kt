@@ -1,7 +1,6 @@
 package com.qh.wanandroid.ui.setting
 
 import android.view.View
-import androidx.appcompat.app.AppCompatDelegate
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.color.ColorPalette
 import com.afollestad.materialdialogs.color.colorChooser
@@ -43,23 +42,10 @@ class SettingActivity :
         setTitle(R.string.setting)
         tvClearValue.text = CacheUtils.getTotalCacheSize(this)
         tvClearValue.onClick { clearCache() }
-        tvVersionValue.text = versionName
+        tvVersionValue.text = StringUtils.format("v %s", versionName)
         tvLogout.visibility = if (isLogin) View.VISIBLE else View.GONE
         tvLogout.onClick { mPresenter?.logout() }
         tvColor.onClick { setThemeColor() }
-        tvNight.onClick { switchNightMode() }
-    }
-
-    private fun switchNightMode() {
-        if (SettingUtil.getIsNightMode()) {
-            SettingUtil.setIsNightMode(false)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        } else {
-            SettingUtil.setIsNightMode(true)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        }
-        window.setWindowAnimations(R.style.WindowAnimationFadeInOut)
-        recreate()
     }
 
     private fun setThemeColor() {

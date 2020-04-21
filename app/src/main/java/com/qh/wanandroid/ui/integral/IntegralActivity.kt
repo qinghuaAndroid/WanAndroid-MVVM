@@ -1,8 +1,6 @@
 package com.qh.wanandroid.ui.integral
 
-import android.animation.ValueAnimator
 import android.view.View
-import android.view.animation.DecelerateInterpolator
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.devlibrary.ext.showToast

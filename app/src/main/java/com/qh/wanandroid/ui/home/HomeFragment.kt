@@ -7,12 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.example.common.constant.Const
-import com.example.devlibrary.ext.getThemeColor
 import com.example.devlibrary.ext.showToast
-import com.example.devlibrary.helper.LiveEventBusHelper
 import com.example.devlibrary.mvvm.BaseVMFragment
-import com.example.devlibrary.utils.DisplayUtils
-import com.example.devlibrary.utils.StatusBarUtil
 import com.example.devlibrary.widget.LoadMoreView
 import com.google.android.material.appbar.AppBarLayout
 import com.qh.wanandroid.R
@@ -22,10 +18,6 @@ import com.qh.wanandroid.databinding.FragmentHomeBinding
 import com.qh.wanandroid.ui.ArticleViewModel
 import com.qh.wanandroid.ui.BrowserNormalActivity
 import com.qh.wanandroid.ui.collect.CollectViewModel
-import com.qh.wanandroid.ui.search.SearchActivity
-import org.jetbrains.anko.backgroundColor
-import org.jetbrains.anko.sdk27.coroutines.onClick
-import org.jetbrains.anko.support.v4.startActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**

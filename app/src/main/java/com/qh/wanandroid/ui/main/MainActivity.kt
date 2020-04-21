@@ -26,12 +26,12 @@ import com.qh.wanandroid.ui.girl.GirlActivity
 import com.qh.wanandroid.ui.home.HomeFragment
 import com.qh.wanandroid.ui.integral.IntegralActivity
 import com.qh.wanandroid.ui.login.LoginActivity
+import com.qh.wanandroid.ui.navigation.NavigationFragment
 import com.qh.wanandroid.ui.question.QuestionActivity
 import com.qh.wanandroid.ui.search.SearchActivity
 import com.qh.wanandroid.ui.setting.SettingActivity
-import com.qh.wanandroid.ui.system.SystemListFragment
-import com.qh.wanandroid.ui.navigation.NavigationFragment
 import com.qh.wanandroid.ui.share.ShareListActivity
+import com.qh.wanandroid.ui.system.SystemListFragment
 import com.qh.wanandroid.ui.tab.TabFragment
 import com.tencent.mmkv.MMKV
 import org.jetbrains.anko.backgroundColor
@@ -83,6 +83,7 @@ class MainActivity :
     }
 
     override fun initView() {
+        super.initView()
         initDrawerLayout()
         initNavView()
         setThemeColor()
@@ -266,6 +267,10 @@ class MainActivity :
         LiveEventBusHelper.observe(com.example.common.constant.Const.THEME_COLOR,
             Int::class.java, this, androidx.lifecycle.Observer<Int> {
                 setThemeColor()
+            })
+        LiveEventBusHelper.observe(com.example.common.constant.Const.LOGIN_SUCCESS,
+            Boolean::class.java, this, androidx.lifecycle.Observer<Boolean> {
+                mPresenter?.getUserInfo()
             })
     }
 
