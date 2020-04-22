@@ -11,7 +11,7 @@ import com.example.devlibrary.mvvm.BaseVMActivity
 import com.example.devlibrary.widget.LoadMoreView
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.ArticleAdapter
-import com.qh.wanandroid.const.ArouterPath
+import com.qh.wanandroid.arouter.ArouterPath
 import com.qh.wanandroid.databinding.ActivityMyArticleBinding
 import com.qh.wanandroid.ui.collect.CollectViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel

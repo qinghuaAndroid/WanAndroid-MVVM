@@ -2,6 +2,8 @@ package com.qh.wanandroid.ui.system.act
 
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alibaba.android.arouter.facade.annotation.Autowired
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
@@ -10,7 +12,7 @@ import com.example.devlibrary.mvvm.BaseVMActivity
 import com.example.devlibrary.widget.LoadMoreView
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.ArticleAdapter
-import com.qh.wanandroid.const.ArouterPath
+import com.qh.wanandroid.arouter.ArouterPath
 import com.qh.wanandroid.const.Const
 import com.qh.wanandroid.databinding.ActivitySystemBinding
 import com.qh.wanandroid.ui.ArticleViewModel
@@ -21,13 +23,18 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  * @author FQH
  * Create at 2020/4/8.
  */
+@Route(path = ArouterPath.ACTIVITY_SYSTEM)
 class SystemActivity : BaseVMActivity<ArticleViewModel, ActivitySystemBinding>() {
 
     private val articleViewModel by viewModel<ArticleViewModel>()
     private val collectViewModel by viewModel<CollectViewModel>()
     private val articleAdapter by lazy { ArticleAdapter() }
-    private var cid: Int = 0
-    private var title: String? = null
+    @Autowired(name = Const.SYSTEM_ID)
+    @JvmField
+    var cid: Int = 0
+    @Autowired(name = Const.SYSTEM_TITLE)
+    @JvmField
+    var title: String? = null
     private var curPosition = 0
 
     override fun startObserve() {
@@ -60,10 +67,7 @@ class SystemActivity : BaseVMActivity<ArticleViewModel, ActivitySystemBinding>()
     override fun attachLayoutRes(): Int = R.layout.activity_system
 
     override fun initData() {
-        intent.run {
-            cid = getIntExtra(Const.SYSTEM_ID, 0)
-            title = getStringExtra(Const.SYSTEM_TITLE)
-        }
+        ARouter.getInstance().inject(this)
     }
 
     override fun initView() {

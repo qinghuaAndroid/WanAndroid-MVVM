@@ -1,6 +1,5 @@
 package com.qh.wanandroid.ui.main
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -19,24 +18,20 @@ import com.example.devlibrary.utils.SettingUtil
 import com.google.android.material.navigation.NavigationView
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.ViewPagerAdapter
+import com.qh.wanandroid.arouter.ArouterPath
 import com.qh.wanandroid.bean.UserInfoEntity
-import com.qh.wanandroid.const.ArouterPath
 import com.qh.wanandroid.const.Const
 import com.qh.wanandroid.databinding.ActivityMainBinding
-import com.qh.wanandroid.ext.startActivity
-import com.qh.wanandroid.ui.collect.CollectActivity
+import com.qh.wanandroid.ext.navigation
 import com.qh.wanandroid.ui.home.HomeFragment
-import com.qh.wanandroid.ui.integral.IntegralActivity
-import com.qh.wanandroid.ui.login.LoginActivity
 import com.qh.wanandroid.ui.navigation.NavigationFragment
-import com.qh.wanandroid.ui.search.SearchActivity
 import com.qh.wanandroid.ui.system.SystemListFragment
 import com.qh.wanandroid.ui.tab.TabFragment
 import com.tencent.mmkv.MMKV
 import org.jetbrains.anko.backgroundColor
 import org.jetbrains.anko.sdk27.coroutines.onClick
-import org.jetbrains.anko.startActivity
 import java.util.*
+import kotlin.properties.Delegates
 
 @Route(path = ArouterPath.ACTIVITY_MAIN)
 class MainActivity :
@@ -44,19 +39,20 @@ class MainActivity :
     MainContract.View {
 
     private val mmkv by lazy { MMKV.defaultMMKV() }
-    private val isLogin by lazy {
-        mmkv.decodeBool(com.example.common.constant.Const.IS_LOGIN, false)
-    }
+    private var isLogin by Delegates.notNull<Boolean>()
+    private var userInfoEntity: UserInfoEntity? = null
     private val fragments = ArrayList<Fragment>()
     private lateinit var navHeaderView: View
     private lateinit var tvUserId: TextView
     private lateinit var tvUserName: TextView
     private lateinit var tvUserGrade: TextView
     private lateinit var tvUserRank: TextView
+    private lateinit var logoutMenuItem: MenuItem
 
     override fun attachLayoutRes(): Int = R.layout.activity_main
 
     override fun initData() {
+        isLogin = mmkv.decodeBool(com.example.common.constant.Const.IS_LOGIN, false)
         receiveNotice()
         initFragments()
     }
@@ -144,9 +140,7 @@ class MainActivity :
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.action_search -> {
-                Intent(this, SearchActivity::class.java).run {
-                    startActivity(this)
-                }
+                ARouter.getInstance().build(ArouterPath.ACTIVITY_SEARCH).navigation()
                 return true
             }
         }
@@ -166,9 +160,13 @@ class MainActivity :
                 tvUserRank = findViewById(R.id.tv_user_rank)
             }
             setNavigationItemSelectedListener(onDrawerNavigationItemSelectedListener)
-            menu.findItem(R.id.nav_logout).isVisible = isLogin
+            logoutMenuItem = menu.findItem(R.id.nav_logout)
         }
-        tvUserName.onClick { if (isLogin.not()) startActivity<LoginActivity>() }
+        tvUserName.onClick {
+            if (isLogin.not()) {
+                ARouter.getInstance().build(ArouterPath.ACTIVITY_LOGIN).navigation()
+            }
+        }
     }
 
     /**
@@ -178,13 +176,26 @@ class MainActivity :
         NavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_score -> {
-                    startActivity(IntegralActivity::class.java, true)
+                    userInfoEntity?.let {
+                        ARouter.getInstance().build(ArouterPath.ACTIVITY_INTEGRAL)
+                            .withObject(Const.USER_INFO_ENTITY, it).navigation(this) {
+                            onInterrupt {
+                                ARouter.getInstance().build(ArouterPath.ACTIVITY_LOGIN)
+                                    .with(it?.extras).navigation()
+                            }
+                        }
+                    }
                 }
                 R.id.nav_collect -> {
-                    startActivity(CollectActivity::class.java, true)
+                    ARouter.getInstance().build(ArouterPath.ACTIVITY_COLLECT).navigation(this) {
+                        onInterrupt {
+                            ARouter.getInstance().build(ArouterPath.ACTIVITY_LOGIN).with(it?.extras)
+                                .navigation()
+                        }
+                    }
                 }
                 R.id.nav_girl -> {
-                   ARouter.getInstance().build(ArouterPath.ACTIVITY_GIRL).navigation()
+                    ARouter.getInstance().build(ArouterPath.ACTIVITY_GIRL).navigation()
                 }
                 R.id.nav_question -> {
                     ARouter.getInstance().build(ArouterPath.ACTIVITY_QUESTION).navigation()
@@ -257,10 +268,12 @@ class MainActivity :
     }
 
     override fun showUserInfo(bean: UserInfoEntity) {
+        userInfoEntity = bean
         tvUserId.text = bean.userId.toString()
         tvUserName.text = bean.username.toString()
-        tvUserGrade.text = (bean.coinCount / 100 + 1).toString()
+        tvUserGrade.text = bean.level.toString()
         tvUserRank.text = bean.rank.toString()
+        logoutMenuItem.isVisible = isLogin
     }
 
     private fun receiveNotice() {
@@ -270,6 +283,7 @@ class MainActivity :
             })
         LiveEventBusHelper.observe(com.example.common.constant.Const.LOGIN_SUCCESS,
             Boolean::class.java, this, androidx.lifecycle.Observer<Boolean> {
+                isLogin = true
                 mPresenter?.getUserInfo()
             })
     }

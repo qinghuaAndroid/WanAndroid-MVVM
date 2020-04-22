@@ -15,4 +15,6 @@ object Const {
     /*************************************传参部分 */
     const val WEB_URL = "webUrl"
     const val WEB_TITLE = "webTitle"
+    /*************************************Arouter extras  */
+    const val NEED_LOGIN = 0X01
 }

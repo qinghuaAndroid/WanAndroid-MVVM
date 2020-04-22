@@ -7,8 +7,8 @@ import com.example.devlibrary.mvp.BaseMvpActivity
 import com.example.devlibrary.widget.LoadMoreView
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.GirlAdapter
+import com.qh.wanandroid.arouter.ArouterPath
 import com.qh.wanandroid.bean.GankIoDataBean
-import com.qh.wanandroid.const.ArouterPath
 import com.qh.wanandroid.databinding.ActivityGirlBinding
 
 /**

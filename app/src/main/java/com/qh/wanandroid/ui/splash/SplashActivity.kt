@@ -5,7 +5,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.example.devlibrary.base.BaseActivity
 import com.example.devlibrary.utils.ToastUtils
 import com.qh.wanandroid.R
-import com.qh.wanandroid.const.ArouterPath
+import com.qh.wanandroid.arouter.ArouterPath
 import com.qh.wanandroid.databinding.ActivitySplashBinding
 import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.coroutines.GlobalScope

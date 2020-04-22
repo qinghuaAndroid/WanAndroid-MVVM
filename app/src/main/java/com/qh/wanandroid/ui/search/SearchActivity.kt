@@ -1,24 +1,26 @@
 package com.qh.wanandroid.ui.search
 
-import android.content.Intent
 import android.view.Menu
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.example.devlibrary.ext.listener.queryTextListener
 import com.example.devlibrary.helper.RealmHelper
 import com.example.devlibrary.mvp.BaseMvpActivity
 import com.qh.wanandroid.R
+import com.qh.wanandroid.arouter.ArouterPath
 import com.qh.wanandroid.bean.HotSearchEntity
 import com.qh.wanandroid.bean.SearchHistoryBean
 import com.qh.wanandroid.const.Const
 import com.qh.wanandroid.databinding.ActivitySearchBinding
-import com.qh.wanandroid.ui.search.list.SearchListActivity
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 /**
  * @author FQH
  * Create at 2020/4/14.
  */
+@Route(path = ArouterPath.ACTIVITY_SEARCH)
 class SearchActivity :
     BaseMvpActivity<SearchContract.View, SearchContract.Presenter, ActivitySearchBinding>(),
     SearchContract.View {
@@ -46,10 +48,8 @@ class SearchActivity :
 
     private fun goToSearchList(key: String) {
         mPresenter?.saveSearchKey(key)
-        Intent(this, SearchListActivity::class.java).run {
-            putExtra(Const.SEARCH_KEY, key)
-            startActivity(this)
-        }
+        ARouter.getInstance().build(ArouterPath.ACTIVITY_SEARCH_LIST)
+            .withString(Const.SEARCH_KEY, key).navigation()
     }
 
     override fun loadData() {

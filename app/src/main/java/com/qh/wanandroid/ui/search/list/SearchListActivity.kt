@@ -2,6 +2,8 @@ package com.qh.wanandroid.ui.search.list
 
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alibaba.android.arouter.facade.annotation.Autowired
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
@@ -10,7 +12,7 @@ import com.example.devlibrary.mvvm.BaseVMActivity
 import com.example.devlibrary.widget.LoadMoreView
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.ArticleAdapter
-import com.qh.wanandroid.const.ArouterPath
+import com.qh.wanandroid.arouter.ArouterPath
 import com.qh.wanandroid.const.Const
 import com.qh.wanandroid.databinding.ActivitySystemBinding
 import com.qh.wanandroid.ui.ArticleViewModel
@@ -21,12 +23,15 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  * @author FQH
  * Create at 2020/4/8.
  */
+@Route(path = ArouterPath.ACTIVITY_SEARCH_LIST)
 class SearchListActivity : BaseVMActivity<ArticleViewModel, ActivitySystemBinding>() {
 
     private val articleViewModel by viewModel<ArticleViewModel>()
     private val collectViewModel by viewModel<CollectViewModel>()
     private val articleAdapter by lazy { ArticleAdapter() }
-    private var key = ""
+    @Autowired(name = Const.SEARCH_KEY)
+    @JvmField
+    var key = ""
     private var curPosition = 0
 
     override fun startObserve() {
@@ -59,13 +64,11 @@ class SearchListActivity : BaseVMActivity<ArticleViewModel, ActivitySystemBindin
     override fun attachLayoutRes(): Int = R.layout.activity_system
 
     override fun initData() {
-        intent.run {
-            key = getStringExtra(Const.SEARCH_KEY)
-        }
+        ARouter.getInstance().inject(this)
     }
 
     override fun initView() {
-        setTitle(key)
+        title = key
         initRecyclerView()
         mBinding.swipeRefresh.setOnRefreshListener { loadData() }
     }

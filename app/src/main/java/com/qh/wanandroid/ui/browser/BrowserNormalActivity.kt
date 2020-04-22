@@ -14,7 +14,7 @@ import com.example.common.constant.Const
 import com.example.devlibrary.base.BaseActivity
 import com.just.agentweb.*
 import com.qh.wanandroid.R
-import com.qh.wanandroid.const.ArouterPath
+import com.qh.wanandroid.arouter.ArouterPath
 import com.qh.wanandroid.databinding.ActivityBrowserNormalBinding
 
 /**

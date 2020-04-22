@@ -97,12 +97,6 @@ interface ApiService {
      * 获取个人积分
      */
     @GET("/lg/coin/userinfo/json")
-    suspend fun getIntegral(): HttpResult<IntegralEntity>
-
-    /**
-     * 获取个人积分
-     */
-    @GET("/lg/coin/userinfo/json")
     fun getUserInfo(): Observable<HttpResult<UserInfoEntity>>
 
     /**

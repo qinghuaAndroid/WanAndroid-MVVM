@@ -10,7 +10,7 @@ import com.example.devlibrary.ext.showToast
 import com.example.devlibrary.mvvm.BaseVMFragment
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.NavigationAdapter
-import com.qh.wanandroid.const.ArouterPath
+import com.qh.wanandroid.arouter.ArouterPath
 import com.qh.wanandroid.databinding.FragmentSystemListBinding
 import com.qh.wanandroid.listener.OnLabelClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel

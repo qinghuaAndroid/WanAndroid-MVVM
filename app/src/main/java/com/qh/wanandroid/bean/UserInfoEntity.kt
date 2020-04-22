@@ -1,21 +1,21 @@
 package com.qh.wanandroid.bean
 
-import java.io.Serializable
-
 /**
  * @author FQH
  * Create at 2020/4/14.
  */
-class UserInfoEntity: Serializable {
+class UserInfoEntity {
 
     /**
-     * coinCount : 451
-     * rank : 7
-     * userId : 2
-     * username : x**oyang
+     * "coinCount":1580,
+     * "level":16,
+     * "rank":373,"
+     * userId":9477,
+     * "username":"1**4806539@qq.com"
      */
 
     var coinCount: Int = 0
+    var level: Int = 0
     var rank: Int = 0
     var userId: Int = 0
     var username: String? = null

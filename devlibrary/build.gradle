@@ -80,6 +80,9 @@ dependencies {
     //Logger
     api "com.orhanobut:logger:$rootProject.loggerVersion"
 
+    //fastjson
+    api 'com.alibaba:fastjson:1.2.48'
+
     //circle imageview
     api "de.hdodenhof:circleimageview:$rootProject.circleImageviewVersion"
 
@@ -118,10 +121,6 @@ dependencies {
 
     //agentweb
     api 'com.just.agentweb:agentweb:4.1.3'
-
-//    //ARouter
-//    api 'com.alibaba:arouter-api:1.5.0'
-//    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
 
     //协程
     api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3'
