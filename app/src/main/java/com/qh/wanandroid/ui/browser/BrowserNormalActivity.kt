@@ -1,4 +1,4 @@
-package com.qh.wanandroid.ui
+package com.qh.wanandroid.ui.browser
 
 import android.content.Intent
 import android.graphics.Bitmap
@@ -7,20 +7,30 @@ import android.view.KeyEvent
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.widget.LinearLayout
+import com.alibaba.android.arouter.facade.annotation.Autowired
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.example.common.constant.Const
 import com.example.devlibrary.base.BaseActivity
 import com.just.agentweb.*
 import com.qh.wanandroid.R
+import com.qh.wanandroid.const.ArouterPath
 import com.qh.wanandroid.databinding.ActivityBrowserNormalBinding
 
 /**
  * @author FQH
  * Create at 2020/4/8.
  */
+@Route(path = ArouterPath.ACTIVITY_BROWSER)
 class BrowserNormalActivity : BaseActivity<ActivityBrowserNormalBinding>() {
 
-    private lateinit var title: String
-    private lateinit var url: String
+    @Autowired(name = Const.WEB_TITLE)
+    @JvmField
+    var title: String? = null
+
+    @Autowired(name = Const.WEB_URL)
+    @JvmField
+    var url: String? = null
     private lateinit var mAgentWeb: AgentWeb
     private val mWebView: NestedScrollAgentWebView by lazy {
         NestedScrollAgentWebView(this)
@@ -29,12 +39,11 @@ class BrowserNormalActivity : BaseActivity<ActivityBrowserNormalBinding>() {
     override fun attachLayoutRes(): Int = R.layout.activity_browser_normal
 
     override fun initData() {
-        title = intent.getStringExtra(Const.WEB_TITLE)
-        url = intent.getStringExtra(Const.WEB_URL)
+        ARouter.getInstance().inject(this)
     }
 
     override fun initView() {
-        setTitle(this@BrowserNormalActivity.title)
+        title?.let { setTitle(it) }
         mAgentWeb = AgentWeb.with(this)
             .setAgentWebParent(mBinding.container, LinearLayout.LayoutParams(-1, -1))
             .useDefaultIndicator()

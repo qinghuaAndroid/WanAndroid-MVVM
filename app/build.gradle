@@ -6,6 +6,12 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'com.didi.dokit'
 apply plugin: 'realm-android'
 
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
@@ -70,5 +76,8 @@ dependencies {
     //颜色对话框，【https://github.com/afollestad/material-dialogs】
     implementation 'com.afollestad.material-dialogs:color:3.3.0'
     implementation 'com.afollestad.material-dialogs:lifecycle:3.3.0'
+    //ARouter
+    implementation 'com.alibaba:arouter-api:1.5.0'
+    kapt 'com.alibaba:arouter-compiler:1.2.2'
 
 }

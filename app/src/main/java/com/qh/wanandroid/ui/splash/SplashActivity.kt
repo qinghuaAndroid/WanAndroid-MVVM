@@ -1,16 +1,16 @@
-package com.qh.wanandroid.ui
+package com.qh.wanandroid.ui.splash
 
 import android.Manifest
+import com.alibaba.android.arouter.launcher.ARouter
 import com.example.devlibrary.base.BaseActivity
 import com.example.devlibrary.utils.ToastUtils
 import com.qh.wanandroid.R
+import com.qh.wanandroid.const.ArouterPath
 import com.qh.wanandroid.databinding.ActivitySplashBinding
-import com.qh.wanandroid.ui.main.MainActivity
 import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.jetbrains.anko.startActivity
 
 /**
  * @author FQH
@@ -38,7 +38,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     private fun enterMain() {
         GlobalScope.launch {
             delay(2000)
-            startActivity<MainActivity>()
+            ARouter.getInstance().build(ArouterPath.ACTIVITY_MAIN).navigation()
             finish()
         }
     }

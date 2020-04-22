@@ -11,7 +11,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.ViewPagerAdapter
 import com.qh.wanandroid.bean.TabEntity
-import com.qh.wanandroid.constant.Const
+import com.qh.wanandroid.const.Const
 import com.qh.wanandroid.databinding.FragmentTabBinding
 import com.qh.wanandroid.ui.tab.list.TabListFragment
 import org.jetbrains.anko.backgroundColor

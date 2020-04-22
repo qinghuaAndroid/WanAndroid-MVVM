@@ -29,7 +29,7 @@
             android:layout_gravity="bottom"
             android:gravity="center_horizontal"
             android:padding="50dp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="18sp"
             android:text="@{bean.desc}" />
 

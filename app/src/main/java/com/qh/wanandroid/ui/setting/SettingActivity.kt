@@ -5,6 +5,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.color.ColorPalette
 import com.afollestad.materialdialogs.color.colorChooser
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.common.constant.Const
 import com.example.devlibrary.helper.LiveEventBusHelper
 import com.example.devlibrary.mvp.BaseMvpActivity
@@ -13,6 +14,7 @@ import com.example.devlibrary.utils.SettingUtil
 import com.example.devlibrary.utils.StringUtils
 import com.example.devlibrary.utils.versionName
 import com.qh.wanandroid.R
+import com.qh.wanandroid.const.ArouterPath
 import com.qh.wanandroid.databinding.ActivitySettingBinding
 import com.tencent.mmkv.MMKV
 import kotlinx.android.synthetic.main.activity_setting.*
@@ -22,6 +24,7 @@ import org.jetbrains.anko.sdk27.coroutines.onClick
  * @author FQH
  * Create at 2020/4/10.
  */
+@Route(path = ArouterPath.ACTIVITY_SETTING)
 class SettingActivity :
     BaseMvpActivity<SettingContract.View, SettingContract.Presenter, ActivitySettingBinding>(),
     SettingContract.View {

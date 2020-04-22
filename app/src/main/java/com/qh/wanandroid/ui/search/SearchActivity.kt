@@ -10,7 +10,7 @@ import com.example.devlibrary.mvp.BaseMvpActivity
 import com.qh.wanandroid.R
 import com.qh.wanandroid.bean.HotSearchEntity
 import com.qh.wanandroid.bean.SearchHistoryBean
-import com.qh.wanandroid.constant.Const
+import com.qh.wanandroid.const.Const
 import com.qh.wanandroid.databinding.ActivitySearchBinding
 import com.qh.wanandroid.ui.search.list.SearchListActivity
 import org.jetbrains.anko.sdk27.coroutines.onClick

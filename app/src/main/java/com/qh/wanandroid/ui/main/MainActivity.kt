@@ -10,6 +10,8 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.example.devlibrary.ext.getThemeColor
 import com.example.devlibrary.helper.LiveEventBusHelper
 import com.example.devlibrary.mvp.BaseMvpActivity
@@ -18,19 +20,16 @@ import com.google.android.material.navigation.NavigationView
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.ViewPagerAdapter
 import com.qh.wanandroid.bean.UserInfoEntity
-import com.qh.wanandroid.constant.Const
+import com.qh.wanandroid.const.ArouterPath
+import com.qh.wanandroid.const.Const
 import com.qh.wanandroid.databinding.ActivityMainBinding
 import com.qh.wanandroid.ext.startActivity
 import com.qh.wanandroid.ui.collect.CollectActivity
-import com.qh.wanandroid.ui.girl.GirlActivity
 import com.qh.wanandroid.ui.home.HomeFragment
 import com.qh.wanandroid.ui.integral.IntegralActivity
 import com.qh.wanandroid.ui.login.LoginActivity
 import com.qh.wanandroid.ui.navigation.NavigationFragment
-import com.qh.wanandroid.ui.question.QuestionActivity
 import com.qh.wanandroid.ui.search.SearchActivity
-import com.qh.wanandroid.ui.setting.SettingActivity
-import com.qh.wanandroid.ui.share.ShareListActivity
 import com.qh.wanandroid.ui.system.SystemListFragment
 import com.qh.wanandroid.ui.tab.TabFragment
 import com.tencent.mmkv.MMKV
@@ -39,6 +38,7 @@ import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.startActivity
 import java.util.*
 
+@Route(path = ArouterPath.ACTIVITY_MAIN)
 class MainActivity :
     BaseMvpActivity<MainContract.View, MainContract.Presenter, ActivityMainBinding>(),
     MainContract.View {
@@ -184,13 +184,13 @@ class MainActivity :
                     startActivity(CollectActivity::class.java, true)
                 }
                 R.id.nav_girl -> {
-                    startActivity(GirlActivity::class.java)
+                   ARouter.getInstance().build(ArouterPath.ACTIVITY_GIRL).navigation()
                 }
                 R.id.nav_question -> {
-                    startActivity(QuestionActivity::class.java)
+                    ARouter.getInstance().build(ArouterPath.ACTIVITY_QUESTION).navigation()
                 }
                 R.id.nav_setting -> {
-                    startActivity(SettingActivity::class.java)
+                    ARouter.getInstance().build(ArouterPath.ACTIVITY_SETTING).navigation()
                 }
                 R.id.nav_about_us -> {
 
@@ -202,10 +202,10 @@ class MainActivity :
                     switchNightMode()
                 }
                 R.id.nav_todo -> {
-//                    startActivity(TodoActivity::class.java, true)
+
                 }
                 R.id.nav_square -> {
-                    startActivity(ShareListActivity::class.java)
+                    ARouter.getInstance().build(ArouterPath.ACTIVITY_SHARE_LIST).navigation()
                 }
             }
             // drawer_layout.closeDrawer(GravityCompat.START)

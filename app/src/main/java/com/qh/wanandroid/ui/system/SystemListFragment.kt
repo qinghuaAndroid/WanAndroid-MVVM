@@ -9,7 +9,7 @@ import com.example.devlibrary.ext.showToast
 import com.example.devlibrary.mvvm.BaseVMFragment
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.SystemListAdapter
-import com.qh.wanandroid.constant.Const
+import com.qh.wanandroid.const.Const
 import com.qh.wanandroid.databinding.FragmentSystemListBinding
 import com.qh.wanandroid.listener.OnLabelClickListener
 import com.qh.wanandroid.ui.system.act.SystemActivity

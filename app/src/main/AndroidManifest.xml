@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".ui.SplashActivity"
+            android:name=".ui.splash.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,7 +30,7 @@
 
         <activity android:name=".ui.system.act.SystemActivity" />
 
-        <activity android:name=".ui.BrowserNormalActivity" />
+        <activity android:name=".ui.browser.BrowserNormalActivity" />
 
         <activity
             android:name=".ui.girl.GirlActivity"

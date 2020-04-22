@@ -1,4 +1,4 @@
-package com.qh.wanandroid.constant
+package com.qh.wanandroid.const
 
 /**
  * Created by Cy on 2018/9/20.

@@ -2,17 +2,20 @@ package com.qh.wanandroid.ui.girl
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.devlibrary.mvp.BaseMvpActivity
 import com.example.devlibrary.widget.LoadMoreView
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.GirlAdapter
 import com.qh.wanandroid.bean.GankIoDataBean
+import com.qh.wanandroid.const.ArouterPath
 import com.qh.wanandroid.databinding.ActivityGirlBinding
 
 /**
  * Description:
  * Created by FQH on 2019/10/14.
  */
+@Route(path = ArouterPath.ACTIVITY_GIRL)
 class GirlActivity :
     BaseMvpActivity<GirlContract.View, GirlContract.Presenter, ActivityGirlBinding>(),
     GirlContract.View {

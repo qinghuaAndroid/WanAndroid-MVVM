@@ -1,9 +1,9 @@
 package com.qh.wanandroid.ui.home
 
-import android.content.Intent
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alibaba.android.arouter.launcher.ARouter
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.example.common.constant.Const
@@ -14,9 +14,9 @@ import com.google.android.material.appbar.AppBarLayout
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.ArticleAdapter
 import com.qh.wanandroid.adapter.ImageNetAdapter
+import com.qh.wanandroid.const.ArouterPath
 import com.qh.wanandroid.databinding.FragmentHomeBinding
 import com.qh.wanandroid.ui.ArticleViewModel
-import com.qh.wanandroid.ui.BrowserNormalActivity
 import com.qh.wanandroid.ui.collect.CollectViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -25,7 +25,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  * Create at 2020/4/2.
  */
 class HomeFragment :
-    BaseVMFragment<ArticleViewModel, FragmentHomeBinding>(){
+    BaseVMFragment<ArticleViewModel, FragmentHomeBinding>() {
 
     private val homeViewModel by viewModel<HomeViewModel>()
     private val articleViewModel by viewModel<ArticleViewModel>()
@@ -62,13 +62,10 @@ class HomeFragment :
 
     private val mOnItemClickListener = OnItemClickListener { _, _, position ->
         val datasBean = articleAdapter.data[position]
-        activity?.let {
-            Intent(it, BrowserNormalActivity::class.java).run {
-                putExtra(Const.WEB_TITLE, datasBean.title)
-                putExtra(Const.WEB_URL, datasBean.link)
-                it.startActivity(this)
-            }
-        }
+        ARouter.getInstance().build(ArouterPath.ACTIVITY_BROWSER)
+            .withString(Const.WEB_TITLE, datasBean.title)
+            .withString(Const.WEB_URL, datasBean.link)
+            .navigation()
     }
 
     private val mOnItemChildClickListener = OnItemChildClickListener { _, view, position ->
@@ -103,7 +100,7 @@ class HomeFragment :
 
     override fun startObserve() {
         homeViewModel.bannerUiState.observe(this, Observer {
-            it.showSuccess?.let {list ->
+            it.showSuccess?.let { list ->
                 mBinding.banner.adapter = ImageNetAdapter(list)
             }
             it.showError?.let { errorMsg -> showToast(errorMsg) }
