@@ -31,4 +31,6 @@
     <color name="orange">#ea9518</color>
 
     <color name="item_nav_color_tv">#19191B</color>
+
+    <color name="tab_text_color">@color/Grey50</color>
 </resources>

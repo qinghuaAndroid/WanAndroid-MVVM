@@ -17,10 +17,10 @@
             android:layout_height="50dp"
             android:background="@color/colorPrimary"
             app:tabMode="scrollable"
-            app:tabIndicatorColor="@color/white"
+            app:tabIndicatorColor="@color/tab_text_color"
             app:tabIndicatorFullWidth="false"
-            app:tabSelectedTextColor="@color/white"
-            app:tabTextColor="@color/white" />
+            app:tabSelectedTextColor="@color/tab_text_color"
+            app:tabTextColor="@color/tab_text_color" />
 
         <View style="@style/sep_line_horizontal" />
 
