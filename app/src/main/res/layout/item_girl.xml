@@ -11,27 +11,28 @@
             type="com.qh.wanandroid.bean.GankIoDataBean.ResultBean" />
     </data>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="5dp">
 
         <com.github.chrisbanes.photoview.PhotoView
             android:id="@+id/iv_girl"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:girlImgUrl="@{bean.images.get(0)}"
-            android:scaleType="centerCrop" />
+            android:adjustViewBounds="true" />
 
         <TextView
             android:id="@+id/tv_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:gravity="center_horizontal"
-            android:padding="50dp"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:text="@{bean.desc}" />
+            android:layout_marginTop="5dp"
+            android:textColor="@color/text_1"
+            android:textSize="14sp"
+            android:text="@{bean.desc.trim()}" />
 
-    </FrameLayout>
+    </LinearLayout>
 </layout>

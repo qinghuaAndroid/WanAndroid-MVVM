@@ -1,7 +1,6 @@
 package com.qh.wanandroid.ui.girl
 
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.devlibrary.mvp.BaseMvpActivity
 import com.example.devlibrary.widget.LoadMoreView
@@ -47,9 +46,8 @@ class GirlActivity :
 
     override fun initView() {
         super.initView()
-        mBinding.rvGirl.layoutManager = LinearLayoutManager(this)
+        mBinding.rvGirl.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         mBinding.rvGirl.adapter = girlAdapter
-        PagerSnapHelper().attachToRecyclerView(mBinding.rvGirl)
         girlAdapter.loadMoreModule.loadMoreView = LoadMoreView()
         girlAdapter.loadMoreModule.setOnLoadMoreListener { loadMore() }
     }

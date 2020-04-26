@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.qh.wanandroid.ui.search.SearchActivity">
 
     <LinearLayout
@@ -28,13 +29,24 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:text="@string/hot_search"
-                    android:textColor="@color/theme"
+                    android:textColor="@color/text_1"
                     android:textSize="@dimen/text_1" />
 
                 <com.donkingliang.labels.LabelsView
                     android:id="@+id/hotLabelsView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:labelBackground="@drawable/tag_ripple_bg"
+                    app:labelTextColor="@color/text_2"
+                    app:labelTextSize="@dimen/text_2"
+                    app:labelTextPaddingBottom="4dp"
+                    app:labelTextPaddingLeft="10dp"
+                    app:labelTextPaddingRight="10dp"
+                    app:labelTextPaddingTop="4dp"
+                    app:lineMargin="16dp"
+                    app:selectType="NONE"
+                    app:wordMargin="10dp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -57,14 +69,25 @@
                         android:layout_centerVertical="true"
                         android:layout_toStartOf="@+id/ivClearAll"
                         android:text="@string/recent_search"
-                        android:textColor="@color/theme"
+                        android:textColor="@color/text_1"
                         android:textSize="@dimen/text_1" />
                 </RelativeLayout>
 
                 <com.donkingliang.labels.LabelsView
                     android:id="@+id/historyLabelsView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:labelBackground="@drawable/tag_ripple_bg"
+                    app:labelTextColor="@color/text_2"
+                    app:labelTextSize="@dimen/text_2"
+                    app:labelTextPaddingBottom="4dp"
+                    app:labelTextPaddingLeft="10dp"
+                    app:labelTextPaddingRight="10dp"
+                    app:labelTextPaddingTop="4dp"
+                    app:lineMargin="16dp"
+                    app:selectType="NONE"
+                    app:wordMargin="10dp" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 

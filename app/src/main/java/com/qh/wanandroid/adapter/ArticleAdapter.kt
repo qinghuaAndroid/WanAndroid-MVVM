@@ -2,10 +2,12 @@ package com.qh.wanandroid.adapter
 
 import android.text.Html
 import android.text.TextUtils
+import android.view.View
 import android.widget.ImageView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.example.devlibrary.utils.ImageLoader
 import com.example.devlibrary.utils.ResourcesUtils
 import com.qh.wanandroid.R
 import com.qh.wanandroid.bean.ArticleEntity
@@ -30,6 +32,10 @@ class ArticleAdapter :
             }
             holder.setText(R.id.tvAuthor, if (!TextUtils.isEmpty(author)) author else shareUser)
             holder.setText(R.id.tvDate, niceDate)
+            val ivArticlePic = holder.getView<ImageView>(R.id.ivArticlePic)
+            ivArticlePic.visibility = if (envelopePic.isNullOrBlank()) View.GONE else View.VISIBLE
+            holder.getView<View>(R.id.view).visibility = if (envelopePic.isNullOrBlank()) View.GONE else View.VISIBLE
+            ImageLoader.load(ivArticlePic, envelopePic)
             holder.setText(R.id.tvTitle, Html.fromHtml(title))
             holder.setText(R.id.tvChapterName, superChapterName)
             holder.getView<ImageView>(R.id.ivCollect)

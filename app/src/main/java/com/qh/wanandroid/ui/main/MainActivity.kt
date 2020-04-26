@@ -176,13 +176,17 @@ class MainActivity :
         NavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_score -> {
+                    val postcard = ARouter.getInstance().build(ArouterPath.ACTIVITY_INTEGRAL)
                     userInfoEntity?.let {
-                        ARouter.getInstance().build(ArouterPath.ACTIVITY_INTEGRAL)
-                            .withObject(Const.USER_INFO_ENTITY, it).navigation(this) {
-                            onInterrupt {
-                                ARouter.getInstance().build(ArouterPath.ACTIVITY_LOGIN)
-                                    .with(it?.extras).navigation()
-                            }
+                        postcard.withObject(
+                            Const.USER_INFO_ENTITY,
+                            userInfoEntity
+                        )
+                    }
+                    postcard.navigation(this) {
+                        onInterrupt {
+                            ARouter.getInstance().build(ArouterPath.ACTIVITY_LOGIN)
+                                .with(it?.extras).navigation()
                         }
                     }
                 }
