@@ -14,6 +14,7 @@ kapt {
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.qh.wanandroid"
@@ -31,8 +32,6 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-//            shrinkResources true
-//            zipAlignEnabled true
         }
     }
     compileOptions {

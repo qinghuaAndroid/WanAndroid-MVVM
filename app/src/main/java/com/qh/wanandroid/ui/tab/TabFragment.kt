@@ -9,7 +9,8 @@ import com.example.devlibrary.helper.LiveEventBusHelper
 import com.example.devlibrary.mvp.BaseMvpFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.qh.wanandroid.R
-import com.qh.wanandroid.adapter.ViewPagerAdapter
+import com.qh.wanandroid.adapter.MainPagerAdapter
+import com.qh.wanandroid.adapter.TabPagerAdapter
 import com.qh.wanandroid.bean.TabEntity
 import com.qh.wanandroid.const.Const
 import com.qh.wanandroid.databinding.FragmentTabBinding
@@ -46,20 +47,12 @@ class TabFragment : BaseMvpFragment<TabContract.View, TabContract.Presenter, Fra
     override fun createPresenter(): TabContract.Presenter = TabPresenter()
 
     override fun showList(list: MutableList<TabEntity>) {
-        val fragmentList = mutableListOf<Fragment>()
         val titleList = mutableListOf<String>()
         list.forEach {
-            val fragment = TabListFragment()
-            val bundle = Bundle()
-            type?.let { it1 -> bundle.putInt(Const.TYPE, it1) }
-            bundle.putInt(Const.ID, it.id)
-            bundle.putString(Const.NAME, it.name)
-            fragment.arguments = bundle
-            fragmentList.add(fragment)
             it.name?.let { it1 -> titleList.add(it1) }
         }
         activity?.let {
-            mBinding.viewPager.adapter = ViewPagerAdapter(it, fragmentList)
+            mBinding.viewPager.adapter = TabPagerAdapter(it, list, type)
             TabLayoutMediator(mBinding.tabLayout, mBinding.viewPager) { tab, position ->
                 tab.text = titleList[position]
             }.attach()

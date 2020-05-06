@@ -1,13 +1,11 @@
 package com.qh.wanandroid.ui.main
 
-import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
@@ -17,20 +15,15 @@ import com.example.devlibrary.mvp.BaseMvpActivity
 import com.example.devlibrary.utils.SettingUtil
 import com.google.android.material.navigation.NavigationView
 import com.qh.wanandroid.R
-import com.qh.wanandroid.adapter.ViewPagerAdapter
+import com.qh.wanandroid.adapter.MainPagerAdapter
 import com.qh.wanandroid.arouter.ArouterPath
 import com.qh.wanandroid.bean.UserInfoEntity
 import com.qh.wanandroid.const.Const
 import com.qh.wanandroid.databinding.ActivityMainBinding
 import com.qh.wanandroid.ext.navigation
-import com.qh.wanandroid.ui.home.HomeFragment
-import com.qh.wanandroid.ui.navigation.NavigationFragment
-import com.qh.wanandroid.ui.system.SystemListFragment
-import com.qh.wanandroid.ui.tab.TabFragment
 import com.tencent.mmkv.MMKV
 import org.jetbrains.anko.backgroundColor
 import org.jetbrains.anko.sdk27.coroutines.onClick
-import java.util.*
 import kotlin.properties.Delegates
 
 @Route(path = ArouterPath.ACTIVITY_MAIN)
@@ -41,7 +34,6 @@ class MainActivity :
     private val mmkv by lazy { MMKV.defaultMMKV() }
     private var isLogin by Delegates.notNull<Boolean>()
     private var userInfoEntity: UserInfoEntity? = null
-    private val fragments = ArrayList<Fragment>()
     private lateinit var navHeaderView: View
     private lateinit var tvUserId: TextView
     private lateinit var tvUserName: TextView
@@ -54,28 +46,6 @@ class MainActivity :
     override fun initData() {
         isLogin = mmkv.decodeBool(com.example.common.constant.Const.IS_LOGIN, false)
         receiveNotice()
-        initFragments()
-    }
-
-    private fun initFragments() {
-        //首页
-        fragments.add(HomeFragment())
-        //体系
-        fragments.add(SystemListFragment())
-        //公众号
-        val account = TabFragment()
-        val accountBundle = Bundle()
-        accountBundle.putInt(Const.TYPE, Const.ACCOUNT_TYPE)
-        account.arguments = accountBundle
-        fragments.add(account)
-        //导航
-        fragments.add(NavigationFragment())
-        //项目
-        val project = TabFragment()
-        val proBundle = Bundle()
-        proBundle.putInt(Const.TYPE, Const.PROJECT_TYPE)
-        project.arguments = proBundle
-        fragments.add(project)
     }
 
     override fun initView() {
@@ -103,7 +73,7 @@ class MainActivity :
 
     private fun initViewPager() {
         mBinding.viewPager.isUserInputEnabled = false
-        mBinding.viewPager.adapter = ViewPagerAdapter(this, fragments)
+        mBinding.viewPager.adapter = MainPagerAdapter(this)
         mBinding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 mBinding.btmNavigation.selectedItemId = when (position) {
