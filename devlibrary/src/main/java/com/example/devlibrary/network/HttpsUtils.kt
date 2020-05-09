@@ -56,7 +56,7 @@ object HttpsUtils {
             .addInterceptor(HeaderInterceptor())
             .cookieJar(cookieJar)
             .cache(cache)
-                //下面缓存拦截器会拦截网络请求，可能导致请求参数一致请求的只走缓存，不走服务器
+                //下面缓存拦截器会拦截网络请求，可能导致请求参数一致的网络请求只走缓存，不走服务器
 //            .addNetworkInterceptor(CacheInterceptor(App.sContext))
             .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)

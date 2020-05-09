@@ -72,6 +72,7 @@ abstract class BaseActivity<B : ViewDataBinding> : RxActivity(), CoroutineScope 
 
     override fun onDestroy() {
         super.onDestroy()
+        mBinding.unbind()
         cancel()
     }
 }
