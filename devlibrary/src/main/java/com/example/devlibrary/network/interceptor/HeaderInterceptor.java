@@ -7,6 +7,7 @@ import okhttp3.Response;
 
 /**
  * Created by Cy on 2017/5/26.
+ * 添加请求头
  */
 public class HeaderInterceptor implements Interceptor {
 

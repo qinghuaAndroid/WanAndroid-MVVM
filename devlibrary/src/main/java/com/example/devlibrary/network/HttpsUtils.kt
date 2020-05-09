@@ -3,6 +3,7 @@ package com.example.devlibrary.network
 import com.example.devlibrary.BuildConfig
 import com.example.devlibrary.app.App
 import com.example.devlibrary.network.interceptor.HeaderInterceptor
+import com.example.devlibrary.network.interceptor.QueryParameterInterceptor
 import com.franmontiel.persistentcookiejar.ClearableCookieJar
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
@@ -54,6 +55,7 @@ object HttpsUtils {
             .hostnameVerifier(hostnameVerifier)
             .addNetworkInterceptor(loggingInterceptor)
             .addInterceptor(HeaderInterceptor())
+            .addInterceptor(QueryParameterInterceptor())
             .cookieJar(cookieJar)
             .cache(cache)
                 //下面缓存拦截器会拦截网络请求，可能导致请求参数一致的网络请求只走缓存，不走服务器
