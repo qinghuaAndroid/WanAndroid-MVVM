@@ -26,7 +26,7 @@ class CollectActivity :
     BaseVMActivity<ArticleViewModel, ActivityCollectBinding>(){
     private val articleViewModel by viewModel<ArticleViewModel>()
     private val collectViewModel by viewModel<CollectViewModel>()
-    private val collectAdapter by lazy { CollectAdapter(R.layout.item_home_article) }
+    private val collectAdapter by lazy { CollectAdapter() }
     private var curPosition = 0
 
     override fun attachLayoutRes(): Int = R.layout.activity_collect

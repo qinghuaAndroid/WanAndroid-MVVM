@@ -1,20 +1,16 @@
 package com.qh.wanandroid.ui.tab
 
-import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.devlibrary.ext.getThemeColor
 import com.example.devlibrary.helper.LiveEventBusHelper
 import com.example.devlibrary.mvp.BaseMvpFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.qh.wanandroid.R
-import com.qh.wanandroid.adapter.MainPagerAdapter
 import com.qh.wanandroid.adapter.TabPagerAdapter
 import com.qh.wanandroid.bean.TabEntity
 import com.qh.wanandroid.const.Const
 import com.qh.wanandroid.databinding.FragmentTabBinding
-import com.qh.wanandroid.ui.tab.list.TabListFragment
 import org.jetbrains.anko.backgroundColor
 
 /**

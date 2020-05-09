@@ -5,12 +5,12 @@
     <data>
 
         <variable
-            name="systemListEntity"
-            type="com.qh.wanandroid.bean.SystemListEntity" />
+            name="navigationEntity"
+            type="com.qh.wanandroid.bean.NavigationEntity" />
 
         <variable
             name="presenter"
-            type="com.qh.wanandroid.ui.system.SystemListPresenter" />
+            type="com.qh.wanandroid.ui.navigation.NavigationPresenter" />
     </data>
 
     <LinearLayout
@@ -22,7 +22,7 @@
         <TextView
             android:id="@+id/tvTitle"
             style="@style/text_1"
-            android:text="@{systemListEntity.name}"
+            android:text="@{navigationEntity.name}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold" />
@@ -32,8 +32,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            app:systemLabels="@{systemListEntity.children}"
-            app:onSystemLabelClickListener="@{presenter.clickLabel}"
+            app:navigationLabels="@{navigationEntity.articles}"
+            app:onNavigationLabelClickListener="@{presenter.clickLabel}"
             app:labelBackground="@drawable/tag_ripple_bg"
             app:labelTextColor="@color/text_2"
             app:labelTextSize="@dimen/text_2"

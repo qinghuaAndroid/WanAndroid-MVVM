@@ -2,42 +2,27 @@ package com.qh.wanandroid.adapter
 
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
-import com.donkingliang.labels.LabelsView
+import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.qh.wanandroid.R
 import com.qh.wanandroid.bean.NavigationEntity
-import com.qh.wanandroid.listener.OnLabelClickListener
+import com.qh.wanandroid.databinding.ItemNavigationBinding
+import com.qh.wanandroid.ui.navigation.NavigationPresenter
 
 /**
  * @author FQH
  * Create at 2020/4/8.
  */
-class NavigationAdapter(list: MutableList<NavigationEntity>?) :
+class NavigationAdapter :
     BaseQuickAdapter<NavigationEntity,
-            BaseViewHolder>(R.layout.item_system, list), LoadMoreModule {
+            BaseDataBindingHolder<ItemNavigationBinding>>(R.layout.item_navigation), LoadMoreModule {
 
-    private var mOnLabelClickListener: OnLabelClickListener? = null
+    private val presenter: NavigationPresenter by lazy { NavigationPresenter() }
 
-    fun setOnLabelClickListener(listener: OnLabelClickListener?) {
-        this.mOnLabelClickListener = listener
-    }
-
-    override fun convert(holder: BaseViewHolder, item: NavigationEntity) {
-        item.let {
-            holder.setText(R.id.tvTitle, item.name)
-            holder.getView<LabelsView>(R.id.labelsView).apply {
-                setLabels(item.articles) { _, _, data ->
-                    data.title
-                }
-                //标签的点击监听
-                setOnLabelClickListener { _, _, position ->
-                    mOnLabelClickListener?.onLabelClick(
-                        holder,
-                        holder.adapterPosition,
-                        position
-                    )
-                }
-            }
+    override fun convert(holder: BaseDataBindingHolder<ItemNavigationBinding>, item: NavigationEntity) {
+        holder.dataBinding?.let {
+            it.navigationEntity = item
+            it.presenter = presenter
+            it.executePendingBindings()
         }
     }
 }

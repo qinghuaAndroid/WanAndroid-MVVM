@@ -12,7 +12,7 @@ import com.qh.wanandroid.bean.IntegralRecordEntity
  */
 class IntegralAdapter(layoutId:Int) : BaseQuickAdapter<IntegralRecordEntity.DatasBean, BaseViewHolder>(layoutId),LoadMoreModule {
 
-    override fun convert(helper: BaseViewHolder, item: IntegralRecordEntity.DatasBean) {
+    override fun convert(holder: BaseViewHolder, item: IntegralRecordEntity.DatasBean) {
         item.apply {
             val desc = desc
             val firstSpace = desc?.indexOf(" ")
@@ -24,9 +24,9 @@ class IntegralAdapter(layoutId:Int) : BaseQuickAdapter<IntegralRecordEntity.Data
                     .replace("：", "")
                     .replace(" ", "")
             }
-            helper.setText(R.id.tvAddIntegralMode,title)
-            helper.setText(R.id.tvDate,time)
-            helper.setText(R.id.tvAddIntegral,"+$coinCount")
+            holder.setText(R.id.tvAddIntegralMode,title)
+            holder.setText(R.id.tvDate,time)
+            holder.setText(R.id.tvAddIntegral,"+$coinCount")
         }
     }
 

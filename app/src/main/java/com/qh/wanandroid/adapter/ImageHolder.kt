@@ -6,9 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 
 class ImageHolder(view: View) : RecyclerView.ViewHolder(view) {
     @JvmField
-    var imageView: ImageView
+    var imageView: ImageView = view as ImageView
 
-    init {
-        imageView = view as ImageView
-    }
 }

@@ -2,42 +2,27 @@ package com.qh.wanandroid.adapter
 
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
-import com.donkingliang.labels.LabelsView
+import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.qh.wanandroid.R
 import com.qh.wanandroid.bean.SystemListEntity
-import com.qh.wanandroid.listener.OnLabelClickListener
+import com.qh.wanandroid.databinding.ItemSystemBinding
+import com.qh.wanandroid.ui.system.SystemListPresenter
 
 /**
  * @author FQH
  * Create at 2020/4/8.
  */
-class SystemListAdapter(list: MutableList<SystemListEntity>?) :
+class SystemListAdapter :
     BaseQuickAdapter<SystemListEntity,
-            BaseViewHolder>(R.layout.item_system, list), LoadMoreModule {
+            BaseDataBindingHolder<ItemSystemBinding>>(R.layout.item_system), LoadMoreModule {
 
-    private var mOnLabelClickListener: OnLabelClickListener? = null
+    private val presenter: SystemListPresenter by lazy { SystemListPresenter() }
 
-    fun setOnLabelClickListener(listener: OnLabelClickListener?) {
-        this.mOnLabelClickListener = listener
-    }
-
-    override fun convert(holder: BaseViewHolder, item: SystemListEntity) {
-        item.let {
-            holder.setText(R.id.tvTitle, item.name)
-            holder.getView<LabelsView>(R.id.labelsView).apply {
-                setLabels(item.children) { _, _, data ->
-                    data.name
-                }
-                //标签的点击监听
-                setOnLabelClickListener { _, _, position ->
-                    mOnLabelClickListener?.onLabelClick(
-                        holder,
-                        holder.adapterPosition,
-                        position
-                    )
-                }
-            }
+    override fun convert(holder: BaseDataBindingHolder<ItemSystemBinding>, item: SystemListEntity) {
+        holder.dataBinding?.let {
+            it.systemListEntity = item
+            it.presenter = presenter
+            it.executePendingBindings()
         }
     }
 }

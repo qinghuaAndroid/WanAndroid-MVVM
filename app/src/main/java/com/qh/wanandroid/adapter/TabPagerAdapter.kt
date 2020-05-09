@@ -6,10 +6,6 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.qh.wanandroid.bean.TabEntity
 import com.qh.wanandroid.const.Const
-import com.qh.wanandroid.ui.home.HomeFragment
-import com.qh.wanandroid.ui.navigation.NavigationFragment
-import com.qh.wanandroid.ui.system.SystemListFragment
-import com.qh.wanandroid.ui.tab.TabFragment
 import com.qh.wanandroid.ui.tab.list.TabListFragment
 
 /**

@@ -3,16 +3,11 @@ package com.qh.wanandroid.ui.system
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.alibaba.android.arouter.launcher.ARouter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.example.devlibrary.ext.showToast
 import com.example.devlibrary.mvvm.BaseVMFragment
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.SystemListAdapter
-import com.qh.wanandroid.arouter.ArouterPath
-import com.qh.wanandroid.const.Const
 import com.qh.wanandroid.databinding.FragmentSystemListBinding
-import com.qh.wanandroid.listener.OnLabelClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -23,7 +18,7 @@ class SystemListFragment : BaseVMFragment<SystemListViewModel, FragmentSystemLis
 
     private val mViewModel by viewModel<SystemListViewModel>()
 
-    private val systemListAdapter by lazy { SystemListAdapter(null) }
+    private val systemListAdapter by lazy { SystemListAdapter() }
 
     override fun attachLayoutRes(): Int = R.layout.fragment_system_list
 
@@ -34,17 +29,6 @@ class SystemListFragment : BaseVMFragment<SystemListViewModel, FragmentSystemLis
     override fun initView(view: View) {
         mBinding.rvSystem.layoutManager = LinearLayoutManager(context)
         mBinding.rvSystem.adapter = systemListAdapter
-        systemListAdapter.setOnLabelClickListener(object : OnLabelClickListener {
-            override fun onLabelClick(helper: BaseViewHolder, i: Int, j: Int) {
-                val childrenBean = systemListAdapter.data[i].children[j]
-                val id = childrenBean.id
-                val title = childrenBean.name
-                ARouter.getInstance().build(ArouterPath.ACTIVITY_SYSTEM)
-                    .withInt(Const.SYSTEM_ID, id)
-                    .withString(Const.SYSTEM_TITLE, title)
-                    .navigation()
-            }
-        })
     }
 
     override fun loadData() {
