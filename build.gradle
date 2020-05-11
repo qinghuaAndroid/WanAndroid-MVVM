@@ -57,5 +57,4 @@ ext {
     SwtichButtonVersion = '2.0.0'
     PhotoViewVersion = '2.1.4'
     glideTransformationVersion = '4.0.1'
-    lifecycleVersion = '2.2.0'
 }
