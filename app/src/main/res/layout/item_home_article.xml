@@ -28,14 +28,24 @@
         android:paddingRight="@dimen/padding"
         android:background="@drawable/ripple_bg">
 
+        <ImageView
+            android:id="@+id/ivArticlePic"
+            android:layout_width="100dp"
+            android:layout_height="180dp"
+            android:visibility="@{TextUtils.isEmpty(article.envelopePic)? View.GONE : View.VISIBLE}"
+            app:imageUrl="@{article.envelopePic}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
             android:id="@+id/tvTag"
             android:text="@{article.type == 1 ? &quot;置顶 &quot; : &quot;&quot;}"
             android:textSize="@dimen/text_3"
             android:textColor="@color/red"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivArticlePic"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -56,21 +66,11 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <ImageView
-            android:id="@+id/ivArticlePic"
-            android:layout_width="100dp"
-            android:layout_height="180dp"
-            android:layout_marginTop="5dp"
-            android:visibility="@{TextUtils.isEmpty(article.envelopePic)? View.GONE : View.VISIBLE}"
-            app:imageUrl="@{article.envelopePic}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTag" />
-
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
             android:id="@+id/tvTitle"
             style="@style/text_1"
             android:text="@{Html.fromHtml(article.title)}"
@@ -80,11 +80,12 @@
 
         <View
             android:id="@+id/view"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:visibility="@{TextUtils.isEmpty(article.envelopePic)? View.GONE : View.VISIBLE}"
             app:layout_constraintStart_toEndOf="@id/ivArticlePic"
             app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/tvChapterName" />
 
         <TextView
@@ -105,6 +106,7 @@
             android:padding="5dp"
             app:collectIcon="@{article.collect||collected}"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvChapterName"
             app:layout_constraintBottom_toBottomOf="@id/tvChapterName" />
 
         <View
