@@ -16,7 +16,7 @@ class QueryParameterInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
         val request: Request
-        val modifiedUrl = originalRequest.url().newBuilder()
+        val modifiedUrl = originalRequest.url.newBuilder()
             // Provide your custom parameter here
             .addQueryParameter("sysVersion", getSystemVersion())//系统版本号
             .addQueryParameter("deviceBrand", getDeviceBrand())//手机厂商

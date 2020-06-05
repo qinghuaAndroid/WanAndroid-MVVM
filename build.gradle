@@ -1,11 +1,11 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.3.71'
+    ext.kotlin_version = '1.3.72'
     repositories {
         google()
         jcenter()
-        
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.3'
@@ -41,10 +41,10 @@ ext {
     buildToolsVersion = '29.0.3'
 
     // App dependencies
-    retrofitVersion = '2.7.0'
-    okhttploggingVersion = '3.12.0'
-    okhttpVersion = '3.4.1'
-    rxjavaVersion = '2.0.1'
+    retrofitVersion = '2.7.2'
+    okhttploggingVersion = '4.0.0'
+    okhttpVersion = '4.0.0'
+    rxjavaVersion = '2.2.12'
     rxandroidVersion = '2.1.1'
     rxbindingVersion = '2.1.0'
     rxPerssionsVersion = '0.9.5@aar'
@@ -55,6 +55,6 @@ ext {
     circleImageviewVersion = '3.0.0'
     BaseRecyclerViewAdapterHelperVersion = '3.0.2'
     SwtichButtonVersion = '2.0.0'
-    PhotoViewVersion = '2.1.4'
+    PhotoViewVersion = '2.3.0'
     glideTransformationVersion = '4.0.1'
 }
