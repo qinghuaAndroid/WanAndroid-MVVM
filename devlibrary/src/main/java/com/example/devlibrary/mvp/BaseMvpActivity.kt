@@ -1,5 +1,6 @@
 package com.example.devlibrary.mvp
 
+import androidx.core.widget.ContentLoadingProgressBar
 import androidx.databinding.ViewDataBinding
 import com.example.devlibrary.base.BaseActivity
 import com.example.devlibrary.ext.showToast
@@ -17,6 +18,7 @@ abstract class BaseMvpActivity<in V : IView, P : IPresenter<V>, B : ViewDataBind
      * Presenter
      */
     protected var mPresenter: P? = null
+    private var progressBar:ContentLoadingProgressBar? = null
 
     protected abstract fun createPresenter(): P
 
@@ -32,9 +34,14 @@ abstract class BaseMvpActivity<in V : IView, P : IPresenter<V>, B : ViewDataBind
     }
 
     override fun showLoading() {
+        if (progressBar == null){
+            progressBar = ContentLoadingProgressBar(this)
+        }
+        progressBar?.show()
     }
 
     override fun hideLoading() {
+        progressBar?.hide()
     }
 
     override fun showError(errorMsg: String?) {
