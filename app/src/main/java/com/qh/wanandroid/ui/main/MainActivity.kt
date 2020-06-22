@@ -16,11 +16,11 @@ import com.example.devlibrary.utils.SettingUtil
 import com.google.android.material.navigation.NavigationView
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.MainPagerAdapter
-import com.qh.wanandroid.arouter.ArouterPath
+import com.example.common.arouter.ArouterPath
+import com.example.common.ext.navigation
 import com.qh.wanandroid.bean.UserInfoEntity
 import com.qh.wanandroid.const.Const
 import com.qh.wanandroid.databinding.ActivityMainBinding
-import com.qh.wanandroid.ext.navigation
 import com.tencent.mmkv.MMKV
 import org.jetbrains.anko.backgroundColor
 import org.jetbrains.anko.sdk27.coroutines.onClick

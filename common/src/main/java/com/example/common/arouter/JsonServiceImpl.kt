@@ -1,4 +1,4 @@
-package com.qh.wanandroid.arouter
+package com.example.common.arouter
 
 import android.content.Context
 import com.alibaba.android.arouter.facade.annotation.Route

@@ -15,7 +15,7 @@ import com.example.devlibrary.widget.LoadMoreView
 import com.google.android.material.appbar.AppBarLayout
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.IntegralAdapter
-import com.qh.wanandroid.arouter.ArouterPath
+import com.example.common.arouter.ArouterPath
 import com.qh.wanandroid.bean.UserInfoEntity
 import com.qh.wanandroid.databinding.ActivityIntegralBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel

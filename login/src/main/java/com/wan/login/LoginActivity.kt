@@ -1,16 +1,15 @@
-package com.qh.wanandroid.ui.login
+package com.wan.login
 
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import androidx.lifecycle.Observer
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.example.common.arouter.ArouterPath
 import com.example.common.constant.Const
 import com.example.devlibrary.helper.LiveEventBusHelper
 import com.example.devlibrary.mvvm.BaseVMActivity
 import com.example.devlibrary.utils.ToastUtils
-import com.qh.wanandroid.R
-import com.qh.wanandroid.arouter.ArouterPath
-import com.qh.wanandroid.databinding.ActivityLoginBinding
+import com.wan.login.databinding.ActivityLoginBinding
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

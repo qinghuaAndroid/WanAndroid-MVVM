@@ -14,7 +14,7 @@ import com.google.android.material.appbar.AppBarLayout
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.ArticleAdapter
 import com.qh.wanandroid.adapter.ImageNetAdapter
-import com.qh.wanandroid.arouter.ArouterPath
+import com.example.common.arouter.ArouterPath
 import com.qh.wanandroid.databinding.FragmentHomeBinding
 import com.qh.wanandroid.ui.ArticleViewModel
 import com.qh.wanandroid.ui.collect.CollectViewModel

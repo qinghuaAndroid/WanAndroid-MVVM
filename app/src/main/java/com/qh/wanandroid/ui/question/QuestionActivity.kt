@@ -12,8 +12,8 @@ import com.example.devlibrary.mvvm.BaseVMActivity
 import com.example.devlibrary.widget.LoadMoreView
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.ArticleAdapter
-import com.qh.wanandroid.arouter.ArouterPath
-import com.qh.wanandroid.databinding.ActivityQuestionListBinding
+import com.example.common.arouter.ArouterPath
+import com.qh.wanandroid.databinding.ActivityQuestionBinding
 import com.qh.wanandroid.ui.ArticleViewModel
 import com.qh.wanandroid.ui.collect.CollectViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -23,7 +23,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  * Create at 2020/4/15.
  */
 @Route(path = ArouterPath.ACTIVITY_QUESTION)
-class QuestionActivity : BaseVMActivity<ArticleViewModel, ActivityQuestionListBinding>() {
+class QuestionActivity : BaseVMActivity<ArticleViewModel, ActivityQuestionBinding>() {
 
     private val articleViewModel by viewModel<ArticleViewModel>()
     private val collectViewModel by viewModel<CollectViewModel>()
@@ -57,7 +57,7 @@ class QuestionActivity : BaseVMActivity<ArticleViewModel, ActivityQuestionListBi
         })
     }
 
-    override fun attachLayoutRes(): Int = R.layout.activity_question_list
+    override fun attachLayoutRes(): Int = R.layout.activity_question
 
     override fun initData() {
 

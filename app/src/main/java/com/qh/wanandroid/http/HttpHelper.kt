@@ -1,7 +1,7 @@
 package com.qh.wanandroid.http
 
+import com.example.common.constant.Const
 import com.example.devlibrary.network.HttpsUtils
-import com.qh.wanandroid.const.Const
 
 /**
  * Description: 获取各种类型ApiService

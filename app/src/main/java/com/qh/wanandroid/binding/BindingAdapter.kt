@@ -1,23 +1,12 @@
 package com.qh.wanandroid.binding
 
-import android.widget.EditText
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.donkingliang.labels.LabelsView
-import com.example.devlibrary.ext.listener.textWatcher
 import com.example.devlibrary.utils.ImageLoader
 import com.qh.wanandroid.R
 import com.qh.wanandroid.bean.ArticleEntity
 import com.qh.wanandroid.bean.SystemListEntity
-
-@BindingAdapter(value = ["afterTextChanged"])
-fun EditText.afterTextChanged(action: (String) -> Unit) {
-    textWatcher {
-        onTextChanged { s, start, before, count ->
-            action(s.toString())
-        }
-    }
-}
 
 @BindingAdapter(value = ["girlImgUrl"])
 fun ImageView.loadGirlImg(url: String) {

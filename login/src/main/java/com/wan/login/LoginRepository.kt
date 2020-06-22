@@ -1,11 +1,11 @@
-package com.qh.wanandroid.ui.login
+package com.wan.login
 
 import com.example.common.constant.Const
 import com.example.devlibrary.mvvm.BaseRepository
 import com.example.devlibrary.mvvm.Result
-import com.qh.wanandroid.bean.UserEntity
-import com.qh.wanandroid.http.HttpHelper
+import com.wan.login.http.HttpHelper
 import com.tencent.mmkv.MMKV
+import com.wan.login.bean.UserEntity
 
 /**
  * @author FQH

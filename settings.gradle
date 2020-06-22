@@ -1,2 +1,3 @@
+include ':login'
 rootProject.name='WanAndroid-qh'
 include ':app', ':devlibrary', ':common'

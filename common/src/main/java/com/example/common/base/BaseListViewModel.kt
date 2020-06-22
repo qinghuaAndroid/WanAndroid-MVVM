@@ -1,4 +1,4 @@
-package com.qh.wanandroid.base
+package com.example.common.base
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

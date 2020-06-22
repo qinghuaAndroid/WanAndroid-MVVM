@@ -1,4 +1,4 @@
-package com.qh.wanandroid.base
+package com.example.common.base
 
 data class BaseUiModel<T>(
     val showLoading: Boolean,

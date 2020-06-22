@@ -12,7 +12,7 @@ import com.example.devlibrary.mvvm.BaseVMActivity
 import com.example.devlibrary.widget.LoadMoreView
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.ArticleAdapter
-import com.qh.wanandroid.arouter.ArouterPath
+import com.example.common.arouter.ArouterPath
 import com.qh.wanandroid.databinding.ActivityShareListBinding
 import com.qh.wanandroid.ui.ArticleViewModel
 import com.qh.wanandroid.ui.collect.CollectViewModel

@@ -61,10 +61,10 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(path: ':login')
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation project(path: ':common')
     //DoraemonKit
     debugImplementation 'com.didichuxing.doraemonkit:doraemonkit:2.2.2'
     releaseImplementation 'com.didichuxing.doraemonkit:doraemonkit-no-op:2.2.2'
@@ -75,8 +75,6 @@ dependencies {
     //颜色对话框，【https://github.com/afollestad/material-dialogs】
     implementation 'com.afollestad.material-dialogs:color:3.3.0'
     implementation 'com.afollestad.material-dialogs:lifecycle:3.3.0'
-    //ARouter
-    implementation 'com.alibaba:arouter-api:1.5.0'
+    //使用ARouter的模块都要配置
     kapt 'com.alibaba:arouter-compiler:1.2.2'
-
 }

@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:binding="http://schemas.android.com/tools"
-    tools:context="com.qh.wanandroid.ui.login.LoginActivity">
+    tools:context=".LoginActivity">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.qh.wanandroid.ui.login.LoginViewModel" />
+            type="com.wan.login.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

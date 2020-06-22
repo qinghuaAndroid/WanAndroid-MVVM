@@ -1,7 +1,7 @@
 package com.qh.wanandroid.ui.system
 
 import com.alibaba.android.arouter.launcher.ARouter
-import com.qh.wanandroid.arouter.ArouterPath
+import com.example.common.arouter.ArouterPath
 import com.qh.wanandroid.bean.SystemListEntity
 import com.qh.wanandroid.const.Const
 

@@ -140,26 +140,6 @@ interface ApiService {
             HttpResult<ArticleEntity>
 
     /**
-     * 登录
-     */
-    @FormUrlEncoded
-    @POST("/user/login")
-    suspend fun login(
-        @Field("username") username: String,
-        @Field("password") password: String
-    ): HttpResult<UserEntity>
-
-    /**
-     * 注册
-     */
-    @POST("/user/register")
-    fun register(
-        @Query("username") username: String,
-        @Query("password") password: String,
-        @Query("repassword") repassword: String
-    ): Observable<HttpResult<Any>>
-
-    /**
      * 退出登录
      */
     @GET("/user/logout/json")

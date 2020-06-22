@@ -1,4 +1,4 @@
-package com.qh.wanandroid.bean
+package com.wan.login.bean
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

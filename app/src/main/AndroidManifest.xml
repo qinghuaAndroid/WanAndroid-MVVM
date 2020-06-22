@@ -26,8 +26,6 @@
 
         <activity android:name=".ui.main.MainActivity" />
 
-        <activity android:name=".ui.login.LoginActivity" />
-
         <activity android:name=".ui.system.act.SystemActivity" />
 
         <activity android:name=".ui.browser.BrowserNormalActivity" />

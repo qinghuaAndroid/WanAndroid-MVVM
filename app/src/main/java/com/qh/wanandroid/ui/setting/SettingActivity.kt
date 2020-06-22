@@ -14,7 +14,7 @@ import com.example.devlibrary.utils.SettingUtil
 import com.example.devlibrary.utils.StringUtils
 import com.example.devlibrary.utils.versionName
 import com.qh.wanandroid.R
-import com.qh.wanandroid.arouter.ArouterPath
+import com.example.common.arouter.ArouterPath
 import com.qh.wanandroid.databinding.ActivitySettingBinding
 import com.tencent.mmkv.MMKV
 import kotlinx.android.synthetic.main.activity_setting.*

@@ -1,4 +1,4 @@
-package com.qh.wanandroid.ui.login
+package com.wan.login
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.devlibrary.mvvm.BaseViewModel
 import com.example.devlibrary.mvvm.Result
-import com.qh.wanandroid.bean.UserEntity
+import com.wan.login.bean.UserEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -76,7 +76,13 @@ class LoginViewModel(private val mRepository: LoginRepository) : BaseViewModel()
         needLogin: Boolean = false
     ) {
         val uiModel =
-            LoginUiModel(showProgress, showError, showSuccess, enableLoginButton, needLogin)
+            LoginUiModel(
+                showProgress,
+                showError,
+                showSuccess,
+                enableLoginButton,
+                needLogin
+            )
         _uiState.value = uiModel
     }
 }

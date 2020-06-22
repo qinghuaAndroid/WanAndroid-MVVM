@@ -1,4 +1,4 @@
-package com.qh.wanandroid.arouter
+package com.example.common.arouter
 
 /**
  * @author FQH

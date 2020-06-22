@@ -9,7 +9,7 @@ import com.example.devlibrary.ext.listener.queryTextListener
 import com.example.devlibrary.helper.RealmHelper
 import com.example.devlibrary.mvp.BaseMvpActivity
 import com.qh.wanandroid.R
-import com.qh.wanandroid.arouter.ArouterPath
+import com.example.common.arouter.ArouterPath
 import com.qh.wanandroid.bean.HotSearchEntity
 import com.qh.wanandroid.bean.SearchHistoryBean
 import com.qh.wanandroid.const.Const

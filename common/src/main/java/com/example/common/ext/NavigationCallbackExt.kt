@@ -1,4 +1,4 @@
-package com.qh.wanandroid.ext
+package com.example.common.ext
 
 import android.content.Context
 import com.alibaba.android.arouter.facade.Postcard

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="viewBackground">#424242</color>
+    <color name="text_1">@color/Grey500</color>
+    <color name="text_2">@color/Grey500</color>
+    <color name="text_3">@color/Grey500</color>
+    <color name="search_bg_gray">@color/Grey700</color>
+    <color name="division_line">@color/Grey700</color>
+    <color name="division_line_thickening">@color/Grey800</color>
+
+    <color name="item_nav_color_tv">@color/Grey500</color>
+    <color name="tab_text_color">@color/Grey400</color>
+</resources>

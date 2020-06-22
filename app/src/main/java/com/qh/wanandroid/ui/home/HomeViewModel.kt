@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.devlibrary.mvvm.BaseViewModel
 import com.example.devlibrary.mvvm.Result
-import com.qh.wanandroid.base.BaseUiModel
+import com.example.common.base.BaseUiModel
 import com.qh.wanandroid.bean.ArticleEntity
 import com.qh.wanandroid.bean.BannerEntity
 import kotlinx.coroutines.Dispatchers
