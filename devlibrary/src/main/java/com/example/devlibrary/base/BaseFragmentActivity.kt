@@ -14,6 +14,8 @@ import java.util.*
  */
 abstract class BaseFragmentActivity<B : ViewDataBinding> : BaseActivity<B>(), IFragmentCallBack {
 
+    lateinit var modules: HashMap<String, FragmentModule>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //处理异常退出恢复情况
@@ -48,6 +50,7 @@ abstract class BaseFragmentActivity<B : ViewDataBinding> : BaseActivity<B>(), IF
     }
 
     override fun initData() {
+        modules = getFragmentModule()
         val defaultModule: FragmentModule = getDefaultModule()
         title = defaultModule.title
         //默认fragment不用添加到回退栈中
@@ -62,7 +65,6 @@ abstract class BaseFragmentActivity<B : ViewDataBinding> : BaseActivity<B>(), IF
 
     override fun jump(tag: String, current: Fragment, bundle: Bundle?) {
         val transaction = supportFragmentManager.beginTransaction()
-        val modules: HashMap<String, FragmentModule> = getFragmentModule()
         var target: Fragment? =
             supportFragmentManager.findFragmentByTag(tag) as Fragment?
         if (target == null) {

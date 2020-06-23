@@ -14,18 +14,16 @@ import java.util.*
 @Route(path = ArouterPath.ACTIVITY_LOGIN)
 class LoginActivity : BaseFragmentActivity<ActivityLoginBinding>() {
 
-    private var modules: HashMap<String, FragmentModule>? = null
-
     override fun getContainerViewId(): Int = R.id.fragmentContainerView
 
     override fun getDefaultModule(): FragmentModule =
         FragmentModule(LoginFragment(this), getString(R.string.login))
 
     override fun getFragmentModule(): HashMap<String, FragmentModule> {
-        return modules ?: HashMap<String, FragmentModule>().apply {
-            this[Const.FRAGMENT_REGISTER] =
-                FragmentModule(RegisterFragment(this@LoginActivity), getString(R.string.register))
-        }
+        modules = HashMap<String, FragmentModule>()
+        modules[Const.FRAGMENT_REGISTER] =
+            FragmentModule(RegisterFragment(this@LoginActivity), getString(R.string.register))
+        return modules
     }
 
     override fun attachLayoutRes(): Int = R.layout.activity_login
