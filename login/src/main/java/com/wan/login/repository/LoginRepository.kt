@@ -1,4 +1,4 @@
-package com.wan.login
+package com.wan.login.repository
 
 import com.example.common.constant.Const
 import com.example.devlibrary.mvvm.BaseRepository

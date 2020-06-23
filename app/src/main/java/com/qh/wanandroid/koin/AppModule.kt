@@ -7,8 +7,7 @@ import com.qh.wanandroid.ui.home.HomeRepository
 import com.qh.wanandroid.ui.home.HomeViewModel
 import com.qh.wanandroid.ui.integral.IntegralRepository
 import com.qh.wanandroid.ui.integral.IntegralViewModel
-import com.wan.login.LoginRepository
-import com.wan.login.LoginViewModel
+import com.wan.login.viewmodel.LoginViewModel
 import com.qh.wanandroid.ui.myarticle.MyArticleRepository
 import com.qh.wanandroid.ui.myarticle.MyArticleViewModel
 import com.qh.wanandroid.ui.navigation.NavigationRepository
@@ -20,6 +19,9 @@ import com.qh.wanandroid.ui.system.SystemListRepository
 import com.qh.wanandroid.ui.system.SystemListViewModel
 import com.qh.wanandroid.ui.system.act.SystemRepository
 import com.qh.wanandroid.ui.tab.list.TabListRepository
+import com.wan.login.repository.LoginRepository
+import com.wan.login.repository.RegisterRepository
+import com.wan.login.viewmodel.RegisterViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -29,7 +31,8 @@ import org.koin.dsl.module
  */
 
 val viewModelModule = module {
-    viewModel { com.wan.login.LoginViewModel(get()) }
+    viewModel { LoginViewModel(get()) }
+    viewModel { RegisterViewModel(get()) }
     viewModel { SystemListViewModel(get()) }
     viewModel { NavigationViewModel(get()) }
     viewModel { IntegralViewModel(get()) }
@@ -40,7 +43,8 @@ val viewModelModule = module {
 }
 
 val repositoryModule = module {
-    single { com.wan.login.LoginRepository() }
+    single { LoginRepository() }
+    single { RegisterRepository() }
     single { SystemListRepository() }
     single { NavigationRepository() }
     single { SystemRepository() }

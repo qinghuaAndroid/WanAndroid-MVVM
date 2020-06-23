@@ -28,8 +28,8 @@ abstract class BaseActivity<B : ViewDataBinding> : RxActivity(), CoroutineScope 
             throw RuntimeException("Please set the page layout")
         }
         mBinding = DataBindingUtil.setContentView<B>(this, attachLayoutRes())
-        initData()
         initToolbar()
+        initData()
         initView()
         loadData()
     }

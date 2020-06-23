@@ -13,7 +13,6 @@ object Const {
     const val IS_LOGIN = "isLogin"
     const val USER_GSON = "userGson"
     /************************************通知事件部分 */
-    const val LOGIN_SUCCESS = "loginSuccess" //登录成功
     const val LOGOUT_SUCCESS = "logoutSuccess"//退出登录成功
     const val THEME_COLOR = "themeColor"//主题颜色
     /*************************************传参部分 */

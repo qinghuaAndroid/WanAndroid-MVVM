@@ -42,7 +42,7 @@ abstract class BaseFragmentActivity<B : ViewDataBinding> : BaseActivity<B>(), IF
      * 回到第一个Fragment
      */
     override fun home() {
-        while (supportFragmentManager.backStackEntryCount != 1) {
+        while (supportFragmentManager.backStackEntryCount > 0) {
             supportFragmentManager.popBackStackImmediate()
         }
     }
@@ -50,9 +50,10 @@ abstract class BaseFragmentActivity<B : ViewDataBinding> : BaseActivity<B>(), IF
     override fun initData() {
         val defaultModule: FragmentModule = getDefaultModule()
         title = defaultModule.title
+        //默认fragment不用添加到回退栈中
         supportFragmentManager.beginTransaction()
             .add(getContainerViewId(), defaultModule.fragment, Const.FRAGMENT_DEFAULT)
-            .addToBackStack(null).commit()
+            .commit()
     }
 
     abstract fun getContainerViewId(): Int
@@ -82,15 +83,4 @@ abstract class BaseFragmentActivity<B : ViewDataBinding> : BaseActivity<B>(), IF
      * @return
      */
     abstract fun getFragmentModule(): HashMap<String, FragmentModule>
-
-    /**
-     * 后退的时候按栈回退
-     */
-    override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount != 1) {
-            supportFragmentManager.popBackStackImmediate()
-        } else {
-            super.onBackPressed()
-        }
-    }
 }

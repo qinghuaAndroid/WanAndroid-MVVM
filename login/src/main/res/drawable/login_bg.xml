@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <corners android:radius="3dp"/>
-    <solid android:color="@color/theme"/>
-</shape>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_enabled="true">
+        <shape >
+            <corners android:radius="3dp"/>
+            <solid android:color="@color/theme"/>
+        </shape>
+    </item>
+
+    <item android:state_enabled="false">
+        <shape >
+            <corners android:radius="3dp"/>
+            <solid android:color="@color/normal_color"/>
+        </shape>
+    </item>
+
+</selector>

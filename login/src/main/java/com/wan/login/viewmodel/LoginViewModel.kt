@@ -1,4 +1,4 @@
-package com.wan.login
+package com.wan.login.viewmodel
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.devlibrary.mvvm.BaseViewModel
 import com.example.devlibrary.mvvm.Result
+import com.wan.login.repository.LoginRepository
 import com.wan.login.bean.UserEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -255,7 +255,7 @@ class MainActivity :
             Int::class.java, this, androidx.lifecycle.Observer<Int> {
                 setThemeColor()
             })
-        LiveEventBusHelper.observe(com.example.common.constant.Const.LOGIN_SUCCESS,
+        LiveEventBusHelper.observe(com.wan.login.Const.LOGIN_SUCCESS,
             Boolean::class.java, this, androidx.lifecycle.Observer<Boolean> {
                 isLogin = true
                 mPresenter?.getUserInfo()

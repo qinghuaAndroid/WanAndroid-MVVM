@@ -16,7 +16,7 @@ interface IFragmentCallBack {
      * @param current
      * @param bundle
      */
-    fun jump(tag: String, current: Fragment, bundle: Bundle?)
+    fun jump(tag: String, current: Fragment, bundle: Bundle? = null)
 
     /**
      * 返回第一个Fragment

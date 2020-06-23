@@ -23,11 +23,12 @@ interface ApiService {
     /**
      * 注册
      */
+    @FormUrlEncoded
     @POST("/user/register")
-    fun register(
+    suspend fun register(
         @Query("username") username: String,
         @Query("password") password: String,
         @Query("repassword") repassword: String
-    ): Observable<HttpResult<Any>>
+    ): HttpResult<Any>
 
 }
