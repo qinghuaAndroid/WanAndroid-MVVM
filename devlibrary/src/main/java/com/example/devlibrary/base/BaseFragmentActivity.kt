@@ -52,7 +52,6 @@ abstract class BaseFragmentActivity<B : ViewDataBinding> : BaseActivity<B>(), IF
     override fun initData() {
         modules = getFragmentModule()
         val defaultModule: FragmentModule = getDefaultModule()
-        title = defaultModule.title
         //默认fragment不用添加到回退栈中
         supportFragmentManager.beginTransaction()
             .add(getContainerViewId(), defaultModule.fragment, Const.FRAGMENT_DEFAULT)
@@ -76,7 +75,6 @@ abstract class BaseFragmentActivity<B : ViewDataBinding> : BaseActivity<B>(), IF
         } else {
             transaction.hide(current).show(target).commit()
         }
-        title = modules[tag]!!.title
     }
 
     /**

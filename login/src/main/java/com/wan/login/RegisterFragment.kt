@@ -46,7 +46,6 @@ class RegisterFragment(callBack: IFragmentCallBack) : BaseVMFragment<RegisterVie
     override fun initView(view: View) {
         mBinding.lifecycleOwner = this
         mBinding.viewModel = mViewModel
-        mBinding.tvRegister.onClick { iCallBack.home() }
         mBinding.ivClear.onClick {
             mBinding.etUsername.requestFocus()
             mBinding.etUsername.setText("")
