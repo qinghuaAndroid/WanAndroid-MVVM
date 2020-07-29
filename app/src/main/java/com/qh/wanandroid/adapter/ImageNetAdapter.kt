@@ -2,6 +2,7 @@ package com.qh.wanandroid.adapter
 
 import android.view.ViewGroup
 import android.widget.ImageView
+import coil.api.load
 import com.example.devlibrary.utils.ImageLoader
 import com.qh.wanandroid.R
 import com.qh.wanandroid.bean.BannerEntity
@@ -25,6 +26,6 @@ class ImageNetAdapter(mDatas: List<BannerEntity>?) :
         position: Int,
         size: Int
     ) {
-        ImageLoader.load(holder.imageView, data.imagePath)
+        holder.imageView.load(data.imagePath)
     }
 }

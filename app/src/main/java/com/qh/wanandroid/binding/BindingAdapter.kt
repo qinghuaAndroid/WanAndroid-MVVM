@@ -2,6 +2,7 @@ package com.qh.wanandroid.binding
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import coil.api.load
 import com.donkingliang.labels.LabelsView
 import com.example.devlibrary.utils.ImageLoader
 import com.qh.wanandroid.R
@@ -10,11 +11,15 @@ import com.qh.wanandroid.bean.SystemListEntity
 
 @BindingAdapter(value = ["girlImgUrl"])
 fun ImageView.loadGirlImg(url: String) {
-    ImageLoader.load(this, url, R.mipmap.ic_girl_default)
+    //使用coil加载
+    this.load(url){
+        placeholder(R.mipmap.ic_girl_default)
+    }
 }
 
 @BindingAdapter(value = ["imageUrl"])
 fun ImageView.loadImage(url: String) {
+    //使用glide加载
     ImageLoader.load(this, url)
 }
 
