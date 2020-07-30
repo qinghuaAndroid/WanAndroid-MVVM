@@ -15,7 +15,6 @@ import com.tencent.mmkv.MMKV
 @Interceptor(priority = 8, name = "login")
 class LoginInterceptor : IInterceptor {
     override fun process(postcard: Postcard?, callback: InterceptorCallback?) {
-        val path = postcard?.path
         if (postcard?.extra == Const.NEED_LOGIN) {
             val isLogin = MMKV.defaultMMKV().decodeBool(Const.IS_LOGIN, false)
             if (isLogin) {

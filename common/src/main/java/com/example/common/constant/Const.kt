@@ -8,7 +8,6 @@ object Const {
     /*************************************BASE_URL部分 */
     const val BASE_URL = "https://www.wanandroid.com/"
     const val GANK_URL = "https://gank.io/api/v2/"
-    const val SOGOU_URL = "https://api.ooopn.com/"
     /************************************存储键值部分 */
     const val IS_LOGIN = "isLogin"
     const val USER_GSON = "userGson"
