@@ -1,10 +1,10 @@
 package com.qh.wanandroid.ui.search
 
-import com.example.devlibrary.helper.RealmHelper
-import com.example.devlibrary.mvp.BasePresenter
-import com.example.devlibrary.network.RxHelper
-import com.example.devlibrary.network.RxObserver
-import com.example.devlibrary.utils.isNull
+import com.wan.baselib.helper.RealmHelper
+import com.wan.baselib.mvp.BasePresenter
+import com.wan.baselib.network.RxHelper
+import com.wan.baselib.network.RxObserver
+import com.wan.baselib.utils.isNull
 import com.qh.wanandroid.bean.HotSearchEntity
 import com.qh.wanandroid.bean.SearchHistoryBean
 

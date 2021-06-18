@@ -3,8 +3,8 @@ package com.qh.wanandroid.ui.navigation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.devlibrary.mvvm.BaseViewModel
-import com.example.devlibrary.mvvm.Result
+import com.wan.baselib.mvvm.BaseViewModel
+import com.wan.baselib.mvvm.Result
 import com.qh.wanandroid.bean.NavigationEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

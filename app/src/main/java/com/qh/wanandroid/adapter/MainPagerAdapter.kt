@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.qh.wanandroid.const.Const
+import com.qh.wanandroid.constant.Const
 import com.qh.wanandroid.ui.home.HomeFragment
 import com.qh.wanandroid.ui.navigation.NavigationFragment
 import com.qh.wanandroid.ui.system.SystemListFragment

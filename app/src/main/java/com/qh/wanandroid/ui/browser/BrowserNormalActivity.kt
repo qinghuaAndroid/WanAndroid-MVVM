@@ -10,11 +10,11 @@ import android.widget.LinearLayout
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import com.example.common.constant.Const
-import com.example.devlibrary.base.BaseActivity
+import com.wan.common.constant.Const
+import com.wan.baselib.base.BaseActivity
 import com.just.agentweb.*
 import com.qh.wanandroid.R
-import com.example.common.arouter.ArouterPath
+import com.wan.common.arouter.ArouterPath
 import com.qh.wanandroid.databinding.ActivityBrowserNormalBinding
 
 /**

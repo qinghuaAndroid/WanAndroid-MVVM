@@ -2,12 +2,12 @@ package com.qh.wanandroid.ui.splash
 
 import android.Manifest
 import com.alibaba.android.arouter.launcher.ARouter
-import com.example.devlibrary.base.BaseActivity
-import com.example.devlibrary.utils.ToastUtils
 import com.qh.wanandroid.R
-import com.example.common.arouter.ArouterPath
 import com.qh.wanandroid.databinding.ActivitySplashBinding
-import com.tbruyelle.rxpermissions2.RxPermissions
+import com.tbruyelle.rxpermissions3.RxPermissions
+import com.wan.baselib.base.BaseActivity
+import com.wan.baselib.utils.ToastUtils
+import com.wan.common.arouter.ArouterPath
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -22,9 +22,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
     override fun initData() {
         val disposable = RxPermissions(this).request(
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            )
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
             .compose(this.bindToLifecycle())
             .subscribe { granted ->
                 if (granted) {

@@ -1,18 +1,20 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.3.72'
+    ext.kotlin_version = '1.4.32'
     repositories {
         google()
         jcenter()
-
+        mavenCentral()
+        maven {
+            url 'https://oss.sonatype.org/content/repositories/snapshots/'
+        }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath 'com.android.tools.build:gradle:4.1.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.tencent.bugly:symtabfileuploader:2.2.1'
-        classpath 'io.realm:realm-gradle-plugin:5.1.0'
-        classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.0'
+        classpath "io.realm:realm-gradle-plugin:5.1.0"
         classpath 'com.didichuxing.doraemonkit:doraemonkit-plugin:1.0.0'
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -24,7 +26,11 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
         maven { url "https://jitpack.io" }
+        maven {
+            url 'https://oss.sonatype.org/content/repositories/snapshots/'
+        }
     }
 }
 
@@ -35,25 +41,22 @@ task clean(type: Delete) {
 // Define versions in a single place
 ext {
     // Sdk and tools
-    minSdkVersion = 19
-    targetSdkVersion = 29
-    compileSdkVersion = 29
-    buildToolsVersion = '29.0.3'
+    minSdkVersion = 21
+    targetSdkVersion = 30
+    compileSdkVersion = 30
+    buildToolsVersion = '30.0.3'
 
     // App dependencies
-    retrofitVersion = '2.7.2'
-    okhttploggingVersion = '4.0.0'
-    okhttpVersion = '4.0.0'
-    rxjavaVersion = '2.2.12'
-    rxandroidVersion = '2.1.1'
-    rxbindingVersion = '2.1.0'
-    rxPerssionsVersion = '0.9.5@aar'
-    rxLifecycleVersion = '2.2.2'
-    glideVersion = '4.11.0'
-    glideokhttpVersion = '1.3.1'
+    retrofitVersion = '2.9.0'
+    rxjavaVersion = '3.0.6'
+    rxandroidVersion = '3.0.0'
+    rxbindingVersion = '3.0.0'
+    rxPerssionsVersion = '0.12'
+    rxLifecycleVersion = '4.0.2'
+    glideVersion = '4.12.0'
+    glideokhttpVersion = '4.12.0'
     loggerVersion = '2.2.0'
     circleImageviewVersion = '3.0.0'
-    BaseRecyclerViewAdapterHelperVersion = '3.0.2'
     SwtichButtonVersion = '2.0.0'
     PhotoViewVersion = '2.3.0'
     glideTransformationVersion = '4.0.1'

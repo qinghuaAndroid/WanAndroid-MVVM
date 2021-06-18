@@ -5,14 +5,14 @@ import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import com.example.devlibrary.ext.listener.queryTextListener
-import com.example.devlibrary.helper.RealmHelper
-import com.example.devlibrary.mvp.BaseMvpActivity
+import com.wan.baselib.ext.listener.queryTextListener
+import com.wan.baselib.helper.RealmHelper
+import com.wan.baselib.mvp.BaseMvpActivity
 import com.qh.wanandroid.R
-import com.example.common.arouter.ArouterPath
+import com.wan.common.arouter.ArouterPath
 import com.qh.wanandroid.bean.HotSearchEntity
 import com.qh.wanandroid.bean.SearchHistoryBean
-import com.qh.wanandroid.const.Const
+import com.qh.wanandroid.constant.Const
 import com.qh.wanandroid.databinding.ActivitySearchBinding
 import org.jetbrains.anko.sdk27.coroutines.onClick
 

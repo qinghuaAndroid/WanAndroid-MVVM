@@ -3,8 +3,8 @@ package com.qh.wanandroid.ui.system
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.devlibrary.ext.showToast
-import com.example.devlibrary.mvvm.BaseVMFragment
+import com.wan.baselib.ext.showToast
+import com.wan.baselib.mvvm.BaseVMFragment
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.SystemListAdapter
 import com.qh.wanandroid.databinding.FragmentSystemListBinding

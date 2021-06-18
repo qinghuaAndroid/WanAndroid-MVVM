@@ -1,8 +1,7 @@
 package com.wan.login.http
 
-import com.example.devlibrary.network.HttpResult
+import com.wan.baselib.network.HttpResult
 import com.wan.login.bean.UserEntity
-import io.reactivex.Observable
 import retrofit2.http.*
 
 /**

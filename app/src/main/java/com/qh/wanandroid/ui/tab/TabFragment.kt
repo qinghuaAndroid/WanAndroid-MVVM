@@ -2,14 +2,14 @@ package com.qh.wanandroid.ui.tab
 
 import android.view.View
 import androidx.lifecycle.Observer
-import com.example.devlibrary.ext.getThemeColor
-import com.example.devlibrary.helper.LiveEventBusHelper
-import com.example.devlibrary.mvp.BaseMvpFragment
+import com.wan.baselib.ext.getThemeColor
+import com.wan.baselib.helper.LiveEventBusHelper
+import com.wan.baselib.mvp.BaseMvpFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.TabPagerAdapter
 import com.qh.wanandroid.bean.TabEntity
-import com.qh.wanandroid.const.Const
+import com.qh.wanandroid.constant.Const
 import com.qh.wanandroid.databinding.FragmentTabBinding
 import org.jetbrains.anko.backgroundColor
 
@@ -56,7 +56,7 @@ class TabFragment : BaseMvpFragment<TabContract.View, TabContract.Presenter, Fra
     }
 
     private fun receiveNotice() {
-        LiveEventBusHelper.observe(com.example.common.constant.Const.THEME_COLOR,
+        LiveEventBusHelper.observe(com.wan.common.constant.Const.THEME_COLOR,
             Int::class.java, this, Observer<Int> {
                 setThemeColor()
             })

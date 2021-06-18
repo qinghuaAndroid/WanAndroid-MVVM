@@ -2,8 +2,7 @@ package com.qh.wanandroid.adapter
 
 import android.view.ViewGroup
 import android.widget.ImageView
-import coil.api.load
-import com.example.devlibrary.utils.ImageLoader
+import coil.load
 import com.qh.wanandroid.R
 import com.qh.wanandroid.bean.BannerEntity
 import com.youth.banner.adapter.BannerAdapter

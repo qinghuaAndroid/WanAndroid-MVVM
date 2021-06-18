@@ -1,10 +1,10 @@
 package com.qh.wanandroid.ui.girl
 
-import com.example.devlibrary.mvp.IModel
-import com.example.devlibrary.mvp.IPresenter
-import com.example.devlibrary.mvp.IView
+import com.wan.baselib.mvp.IModel
+import com.wan.baselib.mvp.IPresenter
+import com.wan.baselib.mvp.IView
 import com.qh.wanandroid.bean.GankIoDataBean
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 
 interface GirlContract {
 

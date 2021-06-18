@@ -2,17 +2,17 @@ package com.qh.wanandroid.binding
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import coil.api.load
+import coil.load
 import com.donkingliang.labels.LabelsView
-import com.example.devlibrary.utils.ImageLoader
 import com.qh.wanandroid.R
 import com.qh.wanandroid.bean.ArticleEntity
 import com.qh.wanandroid.bean.SystemListEntity
+import com.wan.baselib.utils.ImageLoader
 
 @BindingAdapter(value = ["girlImgUrl"])
 fun ImageView.loadGirlImg(url: String) {
     //使用coil加载
-    this.load(url){
+    this.load(url) {
         placeholder(R.mipmap.ic_girl_default)
     }
 }

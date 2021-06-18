@@ -6,13 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.launcher.ARouter
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
-import com.example.devlibrary.ext.showToast
-import com.example.devlibrary.mvvm.BaseVMFragment
-import com.example.devlibrary.widget.LoadMoreView
+import com.wan.baselib.ext.showToast
+import com.wan.baselib.mvvm.BaseVMFragment
+import com.wan.baselib.widget.LoadMoreView
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.ArticleAdapter
-import com.example.common.arouter.ArouterPath
-import com.qh.wanandroid.const.Const
+import com.wan.common.arouter.ArouterPath
+import com.qh.wanandroid.constant.Const
 import com.qh.wanandroid.databinding.FragmentArticleListBinding
 import com.qh.wanandroid.ui.ArticleViewModel
 import com.qh.wanandroid.ui.collect.CollectViewModel
@@ -61,8 +61,8 @@ class TabListFragment :
     private val mOnItemClickListener = OnItemClickListener { _, _, position ->
         val datasBean = articleAdapter.data[position]
         ARouter.getInstance().build(ArouterPath.ACTIVITY_BROWSER)
-            .withString(com.example.common.constant.Const.WEB_TITLE, datasBean.title)
-            .withString(com.example.common.constant.Const.WEB_URL, datasBean.link)
+            .withString(com.wan.common.constant.Const.WEB_TITLE, datasBean.title)
+            .withString(com.wan.common.constant.Const.WEB_URL, datasBean.link)
             .navigation()
     }
 

@@ -2,11 +2,11 @@ package com.qh.wanandroid.ui.girl
 
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.example.devlibrary.mvp.BaseMvpActivity
-import com.example.devlibrary.widget.LoadMoreView
+import com.wan.baselib.mvp.BaseMvpActivity
+import com.wan.baselib.widget.LoadMoreView
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.GirlAdapter
-import com.example.common.arouter.ArouterPath
+import com.wan.common.arouter.ArouterPath
 import com.qh.wanandroid.bean.GankIoDataBean
 import com.qh.wanandroid.databinding.ActivityGirlBinding
 

@@ -1,0 +1,174 @@
+apply plugin: 'com.android.library'
+apply plugin: 'realm-android'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        }
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    androidExtensions {// 打开实验模式
+        experimental = true
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test:runner:1.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    //约束布局
+    api 'androidx.constraintlayout:constraintlayout:2.0.4'
+
+    //kotlin 支持库
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api 'androidx.core:core-ktx:1.5.0'
+
+    // Anko Commons
+    api "org.jetbrains.anko:anko-commons:0.10.8"
+    // Anko Layouts
+    api "org.jetbrains.anko:anko-sdk27:0.10.8"
+    // Coroutine listeners for Anko Layouts
+    api "org.jetbrains.anko:anko-sdk27-coroutines:0.10.8"
+
+    //MMKV(tencent出品，类似sp)
+    api 'com.tencent:mmkv-static:1.2.8'
+
+    // Android support
+    api 'androidx.appcompat:appcompat:1.2.0'
+    api "com.google.android.material:material:1.3.0"
+
+    // Retrofit
+    api "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    api "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+    api "com.squareup.retrofit2:adapter-rxjava3:$rootProject.retrofitVersion"
+
+    // define a BOM and its version
+    api(platform("com.squareup.okhttp3:okhttp-bom:4.9.1"))
+
+    // define any required OkHttp artifacts without version
+    api("com.squareup.okhttp3:okhttp")
+    api("com.squareup.okhttp3:logging-interceptor")
+
+    //PersistentCookieJar
+    api 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
+
+    // RxJava
+    api "io.reactivex.rxjava3:rxjava:$rootProject.rxjavaVersion"
+    api "io.reactivex.rxjava3:rxandroid:$rootProject.rxandroidVersion"
+    api "com.jakewharton.rxbinding3:rxbinding:$rootProject.rxbindingVersion"
+
+    // Glide
+    api "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+//    kapt "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
+
+    api "com.github.bumptech.glide:okhttp3-integration:$rootProject.glideokhttpVersion"
+    api "jp.wasabeef:glide-transformations:$rootProject.glideTransformationVersion"
+
+    /**
+     * 这应该是一个很新的一个图片加载库，完全使用kotlin编写，使用了kotlin的协程，图片网络请求方式默认为Okhttp,相比较于我们常用的Picasso，Glide或者Fresco，它有以下几个特点：
+     *
+     * 足够快速，它在内存、图片存储、图片的采样、Bitmap重用、暂停\取消下载等细节方面都有很大的优化(相比于上面讲的三大框架)；
+     * 足够轻量，只有大概1500个核心方法，当然也是相对于PGF而言的；
+     * 足够新，也足够现代！使用了最新的Koltin协程所编写，充分发挥了CPU的性能，同时也使用了OKHttp、Okio、LifeCycle等比较新式的Android库。
+     */
+    api("io.coil-kt:coil:1.2.2")//base
+    api("io.coil-kt:coil-gif:1.2.2")//gif
+    api("io.coil-kt:coil-svg:1.2.2")//svg
+
+    //Logger
+    api "com.orhanobut:logger:$rootProject.loggerVersion"
+
+    //fastjson
+    api 'com.alibaba:fastjson:1.2.75'
+
+    //circle imageview
+    api "de.hdodenhof:circleimageview:$rootProject.circleImageviewVersion"
+
+    //BaseRecyclerViewAdapterHelper
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
+
+    //SwitchButton
+    api "com.kyleduo.switchbutton:library:$rootProject.SwtichButtonVersion"
+
+    //PhotoView
+    api "com.github.chrisbanes:PhotoView:$rootProject.PhotoViewVersion"
+
+    //rxpermissions
+    api "com.github.tbruyelle:rxpermissions:$rootProject.rxPerssionsVersion"
+
+    //rxlifecycle-components
+    api "com.trello.rxlifecycle4:rxlifecycle-components:$rootProject.rxLifecycleVersion"
+
+    //Bugly
+    api 'com.tencent.bugly:crashreport:3.2.3'
+
+    //友盟统计
+    api 'com.umeng.analytics:analytics:6.1.4'
+
+    //tablayout
+    api 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+
+    //live-event-bus
+    api 'com.jeremyliao:live-event-bus-x:1.7.3'
+
+    //loadsir
+    api 'com.kingja.loadsir:loadsir:1.3.8'
+
+    //agentweb
+    api 'com.just.agentweb:agentweb:4.1.3'
+
+    //协程
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0'
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
+
+    //jetpack
+    api "androidx.lifecycle:lifecycle-livedata-ktx:2.3.0-beta01"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0"
+    api 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.0'
+
+    // 3.x branch
+    def koin_version = '3.1.0'
+    // Koin main features for Android (Scope,ViewModel ...)
+    api "io.insert-koin:koin-android:$koin_version"
+
+    //banner
+    api 'com.youth.banner:banner:2.1.0'
+
+    //标签控件
+    api 'com.github.donkingliang:LabelsView:1.6.5'
+
+    //颜色对话框，【https://github.com/afollestad/material-dialogs】
+    api 'com.afollestad.material-dialogs:color:3.3.0'
+    api 'com.afollestad.material-dialogs:lifecycle:3.3.0'
+
+    //ARouter
+    api 'com.alibaba:arouter-api:1.5.2'
+}

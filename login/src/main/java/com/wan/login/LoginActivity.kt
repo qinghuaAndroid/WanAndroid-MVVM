@@ -1,9 +1,9 @@
 package com.wan.login
 
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.example.common.arouter.ArouterPath
-import com.example.devlibrary.base.BaseFragmentActivity
-import com.example.devlibrary.base.FragmentModule
+import com.wan.common.arouter.ArouterPath
+import com.wan.baselib.base.BaseFragmentActivity
+import com.wan.baselib.base.FragmentModule
 import com.wan.login.databinding.ActivityLoginBinding
 import java.util.*
 

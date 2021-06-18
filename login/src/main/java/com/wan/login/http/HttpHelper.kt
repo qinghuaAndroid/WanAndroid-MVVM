@@ -1,7 +1,7 @@
 package com.wan.login.http
 
-import com.example.common.constant.Const
-import com.example.devlibrary.network.HttpsUtils
+import com.wan.common.constant.Const
+import com.wan.baselib.network.HttpsUtils
 
 /**
  * Description: 获取各种类型ApiService

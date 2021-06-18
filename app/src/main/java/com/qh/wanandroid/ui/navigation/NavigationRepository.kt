@@ -1,7 +1,7 @@
 package com.qh.wanandroid.ui.navigation
 
-import com.example.devlibrary.mvvm.BaseRepository
-import com.example.devlibrary.mvvm.Result
+import com.wan.baselib.mvvm.BaseRepository
+import com.wan.baselib.mvvm.Result
 import com.qh.wanandroid.bean.NavigationEntity
 import com.qh.wanandroid.http.HttpHelper
 

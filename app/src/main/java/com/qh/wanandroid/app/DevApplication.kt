@@ -2,7 +2,7 @@ package com.qh.wanandroid.app
 
 import com.alibaba.android.arouter.launcher.ARouter
 import com.didichuxing.doraemonkit.DoraemonKit
-import com.example.devlibrary.app.App
+import com.wan.baselib.app.App
 import com.qh.wanandroid.BuildConfig
 import com.qh.wanandroid.koin.appModule
 import io.realm.Realm

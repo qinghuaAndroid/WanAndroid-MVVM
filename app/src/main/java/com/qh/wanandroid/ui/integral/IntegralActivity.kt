@@ -8,14 +8,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import com.example.common.constant.Const
-import com.example.devlibrary.ext.showToast
-import com.example.devlibrary.mvvm.BaseVMActivity
-import com.example.devlibrary.widget.LoadMoreView
+import com.wan.common.constant.Const
+import com.wan.baselib.ext.showToast
+import com.wan.baselib.mvvm.BaseVMActivity
+import com.wan.baselib.widget.LoadMoreView
 import com.google.android.material.appbar.AppBarLayout
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.IntegralAdapter
-import com.example.common.arouter.ArouterPath
+import com.wan.common.arouter.ArouterPath
 import com.qh.wanandroid.bean.UserInfoEntity
 import com.qh.wanandroid.databinding.ActivityIntegralBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -27,7 +27,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 @Route(path = ArouterPath.ACTIVITY_INTEGRAL, extras = Const.NEED_LOGIN)
 class IntegralActivity : BaseVMActivity<IntegralViewModel, ActivityIntegralBinding>() {
 
-    @Autowired(name = com.qh.wanandroid.const.Const.USER_INFO_ENTITY)
+    @Autowired(name = com.qh.wanandroid.constant.Const.USER_INFO_ENTITY)
     @JvmField
     var userInfoEntity: UserInfoEntity? = null
     private val integralViewModel by viewModel<IntegralViewModel>()

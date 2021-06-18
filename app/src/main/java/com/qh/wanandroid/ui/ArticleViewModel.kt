@@ -1,8 +1,8 @@
 package com.qh.wanandroid.ui
 
 import androidx.lifecycle.viewModelScope
-import com.example.devlibrary.mvvm.Result
-import com.example.common.base.BaseListViewModel
+import com.wan.baselib.mvvm.Result
+import com.wan.common.base.BaseListViewModel
 import com.qh.wanandroid.bean.ArticleEntity
 import com.qh.wanandroid.ui.collect.CollectRepository
 import com.qh.wanandroid.ui.home.HomeRepository

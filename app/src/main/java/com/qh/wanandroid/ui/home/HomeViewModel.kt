@@ -3,9 +3,9 @@ package com.qh.wanandroid.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.devlibrary.mvvm.BaseViewModel
-import com.example.devlibrary.mvvm.Result
-import com.example.common.base.BaseUiModel
+import com.wan.baselib.mvvm.BaseViewModel
+import com.wan.baselib.mvvm.Result
+import com.wan.common.base.BaseUiModel
 import com.qh.wanandroid.bean.ArticleEntity
 import com.qh.wanandroid.bean.BannerEntity
 import kotlinx.coroutines.Dispatchers

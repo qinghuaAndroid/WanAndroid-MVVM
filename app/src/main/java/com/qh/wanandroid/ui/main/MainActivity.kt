@@ -9,17 +9,17 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.viewpager2.widget.ViewPager2
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import com.example.devlibrary.ext.getThemeColor
-import com.example.devlibrary.helper.LiveEventBusHelper
-import com.example.devlibrary.mvp.BaseMvpActivity
-import com.example.devlibrary.utils.SettingUtil
+import com.wan.baselib.ext.getThemeColor
+import com.wan.baselib.helper.LiveEventBusHelper
+import com.wan.baselib.mvp.BaseMvpActivity
+import com.wan.baselib.utils.SettingUtil
 import com.google.android.material.navigation.NavigationView
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.MainPagerAdapter
-import com.example.common.arouter.ArouterPath
-import com.example.common.ext.navigation
+import com.wan.common.arouter.ArouterPath
+import com.wan.common.ext.navigation
 import com.qh.wanandroid.bean.UserInfoEntity
-import com.qh.wanandroid.const.Const
+import com.qh.wanandroid.constant.Const
 import com.qh.wanandroid.databinding.ActivityMainBinding
 import com.tencent.mmkv.MMKV
 import org.jetbrains.anko.backgroundColor
@@ -31,7 +31,7 @@ class MainActivity :
     BaseMvpActivity<MainContract.View, MainContract.Presenter, ActivityMainBinding>(),
     MainContract.View {
 
-    private val mmkv by lazy { MMKV.defaultMMKV() }
+    private val mmkv by lazy { MMKV.defaultMMKV()!! }
     private var isLogin by Delegates.notNull<Boolean>()
     private var userInfoEntity: UserInfoEntity? = null
     private lateinit var navHeaderView: View
@@ -44,7 +44,7 @@ class MainActivity :
     override fun attachLayoutRes(): Int = R.layout.activity_main
 
     override fun initData() {
-        isLogin = mmkv.decodeBool(com.example.common.constant.Const.IS_LOGIN, false)
+        isLogin = mmkv.decodeBool(com.wan.common.constant.Const.IS_LOGIN, false)
         receiveNotice()
     }
 
@@ -107,8 +107,8 @@ class MainActivity :
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             R.id.action_search -> {
                 ARouter.getInstance().build(ArouterPath.ACTIVITY_SEARCH).navigation()
                 return true
@@ -235,9 +235,9 @@ class MainActivity :
     override fun createPresenter(): MainContract.Presenter = MainPresenter()
 
     override fun showLogoutSuccess(success: Boolean) {
-        mmkv.encode(com.example.common.constant.Const.IS_LOGIN, false)
-        mmkv.removeValueForKey(com.example.common.constant.Const.USER_GSON)
-        LiveEventBusHelper.post(com.example.common.constant.Const.LOGOUT_SUCCESS, true)
+        mmkv.encode(com.wan.common.constant.Const.IS_LOGIN, false)
+        mmkv.removeValueForKey(com.wan.common.constant.Const.USER_GSON)
+        LiveEventBusHelper.post(com.wan.common.constant.Const.LOGOUT_SUCCESS, true)
         finish()
     }
 
@@ -251,7 +251,7 @@ class MainActivity :
     }
 
     private fun receiveNotice() {
-        LiveEventBusHelper.observe(com.example.common.constant.Const.THEME_COLOR,
+        LiveEventBusHelper.observe(com.wan.common.constant.Const.THEME_COLOR,
             Int::class.java, this, androidx.lifecycle.Observer<Int> {
                 setThemeColor()
             })

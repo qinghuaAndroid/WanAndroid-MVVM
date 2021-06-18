@@ -1,11 +1,11 @@
 package com.qh.wanandroid.ui.tab
 
-import com.example.devlibrary.mvp.BaseModel
-import com.example.devlibrary.network.HttpResult
+import com.wan.baselib.mvp.BaseModel
+import com.wan.baselib.network.HttpResult
 import com.qh.wanandroid.bean.TabEntity
-import com.qh.wanandroid.const.Const
+import com.qh.wanandroid.constant.Const
 import com.qh.wanandroid.http.HttpHelper
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 
 /**
  * @author FQH

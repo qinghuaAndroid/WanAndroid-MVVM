@@ -1,9 +1,9 @@
 package com.qh.wanandroid.ui.system
 
 import com.alibaba.android.arouter.launcher.ARouter
-import com.example.common.arouter.ArouterPath
+import com.wan.common.arouter.ArouterPath
 import com.qh.wanandroid.bean.SystemListEntity
-import com.qh.wanandroid.const.Const
+import com.qh.wanandroid.constant.Const
 
 /**
  * @author FQH

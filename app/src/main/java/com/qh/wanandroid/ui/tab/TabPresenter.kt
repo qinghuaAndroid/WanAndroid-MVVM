@@ -1,8 +1,8 @@
 package com.qh.wanandroid.ui.tab
 
-import com.example.devlibrary.mvp.BasePresenter
-import com.example.devlibrary.network.RxHelper
-import com.example.devlibrary.network.RxObserver
+import com.wan.baselib.mvp.BasePresenter
+import com.wan.baselib.network.RxHelper
+import com.wan.baselib.network.RxObserver
 import com.qh.wanandroid.bean.TabEntity
 
 /**

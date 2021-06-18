@@ -1,11 +1,11 @@
 package com.qh.wanandroid.ui.main
 
-import com.example.devlibrary.mvp.IModel
-import com.example.devlibrary.mvp.IPresenter
-import com.example.devlibrary.mvp.IView
-import com.example.devlibrary.network.HttpResult
+import com.wan.baselib.mvp.IModel
+import com.wan.baselib.mvp.IPresenter
+import com.wan.baselib.mvp.IView
+import com.wan.baselib.network.HttpResult
 import com.qh.wanandroid.bean.UserInfoEntity
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 
 /**
  * @author FQH

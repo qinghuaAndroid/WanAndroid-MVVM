@@ -1,8 +1,8 @@
 package com.qh.wanandroid.http
 
-import com.example.devlibrary.network.HttpResult
 import com.qh.wanandroid.bean.*
-import io.reactivex.Observable
+import com.wan.baselib.network.HttpResult
+import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.*
 
 /**

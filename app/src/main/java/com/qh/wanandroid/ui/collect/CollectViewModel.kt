@@ -3,9 +3,9 @@ package com.qh.wanandroid.ui.collect
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.devlibrary.mvvm.BaseViewModel
-import com.example.devlibrary.mvvm.Result
-import com.example.common.base.BaseUiModel
+import com.wan.baselib.mvvm.BaseViewModel
+import com.wan.baselib.mvvm.Result
+import com.wan.common.base.BaseUiModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
