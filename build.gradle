@@ -50,7 +50,7 @@ ext {
     retrofitVersion = '2.9.0'
     rxjavaVersion = '3.0.6'
     rxandroidVersion = '3.0.0'
-    rxbindingVersion = '3.0.0'
+    rxbindingVersion = '4.0.0'
     rxPerssionsVersion = '0.12'
     rxLifecycleVersion = '4.0.2'
     glideVersion = '4.12.0'
