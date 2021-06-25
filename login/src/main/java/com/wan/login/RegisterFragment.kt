@@ -4,7 +4,7 @@ import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
 import androidx.lifecycle.Observer
-import com.wan.baselib.base.IFragmentCallBack
+import androidx.navigation.Navigation
 import com.wan.baselib.mvvm.BaseVMFragment
 import com.wan.baselib.utils.ToastUtils
 import com.wan.login.databinding.FragmentRegisterBinding
@@ -16,12 +16,11 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  * @author FQH
  * Create at 2020/6/23.
  */
-class RegisterFragment(callBack: IFragmentCallBack) : BaseVMFragment<RegisterViewModel, FragmentRegisterBinding>() {
+class RegisterFragment : BaseVMFragment<RegisterViewModel, FragmentRegisterBinding>() {
 
     private val mViewModel: RegisterViewModel by viewModel()
     private var isPasswordShow = false
     private var isRePasswordShow = false
-    private val iCallBack = callBack
 
     override fun startObserve() {
         mViewModel.uiState.observe(this,
@@ -29,7 +28,7 @@ class RegisterFragment(callBack: IFragmentCallBack) : BaseVMFragment<RegisterVie
                 if (it.showProgress) showProgressDialog()
                 it.showSuccess?.let {
                     dismissProgressDialog()
-                    iCallBack.home()
+                    view?.let { it1 -> Navigation.findNavController(it1).navigateUp() }
                 }
                 it.showError?.let { errorMsg ->
                     ToastUtils.showShortToast(errorMsg)

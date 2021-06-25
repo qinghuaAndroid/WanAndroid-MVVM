@@ -4,7 +4,7 @@ import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
 import androidx.lifecycle.Observer
-import com.wan.baselib.base.IFragmentCallBack
+import androidx.navigation.Navigation
 import com.wan.baselib.helper.LiveEventBusHelper
 import com.wan.baselib.mvvm.BaseVMFragment
 import com.wan.baselib.utils.ToastUtils
@@ -17,12 +17,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  * @author FQH
  * Create at 2020/6/23.
  */
-class LoginFragment(callBack: IFragmentCallBack) :
-    BaseVMFragment<LoginViewModel, FragmentLoginBinding>() {
+class LoginFragment : BaseVMFragment<LoginViewModel, FragmentLoginBinding>() {
 
     private val mViewModel: LoginViewModel by viewModel()
     private var isPasswordShow = false
-    private val iCallBack = callBack
 
     override fun startObserve() {
         mViewModel.uiState.observe(this,
@@ -48,7 +46,12 @@ class LoginFragment(callBack: IFragmentCallBack) :
     override fun initView(view: View) {
         mBinding.lifecycleOwner = this
         mBinding.viewModel = mViewModel
-        mBinding.tvRegister.onClick { iCallBack.jump(Const.FRAGMENT_REGISTER, this@LoginFragment) }
+
+//        mBinding.tvRegister.onClick { iCallBack.jump(Const.FRAGMENT_REGISTER, this@LoginFragment) }
+        mBinding.tvRegister.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_registerFragment)
+        }
+
         mBinding.ivClear.onClick {
             mBinding.etUsername.requestFocus()
             mBinding.etUsername.setText("")
