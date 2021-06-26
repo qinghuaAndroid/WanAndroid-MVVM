@@ -8,7 +8,7 @@
 
         <variable
             name="bean"
-            type="com.qh.wanandroid.bean.GankIoDataBean.ResultBean" />
+            type="com.wan.android.bean.GankIoDataBean.ResultBean" />
     </data>
 
     <LinearLayout

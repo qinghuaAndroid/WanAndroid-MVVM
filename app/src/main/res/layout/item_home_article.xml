@@ -6,7 +6,7 @@
 
         <variable
             name="article"
-            type="com.qh.wanandroid.bean.ArticleEntity.DatasBean" />
+            type="com.wan.android.bean.ArticleEntity.DatasBean" />
 
         <variable
             name="collected"

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.qh.wanandroid">
+    package="com.wan.android">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".app.DevApplication"
+        android:name="com.wan.android.app.DevApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".ui.splash.SplashActivity"
+            android:name="com.wan.android.ui.splash.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,31 +24,31 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.main.MainActivity" />
+        <activity android:name="com.wan.android.ui.main.MainActivity" />
 
-        <activity android:name=".ui.system.act.SystemActivity" />
+        <activity android:name="com.wan.android.ui.system.act.SystemActivity" />
 
-        <activity android:name=".ui.browser.BrowserNormalActivity" />
+        <activity android:name="com.wan.android.ui.browser.BrowserNormalActivity" />
 
         <activity
-            android:name=".ui.girl.GirlActivity"
+            android:name="com.wan.android.ui.girl.GirlActivity"
             android:theme="@style/SplashTheme" />
 
-        <activity android:name=".ui.integral.IntegralActivity" />
+        <activity android:name="com.wan.android.ui.integral.IntegralActivity" />
 
-        <activity android:name=".ui.setting.SettingActivity" />
+        <activity android:name="com.wan.android.ui.setting.SettingActivity" />
 
-        <activity android:name=".ui.collect.CollectActivity"/>
+        <activity android:name="com.wan.android.ui.collect.CollectActivity"/>
 
-        <activity android:name=".ui.search.SearchActivity"/>
+        <activity android:name="com.wan.android.ui.search.SearchActivity"/>
 
-        <activity android:name=".ui.search.list.SearchListActivity"/>
+        <activity android:name="com.wan.android.ui.search.list.SearchListActivity"/>
 
-        <activity android:name=".ui.myarticle.MyArticleActivity"/>
+        <activity android:name="com.wan.android.ui.myarticle.MyArticleActivity"/>
 
-        <activity android:name=".ui.share.ShareListActivity"/>
+        <activity android:name="com.wan.android.ui.share.ShareListActivity"/>
 
-        <activity android:name=".ui.question.QuestionActivity"/>
+        <activity android:name="com.wan.android.ui.question.QuestionActivity"/>
     </application>
 
 </manifest>
