@@ -11,6 +11,7 @@ import com.wan.android.adapter.TabPagerAdapter
 import com.wan.android.bean.TabEntity
 import com.wan.android.constant.Const
 import com.wan.android.databinding.FragmentTabBinding
+import org.jetbrains.anko.backgroundColor
 
 /**
  * @author FQH

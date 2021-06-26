@@ -23,98 +23,112 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/padding"
+        android:background="@drawable/ripple_bg"
         android:paddingLeft="@dimen/padding"
-        android:paddingRight="@dimen/padding"
-        android:background="@drawable/ripple_bg">
+        android:paddingTop="@dimen/padding"
+        android:paddingRight="@dimen/padding">
 
-        <ImageView
-            android:id="@+id/ivArticlePic"
-            android:layout_width="100dp"
-            android:layout_height="180dp"
-            android:visibility="@{TextUtils.isEmpty(article.envelopePic)? View.GONE : View.VISIBLE}"
-            app:imageUrl="@{article.envelopePic}"
+        <TextView
+            android:id="@+id/tvTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@{article.type == 1 ? &quot;置顶 &quot; : &quot;&quot;}"
+            android:textColor="@color/red"
+            android:textSize="@dimen/text_3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:id="@+id/tvTag"
-            android:text="@{article.type == 1 ? &quot;置顶 &quot; : &quot;&quot;}"
-            android:textSize="@dimen/text_3"
-            android:textColor="@color/red"
-            app:layout_constraintStart_toEndOf="@id/ivArticlePic"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/tvAuthor"
             style="@style/text_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@{(TextUtils.isEmpty(article.author))? article.shareUser : article.author}"
             app:layout_constraintStart_toEndOf="@id/tvTag"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/tvDate"
             style="@style/text_3"
-            android:text="@{article.niceDate}"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="5dp"
-            android:id="@+id/tvTitle"
-            style="@style/text_1"
-            android:text="@{Html.fromHtml(article.title)}"
-            app:layout_constraintStart_toEndOf="@id/ivArticlePic"
-            app:layout_constraintTop_toBottomOf="@id/tvTag"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <View
-            android:id="@+id/view"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="@{TextUtils.isEmpty(article.envelopePic)? View.GONE : View.VISIBLE}"
-            app:layout_constraintStart_toEndOf="@id/ivArticlePic"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            android:text="@{article.niceDate}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tvChapterName" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTag">
+
+            <ImageView
+                android:id="@+id/ivArticlePic"
+                android:layout_width="100dp"
+                android:layout_height="180dp"
+                android:visibility="@{TextUtils.isEmpty(article.envelopePic)? View.GONE : View.VISIBLE}"
+                app:imageUrl="@{article.envelopePic}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                style="@style/text_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:text="@{Html.fromHtml(article.title)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivArticlePic"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvDesc"
+                style="@style/text_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:text="@{Html.fromHtml(article.desc)}"
+                android:visibility="@{TextUtils.isEmpty(article.projectLink)? View.GONE : View.VISIBLE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivArticlePic"
+                app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
+            android:id="@+id/tvChapterName"
+            style="@style/text_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:id="@+id/tvChapterName"
-            style="@style/text_3"
+            android:layout_marginTop="5dp"
             android:text="@{article.superChapterName}"
-            app:layout_constraintStart_toEndOf="@id/ivArticlePic"
-            app:layout_constraintTop_toBottomOf="@id/view"
-            app:layout_constraintBottom_toBottomOf="@id/ivArticlePic" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/clContent" />
 
         <ImageView
+            android:id="@+id/ivCollect"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:id="@+id/ivCollect"
             android:padding="5dp"
             app:collectIcon="@{article.collect||collected}"
+            app:layout_constraintBottom_toBottomOf="@id/tvChapterName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tvChapterName"
-            app:layout_constraintBottom_toBottomOf="@id/tvChapterName" />
+            app:layout_constraintTop_toTopOf="@id/tvChapterName" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/division_line"
             android:layout_marginTop="@dimen/padding"
-            app:layout_constraintTop_toBottomOf="@id/tvChapterName"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            android:background="@color/division_line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvChapterName" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

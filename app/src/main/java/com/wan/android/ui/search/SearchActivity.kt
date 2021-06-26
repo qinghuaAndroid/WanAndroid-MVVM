@@ -14,6 +14,7 @@ import com.wan.android.bean.HotSearchEntity
 import com.wan.android.bean.SearchHistoryBean
 import com.wan.android.constant.Const
 import com.wan.android.databinding.ActivitySearchBinding
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 /**
  * @author FQH
