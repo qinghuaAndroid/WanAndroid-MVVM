@@ -9,19 +9,20 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.viewpager2.widget.ViewPager2
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import com.wan.baselib.ext.getThemeColor
-import com.wan.baselib.helper.LiveEventBusHelper
-import com.wan.baselib.mvp.BaseMvpActivity
-import com.wan.baselib.utils.SettingUtil
+import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.navigation.NavigationView
 import com.qh.wanandroid.R
 import com.qh.wanandroid.adapter.MainPagerAdapter
-import com.wan.common.arouter.ArouterPath
-import com.wan.common.ext.navigation
 import com.qh.wanandroid.bean.UserInfoEntity
 import com.qh.wanandroid.constant.Const
 import com.qh.wanandroid.databinding.ActivityMainBinding
 import com.tencent.mmkv.MMKV
+import com.wan.baselib.ext.getThemeColor
+import com.wan.baselib.helper.LiveEventBusHelper
+import com.wan.baselib.mvp.BaseMvpActivity
+import com.wan.baselib.utils.SettingUtil
+import com.wan.common.arouter.ArouterPath
+import com.wan.common.ext.navigation
 import org.jetbrains.anko.backgroundColor
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import kotlin.properties.Delegates
@@ -62,8 +63,7 @@ class MainActivity :
             val toggle = ActionBarDrawerToggle(
                 this@MainActivity,
                 this,
-                findViewById(R.id.toolbar)
-                , R.string.navigation_drawer_open,
+                findViewById(R.id.toolbar), R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close
             )
             addDrawerListener(toggle)
@@ -218,6 +218,24 @@ class MainActivity :
 
     private fun initBottom() {
         mBinding.btmNavigation.run {
+            //用于分配，检索，检查和清除徽章内显示的数字。默认情况下，显示的徽章没有数字
+            val badge = getOrCreateBadge(R.id.menu_home)
+            badge.clearNumber()
+
+            val badge1 = getOrCreateBadge(R.id.menu_system)
+            badge1.number = 2
+
+            val badge2 = getOrCreateBadge(R.id.menu_official_account)
+            badge2.number = 100
+            //用于设置/获取徽章数字中允许的最大字符数，然后将其用'+'截断。预设值为4。
+            badge2.maxCharacterCount = 3
+
+            val badge4 = getOrCreateBadge(R.id.menu_project)
+            badge4.number = 30
+            badge4.maxCharacterCount = 3
+            //用于设置/获取它可以是徽章的严重性TOP_END，TOP_START，BOTTOM_END或BOTTOM_START。默认值为TOP_END
+            badge4.badgeGravity = BadgeDrawable.TOP_START
+
             setOnNavigationItemSelectedListener { item ->
                 when (item.itemId) {
                     R.id.menu_home -> mBinding.viewPager.currentItem = 0

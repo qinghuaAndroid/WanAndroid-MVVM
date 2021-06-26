@@ -30,7 +30,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
                 android:background="@color/viewBackground"
-                app:labelVisibilityMode="labeled"
+                app:labelVisibilityMode="selected"
+                app:itemHorizontalTranslationEnabled="true"
                 app:itemIconTint="@drawable/bottom_navigation_item_selector"
                 app:itemTextColor="@drawable/bottom_navigation_item_selector"
                 app:menu="@menu/main_bottom_navigation" />
