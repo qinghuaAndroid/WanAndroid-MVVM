@@ -20,7 +20,7 @@ public class ResourcesUtils {
      * @return 资源文件对应字符串
      */
     public static String getString(int id) {
-        return App.sContext.getResources().getString(id);
+        return App.context().getResources().getString(id);
     }
 
     /**
@@ -30,7 +30,7 @@ public class ResourcesUtils {
      * @return 资源文件对应字符串数组
      */
     public static String[] getStringArray(int id) {
-        return App.sContext.getResources().getStringArray(id);
+        return App.context().getResources().getStringArray(id);
     }
 
     /**
@@ -40,7 +40,7 @@ public class ResourcesUtils {
      * @return 资源文件对应图片
      */
     public static Drawable getDrawable(int id) {
-        return ContextCompat.getDrawable(App.sContext, id);
+        return ContextCompat.getDrawable(App.context(), id);
     }
 
     /**
@@ -60,7 +60,7 @@ public class ResourcesUtils {
      * @return 资源文件对应颜色状态
      */
     public static ColorStateList getColorStateList(int id) {
-        return ContextCompat.getColorStateList(App.sContext, id);
+        return ContextCompat.getColorStateList(App.context(), id);
     }
 
     /**
@@ -70,7 +70,7 @@ public class ResourcesUtils {
      * @return 资源文件对应像素值
      */
     public static int getDimen(int id) {
-        return App.sContext.getResources().getDimensionPixelSize(id);
+        return App.context().getResources().getDimensionPixelSize(id);
     }
 
 }

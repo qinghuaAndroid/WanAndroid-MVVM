@@ -39,7 +39,7 @@ object HttpsUtils {
         else
             HttpLoggingInterceptor.Level.NONE
 
-        val httpCacheDir = File(App.sContext.cacheDir, "api_cache")
+        val httpCacheDir = File(App.context().cacheDir, "api_cache")
         val cache = Cache(httpCacheDir, (10 * 1024 * 1024).toLong())
 
         val sslContext = SSLContext.getInstance("TLS")
@@ -47,7 +47,7 @@ object HttpsUtils {
         val sslSocketFactory = sslContext.socketFactory
 
         val cookieJar: ClearableCookieJar =
-            PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(App.sContext))
+            PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(App.context()))
 
         return OkHttpClient.Builder()
             //信任所有证书，不安全！！！谨记

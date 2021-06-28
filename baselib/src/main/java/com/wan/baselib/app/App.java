@@ -13,14 +13,12 @@ import com.tencent.mmkv.MMKV;
 
 public class App extends Application {
 
-    public static Context sContext;
-    public static App sInstance;
+    public static Application application;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        sInstance = this;
-        sContext = getApplicationContext();
+        application = this;
         AutoDensityUtils.init();
         MMKV.initialize(this);
         initTheme();
@@ -51,5 +49,9 @@ public class App extends Application {
         super.onLowMemory();
         // low memory clear Glide cache
         Glide.get(this).clearMemory();
+    }
+
+    public static Context context(){
+        return application.getApplicationContext();
     }
 }

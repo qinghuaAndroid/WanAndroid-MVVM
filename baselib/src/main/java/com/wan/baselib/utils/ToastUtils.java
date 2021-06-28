@@ -1,5 +1,6 @@
 package com.wan.baselib.utils;
 
+import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
@@ -267,12 +268,13 @@ public class ToastUtils {
      * @param text     文本
      * @param duration 显示时长
      */
+    @SuppressLint("ShowToast")
     private static void showToast(CharSequence text, int duration) {
         if (isJumpWhenMore) {
             cancelToast();
         }
         if (sToast == null) {
-            sToast = Toast.makeText(App.sContext, text, duration);
+            sToast = Toast.makeText(App.context(), text, duration);
         } else {
             sToast.setText(text);
             sToast.setDuration(duration);

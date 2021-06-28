@@ -13,13 +13,13 @@ import org.koin.core.context.startKoin
  * Description: application
  * Created by FQH on 2019/10/21.
  */
-class DevApplication : App() {
+class WanApplication : App() {
     override fun onCreate() {
         super.onCreate()
         DoraemonKit.install(this)
 
         startKoin {
-            androidContext(this@DevApplication)
+            androidContext(this@WanApplication)
             modules(appModule)
         }
         Realm.init(this)

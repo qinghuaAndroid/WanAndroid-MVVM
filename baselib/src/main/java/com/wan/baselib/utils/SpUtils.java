@@ -123,7 +123,7 @@ public class SpUtils {
 
     static class SpHolder {
         static SharedPreferences sPreferences =
-                App.sContext.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
+                App.context().getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
     }
 }
 

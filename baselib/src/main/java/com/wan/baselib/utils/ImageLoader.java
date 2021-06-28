@@ -109,7 +109,7 @@ public class ImageLoader {
                     .error(defHeader);
         } else {
             mOptionAvator = new RequestOptions()
-                    .optionalTransform(new GlideRoundedCornersTransform(App.sContext, 8f, GlideRoundedCornersTransform.CornerType.ALL))
+                    .optionalTransform(new GlideRoundedCornersTransform(App.context(), 8f, GlideRoundedCornersTransform.CornerType.ALL))
                     .placeholder(defHeader)
                     .error(defHeader);
         }

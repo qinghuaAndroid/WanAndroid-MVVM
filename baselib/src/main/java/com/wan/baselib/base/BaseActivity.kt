@@ -23,7 +23,7 @@ import kotlinx.coroutines.cancel
 abstract class BaseActivity<B : ViewDataBinding> : RxAppCompatActivity(), CoroutineScope by MainScope() {
     protected lateinit var mBinding: B
     override fun onCreate(savedInstanceState: Bundle?) {
-        AutoDensityUtils.setCustomDensity(this, App.sInstance)
+        AutoDensityUtils.setCustomDensity(this, App.application)
         super.onCreate(savedInstanceState)
         if (attachLayoutRes() == 0) {
             throw RuntimeException("Please set the page layout")
