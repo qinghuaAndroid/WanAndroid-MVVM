@@ -9,7 +9,7 @@ import com.tencent.mmkv.MMKV
 import com.wan.login.R
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/13.
  */
 internal fun Fragment.startActivity(clazz: Class<*>, needLogin: Boolean = false) {

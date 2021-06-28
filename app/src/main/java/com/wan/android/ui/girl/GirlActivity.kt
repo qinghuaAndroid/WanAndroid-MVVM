@@ -12,7 +12,7 @@ import com.wan.android.databinding.ActivityGirlBinding
 
 /**
  * Description:
- * Created by FQH on 2019/10/14.
+ * Created by cy on 2019/10/14.
  */
 @Route(path = ArouterPath.ACTIVITY_GIRL)
 class GirlActivity :

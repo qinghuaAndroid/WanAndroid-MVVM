@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.wan.baselib.mvvm.BaseViewModel
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/16.
  */
 open class BaseListViewModel<T> : BaseViewModel() {

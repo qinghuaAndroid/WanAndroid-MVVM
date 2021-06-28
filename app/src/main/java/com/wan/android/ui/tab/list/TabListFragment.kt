@@ -19,7 +19,7 @@ import com.wan.android.ui.collect.CollectViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/2.
  */
 class TabListFragment :

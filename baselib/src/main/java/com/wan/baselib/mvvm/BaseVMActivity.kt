@@ -6,7 +6,7 @@ import androidx.databinding.ViewDataBinding
 import com.wan.baselib.base.BaseActivity
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/3.
  */
 abstract class BaseVMActivity<VM : BaseViewModel, B : ViewDataBinding> : BaseActivity<B>() {

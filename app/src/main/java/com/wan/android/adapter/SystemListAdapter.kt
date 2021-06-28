@@ -9,7 +9,7 @@ import com.wan.android.databinding.ItemSystemBinding
 import com.wan.android.ui.system.SystemListPresenter
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/8.
  */
 class SystemListAdapter :

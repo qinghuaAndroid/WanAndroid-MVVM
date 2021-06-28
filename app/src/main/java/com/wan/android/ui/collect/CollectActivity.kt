@@ -18,7 +18,7 @@ import com.wan.android.ui.ArticleViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/13.
  */
 @Route(path = ArouterPath.ACTIVITY_COLLECT, extras = Const.NEED_LOGIN)

@@ -6,7 +6,7 @@ import com.wan.android.bean.NavigationEntity
 import com.wan.android.http.HttpHelper
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/8.
  */
 class NavigationRepository: BaseRepository() {

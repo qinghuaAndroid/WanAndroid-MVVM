@@ -9,7 +9,7 @@ import com.wan.android.databinding.ItemGirlBinding
 
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/9.
  */
 class GirlAdapter :

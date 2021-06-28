@@ -6,7 +6,7 @@ import com.wan.baselib.network.RxObserver
 import com.wan.android.bean.UserInfoEntity
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/10.
  */
 class MainPresenter : BasePresenter<MainContract.Model, MainContract.View>(),

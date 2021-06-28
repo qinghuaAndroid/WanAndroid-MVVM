@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat;
 import com.wan.baselib.app.App;
 
 /**
- * @author FQH
+ * @author cy
  */
 public class ResourcesUtils {
     /**

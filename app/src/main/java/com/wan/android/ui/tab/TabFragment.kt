@@ -14,7 +14,7 @@ import com.wan.android.databinding.FragmentTabBinding
 import org.jetbrains.anko.backgroundColor
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/2.
  */
 class TabFragment : BaseMvpFragment<TabContract.View, TabContract.Presenter, FragmentTabBinding>(),

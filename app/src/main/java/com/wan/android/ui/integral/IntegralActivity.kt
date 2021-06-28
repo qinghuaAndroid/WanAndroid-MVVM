@@ -21,7 +21,7 @@ import com.wan.android.databinding.ActivityIntegralBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/10.
  */
 @Route(path = ArouterPath.ACTIVITY_INTEGRAL, extras = Const.NEED_LOGIN)

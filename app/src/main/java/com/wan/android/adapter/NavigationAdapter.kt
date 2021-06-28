@@ -9,7 +9,7 @@ import com.wan.android.databinding.ItemNavigationBinding
 import com.wan.android.ui.navigation.NavigationPresenter
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/8.
  */
 class NavigationAdapter :

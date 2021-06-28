@@ -6,7 +6,7 @@ import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.*
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/2.
  */
 interface ApiService {

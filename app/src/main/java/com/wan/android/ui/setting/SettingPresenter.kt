@@ -5,7 +5,7 @@ import com.wan.baselib.network.RxHelper
 import com.wan.baselib.network.RxObserver
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/10.
  */
 class SettingPresenter : BasePresenter<SettingContract.Model, SettingContract.View>(),

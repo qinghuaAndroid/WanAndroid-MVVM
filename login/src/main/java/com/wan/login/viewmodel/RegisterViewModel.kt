@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/6/23.
  */
 class RegisterViewModel(private val mRepository: RegisterRepository) : BaseViewModel() {

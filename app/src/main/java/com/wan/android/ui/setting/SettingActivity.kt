@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.activity_setting.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/10.
  */
 @Route(path = ArouterPath.ACTIVITY_SETTING)

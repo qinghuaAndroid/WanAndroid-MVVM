@@ -11,7 +11,7 @@ import com.wan.android.databinding.FragmentSystemListBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/8.
  */
 class NavigationFragment : BaseVMFragment<NavigationViewModel, FragmentSystemListBinding>() {

@@ -5,7 +5,7 @@ import com.wan.login.bean.UserEntity
 import retrofit2.http.*
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/2.
  */
 interface ApiService {

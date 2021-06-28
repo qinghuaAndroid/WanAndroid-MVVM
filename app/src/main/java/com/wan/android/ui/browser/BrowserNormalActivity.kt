@@ -18,7 +18,7 @@ import com.wan.common.arouter.ArouterPath
 import com.wan.android.databinding.ActivityBrowserNormalBinding
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/8.
  */
 @Route(path = ArouterPath.ACTIVITY_BROWSER)

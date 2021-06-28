@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/15.
  */
 class MyArticleViewModel(private val mRepository: MyArticleRepository) : BaseViewModel() {

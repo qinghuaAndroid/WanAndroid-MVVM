@@ -7,7 +7,7 @@ import com.wan.baselib.network.HttpResult
 import io.reactivex.rxjava3.core.Observable
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/10.
  */
 interface SettingContract {

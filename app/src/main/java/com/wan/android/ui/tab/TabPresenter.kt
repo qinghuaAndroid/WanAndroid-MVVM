@@ -6,7 +6,7 @@ import com.wan.baselib.network.RxObserver
 import com.wan.android.bean.TabEntity
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/3.
  */
 class TabPresenter : BasePresenter<TabContract.Model, TabContract.View>(), TabContract.Presenter {

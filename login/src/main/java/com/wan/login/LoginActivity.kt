@@ -6,7 +6,7 @@ import com.wan.common.arouter.ArouterPath
 import com.wan.login.databinding.ActivityLoginBinding
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/7.
  * @see <a href="https://mp.weixin.qq.com/s/kqjYN4LqzONkDAHI3rLRTQ">navigation</a>
  */

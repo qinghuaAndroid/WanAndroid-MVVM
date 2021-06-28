@@ -13,7 +13,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/2.
  */
 class SplashActivity : BaseActivity<ActivitySplashBinding>() {

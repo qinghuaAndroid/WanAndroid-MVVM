@@ -25,7 +25,7 @@ import javax.net.ssl.*
 
 /**
  * Description: 网络请求，主要用于获取Retrofit
- * Created by FQH on 2019/10/14.
+ * Created by cy on 2019/10/14.
  */
 object HttpsUtils {
 

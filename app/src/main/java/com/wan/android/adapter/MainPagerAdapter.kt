@@ -11,7 +11,7 @@ import com.wan.android.ui.system.SystemListFragment
 import com.wan.android.ui.tab.TabFragment
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/3/26.
  */
 class MainPagerAdapter(fragmentActivity: FragmentActivity) :

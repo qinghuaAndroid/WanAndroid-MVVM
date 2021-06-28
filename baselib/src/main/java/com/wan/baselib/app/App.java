@@ -4,33 +4,18 @@ import android.app.Application;
 import android.content.ComponentCallbacks2;
 import android.content.Context;
 
-import androidx.appcompat.app.AppCompatDelegate;
-
 import com.bumptech.glide.Glide;
-import com.wan.baselib.utils.AutoDensityUtils;
-import com.wan.baselib.utils.SettingUtil;
-import com.tencent.mmkv.MMKV;
 
 public class App extends Application {
 
     public static Application application;
 
     @Override
-    public void onCreate() {
-        super.onCreate();
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        //application初始化必须在这里， 不能放在onCreate中，
+        //否则部分初始化依赖Application的第三方库初始化时会奔溃
         application = this;
-        AutoDensityUtils.init();
-        MMKV.initialize(this);
-        initTheme();
-    }
-
-    private void initTheme() {
-        // 获取当前的主题
-        if (SettingUtil.getIsNightMode()) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }
     }
 
     @Override
@@ -51,7 +36,7 @@ public class App extends Application {
         Glide.get(this).clearMemory();
     }
 
-    public static Context context(){
+    public static Context context() {
         return application.getApplicationContext();
     }
 }

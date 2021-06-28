@@ -10,7 +10,7 @@ import com.jeremyliao.liveeventbus.LiveEventBus
  * LiveEventBus是一款Android消息总线，基于LiveData，具有生命周期感知能力，
  * 支持Sticky，支持AndroidX，支持跨进程，支持跨APP
  *
- * Created by FQH on 2019/10/11.
+ * Created by cy on 2019/10/11.
  */
 object LiveEventBusHelper {
 

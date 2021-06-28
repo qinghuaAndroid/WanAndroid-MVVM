@@ -5,7 +5,7 @@ import com.wan.common.arouter.ArouterPath
 import com.wan.android.bean.ArticleEntity
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/5/9.
  */
 class NavigationPresenter {

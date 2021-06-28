@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/8.
  */
 class NavigationViewModel(private val mRepository: NavigationRepository) : BaseViewModel() {

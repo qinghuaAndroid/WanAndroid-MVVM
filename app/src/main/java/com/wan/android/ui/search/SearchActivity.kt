@@ -17,7 +17,7 @@ import com.wan.android.databinding.ActivitySearchBinding
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/14.
  */
 @Route(path = ArouterPath.ACTIVITY_SEARCH)

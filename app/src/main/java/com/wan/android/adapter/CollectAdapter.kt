@@ -8,7 +8,7 @@ import com.wan.android.bean.ArticleEntity
 import com.wan.android.databinding.ItemHomeArticleBinding
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/9.
  * 收藏适配器
  */

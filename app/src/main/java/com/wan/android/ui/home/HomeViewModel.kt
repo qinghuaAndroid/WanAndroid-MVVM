@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/16.
  */
 class HomeViewModel(private val mRepository: HomeRepository) : BaseViewModel() {

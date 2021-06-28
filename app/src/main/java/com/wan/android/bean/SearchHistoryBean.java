@@ -3,7 +3,7 @@ package com.wan.android.bean;
 import io.realm.RealmObject;
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/14.
  */
 public class SearchHistoryBean extends RealmObject {

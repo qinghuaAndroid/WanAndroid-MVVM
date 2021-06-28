@@ -133,9 +133,6 @@ dependencies {
     //友盟统计
     api 'com.umeng.analytics:analytics:6.1.4'
 
-    //tablayout
-    api 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
-
     //live-event-bus
     api 'com.jeremyliao:live-event-bus-x:1.7.3'
 
@@ -162,6 +159,9 @@ dependencies {
     api "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     // Lifecycles only (without ViewModel or LiveData)
     api "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+
+    //jetpack - startup
+    api "androidx.startup:startup-runtime:1.0.0"
 
     // 3.x branch
     def koin_version = '3.1.0'

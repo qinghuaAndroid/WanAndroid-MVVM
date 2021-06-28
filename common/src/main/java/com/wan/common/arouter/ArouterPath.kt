@@ -1,7 +1,7 @@
 package com.wan.common.arouter
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/22.
  */
 object ArouterPath {

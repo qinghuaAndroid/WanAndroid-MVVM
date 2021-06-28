@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/10.
  */
 class IntegralViewModel(private val mRepository: IntegralRepository) :

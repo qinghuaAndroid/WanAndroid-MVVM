@@ -8,7 +8,7 @@ import com.tencent.mmkv.MMKV
 import com.wan.login.bean.UserEntity
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/7.
  */
 class LoginRepository : BaseRepository() {

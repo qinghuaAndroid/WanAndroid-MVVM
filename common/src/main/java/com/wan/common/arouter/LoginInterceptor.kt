@@ -9,7 +9,7 @@ import com.wan.common.constant.Const
 import com.tencent.mmkv.MMKV
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/22.
  */
 @Interceptor(priority = 8, name = "login")

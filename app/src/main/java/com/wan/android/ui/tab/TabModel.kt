@@ -8,7 +8,7 @@ import com.wan.android.http.HttpHelper
 import io.reactivex.rxjava3.core.Observable
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/3.
  */
 class TabModel : BaseModel(), TabContract.Model {

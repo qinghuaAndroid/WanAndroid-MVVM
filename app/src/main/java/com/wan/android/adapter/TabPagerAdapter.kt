@@ -9,7 +9,7 @@ import com.wan.android.constant.Const
 import com.wan.android.ui.tab.list.TabListFragment
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/3/26.
  */
 class TabPagerAdapter(fragmentActivity: FragmentActivity, list: MutableList<TabEntity>,type: Int?) :

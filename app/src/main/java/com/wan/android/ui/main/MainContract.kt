@@ -8,7 +8,7 @@ import com.wan.android.bean.UserInfoEntity
 import io.reactivex.rxjava3.core.Observable
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/20.
  */
 interface MainContract {

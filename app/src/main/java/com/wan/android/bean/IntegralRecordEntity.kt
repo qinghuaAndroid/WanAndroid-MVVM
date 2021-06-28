@@ -1,7 +1,7 @@
 package com.wan.android.bean
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/14.
  */
 class IntegralRecordEntity {

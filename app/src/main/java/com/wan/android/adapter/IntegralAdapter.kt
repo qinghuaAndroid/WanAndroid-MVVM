@@ -7,7 +7,7 @@ import com.wan.android.R
 import com.wan.android.bean.IntegralRecordEntity
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/14.
  */
 class IntegralAdapter(layoutId:Int) : BaseQuickAdapter<IntegralRecordEntity.DatasBean, BaseViewHolder>(layoutId),LoadMoreModule {

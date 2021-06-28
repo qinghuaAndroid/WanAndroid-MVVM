@@ -6,7 +6,7 @@ import androidx.databinding.ViewDataBinding
 import com.wan.baselib.base.BaseFragment
 
 /**
- * @author FQH
+ * @author cy
  * Create at 2020/4/3.
  */
 abstract class BaseVMFragment<VM : BaseViewModel, B : ViewDataBinding> : BaseFragment<B>() {
