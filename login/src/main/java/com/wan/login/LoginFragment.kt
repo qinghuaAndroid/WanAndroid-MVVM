@@ -47,7 +47,6 @@ class LoginFragment : BaseVMFragment<LoginViewModel, FragmentLoginBinding>() {
         mBinding.lifecycleOwner = this
         mBinding.viewModel = mViewModel
 
-//        mBinding.tvRegister.onClick { iCallBack.jump(Const.FRAGMENT_REGISTER, this@LoginFragment) }
         mBinding.tvRegister.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_registerFragment)
         }
