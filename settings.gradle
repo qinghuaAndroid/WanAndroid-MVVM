@@ -1,4 +1,3 @@
-include ':mvvm-examples'
 include ':login'
 rootProject.name = 'WanAndroid-qh'
 include ':app', ':baselib', ':common'
