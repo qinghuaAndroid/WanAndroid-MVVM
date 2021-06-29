@@ -11,12 +11,12 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.navigation.NavigationView
+import com.tencent.mmkv.MMKV
 import com.wan.android.R
 import com.wan.android.adapter.MainPagerAdapter
 import com.wan.android.bean.UserInfoEntity
 import com.wan.android.constant.Const
 import com.wan.android.databinding.ActivityMainBinding
-import com.tencent.mmkv.MMKV
 import com.wan.baselib.ext.getThemeColor
 import com.wan.baselib.helper.LiveEventBusHelper
 import com.wan.baselib.mvp.BaseMvpActivity

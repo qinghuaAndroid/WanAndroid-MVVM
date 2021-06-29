@@ -6,26 +6,25 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.launcher.ARouter
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
-import com.wan.common.constant.Const
-import com.wan.baselib.ext.showToast
-import com.wan.baselib.mvvm.BaseVMFragment
-import com.wan.baselib.widget.LoadMoreView
 import com.google.android.material.appbar.AppBarLayout
 import com.wan.android.R
 import com.wan.android.adapter.ArticleAdapter
 import com.wan.android.adapter.ImageNetAdapter
-import com.wan.common.arouter.ArouterPath
 import com.wan.android.databinding.FragmentHomeBinding
 import com.wan.android.ui.ArticleViewModel
 import com.wan.android.ui.collect.CollectViewModel
+import com.wan.baselib.ext.showToast
+import com.wan.baselib.mvvm.BaseVMFragment
+import com.wan.baselib.widget.LoadMoreView
+import com.wan.common.arouter.ArouterPath
+import com.wan.common.constant.Const
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * @author cy
  * Create at 2020/4/2.
  */
-class HomeFragment :
-    BaseVMFragment<ArticleViewModel, FragmentHomeBinding>() {
+class HomeFragment : BaseVMFragment<ArticleViewModel, FragmentHomeBinding>() {
 
     private val homeViewModel by viewModel<HomeViewModel>()
     private val articleViewModel by viewModel<ArticleViewModel>()
