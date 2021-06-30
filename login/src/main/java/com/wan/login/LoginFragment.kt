@@ -48,7 +48,11 @@ class LoginFragment : BaseVMFragment<LoginViewModel, FragmentLoginBinding>() {
         mBinding.viewModel = mViewModel
 
         mBinding.tvRegister.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_registerFragment)
+            val direction =
+                LoginFragmentDirections.actionLoginFragmentToRegisterFragment(mViewModel.userName.get())
+            Navigation.findNavController(it).navigate(direction)
+            //不传参数可用下面这种
+//            Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
         mBinding.ivClear.onClick {

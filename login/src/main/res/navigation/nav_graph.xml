@@ -19,6 +19,14 @@
         android:id="@+id/registerFragment"
         android:name="com.wan.login.RegisterFragment"
         android:label="register"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/fragment_register">
+
+        <argument
+            android:name="account"
+            android:defaultValue=""
+            app:argType="string"
+            app:nullable="true" />
+
+    </fragment>
 
 </navigation>

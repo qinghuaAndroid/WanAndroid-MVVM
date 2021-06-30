@@ -5,6 +5,7 @@ import android.text.method.PasswordTransformationMethod
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import com.wan.baselib.mvvm.BaseVMFragment
 import com.wan.baselib.utils.ToastUtils
 import com.wan.login.databinding.FragmentRegisterBinding
@@ -19,6 +20,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class RegisterFragment : BaseVMFragment<RegisterViewModel, FragmentRegisterBinding>() {
 
     private val mViewModel: RegisterViewModel by viewModel()
+    private val args: RegisterFragmentArgs by navArgs()
     private var isPasswordShow = false
     private var isRePasswordShow = false
 
@@ -39,7 +41,7 @@ class RegisterFragment : BaseVMFragment<RegisterViewModel, FragmentRegisterBindi
     override fun attachLayoutRes(): Int = R.layout.fragment_register
 
     override fun initData() {
-
+        mViewModel.userName.set(args.account)
     }
 
     override fun initView(view: View) {
