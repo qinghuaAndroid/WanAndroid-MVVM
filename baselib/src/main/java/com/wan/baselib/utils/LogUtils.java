@@ -36,7 +36,7 @@ public class LogUtils {
     /**
      * 日志输出时的TAG
      */
-    private static String mTag = "LogUtils";
+    private static final String TAG = "LogUtils";
 
     /**
      * 是否允许输出log
@@ -57,7 +57,7 @@ public class LogUtils {
      */
     public static void v(String msg) {
         if (mDebuggable >= LEVEL_VERBOSE) {
-            Log.v(mTag, msg);
+            Log.v(TAG, msg);
         }
     }
 
@@ -66,7 +66,7 @@ public class LogUtils {
      */
     public static void d(String msg) {
         if (mDebuggable >= LEVEL_DEBUG) {
-            Log.d(mTag, msg);
+            Log.d(TAG, msg);
         }
     }
 
@@ -75,7 +75,7 @@ public class LogUtils {
      */
     public static void i(String msg) {
         if (mDebuggable >= LEVEL_INFO) {
-            Log.i(mTag, msg);
+            Log.i(TAG, msg);
         }
     }
 
@@ -84,7 +84,7 @@ public class LogUtils {
      */
     public static void w(String msg) {
         if (mDebuggable >= LEVEL_WARN) {
-            Log.w(mTag, msg);
+            Log.w(TAG, msg);
         }
     }
 
@@ -93,7 +93,7 @@ public class LogUtils {
      */
     public static void e(String msg) {
         if (mDebuggable >= LEVEL_ERROR) {
-            Log.e(mTag, msg);
+            Log.e(TAG, msg);
         }
     }
 
@@ -108,7 +108,7 @@ public class LogUtils {
      * 以级别为 w 的形式输出LOG信息和Throwable
      */
     public static void w(String msg, Throwable tr) {
-        Log.w(mTag, msg, tr);
+        Log.w(TAG, msg, tr);
     }
 
     /**
@@ -123,7 +123,7 @@ public class LogUtils {
      */
     public static void e(String msg, Throwable tr) {
         if (mDebuggable >= LEVEL_ERROR && null != msg) {
-            Log.e(mTag, msg, tr);
+            Log.e(TAG, msg, tr);
         }
     }
 }
