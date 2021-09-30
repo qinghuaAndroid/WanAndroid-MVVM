@@ -15,7 +15,7 @@ import java.text.ParseException
  * desc: 异常处理类
  */
 
-class ExceptionHandle {
+class ExceptionHandler {
 
     companion object {
          var errorCode = ErrorStatus.UNKNOWN_ERROR

@@ -1,129 +1,133 @@
-package com.wan.baselib.utils;
+package com.wan.baselib.utils
 
-import android.util.Log;
-
-import com.wan.baselib.BuildConfig;
+import android.util.Log
+import com.wan.baselib.BuildConfig
 
 /**
  * Log工具类
  */
-public class LogUtils {
+object LogUtils {
     /**
      * 日志输出级别NONE
      */
-    public static final int LEVEL_NONE = 0;
+    const val LEVEL_NONE = 0
+
     /**
      * 日志输出级别E
      */
-    public static final int LEVEL_ERROR = 1;
+    const val LEVEL_ERROR = 1
+
     /**
      * 日志输出级别W
      */
-    public static final int LEVEL_WARN = 2;
+    const val LEVEL_WARN = 2
+
     /**
      * 日志输出级别I
      */
-    public static final int LEVEL_INFO = 3;
+    const val LEVEL_INFO = 3
+
     /**
      * 日志输出级别D
      */
-    public static final int LEVEL_DEBUG = 4;
+    const val LEVEL_DEBUG = 4
+
     /**
      * 日志输出级别V
      */
-    public static final int LEVEL_VERBOSE = 5;
+    const val LEVEL_VERBOSE = 5
 
     /**
      * 日志输出时的TAG
      */
-    private static final String TAG = "LogUtils";
+    private const val TAG = "LogUtils"
 
     /**
      * 是否允许输出log
      */
-    private static int mDebuggable = BuildConfig.DEBUG ? LEVEL_VERBOSE : LEVEL_NONE;
+    private var mDebuggable = if (BuildConfig.DEBUG) LEVEL_VERBOSE else LEVEL_NONE
 
     /**
      * 设置调试Log开关
      *
      * @param isEnable 是否允许log
      */
-    public static void setDebuggable(boolean isEnable) {
-        mDebuggable = isEnable ? LEVEL_VERBOSE : LEVEL_NONE;
+    fun setDebuggable(isEnable: Boolean) {
+        mDebuggable = if (isEnable) LEVEL_VERBOSE else LEVEL_NONE
     }
 
     /**
      * 以级别为 d 的形式输出LOG
      */
-    public static void v(String msg) {
+    fun v(msg: String?) {
         if (mDebuggable >= LEVEL_VERBOSE) {
-            Log.v(TAG, msg);
+            Log.v(TAG, msg!!)
         }
     }
 
     /**
      * 以级别为 d 的形式输出LOG
      */
-    public static void d(String msg) {
+    fun d(msg: String?) {
         if (mDebuggable >= LEVEL_DEBUG) {
-            Log.d(TAG, msg);
+            Log.d(TAG, msg!!)
         }
     }
 
     /**
      * 以级别为 i 的形式输出LOG
      */
-    public static void i(String msg) {
+    fun i(msg: String?) {
         if (mDebuggable >= LEVEL_INFO) {
-            Log.i(TAG, msg);
+            Log.i(TAG, msg!!)
         }
     }
 
     /**
      * 以级别为 w 的形式输出LOG
      */
-    public static void w(String msg) {
+    fun w(msg: String?) {
         if (mDebuggable >= LEVEL_WARN) {
-            Log.w(TAG, msg);
+            Log.w(TAG, msg!!)
         }
     }
 
     /**
      * 以级别为 e 的形式输出LOG
      */
-    public static void e(String msg) {
+    fun e(msg: String?) {
         if (mDebuggable >= LEVEL_ERROR) {
-            Log.e(TAG, msg);
+            Log.e(TAG, msg!!)
         }
     }
 
     /**
      * 以级别为 w 的形式输出Throwable
      */
-    public static void w(Throwable tr) {
-        w("", tr);
+    fun w(tr: Throwable?) {
+        w("", tr)
     }
 
     /**
      * 以级别为 w 的形式输出LOG信息和Throwable
      */
-    public static void w(String msg, Throwable tr) {
-        Log.w(TAG, msg, tr);
+    fun w(msg: String?, tr: Throwable?) {
+        Log.w(TAG, msg, tr)
     }
 
     /**
      * 以级别为 e 的形式输出Throwable
      */
-    public static void e(Throwable tr) {
-        e("", tr);
+    fun e(tr: Throwable?) {
+        e("", tr)
     }
 
     /**
      * 以级别为 e 的形式输出LOG信息和Throwable
      */
-    public static void e(String msg, Throwable tr) {
+    fun e(msg: String?, tr: Throwable?) {
         if (mDebuggable >= LEVEL_ERROR && null != msg) {
-            Log.e(TAG, msg, tr);
+            Log.e(TAG, msg, tr)
         }
     }
 }
