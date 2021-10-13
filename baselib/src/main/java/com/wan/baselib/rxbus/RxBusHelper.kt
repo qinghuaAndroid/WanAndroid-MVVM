@@ -1,12 +1,7 @@
 package com.wan.baselib.rxbus
 
-import com.wan.baselib.rxbus.RxBus
-import java.lang.Class
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import com.wan.baselib.rxbus.RxBusHelper
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import kotlin.Throws
-import java.lang.Exception
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 object RxBusHelper {
@@ -15,7 +10,7 @@ object RxBusHelper {
      *
      * @param o
      */
-    fun post(o: Any?) {
+    fun post(o: Any) {
         RxBus.INSTANCE.post(o)
     }
 
@@ -27,8 +22,8 @@ object RxBusHelper {
      * @param listener
      * @param <T>
     </T> */
-    fun <T> doOnMainThread(
-        aClass: Class<T>?,
+    fun <T : Any> doOnMainThread(
+        aClass: Class<T>,
         disposables: CompositeDisposable,
         listener: OnEventListener<T>
     ) {
@@ -36,7 +31,7 @@ object RxBusHelper {
             .subscribe({ t -> listener.onEvent(t) }) { throwable -> listener.onError(throwable) })
     }
 
-    fun <T> doOnMainThread(aClass: Class<T>?, listener: OnEventListener<T>) {
+    fun <T : Any> doOnMainThread(aClass: Class<T>, listener: OnEventListener<T>) {
         val disposable = RxBus.INSTANCE.toFlowable(aClass).observeOn(AndroidSchedulers.mainThread())
             .subscribe({ t -> listener.onEvent(t) }) { throwable -> listener.onError(throwable) }
     }
@@ -49,8 +44,8 @@ object RxBusHelper {
      * @param listener
      * @param <T>
     </T> */
-    fun <T> doOnChildThread(
-        aClass: Class<T>?,
+    fun <T : Any> doOnChildThread(
+        aClass: Class<T>,
         disposables: CompositeDisposable,
         listener: OnEventListener<T>
     ) {
@@ -58,7 +53,7 @@ object RxBusHelper {
             .subscribe({ t -> listener.onEvent(t) }) { throwable -> listener.onError(throwable) })
     }
 
-    fun <T> doOnChildThread(aClass: Class<T>?, listener: OnEventListener<T>) {
+    fun <T : Any> doOnChildThread(aClass: Class<T>, listener: OnEventListener<T>) {
         val disposable = RxBus.INSTANCE.toFlowable(aClass).subscribeOn(Schedulers.newThread())
             .subscribe({ t -> listener.onEvent(t) }) { throwable -> listener.onError(throwable) }
     }

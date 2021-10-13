@@ -50,9 +50,8 @@ public class StringUtils {
     public static boolean isPhoneNumberValid(String phoneNumber) {
         boolean isValid = false;
         String expression = "^1[3|4|5|7|8]\\d{9}$";
-        CharSequence inputStr = phoneNumber;
         Pattern pattern = Pattern.compile(expression);
-        Matcher matcher = pattern.matcher(inputStr);
+        Matcher matcher = pattern.matcher(phoneNumber);
         if (matcher.matches()) {
             isValid = true;
         }
