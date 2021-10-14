@@ -21,7 +21,7 @@ object ImageLoader {
     private var mOptionAvatar: RequestOptions? = null
 
     private val defImage = R.mipmap.ic_default_img
-    private val defHeader: Int = R.mipmap.ic_default_avatar
+    private val defHeader = R.mipmap.ic_default_avatar
     private var mStyle = STYLE_ROUND
 
     @JvmStatic

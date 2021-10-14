@@ -1,53 +1,45 @@
 package com.wan.android.ui.search
 
-import com.wan.baselib.helper.RealmHelper
+import com.wan.android.bean.HotSearchEntity
+import com.wan.android.bean.SearchHistoryBean
 import com.wan.baselib.mvp.BasePresenter
 import com.wan.baselib.network.RxHelper
 import com.wan.baselib.network.RxObserver
-import com.wan.baselib.utils.isNull
-import com.wan.android.bean.HotSearchEntity
-import com.wan.android.bean.SearchHistoryBean
+import io.realm.OrderedCollectionChangeSet
+import io.realm.OrderedRealmCollectionChangeListener
+import io.realm.RealmResults
 
 
 class SearchPresenter : BasePresenter<SearchContract.Model, SearchContract.View>(),
     SearchContract.Presenter {
 
-    private val realm by lazy { RealmHelper.realm }
-
-    override fun createModel(): SearchContract.Model? = SearchModel()
+    override fun createModel(): SearchContract.Model = SearchModel()
 
     override fun deleteByKey(key: String) {
-        val results = realm.where(SearchHistoryBean::class.java).equalTo("key", key).findAll()
-        realm.executeTransaction {
-            results.deleteAllFromRealm()
-        }
+        mModel?.deleteByKey(key)
     }
 
     override fun clearAllHistory() {
-        val results = realm.where(SearchHistoryBean::class.java).findAll()
-        realm.executeTransaction {
-            results.deleteAllFromRealm()
-        }
+
+        mModel?.clearAllHistory()
     }
 
     override fun saveSearchKey(key: String) {
-        val result = realm.where(SearchHistoryBean::class.java).equalTo("key", key).findFirst()
-        result.isNull<SearchHistoryBean> {
-            realm.executeTransactionAsync {
-                val searchHistoryBean = it.createObject(SearchHistoryBean::class.java)
-                searchHistoryBean.key = key
-            }
-        }
+        mModel?.saveSearchKey(key)
     }
 
-    override fun queryHistory() {
-        val results = realm.where(SearchHistoryBean::class.java).findAll()
-        val historyBeans: MutableList<SearchHistoryBean> = mutableListOf()
-        for (searchHistoryBean in results) {
-            historyBeans.add(searchHistoryBean)
-        }
-        mView?.showHistoryData(historyBeans)
+    override fun addChangeListener() {
+        mModel?.getRealmResults()?.addChangeListener(orderedRealmCollectionChangeListener)
     }
+
+    private val orderedRealmCollectionChangeListener =
+        OrderedRealmCollectionChangeListener<RealmResults<SearchHistoryBean>> { collection, changeSet ->
+            if (changeSet.state == OrderedCollectionChangeSet.State.INITIAL
+                || changeSet.state == OrderedCollectionChangeSet.State.UPDATE
+            ) {
+                mView?.showHistoryData(collection)
+            }
+        }
 
     override fun getHotSearchData() {
         val disposableObserver =
@@ -62,6 +54,10 @@ class SearchPresenter : BasePresenter<SearchContract.Model, SearchContract.View>
                 }
             })
         addDisposable(disposableObserver)
+    }
+
+    override fun removeChangeListener() {
+        mModel?.getRealmResults()?.removeChangeListener(orderedRealmCollectionChangeListener)
     }
 
 }

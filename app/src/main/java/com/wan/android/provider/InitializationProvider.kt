@@ -1,7 +1,6 @@
 package com.wan.android.provider
 
 import android.content.Context
-import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.startup.Initializer
 import com.alibaba.android.arouter.launcher.ARouter
@@ -11,7 +10,6 @@ import com.wan.android.BuildConfig
 import com.wan.android.koin.appModule
 import com.wan.baselib.app.App
 import com.wan.baselib.utils.AutoDensityUtils
-import com.wan.baselib.utils.LogUtils
 import com.wan.baselib.utils.SettingUtil
 import io.realm.Realm
 import org.koin.android.ext.koin.androidContext

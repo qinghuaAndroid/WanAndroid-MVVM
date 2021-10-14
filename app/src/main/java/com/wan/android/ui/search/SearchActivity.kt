@@ -40,9 +40,9 @@ class SearchActivity :
     }
 
     private fun initListener() {
+        mPresenter?.addChangeListener()
         mBinding.ivClearAll.onClick {
             mPresenter?.clearAllHistory()
-            mBinding.historyLabelsView.removeAllViews()
         }
     }
 
@@ -54,11 +54,6 @@ class SearchActivity :
 
     override fun loadData() {
         mPresenter?.getHotSearchData()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mPresenter?.queryHistory()
     }
 
     override fun showHistoryData(historyBeans: MutableList<SearchHistoryBean>) {
@@ -110,6 +105,7 @@ class SearchActivity :
 
     override fun onDestroy() {
         super.onDestroy()
+        mPresenter?.removeChangeListener()
         RealmHelper.realm.close()
     }
 }
