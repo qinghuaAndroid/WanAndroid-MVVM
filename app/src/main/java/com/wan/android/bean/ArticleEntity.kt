@@ -69,6 +69,7 @@ class ArticleEntity {
         var niceDate: String? = null
         var niceShareDate: String? = null
         var origin: String? = null
+        var originId = -1
         var prefix: String? = null
         var projectLink: String? = null
         var publishTime: Long = 0

@@ -23,7 +23,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  */
 @Route(path = ArouterPath.ACTIVITY_COLLECT, extras = Const.NEED_LOGIN)
 class CollectActivity :
-    BaseVMActivity<ArticleViewModel, ActivityCollectBinding>(){
+    BaseVMActivity<ArticleViewModel, ActivityCollectBinding>() {
     private val articleViewModel by viewModel<ArticleViewModel>()
     private val collectViewModel by viewModel<CollectViewModel>()
     private val collectAdapter by lazy { CollectAdapter() }
@@ -67,7 +67,9 @@ class CollectActivity :
         val datasBean = collectAdapter.data[position]
         curPosition = position
         when (view.id) {
-            R.id.ivCollect -> {collectViewModel.unCollect(datasBean.id)}
+            R.id.ivCollect -> {
+                collectViewModel.unMyCollect(datasBean.id, datasBean.originId)
+            }
         }
     }
 
@@ -98,8 +100,10 @@ class CollectActivity :
         })
         collectViewModel.uiState.observe(this, Observer {
             if (it.showLoading) showProgressDialog() else dismissProgressDialog()
-            it.showSuccess?.let {
-                collectAdapter.remove(curPosition)
+            it.showSuccess?.let { collect ->
+                if (collect.not()) {
+                    collectAdapter.remove(curPosition)
+                }
             }
             it.showError?.let { errorMsg -> showToast(errorMsg) }
         })

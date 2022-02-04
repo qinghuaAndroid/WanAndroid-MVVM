@@ -36,6 +36,14 @@ class CollectViewModel(private val mRepository: CollectRepository) : BaseViewMod
         }
     }
 
+    fun unMyCollect(id: Int, originId: Int) {
+        viewModelScope.launch(Dispatchers.Main) {
+            val result = withContext(Dispatchers.IO) { mRepository.unMyCollect(id, originId) }
+            if (result is Result.Success) emitUiState(showSuccess = false)
+            else if (result is Result.Error) emitUiState(showError = result.exception.message)
+        }
+    }
+
     private fun emitUiState(
         showLoading: Boolean = false,
         showError: String? = null,

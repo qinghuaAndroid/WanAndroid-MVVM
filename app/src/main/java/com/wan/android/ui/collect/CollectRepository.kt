@@ -35,5 +35,13 @@ class CollectRepository: BaseRepository() {
         return executeResponse(HttpHelper.apiService.unCollect(id))
     }
 
+    suspend fun unMyCollect(id: Int, originId: Int):Result<Any>{
+        return safeApiCall { requestCancelMyCollect(id, originId) }
+    }
+
+    private suspend fun requestCancelMyCollect(id: Int, originId:Int):Result<Any> {
+        return executeResponse(HttpHelper.apiService.unMyCollect(id, originId))
+    }
+
 
 }

@@ -42,6 +42,13 @@ interface ApiService {
     suspend fun unCollect(@Path("id") id: Int): HttpResult<Any>
 
     /**
+     * 取消收藏
+     */
+    @POST("/lg/uncollect/{id}/json")
+    @FormUrlEncoded
+    suspend fun unMyCollect(@Path("id") id: Int, @Field("originId") originId: Int): HttpResult<Any>
+
+    /**
      * 获取项目tab
      */
     @GET("/project/tree/json")

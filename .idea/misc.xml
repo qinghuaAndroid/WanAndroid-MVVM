@@ -3,11 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Actual/WanAndroid-qh/app/src/main/res/drawable/ic_logout_white_24dp.xml" value="0.3697916666666667" />
-        <entry key="..\:/Actual/WanAndroid-qh/app/src/main/res/menu/nav_menu.xml" value="0.3536458333333333" />
-        <entry key="..\:/Project/WanAndroid-qh/app/src/main/res/layout/item_girl.xml" value="0.2518518518518518" />
+        <entry key="..\:/Personal/WanAndroid-qh/app/src/main/res/layout/activity_about.xml" value="0.1" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
 </project>
