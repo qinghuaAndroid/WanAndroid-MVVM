@@ -36,7 +36,7 @@ class BrowserNormalActivity : BaseActivity<ActivityBrowserNormalBinding>() {
         NestedScrollAgentWebView(this)
     }
 
-    override fun attachLayoutRes(): Int = R.layout.activity_browser_normal
+    override fun getLayoutId(): Int = R.layout.activity_browser_normal
 
     override fun initData() {
         ARouter.getInstance().inject(this)

@@ -30,7 +30,7 @@ open class App : Application() {
     }
 
     companion object {
-        lateinit var application: Application
+        private lateinit var application: Application
 
         @JvmStatic
         fun context(): Context {

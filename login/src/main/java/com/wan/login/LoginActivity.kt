@@ -13,7 +13,7 @@ import com.wan.login.databinding.ActivityLoginBinding
 @Route(path = ArouterPath.ACTIVITY_LOGIN)
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
-    override fun attachLayoutRes(): Int = R.layout.activity_login
+    override fun getLayoutId(): Int = R.layout.activity_login
 
     override fun initView() {
 

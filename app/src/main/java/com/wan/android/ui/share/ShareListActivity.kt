@@ -57,7 +57,7 @@ class ShareListActivity : BaseVMActivity<ArticleViewModel, ActivityShareListBind
         })
     }
 
-    override fun attachLayoutRes(): Int = R.layout.activity_share_list
+    override fun getLayoutId(): Int = R.layout.activity_share_list
 
     override fun initData() {
 

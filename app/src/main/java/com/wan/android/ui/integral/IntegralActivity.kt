@@ -53,7 +53,7 @@ class IntegralActivity : BaseVMActivity<IntegralViewModel, ActivityIntegralBindi
         })
     }
 
-    override fun attachLayoutRes(): Int = R.layout.activity_integral
+    override fun getLayoutId(): Int = R.layout.activity_integral
 
     override fun initData() {
         ARouter.getInstance().inject(this)

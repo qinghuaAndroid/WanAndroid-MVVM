@@ -42,7 +42,7 @@ class MainActivity :
     private lateinit var tvUserRank: TextView
     private lateinit var logoutMenuItem: MenuItem
 
-    override fun attachLayoutRes(): Int = R.layout.activity_main
+    override fun getLayoutId(): Int = R.layout.activity_main
 
     override fun initData() {
         isLogin = mmkv.decodeBool(com.wan.common.constant.Const.IS_LOGIN, false)

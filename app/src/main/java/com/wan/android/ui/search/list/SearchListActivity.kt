@@ -61,7 +61,7 @@ class SearchListActivity : BaseVMActivity<ArticleViewModel, ActivitySystemBindin
         })
     }
 
-    override fun attachLayoutRes(): Int = R.layout.activity_system
+    override fun getLayoutId(): Int = R.layout.activity_system
 
     override fun initData() {
         ARouter.getInstance().inject(this)

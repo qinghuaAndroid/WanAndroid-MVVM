@@ -70,8 +70,10 @@ dependencies {
     //DoraemonKit
     debugImplementation 'com.didichuxing.doraemonkit:doraemonkit:2.2.2'
     releaseImplementation 'com.didichuxing.doraemonkit:doraemonkit-no-op:2.2.2'
-
-    implementation project(path: ':login')
+    //leakcanary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'
     //使用ARouter的模块都要配置
     kapt 'com.alibaba:arouter-compiler:1.5.2'
+    //login模块
+    implementation project(path: ':login')
 }

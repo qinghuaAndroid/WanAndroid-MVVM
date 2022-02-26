@@ -54,7 +54,7 @@ class MyArticleActivity : BaseVMActivity<MyArticleViewModel, ActivityMyArticleBi
         })
     }
 
-    override fun attachLayoutRes(): Int = R.layout.activity_my_article
+    override fun getLayoutId(): Int = R.layout.activity_my_article
 
     override fun initData() {
 

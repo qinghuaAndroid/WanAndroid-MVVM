@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
  */
 class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
-    override fun attachLayoutRes(): Int = R.layout.activity_splash
+    override fun getLayoutId(): Int = R.layout.activity_splash
 
     override fun initData() {
         val disposable = RxPermissions(this).request(

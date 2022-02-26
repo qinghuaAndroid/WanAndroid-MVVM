@@ -27,7 +27,7 @@ class SearchActivity :
 
     override fun createPresenter(): SearchContract.Presenter = SearchPresenter()
 
-    override fun attachLayoutRes(): Int = R.layout.activity_search
+    override fun getLayoutId(): Int = R.layout.activity_search
 
     override fun initData() {
 

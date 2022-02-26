@@ -38,7 +38,7 @@ class GirlActivity :
         girlAdapter.loadMoreModule.loadMoreFail()
     }
 
-    override fun attachLayoutRes(): Int = R.layout.activity_girl
+    override fun getLayoutId(): Int = R.layout.activity_girl
 
     override fun initData() {
 

@@ -6,7 +6,6 @@ import androidx.annotation.StringRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.trello.rxlifecycle4.components.support.RxAppCompatActivity
-import com.wan.baselib.app.App
 import com.wan.baselib.ext.getThemeColor
 import com.wan.baselib.utils.AutoDensityUtils
 import com.wan.baselib.utils.StatusBarUtil
@@ -23,12 +22,12 @@ import kotlinx.coroutines.cancel
 abstract class BaseActivity<B : ViewDataBinding> : RxAppCompatActivity(), CoroutineScope by MainScope() {
     protected lateinit var mBinding: B
     override fun onCreate(savedInstanceState: Bundle?) {
-        AutoDensityUtils.setCustomDensity(this, App.application)
+        AutoDensityUtils.setCustomDensity(this, application)
         super.onCreate(savedInstanceState)
-        if (attachLayoutRes() == 0) {
+        if (getLayoutId() == 0) {
             throw RuntimeException("Please set the page layout")
         }
-        mBinding = DataBindingUtil.setContentView<B>(this, attachLayoutRes())
+        mBinding = DataBindingUtil.setContentView<B>(this, getLayoutId())
         initToolbar()
         initData()
         initView()
@@ -66,7 +65,7 @@ abstract class BaseActivity<B : ViewDataBinding> : RxAppCompatActivity(), Corout
     }
 
 
-    protected abstract fun attachLayoutRes(): Int
+    protected abstract fun getLayoutId(): Int
     protected abstract fun initData()
     protected abstract fun initView()
     protected abstract fun loadData()

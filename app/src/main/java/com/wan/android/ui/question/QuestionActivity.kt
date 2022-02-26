@@ -57,7 +57,7 @@ class QuestionActivity : BaseVMActivity<ArticleViewModel, ActivityQuestionBindin
         })
     }
 
-    override fun attachLayoutRes(): Int = R.layout.activity_question
+    override fun getLayoutId(): Int = R.layout.activity_question
 
     override fun initData() {
 

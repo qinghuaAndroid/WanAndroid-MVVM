@@ -34,7 +34,7 @@ class SettingActivity :
 
     override fun createPresenter(): SettingContract.Presenter = SettingPresenter()
 
-    override fun attachLayoutRes(): Int = R.layout.activity_setting
+    override fun getLayoutId(): Int = R.layout.activity_setting
 
     override fun initData() {
 

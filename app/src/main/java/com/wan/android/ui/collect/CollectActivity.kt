@@ -29,7 +29,7 @@ class CollectActivity :
     private val collectAdapter by lazy { CollectAdapter() }
     private var curPosition = 0
 
-    override fun attachLayoutRes(): Int = R.layout.activity_collect
+    override fun getLayoutId(): Int = R.layout.activity_collect
 
     override fun initData() {
 
