@@ -11,6 +11,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.navigation.NavigationView
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.tencent.mmkv.MMKV
 import com.wan.android.R
 import com.wan.android.adapter.MainPagerAdapter
@@ -18,7 +19,6 @@ import com.wan.android.bean.UserInfoEntity
 import com.wan.android.constant.Const
 import com.wan.android.databinding.ActivityMainBinding
 import com.wan.baselib.ext.getThemeColor
-import com.wan.baselib.helper.LiveEventBusHelper
 import com.wan.baselib.mvp.BaseMvpActivity
 import com.wan.baselib.utils.SettingUtil
 import com.wan.common.arouter.ArouterPath
@@ -258,7 +258,7 @@ class MainActivity :
     override fun showLogoutSuccess(success: Boolean) {
         mmkv.encode(com.wan.common.constant.Const.IS_LOGIN, false)
         mmkv.removeValueForKey(com.wan.common.constant.Const.USER_GSON)
-        LiveEventBusHelper.post(com.wan.common.constant.Const.LOGOUT_SUCCESS, true)
+        LiveEventBus.get(com.wan.common.constant.Const.LOGOUT_SUCCESS).post(true)
         finish()
     }
 
@@ -272,12 +272,12 @@ class MainActivity :
     }
 
     private fun receiveNotice() {
-        LiveEventBusHelper.observe(com.wan.common.constant.Const.THEME_COLOR,
-            Int::class.java, this, androidx.lifecycle.Observer<Int> {
+        LiveEventBus.get(com.wan.common.constant.Const.THEME_COLOR, Int::class.java)
+            .observe(this, androidx.lifecycle.Observer<Int> {
                 setThemeColor()
             })
-        LiveEventBusHelper.observe(com.wan.login.Const.LOGIN_SUCCESS,
-            Boolean::class.java, this, androidx.lifecycle.Observer<Boolean> {
+        LiveEventBus.get(com.wan.common.constant.Const.LOGOUT_SUCCESS, Boolean::class.java)
+            .observe(this, androidx.lifecycle.Observer<Boolean> {
                 isLogin = true
                 mPresenter?.getUserInfo()
             })

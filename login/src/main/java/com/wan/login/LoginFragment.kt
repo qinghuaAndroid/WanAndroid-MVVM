@@ -5,7 +5,7 @@ import android.text.method.PasswordTransformationMethod
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
-import com.wan.baselib.helper.LiveEventBusHelper
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.wan.baselib.mvvm.BaseVMFragment
 import com.wan.baselib.utils.ToastUtils
 import com.wan.login.databinding.FragmentLoginBinding
@@ -27,7 +27,7 @@ class LoginFragment : BaseVMFragment<LoginViewModel, FragmentLoginBinding>() {
             Observer {
                 if (it.showProgress) showProgressDialog()
                 it.showSuccess?.let {
-                    LiveEventBusHelper.post(Const.LOGIN_SUCCESS, true)
+                    LiveEventBus.get(Const.LOGIN_SUCCESS).post(true)
                     dismissProgressDialog()
                     activity?.finish()
                 }

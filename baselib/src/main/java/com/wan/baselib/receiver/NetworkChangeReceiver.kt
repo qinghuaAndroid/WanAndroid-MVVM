@@ -3,10 +3,10 @@ package com.wan.baselib.receiver
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.tencent.mmkv.MMKV
 import com.wan.baselib.constant.Const
 import com.wan.baselib.event.NetworkChangeEvent
-import com.wan.baselib.helper.LiveEventBusHelper
 import com.wan.baselib.utils.NetworkUtil
 
 /**
@@ -24,11 +24,10 @@ class NetworkChangeReceiver : BroadcastReceiver() {
         val isConnected = NetworkUtil.isNetworkConnected(context)
         if (isConnected) {
             if (isConnected != hasNetwork) {
-                LiveEventBusHelper.post(Const.KEY_NETWORK_CHANGE, NetworkChangeEvent(isConnected))
+                LiveEventBus.get(Const.KEY_NETWORK_CHANGE).post(NetworkChangeEvent(isConnected))
             }
         } else {
-            LiveEventBusHelper.post(Const.KEY_NETWORK_CHANGE, NetworkChangeEvent(isConnected))
+            LiveEventBus.get(Const.KEY_NETWORK_CHANGE).post(NetworkChangeEvent(isConnected))
         }
     }
-
 }

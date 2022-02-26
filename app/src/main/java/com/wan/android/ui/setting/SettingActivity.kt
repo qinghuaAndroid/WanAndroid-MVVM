@@ -6,17 +6,17 @@ import com.afollestad.materialdialogs.color.ColorPalette
 import com.afollestad.materialdialogs.color.colorChooser
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.wan.common.constant.Const
-import com.wan.baselib.helper.LiveEventBusHelper
+import com.jeremyliao.liveeventbus.LiveEventBus
+import com.tencent.mmkv.MMKV
+import com.wan.android.R
+import com.wan.android.databinding.ActivitySettingBinding
 import com.wan.baselib.mvp.BaseMvpActivity
 import com.wan.baselib.utils.CacheUtils
 import com.wan.baselib.utils.SettingUtil
 import com.wan.baselib.utils.StringUtils
 import com.wan.baselib.utils.versionName
-import com.wan.android.R
 import com.wan.common.arouter.ArouterPath
-import com.wan.android.databinding.ActivitySettingBinding
-import com.tencent.mmkv.MMKV
+import com.wan.common.constant.Const
 import kotlinx.android.synthetic.main.activity_setting.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
@@ -60,7 +60,7 @@ class SettingActivity :
             ) { _, color ->
                 SettingUtil.setColor(color)
                 initColor()
-                LiveEventBusHelper.post(Const.THEME_COLOR, color)
+                LiveEventBus.get(Const.THEME_COLOR).post(color)
             }
             positiveButton(R.string.done)
             negativeButton(android.R.string.cancel)
@@ -80,7 +80,7 @@ class SettingActivity :
     override fun logoutSuccess() {
         mmkv.encode(Const.IS_LOGIN, false)
         mmkv.removeValueForKey(Const.USER_GSON)
-        LiveEventBusHelper.post(Const.LOGOUT_SUCCESS, true)
+        LiveEventBus.get(Const.LOGOUT_SUCCESS).post(true)
         finish()
     }
 }
