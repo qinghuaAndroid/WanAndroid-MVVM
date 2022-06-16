@@ -1,17 +1,18 @@
 package com.wan.baselib.network
 
-import com.wan.baselib.BuildConfig
-import com.wan.baselib.app.App
-import com.wan.baselib.network.interceptor.HeaderInterceptor
-import com.wan.baselib.network.interceptor.QueryParameterInterceptor
+import android.app.Application
 import com.franmontiel.persistentcookiejar.ClearableCookieJar
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
+import com.wan.baselib.BuildConfig
+import com.wan.baselib.network.interceptor.HeaderInterceptor
+import com.wan.baselib.network.interceptor.QueryParameterInterceptor
 import okhttp3.Cache
 import okhttp3.ConnectionPool
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.java.KoinJavaComponent.inject
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -31,6 +32,7 @@ object HttpsUtils {
 
     private const val DEFAULT_TIMEOUT: Long = 10L
     private val client: OkHttpClient by lazy { getOkHttpClient() }
+    private val context by inject<Application>(Application::class.java)
 
     private fun getOkHttpClient(): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor()
@@ -39,7 +41,7 @@ object HttpsUtils {
         else
             HttpLoggingInterceptor.Level.NONE
 
-        val httpCacheDir = File(App.context().cacheDir, "api_cache")
+        val httpCacheDir = File(context.cacheDir, "api_cache")
         val cache = Cache(httpCacheDir, (10 * 1024 * 1024).toLong())
 
         val sslContext = SSLContext.getInstance("TLS")
@@ -47,7 +49,7 @@ object HttpsUtils {
         val sslSocketFactory = sslContext.socketFactory
 
         val cookieJar: ClearableCookieJar =
-            PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(App.context()))
+            PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(context))
 
         return OkHttpClient.Builder()
             //信任所有证书，不安全！！！谨记
@@ -58,8 +60,8 @@ object HttpsUtils {
             .addInterceptor(QueryParameterInterceptor())
             .cookieJar(cookieJar)
             .cache(cache)
-                //下面缓存拦截器会拦截网络请求，可能导致请求参数一致的网络请求只走缓存，不走服务器
-//            .addNetworkInterceptor(CacheInterceptor(App.sContext))
+            //下面缓存拦截器会拦截网络请求，可能导致请求参数一致的网络请求只走缓存，不走服务器
+//            .addNetworkInterceptor(CacheInterceptor(context))
             .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)

@@ -30,7 +30,7 @@ class RegisterViewModel(private val mRepository: RegisterRepository) : BaseViewM
     private fun isInputValid(userName: String, passWord: String, rePassWord: String) =
         userName.isNotBlank() && passWord.isNotBlank() && rePassWord.isNotBlank()
 
-    fun registerDataChanged() {
+    private fun registerDataChanged() {
         emitUiState(
             enableRegisterButton = isInputValid(
                 userName.get() ?: "",

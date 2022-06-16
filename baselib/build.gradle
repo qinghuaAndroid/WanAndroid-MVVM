@@ -166,9 +166,11 @@ dependencies {
     api "androidx.startup:startup-runtime:1.0.0"
 
     // 3.x branch
-    def koin_version = '3.1.0'
+    def koin_version = '3.2.0'
     // Koin main features for Android (Scope,ViewModel ...)
     api "io.insert-koin:koin-android:$koin_version"
+    // Navigation Graph
+    api "io.insert-koin:koin-androidx-navigation:$koin_version"
 
     //banner
     api 'com.youth.banner:banner:2.1.0'

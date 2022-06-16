@@ -6,8 +6,8 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.jeremyliao.liveeventbus.LiveEventBus
+import com.wan.baselib.ext.showToast
 import com.wan.baselib.mvvm.BaseVMFragment
-import com.wan.baselib.utils.ToastUtils
 import com.wan.login.databinding.FragmentLoginBinding
 import com.wan.login.viewmodel.LoginViewModel
 import org.jetbrains.anko.sdk27.coroutines.onClick
@@ -32,7 +32,7 @@ class LoginFragment : BaseVMFragment<LoginViewModel, FragmentLoginBinding>() {
                     activity?.finish()
                 }
                 it.showError?.let { errorMsg ->
-                    ToastUtils.showShortToast(errorMsg)
+                    showToast(errorMsg)
                 }
             })
     }

@@ -1,5 +1,6 @@
 package com.wan.baselib.utils
 
+import android.app.Application
 import android.graphics.Color
 import android.widget.ImageView
 import com.bumptech.glide.Glide
@@ -10,6 +11,8 @@ import com.wan.baselib.R
 import com.wan.baselib.app.App
 import com.wan.baselib.transform.GlideCircleBorderTransform
 import com.wan.baselib.transform.GlideRoundedCornersTransform
+import org.koin.java.KoinJavaComponent
+import org.koin.java.KoinJavaComponent.inject
 
 /**
  * Created by cy on 13/10/2021.
@@ -19,6 +22,7 @@ object ImageLoader {
     private const val STYLE_CIRCLE = "circle"
     private const val STYLE_ROUND = "round"
     private var mOptionAvatar: RequestOptions? = null
+    private val context by inject<Application>(Application::class.java)
 
     private val defImage = R.mipmap.ic_default_img
     private val defHeader = R.mipmap.ic_default_avatar
@@ -120,7 +124,7 @@ object ImageLoader {
             mOptionAvatar = RequestOptions()
                 .optionalTransform(
                     GlideRoundedCornersTransform(
-                        App.context(),
+                        context,
                         8f,
                         GlideRoundedCornersTransform.CornerType.ALL
                     )

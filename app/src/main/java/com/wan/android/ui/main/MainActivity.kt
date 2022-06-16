@@ -284,6 +284,6 @@ class MainActivity :
     }
 
     private fun setThemeColor() {
-        navHeaderView.backgroundColor = getThemeColor(this)
+        navHeaderView.backgroundColor = getThemeColor()
     }
 }

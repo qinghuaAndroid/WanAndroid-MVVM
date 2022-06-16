@@ -63,6 +63,6 @@ class TabFragment : BaseMvpFragment<TabContract.View, TabContract.Presenter, Fra
     }
 
     private fun setThemeColor() {
-        context?.let { mBinding.tabLayout.backgroundColor = getThemeColor(it) }
+        mBinding.tabLayout.backgroundColor = getThemeColor()
     }
 }

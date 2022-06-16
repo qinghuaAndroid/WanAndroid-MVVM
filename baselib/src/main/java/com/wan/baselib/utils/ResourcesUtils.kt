@@ -1,16 +1,21 @@
 package com.wan.baselib.utils
 
+import android.app.Application
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import androidx.annotation.*
 import androidx.core.content.ContextCompat
 import com.wan.baselib.app.App
+import org.koin.java.KoinJavaComponent
+import org.koin.java.KoinJavaComponent.inject
 
 /**
  * @author cy
  */
 object ResourcesUtils {
+
+    private val context by inject<Application>(Application::class.java)
     /**
      * 获取strings.xml资源文件字符串
      *
@@ -19,7 +24,7 @@ object ResourcesUtils {
      */
     @JvmStatic
     fun getString(@StringRes id: Int): String {
-        return App.context().resources.getString(id)
+        return context.resources.getString(id)
     }
 
     /**
@@ -29,7 +34,7 @@ object ResourcesUtils {
      * @return 资源文件对应字符串数组
      */
     fun getStringArray(@ArrayRes id: Int): Array<String> {
-        return App.context().resources.getStringArray(id)
+        return context.resources.getStringArray(id)
     }
 
     /**
@@ -39,7 +44,7 @@ object ResourcesUtils {
      * @return 资源文件对应图片
      */
     fun getDrawable(@DrawableRes id: Int): Drawable? {
-        return ContextCompat.getDrawable(App.context(), id)
+        return ContextCompat.getDrawable(context, id)
     }
 
     /**
@@ -49,7 +54,7 @@ object ResourcesUtils {
      * @return 资源文件对应颜色值
      */
     @ColorInt
-    fun getColor(context: Context, @ColorRes id: Int): Int {
+    fun getColor(@ColorRes id: Int): Int {
         return ContextCompat.getColor(context, id)
     }
 
@@ -60,7 +65,7 @@ object ResourcesUtils {
      * @return 资源文件对应颜色状态
      */
     fun getColorStateList(@ColorRes id: Int): ColorStateList? {
-        return ContextCompat.getColorStateList(App.context(), id)
+        return ContextCompat.getColorStateList(context, id)
     }
 
     /**
@@ -70,6 +75,6 @@ object ResourcesUtils {
      * @return 资源文件对应像素值
      */
     fun getDimen(@DimenRes id: Int): Int {
-        return App.context().resources.getDimensionPixelSize(id)
+        return context.resources.getDimensionPixelSize(id)
     }
 }

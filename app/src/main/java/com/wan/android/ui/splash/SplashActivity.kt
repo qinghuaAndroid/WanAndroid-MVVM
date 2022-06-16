@@ -2,11 +2,11 @@ package com.wan.android.ui.splash
 
 import android.Manifest
 import com.alibaba.android.arouter.launcher.ARouter
+import com.tbruyelle.rxpermissions3.RxPermissions
 import com.wan.android.R
 import com.wan.android.databinding.ActivitySplashBinding
-import com.tbruyelle.rxpermissions3.RxPermissions
 import com.wan.baselib.base.BaseActivity
-import com.wan.baselib.utils.ToastUtils
+import com.wan.baselib.ext.showLongToast
 import com.wan.common.arouter.ArouterPath
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -30,7 +30,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                 if (granted) {
                     enterMain()
                 } else {
-                    ToastUtils.showLongToast("请授予应用权限以获得更好的使用体验")
+                    showLongToast("请授予应用权限以获得更好的使用体验")
                 }
             }
     }

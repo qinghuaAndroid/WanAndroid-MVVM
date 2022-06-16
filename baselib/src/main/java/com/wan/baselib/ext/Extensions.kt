@@ -1,6 +1,5 @@
 package com.wan.baselib.ext
 
-import android.content.Context
 import com.wan.baselib.R
 import com.wan.baselib.utils.ResourcesUtils
 import com.wan.baselib.utils.SettingUtil
@@ -14,8 +13,12 @@ fun showToast(content: String) {
     ToastUtils.showShortToast(content)
 }
 
-fun getThemeColor(context: Context) = if (!SettingUtil.getIsNightMode()) {
-    SettingUtil.getColor(context)
+fun showLongToast(content: String) {
+    ToastUtils.showLongToast(content)
+}
+
+fun getThemeColor() = if (!SettingUtil.getIsNightMode()) {
+    SettingUtil.getColor()
 } else {
-    ResourcesUtils.getColor(context, R.color.colorPrimary)
+    ResourcesUtils.getColor(R.color.colorPrimary)
 }
