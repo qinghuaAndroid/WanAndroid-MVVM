@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">WanAndroid</string>
+    <string name="tab_1">玩Android</string>
+    <string name="tab_2">知识体系</string>
+    <string name="tab_3">公众号</string>
+    <string name="tab_4">导航</string>
+    <string name="tab_5">项目</string>
+    <string name="system">体系</string>
+    <string name="navigation">导航</string>
+    <string name="my_integral">我的积分</string>
+    <string name="my_article">我的文章</string>
+    <string name="question">问答</string>
+    <string name="choose_theme_color">主题颜色</string>
+    <string name="done">完成</string>
+    <string name="setting">设置</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- Menu Action -->
+    <string name="action_search">搜索</string>
+    <string name="action_share">分享</string>
+    <string name="action_like">收藏</string>
+    <string name="action_browser">用浏览器打开</string>
+
+    <!-- Nav Action -->
+    <string name="nav_my_collect">我的收藏</string>
+    <string name="nav_setting">系统设置</string>
+    <string name="nav_about_us">关于我们</string>
+    <string name="nav_logout">退出登录</string>
+    <string name="nav_night_mode">夜间模式</string>
+    <string name="nav_todo">TODO</string>
+    <string name="nav_square">广场</string>
+    <string name="nav_my_score">我的积分</string>
+    <string name="nav_girl">轻松一下</string>
+    <string name="nav_question">问答</string>
+    <string name="nav_id">ID:</string>
+    <string name="nav_grade">等级:</string>
+    <string name="nav_rank">排名:</string>
+
+    <!-- Search -->
+    <string name="search">搜索</string>
+    <string name="search_tint">发现更多干货</string>
+    <string name="hot_search">热门搜索</string>
+    <string name="recent_search">最近搜索</string>
+</resources>

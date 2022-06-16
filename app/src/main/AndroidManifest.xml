@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.wan.android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:name=".app.WanApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.WanAndroid">
+
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            tools:node="merge"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false">
+            <meta-data
+                android:name="com.wan.android.provider.InitializationProvider"
+                android:value="androidx.startup" />
+        </provider>
+
+        <activity
+            android:name="com.wan.android.ui.splash.SplashActivity"
+            android:theme="@style/SplashTheme"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.wan.android.ui.main.MainActivity" />
+
+        <activity android:name="com.wan.android.ui.system.act.SystemActivity" />
+
+        <activity android:name="com.wan.android.ui.browser.BrowserNormalActivity" />
+
+        <activity
+            android:name="com.wan.android.ui.girl.GirlActivity"
+            android:theme="@style/SplashTheme" />
+
+        <activity android:name="com.wan.android.ui.integral.IntegralActivity" />
+
+        <activity android:name="com.wan.android.ui.setting.SettingActivity" />
+
+        <activity android:name="com.wan.android.ui.collect.CollectActivity"/>
+
+        <activity android:name="com.wan.android.ui.search.SearchActivity"/>
+
+        <activity android:name="com.wan.android.ui.search.list.SearchListActivity"/>
+
+        <activity android:name="com.wan.android.ui.myarticle.MyArticleActivity"/>
+
+        <activity android:name="com.wan.android.ui.share.ShareListActivity"/>
+
+        <activity android:name="com.wan.android.ui.question.QuestionActivity"/>
+    </application>
+
+</manifest>
