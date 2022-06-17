@@ -26,7 +26,7 @@ class RegisterFragment : BaseVMFragment<RegisterViewModel, FragmentRegisterBindi
     private var isRePasswordShow = false
 
     override fun startObserve() {
-        mViewModel.uiState.observe(this) {
+        mViewModel.uiState.observe(viewLifecycleOwner) {
             if (it.showProgress) showProgressDialog()
             it.showSuccess?.let {
                 dismissProgressDialog()

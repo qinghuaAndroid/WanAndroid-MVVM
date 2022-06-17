@@ -39,7 +39,7 @@ class NavigationFragment : BaseVMFragment<NavigationViewModel, FragmentSystemLis
     }
 
     override fun startObserve() {
-        mViewModel.uiState.observe(this,
+        mViewModel.uiState.observe(viewLifecycleOwner,
             Observer { uiModel ->
                 uiModel.showSuccess?.let { navigationAdapter.setList(it) }
                 uiModel.showError?.let { showToast(it) }

@@ -101,19 +101,19 @@ class HomeFragment : BaseVMFragment<ArticleViewModel, FragmentHomeBinding>() {
     }
 
     override fun startObserve() {
-        homeViewModel.bannerUiState.observe(this, Observer {
+        homeViewModel.bannerUiState.observe(viewLifecycleOwner, Observer {
             it.showSuccess?.let { list ->
                 binding.banner.adapter = ImageNetAdapter(list)
             }
             it.showError?.let { errorMsg -> showToast(errorMsg) }
         })
-        homeViewModel.topArticleUiState.observe(this, Observer {
+        homeViewModel.topArticleUiState.observe(viewLifecycleOwner, Observer {
             it.showSuccess?.let { list ->
                 articleAdapter.setList(list)
             }
             it.showError?.let { errorMsg -> showToast(errorMsg) }
         })
-        articleViewModel.uiState.observe(this, Observer {
+        articleViewModel.uiState.observe(viewLifecycleOwner, Observer {
             binding.swipeRefresh.isRefreshing = it.showLoading
             it.showSuccess?.let { articleEntity ->
                 articleEntity.datas?.let { list ->
@@ -129,7 +129,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel, FragmentHomeBinding>() {
             if (it.showEnd) articleAdapter.loadMoreModule.loadMoreEnd()
             articleAdapter.loadMoreModule.isEnableLoadMore = it.isEnableLoadMore
         })
-        collectViewModel.uiState.observe(this, Observer {
+        collectViewModel.uiState.observe(viewLifecycleOwner, Observer {
             if (it.showLoading) showProgressDialog() else dismissProgressDialog()
             it.showSuccess?.let { collect ->
                 articleAdapter.data[curPosition].collect = collect

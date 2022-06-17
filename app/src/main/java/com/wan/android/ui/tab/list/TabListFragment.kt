@@ -98,7 +98,7 @@ class TabListFragment :
     }
 
     override fun startObserve() {
-        articleViewModel.uiState.observe(this, Observer {
+        articleViewModel.uiState.observe(viewLifecycleOwner, Observer {
             binding.swipeRefresh.isRefreshing = it.showLoading
             it.showSuccess?.let { articleEntity ->
                 articleEntity.datas?.let { list ->
@@ -114,7 +114,7 @@ class TabListFragment :
             if (it.showEnd) articleAdapter.loadMoreModule.loadMoreEnd()
             articleAdapter.loadMoreModule.isEnableLoadMore = it.isEnableLoadMore
         })
-        collectViewModel.uiState.observe(this, Observer {
+        collectViewModel.uiState.observe(viewLifecycleOwner, Observer {
             if (it.showLoading) showProgressDialog() else dismissProgressDialog()
             it.showSuccess?.let { collect ->
                 articleAdapter.data[curPosition].collect = collect

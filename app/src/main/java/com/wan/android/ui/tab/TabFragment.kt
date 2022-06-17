@@ -57,7 +57,7 @@ class TabFragment : BaseMvpFragment<TabContract.View, TabContract.Presenter, Fra
 
     private fun receiveNotice() {
         LiveEventBus.get(com.wan.common.constant.Const.THEME_COLOR, Int::class.java)
-            .observe(this, Observer<Int> {
+            .observe(viewLifecycleOwner, Observer<Int> {
                 setThemeColor()
             })
     }

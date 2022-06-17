@@ -25,7 +25,7 @@ class LoginFragment : BaseVMFragment<LoginViewModel, FragmentLoginBinding>() {
     private var isPasswordShow = false
 
     override fun startObserve() {
-        mViewModel.uiState.observe(this) {
+        mViewModel.uiState.observe(viewLifecycleOwner) {
             if (it.showProgress) showProgressDialog()
             it.showSuccess?.let {
                 LiveEventBus.get<Boolean>(Const.LOGIN_SUCCESS).post(true)
