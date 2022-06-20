@@ -1,17 +1,19 @@
 package com.wan.android.ui.setting
 
-import com.wan.android.http.HttpHelper
+import android.content.Context
 import com.wan.baselib.mvvm.BaseRepository
-import com.wan.baselib.mvvm.Result
+import com.wan.baselib.utils.CacheUtils
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-class SettingRepository @Inject constructor(): BaseRepository() {
+class SettingRepository @Inject constructor(@ApplicationContext private val context: Context) :
+    BaseRepository() {
 
-    suspend fun logout(): Result<Any> {
-        return safeApiCall { requestLogout() }
+    fun getCacheSize(): String {
+        return CacheUtils.getTotalCacheSize(context)
     }
 
-    private suspend fun requestLogout(): Result<Any> {
-        return executeResponse(HttpHelper.apiService.logout())
+    fun clearCache() {
+        CacheUtils.clearAllCache(context)
     }
 }

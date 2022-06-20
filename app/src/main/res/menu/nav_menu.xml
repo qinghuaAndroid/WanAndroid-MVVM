@@ -16,11 +16,6 @@
             android:title="@string/nav_my_collect" />
 
         <item
-            android:id="@+id/nav_girl"
-            android:icon="@drawable/ic_girl_white_24dp"
-            android:title="@string/nav_girl" />
-
-        <item
             android:id="@+id/nav_question"
             android:icon="@drawable/ic_question_white_24dp"
             android:title="@string/nav_question" />

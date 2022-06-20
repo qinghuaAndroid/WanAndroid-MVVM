@@ -7,7 +7,6 @@ package com.wan.common.arouter
 object ArouterPath {
 
     const val ACTIVITY_MAIN = "/main/MainActivity"
-    const val ACTIVITY_GIRL = "/girl/GirlActivity"
     const val ACTIVITY_SHARE_LIST = "/share/ShareListActivity"
     const val ACTIVITY_SETTING = "/setting/SettingActivity"
     const val ACTIVITY_QUESTION = "/question/QuestionActivity"

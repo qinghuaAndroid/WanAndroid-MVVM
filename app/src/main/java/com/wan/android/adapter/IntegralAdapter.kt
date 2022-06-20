@@ -10,7 +10,9 @@ import com.wan.android.bean.IntegralRecordEntity
  * @author cy
  * Create at 2020/4/14.
  */
-class IntegralAdapter(layoutId:Int) : BaseQuickAdapter<IntegralRecordEntity.DatasBean, BaseViewHolder>(layoutId),LoadMoreModule {
+class IntegralAdapter :
+    BaseQuickAdapter<IntegralRecordEntity.DatasBean, BaseViewHolder>(R.layout.item_integral),
+    LoadMoreModule {
 
     override fun convert(holder: BaseViewHolder, item: IntegralRecordEntity.DatasBean) {
         item.apply {
@@ -24,9 +26,9 @@ class IntegralAdapter(layoutId:Int) : BaseQuickAdapter<IntegralRecordEntity.Data
                     .replace("：", "")
                     .replace(" ", "")
             }
-            holder.setText(R.id.tvAddIntegralMode,title)
-            holder.setText(R.id.tvDate,time)
-            holder.setText(R.id.tvAddIntegral,"+$coinCount")
+            holder.setText(R.id.tvAddIntegralMode, title)
+            holder.setText(R.id.tvDate, time)
+            holder.setText(R.id.tvAddIntegral, "+$coinCount")
         }
     }
 

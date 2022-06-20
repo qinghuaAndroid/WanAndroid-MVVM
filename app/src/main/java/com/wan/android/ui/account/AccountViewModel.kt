@@ -1,8 +1,6 @@
 package com.wan.android.ui.account
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.tencent.mmkv.MMKV
 import com.wan.baselib.mvvm.BaseViewModel
 import com.wan.baselib.mvvm.Result
@@ -15,18 +13,26 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class AccountViewModel @Inject constructor(private val mRepository: AccountRepository) : BaseViewModel() {
+class AccountViewModel @Inject constructor(
+    private val mRepository: AccountRepository
+) : BaseViewModel() {
 
-    private val mmkv by lazy { MMKV.defaultMMKV()!! }
-    val isLogin: Boolean get() = _isLogged.value ?: false
-    private val _isLogged = MutableLiveData(false)
+    private val mmkv by lazy(LazyThreadSafetyMode.NONE) { MMKV.defaultMMKV() }
+
+    private val _isLogged = MediatorLiveData<Boolean>()
+    val isLogged: LiveData<Boolean> get() = _isLogged
+
+    val isLogin: Boolean
+        get() = mmkv.decodeBool(Const.IS_LOGIN, false)
 
     private val _uiState = MutableLiveData<BaseUiModel<Boolean>>()
     val uiState: LiveData<BaseUiModel<Boolean>>
         get() = _uiState
 
     init {
-        _isLogged.value = mmkv.decodeBool(Const.IS_LOGIN, false)
+        _isLogged.addSource(mRepository.getUser().asLiveData()) { user ->
+            _isLogged.postValue(user != null)
+        }
     }
 
     fun logout() {

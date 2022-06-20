@@ -1,9 +1,9 @@
-package com.wan.android.ui.main
+package com.wan.android.ui.tab
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.wan.android.bean.UserInfoEntity
+import com.wan.android.bean.TabEntity
 import com.wan.baselib.mvvm.BaseViewModel
 import com.wan.baselib.mvvm.Result
 import com.wan.common.base.BaseUiModel
@@ -13,29 +13,29 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+/**
+ * @author cy
+ * Create at 2020/4/3.
+ */
 @HiltViewModel
-class MainViewModel @Inject constructor(private val mRepository: MainRepository) : BaseViewModel() {
+class TabViewModel @Inject constructor(private val mRepository: TabRepository) : BaseViewModel() {
 
-    private val _uiState = MutableLiveData<BaseUiModel<UserInfoEntity>>()
-    val uiState: LiveData<BaseUiModel<UserInfoEntity>>
+    private val _uiState = MutableLiveData<BaseUiModel<MutableList<TabEntity>>>()
+    val uiState: LiveData<BaseUiModel<MutableList<TabEntity>>>
         get() = _uiState
 
-
-    fun getUserInfo() {
+    fun getTabList(type: Int) {
         viewModelScope.launch(Dispatchers.Main) {
-            val result = withContext(Dispatchers.IO) { mRepository.getUserInfo() }
-            if (result is Result.Success) {
-                emitUiState(showSuccess = result.data)
-            } else if (result is Result.Error) {
-                emitUiState(showError = result.exception.message)
-            }
+            val result = withContext(Dispatchers.IO) { mRepository.getTabList(type) }
+            if (result is Result.Success) emitUiState(showSuccess = result.data)
+            else if (result is Result.Error) emitUiState(showError = result.exception.message)
         }
     }
 
     private fun emitUiState(
         showLoading: Boolean = false,
         showError: String? = null,
-        showSuccess: UserInfoEntity? = null
+        showSuccess: MutableList<TabEntity>? = null
     ) {
         val uiModel = BaseUiModel(showLoading, showError, showSuccess)
         _uiState.value = uiModel

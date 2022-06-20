@@ -16,7 +16,6 @@ import com.jeremyliao.liveeventbus.LiveEventBus
 import com.wan.android.R
 import com.wan.android.adapter.MainPagerAdapter
 import com.wan.android.bean.CoinInfo
-import com.wan.android.constant.Const
 import com.wan.android.databinding.ActivityMainBinding
 import com.wan.android.ui.account.AccountViewModel
 import com.wan.baselib.ext.getThemeColor
@@ -36,7 +35,6 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>() {
 
     private val accountViewModel by viewModels<AccountViewModel>()
     private val mainViewModel by viewModels<MainViewModel>()
-    private var coinInfo: CoinInfo? = null
     private lateinit var navHeaderView: View
     private lateinit var tvUserId: TextView
     private lateinit var tvUserName: TextView
@@ -99,7 +97,7 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>() {
     }
 
     override fun loadData() {
-        mainViewModel.getUserInfo()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -146,17 +144,10 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>() {
         NavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_score -> {
-                    val postcard = ARouter.getInstance().build(ArouterPath.ACTIVITY_INTEGRAL)
-                    coinInfo?.let {
-                        postcard.withObject(
-                            Const.COIN_INFO,
-                            coinInfo
-                        )
-                    }
-                    postcard.navigation(this) {
+                    ARouter.getInstance().build(ArouterPath.ACTIVITY_INTEGRAL).navigation(this) {
                         onInterrupt {
-                            ARouter.getInstance().build(ArouterPath.ACTIVITY_LOGIN)
-                                .with(it?.extras).navigation()
+                            ARouter.getInstance().build(ArouterPath.ACTIVITY_LOGIN).with(it?.extras)
+                                .navigation()
                         }
                     }
                 }
@@ -167,9 +158,6 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>() {
                                 .navigation()
                         }
                     }
-                }
-                R.id.nav_girl -> {
-                    ARouter.getInstance().build(ArouterPath.ACTIVITY_GIRL).navigation()
                 }
                 R.id.nav_question -> {
                     ARouter.getInstance().build(ArouterPath.ACTIVITY_QUESTION).navigation()
@@ -253,22 +241,17 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>() {
         }
     }
 
-    private fun showUserInfo(bean: CoinInfo) {
-        coinInfo = bean
-        tvUserId.text = bean.userId.toString()
-        tvUserName.text = bean.username.toString()
-        tvUserGrade.text = bean.level.toString()
-        tvUserRank.text = bean.rank.toString()
-        logoutMenuItem.isVisible = true
+    private fun showUserInfo(coinInfo: CoinInfo?) {
+        tvUserId.text = coinInfo?.userId.toString()
+        tvUserName.text = coinInfo?.username ?: getString(com.wan.login.R.string.go_login)
+        tvUserGrade.text = coinInfo?.level?.toString() ?: getString(R.string.nav_line_2)
+        tvUserRank.text = coinInfo?.rank?.toString() ?: getString(R.string.nav_line_2)
+        logoutMenuItem.isVisible = (coinInfo != null)
     }
 
     private fun receiveNotice() {
         LiveEventBus.get(com.wan.common.constant.Const.THEME_COLOR, Int::class.java)
             .observe(this) { setThemeColor() }
-        LiveEventBus.get(com.wan.common.constant.Const.LOGIN_SUCCESS, Boolean::class.java)
-            .observe(this) { mainViewModel.getUserInfo() }
-        LiveEventBus.get(com.wan.common.constant.Const.LOGOUT_SUCCESS, Boolean::class.java)
-            .observe(this) { recreate() }
     }
 
     private fun setThemeColor() {
@@ -278,22 +261,20 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>() {
     override fun startObserve() {
         mainViewModel.uiState.observe(this) {
             if (it.showLoading) showProgressDialog() else dismissProgressDialog()
-            it.showSuccess?.coinInfo?.let { coinInfo ->
-                showUserInfo(coinInfo)
+            it.showSuccess?.let { userInfoEntity ->
+                showUserInfo(userInfoEntity.coinInfo)
             }
             it.showError?.let { errorMsg -> showToast(errorMsg) }
         }
 
         accountViewModel.uiState.observe(this) {
             if (it.showLoading) showProgressDialog() else dismissProgressDialog()
-            it.showSuccess?.let { success ->
-                if (success) {
-                    LiveEventBus.get<Boolean>(com.wan.common.constant.Const.LOGOUT_SUCCESS)
-                        .post(true)
-                    finish()
-                }
-            }
+            it.showSuccess?.let { showUserInfo(null) }
             it.showError?.let { errorMsg -> showToast(errorMsg) }
+        }
+
+        accountViewModel.isLogged.observe(this) {
+            mainViewModel.getUserInfo()
         }
     }
 }

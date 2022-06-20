@@ -1,10 +1,13 @@
 package com.wan.login.bean
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class UserEntity(
+@Entity(tableName = User.TABLE_NAME)
+data class User(
 
     /**
      * admin : false
@@ -24,13 +27,17 @@ data class UserEntity(
     var admin: Boolean = false,
     var email: String? = null,
     var icon: String? = null,
-    var id: Int = 0,
+    @PrimaryKey var id: Int = 0,
     var nickname: String? = null,
     var password: String? = null,
     var publicName: String? = null,
     var token: String? = null,
     var type: Int = 0,
     var username: String? = null,
-//    var chapterTops: List<*>? = null,
+    var chapterTops: List<String>? = null,
     var collectIds: List<Int>? = null
-) : Parcelable
+) : Parcelable {
+    companion object {
+        const val TABLE_NAME = "user"
+    }
+}

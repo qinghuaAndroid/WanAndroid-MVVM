@@ -4,7 +4,7 @@ package com.wan.android.bean
  * @author cy
  * Create at 2020/4/14.
  */
-class IntegralRecordEntity {
+data class IntegralRecordEntity(
 
 
     /**
@@ -17,15 +17,16 @@ class IntegralRecordEntity {
      * total : 21
      */
 
-    var curPage: Int = 0
-    var offset: Int = 0
-    var over: Boolean = false
-    var pageCount: Int = 0
-    var size: Int = 0
-    var total: Int = 0
+    var curPage: Int = 0,
+    var offset: Int = 0,
+    var over: Boolean = false,
+    var pageCount: Int = 0,
+    var size: Int = 0,
+    var total: Int = 0,
     var datas: List<DatasBean>? = null
+) {
 
-    class DatasBean {
+    data class DatasBean(
         /**
          * coinCount : 29
          * date : 1584398959000
@@ -37,13 +38,13 @@ class IntegralRecordEntity {
          * userName : 18616720137
          */
 
-        var coinCount: Int = 0
-        var date: Long = 0
-        var desc: String? = null
-        var id: Int = 0
-        var reason: String? = null
-        var type: Int = 0
-        var userId: Int = 0
+        var coinCount: Int = 0,
+        var date: Long = 0,
+        var desc: String? = null,
+        var id: Int = 0,
+        var reason: String? = null,
+        var type: Int = 0,
+        var userId: Int = 0,
         var userName: String? = null
-    }
+    )
 }

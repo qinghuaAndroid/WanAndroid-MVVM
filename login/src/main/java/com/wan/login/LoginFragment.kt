@@ -28,7 +28,6 @@ class LoginFragment : BaseVMFragment<LoginViewModel, FragmentLoginBinding>() {
         mViewModel.uiState.observe(viewLifecycleOwner) {
             if (it.showProgress) showProgressDialog()
             it.showSuccess?.let {
-                LiveEventBus.get<Boolean>(Const.LOGIN_SUCCESS).post(true)
                 dismissProgressDialog()
                 activity?.finish()
             }
@@ -74,7 +73,7 @@ class LoginFragment : BaseVMFragment<LoginViewModel, FragmentLoginBinding>() {
                 binding.ivPasswordVisibility.setImageResource(R.mipmap.password_hide)
                 HideReturnsTransformationMethod.getInstance()
             }
-            binding.etPassword.setSelection(binding.etPassword.text.length)
+            binding.etPassword.setSelection(binding.etPassword.text?.length ?: 0)
         }
         binding.tvSkip.onClick { activity?.finish() }
     }

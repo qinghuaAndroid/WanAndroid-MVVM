@@ -44,7 +44,7 @@ fun LabelsView.onSystemLabelClickListener(action: (SystemListEntity.ChildrenBean
 }
 
 @BindingAdapter(value = ["navigationLabels"])
-fun LabelsView.loadNavigationLabels(labels: List<ArticleEntity.DatasBean>) {
+fun LabelsView.loadNavigationLabels(labels: List<ArticleEntity.DatasBean>?) {
     setLabels(labels) { _, _, data ->
         data.title
     }

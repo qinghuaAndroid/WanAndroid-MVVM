@@ -43,10 +43,6 @@
 
         <activity android:name="com.wan.android.ui.browser.BrowserNormalActivity" />
 
-        <activity
-            android:name="com.wan.android.ui.girl.GirlActivity"
-            android:theme="@style/SplashTheme" />
-
         <activity android:name="com.wan.android.ui.integral.IntegralActivity" />
 
         <activity android:name="com.wan.android.ui.setting.SettingActivity" />

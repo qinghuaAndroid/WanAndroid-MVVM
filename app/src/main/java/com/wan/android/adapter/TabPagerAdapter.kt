@@ -2,7 +2,6 @@ package com.wan.android.adapter
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.wan.android.bean.TabEntity
 import com.wan.android.constant.Const
@@ -12,8 +11,8 @@ import com.wan.android.ui.tab.list.TabListFragment
  * @author cy
  * Create at 2020/3/26.
  */
-class TabPagerAdapter(fragmentActivity: FragmentActivity, list: MutableList<TabEntity>,type: Int?) :
-    FragmentStateAdapter(fragmentActivity) {
+class TabPagerAdapter(fragment: Fragment, list: MutableList<TabEntity>, type: Int?) :
+    FragmentStateAdapter(fragment) {
 
     private val list by lazy { list }
     private val type by lazy { type }

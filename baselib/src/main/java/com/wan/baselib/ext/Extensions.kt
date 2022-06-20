@@ -1,6 +1,7 @@
 package com.wan.baselib.ext
 
 import com.wan.baselib.R
+import com.wan.baselib.app.App
 import com.wan.baselib.utils.ResourcesUtils
 import com.wan.baselib.utils.SettingUtil
 import com.wan.baselib.utils.ToastUtils
@@ -22,3 +23,5 @@ fun getThemeColor() = if (!SettingUtil.getIsNightMode()) {
 } else {
     ResourcesUtils.getColor(R.color.colorPrimary)
 }
+
+val appContext by lazy { App.context() }

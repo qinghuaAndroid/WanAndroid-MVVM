@@ -110,12 +110,4 @@ class ArticleViewModel @Inject constructor(
             }
         }
     }
-
-    fun collect(id: Int) {
-        launch {
-            withContext(Dispatchers.IO) {
-                collectRepository.collect(id)
-            }
-        }
-    }
 }

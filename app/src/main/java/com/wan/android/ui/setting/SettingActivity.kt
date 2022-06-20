@@ -32,7 +32,6 @@ import org.jetbrains.anko.sdk27.coroutines.onClick
 class SettingActivity : BaseVMActivity<SettingViewModel, ActivitySettingBinding>() {
 
     private val settingViewModel by viewModels<SettingViewModel>()
-    private val accountViewModel by viewModels<AccountViewModel>()
 
     override fun getLayoutId(): Int = R.layout.activity_setting
 
@@ -45,8 +44,6 @@ class SettingActivity : BaseVMActivity<SettingViewModel, ActivitySettingBinding>
         binding.tvClearValue.onClick { settingViewModel.clearCache() }
         binding.tvVersionValue.text = StringUtils.format("v %s", versionName)
         binding.tvColor.onClick { setThemeColor() }
-        binding.tvLogout.visibility = if (accountViewModel.isLogin) View.VISIBLE else View.GONE
-        binding.tvLogout.onClick { accountViewModel.logout() }
     }
 
     @SuppressLint("CheckResult")
@@ -74,16 +71,6 @@ class SettingActivity : BaseVMActivity<SettingViewModel, ActivitySettingBinding>
     override fun startObserve() {
         settingViewModel.cacheValue.observe(this) { cacheValue ->
             binding.tvClearValue.text = cacheValue
-        }
-        accountViewModel.uiState.observe(this) {
-            if (it.showLoading) showProgressDialog() else dismissProgressDialog()
-            it.showSuccess?.let { success ->
-                if (success) {
-                    LiveEventBus.get<Boolean>(Const.LOGOUT_SUCCESS).post(true)
-                    finish()
-                }
-            }
-            it.showError?.let { errorMsg -> showToast(errorMsg) }
         }
     }
 }

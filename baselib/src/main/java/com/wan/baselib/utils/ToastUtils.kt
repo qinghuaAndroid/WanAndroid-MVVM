@@ -4,7 +4,7 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
 import androidx.annotation.StringRes
-import com.wan.baselib.app.App
+import com.wan.baselib.ext.appContext
 
 /**
  * <pre>
@@ -192,7 +192,7 @@ object ToastUtils {
      * @param duration 显示时长
      */
     private fun showToast(@StringRes resId: Int, duration: Int) {
-        showToast(App.context().resources.getString(resId), duration)
+        showToast(appContext.resources.getString(resId), duration)
     }
 
     /**
@@ -203,7 +203,7 @@ object ToastUtils {
      * @param args     参数
      */
     private fun showToast(@StringRes resId: Int, duration: Int, vararg args: Any?) {
-        showToast(String.format(App.context().resources.getString(resId), *args), duration)
+        showToast(String.format(appContext.resources.getString(resId), *args), duration)
     }
 
     /**
@@ -228,7 +228,7 @@ object ToastUtils {
             cancelToast()
         }
         if (sToast == null) {
-            sToast = Toast.makeText(App.context(), text, duration)
+            sToast = Toast.makeText(appContext, text, duration)
         } else {
             sToast!!.setText(text)
             sToast!!.duration = duration

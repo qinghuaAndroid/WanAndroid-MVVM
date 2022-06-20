@@ -1,7 +1,7 @@
 package com.wan.android.ui.collect
 
 import com.wan.android.bean.ArticleEntity
-import com.wan.android.http.HttpHelper
+import com.wan.android.http.ApiService
 import com.wan.baselib.mvvm.BaseRepository
 import com.wan.baselib.mvvm.Result
 import javax.inject.Inject
@@ -10,14 +10,14 @@ import javax.inject.Inject
  * @author cy
  * Create at 2020/4/16.
  */
-class CollectRepository @Inject constructor() : BaseRepository() {
+class CollectRepository @Inject constructor(private val apiService: ApiService) : BaseRepository() {
 
     suspend fun getCollectData(pageNum: Int): Result<ArticleEntity> {
         return safeApiCall { requestCollectData(pageNum) }
     }
 
     private suspend fun requestCollectData(pageNum: Int): Result<ArticleEntity> {
-        return executeResponse(HttpHelper.apiService.getCollectData(pageNum))
+        return executeResponse(apiService.getCollectData(pageNum))
     }
 
     suspend fun collect(id: Int): Result<Any> {
@@ -25,7 +25,7 @@ class CollectRepository @Inject constructor() : BaseRepository() {
     }
 
     private suspend fun requestCollect(id: Int): Result<Any> {
-        return executeResponse(HttpHelper.apiService.collect(id))
+        return executeResponse(apiService.collect(id))
     }
 
     suspend fun unCollect(id: Int): Result<Any> {
@@ -33,7 +33,7 @@ class CollectRepository @Inject constructor() : BaseRepository() {
     }
 
     private suspend fun requestCancelCollect(id: Int): Result<Any> {
-        return executeResponse(HttpHelper.apiService.unCollect(id))
+        return executeResponse(apiService.unCollect(id))
     }
 
     suspend fun unMyCollect(id: Int, originId: Int): Result<Any> {
@@ -41,8 +41,6 @@ class CollectRepository @Inject constructor() : BaseRepository() {
     }
 
     private suspend fun requestCancelMyCollect(id: Int, originId: Int): Result<Any> {
-        return executeResponse(HttpHelper.apiService.unMyCollect(id, originId))
+        return executeResponse(apiService.unMyCollect(id, originId))
     }
-
-
 }

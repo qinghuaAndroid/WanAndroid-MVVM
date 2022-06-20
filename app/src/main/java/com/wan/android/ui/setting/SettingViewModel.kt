@@ -11,19 +11,18 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SettingViewModel @Inject constructor(
-    private val mRepository: SettingRepository,
-    @ApplicationContext private val context: Context
+    private val mRepository: SettingRepository
 ) : BaseViewModel() {
 
     private val _cacheValue = MutableLiveData<String>()
     val cacheValue: LiveData<String> get() = _cacheValue
 
     fun getCacheSize() {
-        _cacheValue.value = CacheUtils.getTotalCacheSize(context)
+        _cacheValue.value = mRepository.getCacheSize()
     }
 
     fun clearCache() {
-        CacheUtils.clearAllCache(context)
+        mRepository.clearCache()
         _cacheValue.value = String.format("%s", "0M")
     }
 }

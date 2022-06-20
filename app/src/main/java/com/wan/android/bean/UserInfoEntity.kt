@@ -1,6 +1,6 @@
 package com.wan.android.bean
 
-import com.wan.login.bean.UserEntity
+import com.wan.login.bean.User
 
 /**
  * @author cy
@@ -39,5 +39,5 @@ data class UserInfoEntity(
 //    }
 
     var coinInfo: CoinInfo? = null,
-    var userInfo: UserEntity? = null
+    var userInfo: User? = null
 )

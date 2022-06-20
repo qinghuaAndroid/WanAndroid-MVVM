@@ -52,13 +52,13 @@ interface ApiService {
      * 获取项目tab
      */
     @GET("/project/tree/json")
-    fun getProjectTabList(): Observable<HttpResult<MutableList<TabEntity>>>
+    suspend fun getProjectTabList(): HttpResult<MutableList<TabEntity>>
 
     /**
      * 获取项目tab
      */
     @GET("/wxarticle/chapters/json  ")
-    fun getAccountTabList(): Observable<HttpResult<MutableList<TabEntity>>>
+    suspend fun getAccountTabList(): HttpResult<MutableList<TabEntity>>
 
     /**
      * 获取项目列表
@@ -151,29 +151,6 @@ interface ApiService {
      */
     @GET("/user/logout/json")
     suspend fun logout(): HttpResult<Any>
-
-    /**
-     * 分类数据 API
-     * https://gank.io/api/v2/data/category/<category>/type/<type>/page/<page>/count/<count>
-     * 请求方式: GET
-     * 注:
-     * category 可接受参数 All(所有分类) | Article | GanHuo | Girl
-     * type 可接受参数 All(全部类型) | Android | iOS | Flutter | Girl ...，即分类API返回的类型数据
-     * count: [10, 50]
-     * page: >=1
-     * 示例:
-     * 获取妹子列表
-     * https://gank.io/api/v2/data/category/Girl/type/Girl/page/1/count/10
-     * 获取Android干货列表
-     * https://gank.io/api/v2/data/category/GanHuo/type/Android/page/1/count/10
-     */
-    @GET("data/category/{category}/type/{type}/page/{page}/count/{count}")
-    fun getGankIoData(
-        @Path("category") category: String,
-        @Path("type") type: String,
-        @Path("count") count: Int,
-        @Path("page") page: Int
-    ): Observable<GankIoDataBean>
 
     /**
      * 搜索热词

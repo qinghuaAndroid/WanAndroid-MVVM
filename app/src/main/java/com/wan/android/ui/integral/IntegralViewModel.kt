@@ -1,11 +1,9 @@
 package com.wan.android.ui.integral
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.wan.android.bean.IntegralRecordEntity
-import com.wan.baselib.mvvm.BaseViewModel
 import com.wan.baselib.mvvm.Result
+import com.wan.common.base.BaseListViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,37 +16,33 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class IntegralViewModel @Inject constructor(private val mRepository: IntegralRepository) :
-    BaseViewModel() {
-
-    private val _uiState = MutableLiveData<IntegralUiModel>()
-    val uiState: LiveData<IntegralUiModel>
-        get() = _uiState
+    BaseListViewModel<IntegralRecordEntity>() {
 
     private var pageNum = 1
 
     fun getIntegralRecord(isRefresh: Boolean) {
         viewModelScope.launch(Dispatchers.Main) {
-            emitArticleUiState(showLoading = true)
+            emitUiModel(showLoading = true)
             if (isRefresh) {
                 pageNum = 1
-                emitArticleUiState(isEnableLoadMore = false)
+                emitUiModel(isEnableLoadMore = false)
             }
             val result = withContext(Dispatchers.IO) { mRepository.getIntegralRecord(pageNum) }
             if (result is Result.Success) {
                 val data = result.data
-                emitArticleUiState(
+                emitUiModel(
                     showLoading = false,
                     showSuccess = data,
                     isRefresh = isRefresh,
                     isEnableLoadMore = true
                 )
                 if (data.curPage >= data.pageCount) {
-                    emitArticleUiState(showLoading = false, showEnd = true)
+                    emitUiModel(showLoading = false, showEnd = true)
                     return@launch
                 }
                 pageNum++
             } else if (result is Result.Error) {
-                emitArticleUiState(
+                emitUiModel(
                     showLoading = false,
                     showError = result.exception.message,
                     isEnableLoadMore = true
@@ -56,34 +50,4 @@ class IntegralViewModel @Inject constructor(private val mRepository: IntegralRep
             }
         }
     }
-
-    private fun emitArticleUiState(
-        showLoading: Boolean = false,
-        showError: String? = null,
-        showSuccess: IntegralRecordEntity? = null,
-        showEnd: Boolean = false,
-        isRefresh: Boolean = false,
-        isEnableLoadMore: Boolean = false
-    ) {
-        val uiModel =
-            IntegralUiModel(
-                showLoading,
-                showError,
-                showSuccess,
-                showEnd,
-                isRefresh,
-                isEnableLoadMore
-            )
-        _uiState.value = uiModel
-    }
-
 }
-
-data class IntegralUiModel(
-    val showLoading: Boolean,
-    val showError: String?,
-    val showSuccess: IntegralRecordEntity?,
-    val showEnd: Boolean, // 加载更多
-    val isRefresh: Boolean, // 刷新
-    val isEnableLoadMore: Boolean
-)

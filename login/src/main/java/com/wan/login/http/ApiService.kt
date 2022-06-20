@@ -1,7 +1,7 @@
 package com.wan.login.http
 
 import com.wan.baselib.network.HttpResult
-import com.wan.login.bean.UserEntity
+import com.wan.login.bean.User
 import retrofit2.http.*
 
 /**
@@ -17,7 +17,7 @@ interface ApiService {
     suspend fun login(
         @Field("username") username: String,
         @Field("password") password: String
-    ): HttpResult<UserEntity>
+    ): HttpResult<User>
 
     /**
      * 注册

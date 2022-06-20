@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.wan.baselib.mvvm.BaseViewModel
 import com.wan.baselib.mvvm.Result
+import com.wan.login.bean.User
 import com.wan.login.repository.LoginRepository
-import com.wan.login.bean.UserEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,7 +19,9 @@ import javax.inject.Inject
  * Create at 2020/4/7.
  */
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val mRepository: LoginRepository) : BaseViewModel() {
+class LoginViewModel @Inject constructor(private val mRepository: LoginRepository) :
+    BaseViewModel() {
+
     val userName = ObservableField("")
     val passWord = ObservableField("")
 
@@ -37,45 +39,32 @@ class LoginViewModel @Inject constructor(private val mRepository: LoginRepositor
     }
 
     fun login() {
-        viewModelScope.launch(Dispatchers.Default) {
+        viewModelScope.launch {
             if (userName.get().isNullOrBlank() || passWord.get().isNullOrBlank()) {
                 emitUiState(enableLoginButton = false)
                 return@launch
             }
-            withContext(Dispatchers.Main) { showLoading() }
+            emitUiState(true)
 
-            val result = mRepository.login(userName.get() ?: "", passWord.get() ?: "")
+            val result = withContext(Dispatchers.Main) {
+                mRepository.login(
+                    userName.get() ?: "",
+                    passWord.get() ?: ""
+                )
+            }
 
-            withContext(Dispatchers.Main) {
-                checkResult(result, {
-                    emitUiState(showSuccess = it, enableLoginButton = true)
-                }, {
-                    emitUiState(showError = it, enableLoginButton = true)
-                })
+            if (result is Result.Success) {
+                emitUiState(showSuccess = result.data, enableLoginButton = true)
+            } else if (result is Result.Error) {
+                emitUiState(showError = result.exception.message, enableLoginButton = true)
             }
         }
-    }
-
-    private inline fun <T : Any> checkResult(
-        result: Result<T>,
-        success: (T) -> Unit,
-        error: (String?) -> Unit
-    ) {
-        if (result is Result.Success) {
-            success(result.data)
-        } else if (result is Result.Error) {
-            error(result.exception.message)
-        }
-    }
-
-    private fun showLoading() {
-        emitUiState(true)
     }
 
     private fun emitUiState(
         showProgress: Boolean = false,
         showError: String? = null,
-        showSuccess: UserEntity? = null,
+        showSuccess: User? = null,
         enableLoginButton: Boolean = false,
         needLogin: Boolean = false
     ) {
@@ -94,7 +83,7 @@ class LoginViewModel @Inject constructor(private val mRepository: LoginRepositor
 data class LoginUiModel(
     val showProgress: Boolean,
     val showError: String?,
-    val showSuccess: UserEntity?,
+    val showSuccess: User?,
     val enableLoginButton: Boolean,
     val needLogin: Boolean
 )

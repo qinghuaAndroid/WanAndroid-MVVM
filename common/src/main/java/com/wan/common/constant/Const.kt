@@ -7,13 +7,9 @@ package com.wan.common.constant
 object Const {
     /*************************************BASE_URL部分 */
     const val BASE_URL = "https://www.wanandroid.com/"
-    const val GANK_URL = "https://gank.io/api/v2/"
     /************************************存储键值部分 */
     const val IS_LOGIN = "isLogin"
-    const val USER_GSON = "userGson"
     /************************************通知事件部分 */
-    const val LOGIN_SUCCESS = "loginSuccess" //登录成功
-    const val LOGOUT_SUCCESS = "logoutSuccess"//退出登录成功
     const val THEME_COLOR = "themeColor"//主题颜色
     /*************************************传参部分 */
     const val WEB_URL = "webUrl"
