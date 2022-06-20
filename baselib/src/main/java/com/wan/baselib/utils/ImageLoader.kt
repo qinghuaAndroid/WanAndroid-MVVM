@@ -26,31 +26,31 @@ object ImageLoader {
     private var mStyle = STYLE_ROUND
 
     @JvmStatic
-    fun load(iv: ImageView, url: String?) {
-        load(iv, url, defImage)
+    fun load(imageView: ImageView, url: String?) {
+        load(imageView, url, defImage)
     }
 
     @JvmStatic
-    fun load(iv: ImageView, res: Int) {
-        load(iv, res, defImage)
+    fun load(imageView: ImageView, res: Int) {
+        load(imageView, res, defImage)
     }
 
     @JvmStatic
-    fun loadAvatar(iv: ImageView, res: Int) {
-        loadAvatar(iv, res, defHeader)
+    fun loadAvatar(imageView: ImageView, res: Int) {
+        loadAvatar(imageView, res, defHeader)
     }
 
     @JvmStatic
-    fun loadAvatar(iv: ImageView, url: String?) {
-        Glide.with(iv.context)
+    fun loadAvatar(imageView: ImageView, url: String?) {
+        Glide.with(imageView)
             .load(url)
-            .apply(ImageLoader.getOptionAvatar())
-            .into(iv)
+            .apply(getOptionAvatar())
+            .into(imageView)
     }
 
     @JvmStatic
-    fun loadAvatar(iv: ImageView, res: Int, defaultPicId: Int) {
-        Glide.with(iv.context)
+    fun loadAvatar(imageView: ImageView, res: Int, defaultPicId: Int) {
+        Glide.with(imageView)
             .load(res)
             .transition(
                 DrawableTransitionOptions().crossFade(
@@ -58,40 +58,40 @@ object ImageLoader {
                 )
             )
             .apply(getOptionAvatar().placeholder(defaultPicId))
-            .into(iv)
+            .into(imageView)
     }
 
     @JvmStatic
-    fun load(iv: ImageView, url: String?, defaultPicId: Int) {
-        Glide.with(iv.context)
+    fun load(imageView: ImageView, url: String?, defaultPicId: Int) {
+        Glide.with(imageView)
             .load(url)
             .apply(RequestOptions().placeholder(defaultPicId).error(defaultPicId))
-            .into(iv)
+            .into(imageView)
     }
 
     @JvmStatic
-    fun load(iv: ImageView, res: Int, defaultPicId: Int) {
-        iv.tag = null //需要清空tag，否则报错
-        Glide.with(iv.context)
+    fun load(imageView: ImageView, res: Int, defaultPicId: Int) {
+        imageView.tag = null //需要清空tag，否则报错
+        Glide.with(imageView)
             .load(res)
             .apply(RequestOptions().placeholder(defaultPicId))
-            .into(iv)
+            .into(imageView)
     }
 
     @JvmStatic
-    fun load(iv: ImageView, url: String?, requestOptions: RequestOptions) {
-        Glide.with(iv.context)
+    fun load(imageView: ImageView, url: String?, requestOptions: RequestOptions) {
+        Glide.with(imageView)
             .load(url)
             .apply(requestOptions)
-            .into(iv)
+            .into(imageView)
     }
 
     @JvmStatic
-    fun load(iv: ImageView, res: Int, requestOptions: RequestOptions) {
-        Glide.with(iv.context)
+    fun load(imageView: ImageView, res: Int, requestOptions: RequestOptions) {
+        Glide.with(imageView)
             .load(res)
             .apply(requestOptions)
-            .into(iv)
+            .into(imageView)
     }
 
     @Synchronized

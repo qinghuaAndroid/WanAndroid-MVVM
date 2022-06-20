@@ -7,20 +7,13 @@ import com.donkingliang.labels.LabelsView
 import com.wan.android.R
 import com.wan.android.bean.ArticleEntity
 import com.wan.android.bean.SystemListEntity
-import com.wan.baselib.utils.ImageLoader
-
-@BindingAdapter(value = ["girlImgUrl"])
-fun ImageView.loadGirlImg(url: String) {
-    //使用coil加载
-    this.load(url) {
-        placeholder(R.mipmap.ic_girl_default)
-    }
-}
 
 @BindingAdapter(value = ["imageUrl"])
 fun ImageView.loadImage(url: String) {
     //使用glide加载
-    ImageLoader.load(this, url)
+    this.load(url) {
+        placeholder(com.wan.baselib.R.mipmap.ic_default_img)
+    }
 }
 
 @BindingAdapter(value = ["collectIcon"])
