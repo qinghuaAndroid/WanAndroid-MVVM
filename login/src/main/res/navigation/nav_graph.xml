@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.wan.login.LoginFragment"
-        android:label="login"
+        android:label="@string/login"
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.wan.login.RegisterFragment"
-        android:label="register"
+        android:label="@string/register"
         tools:layout="@layout/fragment_register">
 
         <argument

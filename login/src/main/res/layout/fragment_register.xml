@@ -12,30 +12,39 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingHorizontal="30dp">
 
-        <TextView
-            android:id="@+id/tvRegister"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
-            android:gravity="center"
-            android:text="注册"
-            android:textColor="@color/black"
-            android:textSize="25sp"
-            android:textStyle="bold"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="50dp"
+            android:src="@mipmap/ic_logo"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tv_welcome_title"
+            android:textColor="@color/text_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="欢迎来到WanAndroid"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_logo" />
 
-        <EditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etUsername"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="@dimen/padding"
             android:layout_marginRight="@dimen/padding"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tvRegister"
+            app:layout_constraintTop_toBottomOf="@id/tv_welcome_title"
             android:layout_marginTop="50dp"
             android:background="@null"
             android:textColor="@color/text_1"
@@ -45,7 +54,7 @@
             android:text="@={viewModel.userName}"
             binding:afterTextChanged="@{viewModel.verifyInput}"/>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
             app:layout_constraintTop_toTopOf="@+id/etUsername"
@@ -64,7 +73,7 @@
             app:layout_constraintTop_toBottomOf="@+id/etUsername"
             android:background="@color/division_line" />
 
-        <EditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -82,7 +91,7 @@
             android:text="@={viewModel.passWord}"
             binding:afterTextChanged="@{viewModel.verifyInput}"/>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
             app:layout_constraintTop_toTopOf="@+id/etPassword"
@@ -101,7 +110,7 @@
             app:layout_constraintTop_toBottomOf="@+id/etPassword"
             android:background="@color/division_line" />
 
-        <EditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etRePassword"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -119,7 +128,7 @@
             android:text="@={viewModel.rePassWord}"
             binding:afterTextChanged="@{viewModel.verifyInput}"/>
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
             app:layout_constraintTop_toTopOf="@+id/etRePassword"
@@ -133,17 +142,17 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginLeft="@dimen/padding"
-            android:layout_marginRight="@dimen/padding"
+            android:layout_marginStart="@dimen/padding"
+            android:layout_marginEnd="@dimen/padding"
             app:layout_constraintTop_toBottomOf="@+id/ivRePasswordVisibility"
             android:background="@color/division_line" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             app:layout_constraintTop_toBottomOf="@+id/etRePassword"
             android:layout_marginTop="50dp"
             android:id="@+id/btnRegister"

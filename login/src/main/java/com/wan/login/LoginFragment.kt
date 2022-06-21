@@ -5,10 +5,8 @@ import android.text.method.PasswordTransformationMethod
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import com.jeremyliao.liveeventbus.LiveEventBus
 import com.wan.baselib.ext.showToast
 import com.wan.baselib.mvvm.BaseVMFragment
-import com.wan.common.constant.Const
 import com.wan.login.databinding.FragmentLoginBinding
 import com.wan.login.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -75,7 +73,6 @@ class LoginFragment : BaseVMFragment<LoginViewModel, FragmentLoginBinding>() {
             }
             binding.etPassword.setSelection(binding.etPassword.text?.length ?: 0)
         }
-        binding.tvSkip.onClick { activity?.finish() }
     }
 
     override fun loadData() {

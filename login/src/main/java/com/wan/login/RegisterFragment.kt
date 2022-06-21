@@ -65,7 +65,7 @@ class RegisterFragment : BaseVMFragment<RegisterViewModel, FragmentRegisterBindi
                 binding.ivPasswordVisibility.setImageResource(R.mipmap.password_hide)
                 HideReturnsTransformationMethod.getInstance()
             }
-            binding.etPassword.setSelection(binding.etPassword.text.length)
+            binding.etPassword.setSelection(binding.etPassword.text?.length ?: 0)
         }
         binding.ivRePasswordVisibility.onClick {
             binding.etRePassword.requestFocus()
@@ -81,7 +81,7 @@ class RegisterFragment : BaseVMFragment<RegisterViewModel, FragmentRegisterBindi
                 binding.ivRePasswordVisibility.setImageResource(R.mipmap.password_hide)
                 HideReturnsTransformationMethod.getInstance()
             }
-            binding.etRePassword.setSelection(binding.etRePassword.text.length)
+            binding.etRePassword.setSelection(binding.etRePassword.text?.length ?: 0)
         }
     }
 

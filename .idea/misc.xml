@@ -19,10 +19,11 @@
         <entry key="..\:/My Code/WanAndroid/app/src/main/res/menu/nav_menu.xml" value="0.3536458333333333" />
         <entry key="..\:/My Code/WanAndroid/baselib/src/main/res/layout/toolbar.xml" value="0.3536458333333333" />
         <entry key="..\:/My Code/WanAndroid/common/src/main/res/drawable/ripple_bg.xml" value="0.2015" />
+        <entry key="..\:/My Code/WanAndroid/common/src/main/res/drawable/ripple_circle_bg.xml" value="0.2025" />
         <entry key="..\:/My Code/WanAndroid/login/src/main/res/drawable/login_bg.xml" value="0.2015" />
         <entry key="..\:/My Code/WanAndroid/login/src/main/res/layout/activity_login.xml" value="0.3536458333333333" />
-        <entry key="..\:/My Code/WanAndroid/login/src/main/res/layout/fragment_login.xml" value="0.3536458333333333" />
-        <entry key="..\:/My Code/WanAndroid/login/src/main/res/layout/fragment_register.xml" value="0.3536458333333333" />
+        <entry key="..\:/My Code/WanAndroid/login/src/main/res/layout/fragment_login.xml" value="0.1" />
+        <entry key="..\:/My Code/WanAndroid/login/src/main/res/layout/fragment_register.xml" value="0.1" />
       </map>
     </option>
   </component>
