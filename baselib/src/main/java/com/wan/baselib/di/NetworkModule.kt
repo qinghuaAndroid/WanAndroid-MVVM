@@ -6,7 +6,6 @@ import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 import com.wan.baselib.BuildConfig
-import com.wan.baselib.constant.Const
 import com.wan.baselib.network.interceptor.HeaderInterceptor
 import com.wan.baselib.network.interceptor.QueryParameterInterceptor
 import dagger.Module
@@ -18,9 +17,6 @@ import okhttp3.Cache
 import okhttp3.ConnectionPool
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton

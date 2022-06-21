@@ -7,14 +7,18 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.viewpager2.widget.ViewPager2
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.material.badge.BadgeDrawable
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.wan.android.R
-import com.wan.android.adapter.MainPagerAdapter
 import com.wan.android.bean.CoinInfo
 import com.wan.android.databinding.ActivityMainBinding
 import com.wan.android.ui.account.AccountViewModel
@@ -50,9 +54,9 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>() {
 
     override fun initView() {
         initDrawerLayout()
+        initNavigation()
         initNavView()
         setThemeColor()
-        initViewPager()
         initBottom()
     }
 
@@ -69,31 +73,24 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>() {
         }
     }
 
-    private fun initViewPager() {
-        binding.viewPager.isUserInputEnabled = false
-        binding.viewPager.adapter = MainPagerAdapter(this)
-        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                binding.btmNavigation.selectedItemId = when (position) {
-                    0 -> R.id.menu_home
-                    1 -> R.id.menu_system
-                    2 -> R.id.menu_official_account
-                    3 -> R.id.menu_navigation
-                    4 -> R.id.menu_project
-                    else -> 0
-                }
-                setTitle(
-                    when (position) {
-                        0 -> R.string.tab_1
-                        1 -> R.string.tab_2
-                        2 -> R.string.tab_3
-                        3 -> R.string.tab_4
-                        4 -> R.string.tab_5
-                        else -> 0
-                    }
-                )
-            }
-        })
+    private fun initNavigation() {
+        val navView: BottomNavigationView = binding.btmNavigation
+        val drawerLayout: DrawerLayout = binding.drawerLayout
+        val navHost =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+        val navController = navHost.navController
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        val topLevelDestinationIds = setOf(
+            R.id.navigation_home,
+            R.id.navigation_system,
+            R.id.navigation_official,
+            R.id.navigation_navigation,
+            R.id.navigation_project
+        )
+        val appBarConfiguration = AppBarConfiguration(topLevelDestinationIds, drawerLayout)
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
     }
 
     override fun loadData() {
@@ -207,37 +204,25 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>() {
     private fun initBottom() {
         binding.btmNavigation.run {
             //用于分配，检索，检查和清除徽章内显示的数字。默认情况下，显示的徽章没有数字
-            val badge = getOrCreateBadge(R.id.menu_home)
+            val badge = getOrCreateBadge(R.id.navigation_home)
             badge.clearNumber()
 
-            val badge1 = getOrCreateBadge(R.id.menu_system)
+            val badge1 = getOrCreateBadge(R.id.navigation_system)
             badge1.number = 2
 
-            val badge2 = getOrCreateBadge(R.id.menu_official_account)
+            val badge2 = getOrCreateBadge(R.id.navigation_official)
             badge2.number = 100
             //用于设置/获取徽章数字中允许的最大字符数，然后将其用'+'截断。预设值为4。
             badge2.maxCharacterCount = 3
 
-            val badge3 = getOrCreateBadge(R.id.menu_navigation)
+            val badge3 = getOrCreateBadge(R.id.navigation_navigation)
             badge3.clearNumber()
 
-            val badge4 = getOrCreateBadge(R.id.menu_project)
+            val badge4 = getOrCreateBadge(R.id.navigation_project)
             badge4.number = 30
             badge4.maxCharacterCount = 3
             //用于设置/获取它可以是徽章的严重性TOP_END，TOP_START，BOTTOM_END或BOTTOM_START。默认值为TOP_END
             badge4.badgeGravity = BadgeDrawable.TOP_START
-
-            setOnItemSelectedListener { item ->
-                when (item.itemId) {
-                    R.id.menu_home -> binding.viewPager.currentItem = 0
-                    R.id.menu_system -> binding.viewPager.currentItem = 1
-                    R.id.menu_official_account -> binding.viewPager.currentItem = 2
-                    R.id.menu_navigation -> binding.viewPager.currentItem = 3
-                    R.id.menu_project -> binding.viewPager.currentItem = 4
-                }
-                // 这里注意返回true,否则点击失效
-                true
-            }
         }
     }
 

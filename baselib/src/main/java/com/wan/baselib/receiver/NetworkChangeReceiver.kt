@@ -17,7 +17,7 @@ class NetworkChangeReceiver : BroadcastReceiver() {
      * 缓存上一次的网络状态
      */
     private val mmkv by lazy { MMKV.defaultMMKV()!! }
-    private val hasNetwork by lazy { mmkv.decodeBool(Const.KEY_HAS_NETWORK, true) }
+    private val hasNetwork get() =  mmkv.decodeBool(Const.KEY_HAS_NETWORK, true)
 
     override fun onReceive(context: Context, intent: Intent) {
         val isConnected = NetworkUtil.isNetworkConnected(context)
