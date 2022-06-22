@@ -2,9 +2,9 @@ package com.wan.android.ui.splash
 
 import android.Manifest
 import android.annotation.SuppressLint
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
 import com.alibaba.android.arouter.launcher.ARouter
-import com.tbruyelle.rxpermissions3.RxPermissions
 import com.wan.android.R
 import com.wan.android.databinding.ActivitySplashBinding
 import com.wan.baselib.base.BaseActivity
@@ -23,18 +23,13 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     override fun getLayoutId(): Int = R.layout.activity_splash
 
     override fun initData() {
-        RxPermissions(this).request(
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-        )
-            .compose(this.bindToLifecycle())
-            .subscribe { granted ->
-                if (granted) {
-                    enterMain()
-                } else {
-                    showLongToast("请授予应用权限以获得更好的使用体验")
-                }
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            if (granted) {
+                enterMain()
+            } else {
+                showLongToast("请授予应用权限以获得更好的使用体验")
             }
+        }.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
     }
 
     private fun enterMain() {
