@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="viewBackground">#FFFFFF</color>
+    <color name="viewBackground">@color/White</color>
 
-    <color name="theme">#F60B0B</color>
+    <color name="theme">@color/Red</color>
     <color name="theme_2">#00CAAE</color>
 
     <color name="normal_color">#bfbfbf</color>

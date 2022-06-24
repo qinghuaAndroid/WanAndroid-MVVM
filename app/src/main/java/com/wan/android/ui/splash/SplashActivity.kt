@@ -34,7 +34,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
     private fun enterMain() {
         lifecycleScope.launch {
-            delay(2000)
+            delay(2000)//delay函数是挂起，非阻塞的
             ARouter.getInstance().build(ArouterPath.ACTIVITY_MAIN).navigation()
             finish()
         }

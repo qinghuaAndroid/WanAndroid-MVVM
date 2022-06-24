@@ -67,7 +67,7 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivArticlePic"
                 android:layout_width="100dp"
-                android:layout_height="180dp"
+                android:layout_height="160dp"
                 android:visibility="@{TextUtils.isEmpty(article.envelopePic)? View.GONE : View.VISIBLE}"
                 app:imageUrl="@{article.envelopePic}"
                 app:layout_constraintStart_toStartOf="parent"
@@ -76,6 +76,7 @@
             <TextView
                 android:id="@+id/tvTitle"
                 style="@style/text_1"
+                android:textStyle="bold"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -87,7 +88,7 @@
 
             <TextView
                 android:id="@+id/tvDesc"
-                style="@style/text_2"
+                style="@style/text_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"

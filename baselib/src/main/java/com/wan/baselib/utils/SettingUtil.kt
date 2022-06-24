@@ -30,7 +30,7 @@ object SettingUtil {
      * 获取主题颜色
      */
     fun getColor(): Int {
-        val defaultColor = ResourcesUtils.getColor(R.color.colorPrimary)
+        val defaultColor = ResourcesUtils.getColor(R.color.Blue)
         val color = mmkv.decodeInt("color", defaultColor)
         return if (color != 0 && Color.alpha(color) != 255) {
             defaultColor

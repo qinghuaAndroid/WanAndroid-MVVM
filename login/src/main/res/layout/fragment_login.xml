@@ -15,34 +15,12 @@
         android:layout_height="match_parent"
         android:paddingHorizontal="30dp">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_logo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="50dp"
-            android:src="@mipmap/ic_logo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_welcome_title"
-            android:textColor="@color/text_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="欢迎来到WanAndroid"
-            android:textSize="25sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_logo" />
-
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etUsername"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="@dimen/padding"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="150dp"
             android:layout_marginEnd="20dp"
             android:background="@null"
             android:hint="请输入账号"
@@ -51,7 +29,7 @@
             android:textColorHint="@color/text_3"
             android:textSize="@dimen/text_1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_welcome_title"
+            app:layout_constraintTop_toTopOf="parent"
             binding:afterTextChanged="@{viewModel.verifyInput}" />
 
         <androidx.appcompat.widget.AppCompatImageView

@@ -18,10 +18,10 @@ fun showLongToast(content: String) {
     ToastUtils.showLongToast(content)
 }
 
-fun getThemeColor() = if (!SettingUtil.getIsNightMode()) {
-    SettingUtil.getColor()
+fun getThemeColor() = if (SettingUtil.getIsNightMode()) {
+    ResourcesUtils.getColor(R.color.Grey800)
 } else {
-    ResourcesUtils.getColor(R.color.colorPrimary)
+    SettingUtil.getColor()
 }
 
 val appContext by lazy { App.context() }

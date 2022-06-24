@@ -15,7 +15,7 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@color/colorPrimary"
+            android:background="@color/Blue"
             app:tabMode="scrollable"
             app:tabIndicatorColor="@color/tab_text_color"
             app:tabIndicatorFullWidth="false"
