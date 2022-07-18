@@ -2,8 +2,6 @@ package com.wan.android.ui.main
 
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatDelegate
@@ -21,6 +19,7 @@ import com.jeremyliao.liveeventbus.LiveEventBus
 import com.wan.android.R
 import com.wan.android.bean.CoinInfo
 import com.wan.android.databinding.ActivityMainBinding
+import com.wan.android.databinding.NavHeaderMainBinding
 import com.wan.android.ui.account.AccountViewModel
 import com.wan.baselib.ext.getThemeColor
 import com.wan.baselib.ext.showToast
@@ -39,12 +38,7 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>() {
 
     private val accountViewModel by viewModels<AccountViewModel>()
     private val mainViewModel by viewModels<MainViewModel>()
-    private lateinit var navHeaderView: View
-    private lateinit var tvUserId: TextView
-    private lateinit var tvUserName: TextView
-    private lateinit var tvUserGrade: TextView
-    private lateinit var tvUserRank: TextView
-    private lateinit var logoutMenuItem: MenuItem
+    private lateinit var navHeaderMainBinding: NavHeaderMainBinding
 
     override fun getLayoutId(): Int = R.layout.activity_main
 
@@ -116,18 +110,9 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>() {
      * init NavigationView
      */
     private fun initNavView() {
-        binding.navView.run {
-            getHeaderView(0).run {
-                navHeaderView = this
-                tvUserId = findViewById(R.id.tv_user_id)
-                tvUserName = findViewById(R.id.tv_username)
-                tvUserGrade = findViewById(R.id.tv_user_grade)
-                tvUserRank = findViewById(R.id.tv_user_rank)
-            }
-            setNavigationItemSelectedListener(onDrawerNavigationItemSelectedListener)
-            logoutMenuItem = menu.findItem(R.id.nav_logout)
-        }
-        tvUserName.onClick {
+        navHeaderMainBinding = NavHeaderMainBinding.bind(binding.navView.getHeaderView(0))
+        binding.navView.setNavigationItemSelectedListener(onDrawerNavigationItemSelectedListener)
+        navHeaderMainBinding.tvUsername.onClick {
             if (accountViewModel.isLogin.not()) {
                 ARouter.getInstance().build(ArouterPath.ACTIVITY_LOGIN).navigation()
             }
@@ -227,11 +212,8 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>() {
     }
 
     private fun showUserInfo(coinInfo: CoinInfo?) {
-        tvUserId.text = coinInfo?.userId.toString()
-        tvUserName.text = coinInfo?.username ?: getString(com.wan.login.R.string.go_login)
-        tvUserGrade.text = coinInfo?.level?.toString() ?: getString(R.string.nav_line_2)
-        tvUserRank.text = coinInfo?.rank?.toString() ?: getString(R.string.nav_line_2)
-        logoutMenuItem.isVisible = (coinInfo != null)
+        navHeaderMainBinding.data = coinInfo
+        binding.navView.menu.findItem(R.id.nav_logout).isVisible = (coinInfo != null)
     }
 
     private fun receiveNotice() {
@@ -240,7 +222,7 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>() {
     }
 
     private fun setThemeColor() {
-        navHeaderView.backgroundColor = getThemeColor()
+        navHeaderMainBinding.root.backgroundColor = getThemeColor()
     }
 
     override fun startObserve() {

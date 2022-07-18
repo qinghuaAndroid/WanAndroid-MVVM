@@ -46,5 +46,26 @@ data class IntegralRecordEntity(
         var type: Int = 0,
         var userId: Int = 0,
         var userName: String? = null
-    )
+    ) {
+        val title: String?
+            get() {
+                val firstSpace = desc?.indexOf(" ")
+                val secondSpace = firstSpace?.plus(1)?.let { desc?.indexOf(" ", it) }
+                return secondSpace?.plus(1)?.let {
+                    desc?.substring(it)
+                        ?.replace(",", "")
+                        ?.replace("：", "")
+                        ?.replace(" ", "")
+                }
+            }
+
+        val time: String?
+            get() {
+                val firstSpace = desc?.indexOf(" ")
+                val secondSpace = firstSpace?.plus(1)?.let { desc?.indexOf(" ", it) }
+                return secondSpace?.let { desc?.substring(0, it) }
+            }
+
+        val coin: String get() = "+$coinCount"
+    }
 }

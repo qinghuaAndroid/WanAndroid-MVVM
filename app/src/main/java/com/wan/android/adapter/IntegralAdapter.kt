@@ -2,33 +2,26 @@ package com.wan.android.adapter
 
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.wan.android.R
 import com.wan.android.bean.IntegralRecordEntity
+import com.wan.android.databinding.ItemIntegralBinding
 
 /**
  * @author cy
  * Create at 2020/4/14.
  */
 class IntegralAdapter :
-    BaseQuickAdapter<IntegralRecordEntity.DatasBean, BaseViewHolder>(R.layout.item_integral),
+    BaseQuickAdapter<IntegralRecordEntity.DatasBean, BaseDataBindingHolder<ItemIntegralBinding>>(R.layout.item_integral),
     LoadMoreModule {
 
-    override fun convert(holder: BaseViewHolder, item: IntegralRecordEntity.DatasBean) {
-        item.apply {
-            val desc = desc
-            val firstSpace = desc?.indexOf(" ")
-            val secondSpace = firstSpace?.plus(1)?.let { desc.indexOf(" ", it) }
-            val time = secondSpace?.let { desc.substring(0, it) }
-            val title = secondSpace?.plus(1)?.let {
-                desc.substring(it)
-                    .replace(",", "")
-                    .replace("：", "")
-                    .replace(" ", "")
-            }
-            holder.setText(R.id.tvAddIntegralMode, title)
-            holder.setText(R.id.tvDate, time)
-            holder.setText(R.id.tvAddIntegral, "+$coinCount")
+    override fun convert(
+        holder: BaseDataBindingHolder<ItemIntegralBinding>,
+        item: IntegralRecordEntity.DatasBean
+    ) {
+        holder.dataBinding?.let {
+            it.data = item
+            it.executePendingBindings()
         }
     }
 
