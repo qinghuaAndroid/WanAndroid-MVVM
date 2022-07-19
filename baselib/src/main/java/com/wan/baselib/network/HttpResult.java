@@ -6,7 +6,7 @@ import com.wan.baselib.network.exception.ErrorStatus;
  * <p>
  *   所有响应实体类的基类
  * </p>
- * Created by fanqh on 2017/11/14.
+ * Created by cy on 2017/11/14.
  */
 
 public class HttpResult<T> {

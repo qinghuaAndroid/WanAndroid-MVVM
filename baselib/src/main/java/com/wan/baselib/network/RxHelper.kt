@@ -8,7 +8,7 @@ import io.reactivex.rxjava3.core.ObservableTransformer
 import io.reactivex.rxjava3.functions.Function
 
 /**
- * Created by Alexis.Shelton on 30/9/2021.
+ * Created by cy on 30/9/2021.
  */
 object RxHelper {
     /**

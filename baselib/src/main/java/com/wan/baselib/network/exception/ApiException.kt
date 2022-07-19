@@ -1,7 +1,7 @@
 package com.wan.baselib.network.exception
 
 /**
- * Created by fanqh on 2017/10/26.
+ * Created by cy on 2017/10/26.
  */
 class ApiException : RuntimeException {
 

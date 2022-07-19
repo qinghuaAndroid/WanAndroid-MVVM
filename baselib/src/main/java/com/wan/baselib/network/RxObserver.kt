@@ -5,7 +5,7 @@ import com.wan.baselib.network.exception.ExceptionHandler
 import io.reactivex.rxjava3.observers.DisposableObserver
 
 /**
- * Created by fanqh on 2017/11/14.
+ * Created by cy on 2017/11/14.
  */
 abstract class RxObserver<T> : DisposableObserver<HttpResult<T>>() {
 
