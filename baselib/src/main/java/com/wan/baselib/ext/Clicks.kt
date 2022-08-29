@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit
  * Created by Cy on 25/6/2021.
  */
 
-inline fun android.view.View.onSingleClick(crossinline onClick: (view: View) -> Unit) {
+inline fun View.onSingleClick(crossinline onClick: (view: View) -> Unit) {
     setOnClickListener {
         isClickable = false
         onClick(it)
@@ -16,7 +16,7 @@ inline fun android.view.View.onSingleClick(crossinline onClick: (view: View) -> 
     }
 }
 
-inline fun android.view.View.onClick(crossinline onClick: (view: View) -> Unit) {
+inline fun View.onClick(crossinline onClick: (view: View) -> Unit) {
     setOnClickListener {
         onClick(it)
     }

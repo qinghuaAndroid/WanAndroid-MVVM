@@ -3,8 +3,8 @@ package com.wan.baselib.utils
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import androidx.annotation.*
-import androidx.core.content.ContextCompat
-import com.wan.baselib.ext.appContext
+import splitties.init.appCtx
+import splitties.resources.*
 
 /**
  * @author cy
@@ -19,7 +19,7 @@ object ResourcesUtils {
      */
     @JvmStatic
     fun getString(@StringRes id: Int): String {
-        return appContext.resources.getString(id)
+        return appCtx.str(id)
     }
 
     /**
@@ -29,7 +29,7 @@ object ResourcesUtils {
      * @return 资源文件对应字符串数组
      */
     fun getStringArray(@ArrayRes id: Int): Array<String> {
-        return appContext.resources.getStringArray(id)
+        return appCtx.strArray(id)
     }
 
     /**
@@ -39,7 +39,7 @@ object ResourcesUtils {
      * @return 资源文件对应图片
      */
     fun getDrawable(@DrawableRes id: Int): Drawable? {
-        return ContextCompat.getDrawable(appContext, id)
+        return appCtx.drawable(id)
     }
 
     /**
@@ -50,7 +50,7 @@ object ResourcesUtils {
      */
     @ColorInt
     fun getColor(@ColorRes id: Int): Int {
-        return ContextCompat.getColor(appContext, id)
+        return appCtx.color(id)
     }
 
     /**
@@ -59,8 +59,8 @@ object ResourcesUtils {
      * @param id 资源文件id
      * @return 资源文件对应颜色状态
      */
-    fun getColorStateList(@ColorRes id: Int): ColorStateList? {
-        return ContextCompat.getColorStateList(appContext, id)
+    fun getColorStateList(@ColorRes id: Int): ColorStateList {
+        return appCtx.colorSL(id)
     }
 
     /**
@@ -70,6 +70,6 @@ object ResourcesUtils {
      * @return 资源文件对应像素值
      */
     fun getDimen(@DimenRes id: Int): Int {
-        return appContext.resources.getDimensionPixelSize(id)
+        return appCtx.dimenPxSize(id)
     }
 }

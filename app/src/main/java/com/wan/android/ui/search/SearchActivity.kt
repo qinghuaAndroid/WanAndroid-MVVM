@@ -16,7 +16,7 @@ import com.wan.baselib.ext.showToast
 import com.wan.baselib.mvvm.BaseVMActivity
 import com.wan.common.arouter.ArouterPath
 import dagger.hilt.android.AndroidEntryPoint
-import org.jetbrains.anko.sdk27.coroutines.onClick
+import splitties.views.onClick
 
 /**
  * @author cy

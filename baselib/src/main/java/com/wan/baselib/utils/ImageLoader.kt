@@ -7,9 +7,9 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.wan.baselib.R
-import com.wan.baselib.ext.appContext
 import com.wan.baselib.transform.GlideCircleBorderTransform
 import com.wan.baselib.transform.GlideRoundedCornersTransform
+import splitties.init.appCtx
 
 /**
  * Created by cy on 13/10/2021.
@@ -121,7 +121,7 @@ object ImageLoader {
             mOptionAvatar = RequestOptions()
                 .optionalTransform(
                     GlideRoundedCornersTransform(
-                        appContext,
+                        appCtx,
                         8f,
                         GlideRoundedCornersTransform.CornerType.ALL
                     )

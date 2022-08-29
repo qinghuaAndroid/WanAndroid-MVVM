@@ -10,7 +10,7 @@ import com.wan.baselib.mvvm.BaseVMFragment
 import com.wan.login.databinding.FragmentLoginBinding
 import com.wan.login.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import org.jetbrains.anko.sdk27.coroutines.onClick
+import splitties.views.onClick
 
 /**
  * @author FQH

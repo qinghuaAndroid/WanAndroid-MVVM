@@ -28,8 +28,8 @@ import com.wan.baselib.utils.SettingUtil
 import com.wan.common.arouter.ArouterPath
 import com.wan.common.ext.navigation
 import dagger.hilt.android.AndroidEntryPoint
-import org.jetbrains.anko.backgroundColor
-import org.jetbrains.anko.sdk27.coroutines.onClick
+import splitties.views.backgroundColor
+import splitties.views.onClick
 
 
 @AndroidEntryPoint

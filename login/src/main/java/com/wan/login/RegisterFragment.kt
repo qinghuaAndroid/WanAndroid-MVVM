@@ -11,7 +11,7 @@ import com.wan.baselib.mvvm.BaseVMFragment
 import com.wan.login.databinding.FragmentRegisterBinding
 import com.wan.login.viewmodel.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import org.jetbrains.anko.sdk27.coroutines.onClick
+import splitties.views.onClick
 
 /**
  * @author FQH

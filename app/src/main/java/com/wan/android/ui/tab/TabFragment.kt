@@ -13,7 +13,7 @@ import com.wan.baselib.ext.getThemeColor
 import com.wan.baselib.ext.showToast
 import com.wan.baselib.mvvm.BaseVMFragment
 import dagger.hilt.android.AndroidEntryPoint
-import org.jetbrains.anko.backgroundColor
+import splitties.views.backgroundColor
 
 /**
  * @author cy

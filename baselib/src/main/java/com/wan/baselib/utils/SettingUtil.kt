@@ -1,9 +1,10 @@
 package com.wan.baselib.utils
 
-import android.content.Context
 import android.graphics.Color
-import com.wan.baselib.R
 import com.tencent.mmkv.MMKV
+import com.wan.baselib.R
+import splitties.init.appCtx
+import splitties.resources.color
 
 /**
  * Created by Cy on 2018/8/7.
@@ -30,7 +31,7 @@ object SettingUtil {
      * 获取主题颜色
      */
     fun getColor(): Int {
-        val defaultColor = ResourcesUtils.getColor(R.color.Blue)
+        val defaultColor = appCtx.color(R.color.Blue)
         val color = mmkv.decodeInt("color", defaultColor)
         return if (color != 0 && Color.alpha(color) != 255) {
             defaultColor

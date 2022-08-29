@@ -20,7 +20,7 @@ import com.wan.baselib.utils.versionName
 import com.wan.common.arouter.ArouterPath
 import com.wan.common.constant.Const
 import dagger.hilt.android.AndroidEntryPoint
-import org.jetbrains.anko.sdk27.coroutines.onClick
+import splitties.views.onClick
 
 
 /**

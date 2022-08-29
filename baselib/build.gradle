@@ -47,12 +47,14 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
-    // Anko Commons
-    api "org.jetbrains.anko:anko-commons:0.10.8"
-    // Anko Layouts
-    api "org.jetbrains.anko:anko-sdk27:0.10.8"
-    // Coroutine listeners for Anko Layouts
-    api "org.jetbrains.anko:anko-sdk27-coroutines:0.10.8"
+    // splitties
+    def splitties_version = "3.0.0"
+    api("com.louiscad.splitties:splitties-activities:$splitties_version")
+    api("com.louiscad.splitties:splitties-fragments:$splitties_version")
+    api("com.louiscad.splitties:splitties-appctx:$splitties_version")
+    api("com.louiscad.splitties:splitties-views:$splitties_version")
+    api("com.louiscad.splitties:splitties-dimensions:$splitties_version")
+    api("com.louiscad.splitties:splitties-resources:$splitties_version")
 
     // Retrofit
     def retrofit_version = "2.9.0"
