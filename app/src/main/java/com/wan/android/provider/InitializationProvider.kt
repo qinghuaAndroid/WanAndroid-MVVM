@@ -6,10 +6,16 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.startup.Initializer
 import com.alibaba.android.arouter.launcher.ARouter
 import com.didichuxing.doraemonkit.DoKit
+import com.kingja.loadsir.core.LoadSir
 import com.tencent.mmkv.MMKV
 import com.wan.android.BuildConfig
+import com.wan.common.callback.EmptyCallback
+import com.wan.common.callback.ErrorCallback
+import com.wan.common.callback.LoadingCallback
+import com.wan.common.callback.TimeoutCallback
 import com.wan.baselib.utils.AutoDensityUtils
 import com.wan.baselib.utils.SettingUtil
+
 
 /**
  * Created by cy on 28/6/2021.
@@ -22,6 +28,7 @@ class InitializationProvider : Initializer<Unit> {
             .build()
         initARouter(context)
         initTheme()
+        initLoadSir()
     }
 
     override fun dependencies(): List<Class<out Initializer<*>>> {
@@ -43,5 +50,15 @@ class InitializationProvider : Initializer<Unit> {
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
+    }
+
+    private fun initLoadSir() {
+        LoadSir.beginBuilder()
+            .addCallback(ErrorCallback())
+            .addCallback(EmptyCallback())
+            .addCallback(LoadingCallback())
+            .addCallback(TimeoutCallback())
+            .setDefaultCallback(LoadingCallback::class.java)
+            .commit()
     }
 }

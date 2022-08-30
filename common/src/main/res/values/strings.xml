@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Common</string>
     <string name="loading">正在加载中…</string>
+    <string name="fine_no_data">fine, no data.</string>
+    <string name="something_is_wrong">Boss! something is wrong.</string>
+    <string name="oh_no_timeout">Oh no, timeout.</string>
+    <string name="click_me_to_retry">click me to retry!</string>
 </resources>
