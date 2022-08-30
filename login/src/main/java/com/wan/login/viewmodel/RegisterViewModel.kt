@@ -25,8 +25,8 @@ class RegisterViewModel @Inject constructor(private val mRepository: RegisterRep
     val passWord = ObservableField<String>("")
     val rePassWord = ObservableField<String>("")
 
-    private val _uiState = MutableLiveData<RegisterUiModel>()
-    val uiState: LiveData<RegisterUiModel>
+    private val _uiState = MutableLiveData<RegisterUiState>()
+    val uiState: LiveData<RegisterUiState>
         get() = _uiState
 
     val verifyInput: (String) -> Unit = { registerDataChanged() }
@@ -92,18 +92,13 @@ class RegisterViewModel @Inject constructor(private val mRepository: RegisterRep
         showSuccess: Any? = null,
         enableRegisterButton: Boolean = false
     ) {
-        val uiModel =
-            RegisterUiModel(
-                showProgress,
-                showError,
-                showSuccess,
-                enableRegisterButton
-            )
-        _uiState.value = uiModel
+        val registerUiState =
+            RegisterUiState(showProgress, showError, showSuccess, enableRegisterButton)
+        _uiState.value = registerUiState
     }
 }
 
-data class RegisterUiModel(
+data class RegisterUiState(
     val showProgress: Boolean,
     val showError: String?,
     val showSuccess: Any?,

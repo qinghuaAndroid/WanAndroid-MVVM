@@ -1,12 +1,12 @@
 package com.wan.common.base
 
-data class BaseUiModel<T>(
+data class BaseUiState<T>(
     val showLoading: Boolean,
     val showError: String?,
     val showSuccess: T?
 )
 
-data class ListUiModel<T>(
+data class ListUiState<T>(
     val showLoading: Boolean,
     val showError: String?,
     val showSuccess: T?,

@@ -25,8 +25,8 @@ class LoginViewModel @Inject constructor(private val mRepository: LoginRepositor
     val userName = ObservableField("")
     val passWord = ObservableField("")
 
-    private val _uiState = MutableLiveData<LoginUiModel>()
-    val uiState: LiveData<LoginUiModel>
+    private val _uiState = MutableLiveData<LoginUiState>()
+    val uiState: LiveData<LoginUiState>
         get() = _uiState
 
     val verifyInput: (String) -> Unit = { loginDataChanged() }
@@ -68,19 +68,13 @@ class LoginViewModel @Inject constructor(private val mRepository: LoginRepositor
         enableLoginButton: Boolean = false,
         needLogin: Boolean = false
     ) {
-        val uiModel =
-            LoginUiModel(
-                showProgress,
-                showError,
-                showSuccess,
-                enableLoginButton,
-                needLogin
-            )
-        _uiState.value = uiModel
+        val loginUiState =
+            LoginUiState(showProgress, showError, showSuccess, enableLoginButton, needLogin)
+        _uiState.value = loginUiState
     }
 }
 
-data class LoginUiModel(
+data class LoginUiState(
     val showProgress: Boolean,
     val showError: String?,
     val showSuccess: User?,

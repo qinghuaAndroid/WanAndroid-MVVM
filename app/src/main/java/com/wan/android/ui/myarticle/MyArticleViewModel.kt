@@ -3,9 +3,10 @@ package com.wan.android.ui.myarticle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.wan.android.bean.MyArticleEntity
 import com.wan.baselib.mvvm.BaseViewModel
 import com.wan.baselib.mvvm.Result
-import com.wan.android.bean.MyArticleEntity
+import com.wan.common.base.ListUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,25 +18,26 @@ import javax.inject.Inject
  * Create at 2020/4/15.
  */
 @HiltViewModel
-class MyArticleViewModel @Inject constructor(private val mRepository: MyArticleRepository) : BaseViewModel() {
+class MyArticleViewModel @Inject constructor(private val mRepository: MyArticleRepository) :
+    BaseViewModel() {
 
-    private val _uiState = MutableLiveData<MyArticleUiModel>()
-    val uiState: LiveData<MyArticleUiModel>
+    private val _uiState = MutableLiveData<ListUiState<MyArticleEntity>>()
+    val uiState: LiveData<ListUiState<MyArticleEntity>>
         get() = _uiState
 
     private var pageNum = 0
 
     fun getMyArticle(isRefresh: Boolean) {
         viewModelScope.launch(Dispatchers.Main) {
-            emitUiModel(showLoading = true)
+            emitUiState(showLoading = true)
             if (isRefresh) {
                 pageNum = 0
-                emitUiModel(isEnableLoadMore = false)
+                emitUiState(isEnableLoadMore = false)
             }
             val result = withContext(Dispatchers.IO) { mRepository.getMyArticle(pageNum) }
             if (result is Result.Success) {
                 val myArticleEntity = result.data
-                emitUiModel(
+                emitUiState(
                     showLoading = false,
                     showSuccess = myArticleEntity,
                     isRefresh = isRefresh,
@@ -44,13 +46,13 @@ class MyArticleViewModel @Inject constructor(private val mRepository: MyArticleR
                 val shareArticles = myArticleEntity.shareArticles
                 shareArticles?.let {
                     if (it.curPage >= it.pageCount) {
-                        emitUiModel(showEnd = true)
+                        emitUiState(showEnd = true)
                         return@launch
                     }
                 }
                 pageNum++
             } else if (result is Result.Error) {
-                emitUiModel(
+                emitUiState(
                     showLoading = false,
                     showError = result.exception.message,
                     isEnableLoadMore = true
@@ -60,7 +62,7 @@ class MyArticleViewModel @Inject constructor(private val mRepository: MyArticleR
         }
     }
 
-    private fun emitUiModel(
+    private fun emitUiState(
         showLoading: Boolean = false,
         showError: String? = null,
         showSuccess: MyArticleEntity? = null,
@@ -68,7 +70,7 @@ class MyArticleViewModel @Inject constructor(private val mRepository: MyArticleR
         isRefresh: Boolean = false, // 刷新
         isEnableLoadMore: Boolean = false
     ) {
-        val uiModel = MyArticleUiModel(
+        val listUiState = ListUiState(
             showLoading,
             showError,
             showSuccess,
@@ -76,15 +78,6 @@ class MyArticleViewModel @Inject constructor(private val mRepository: MyArticleR
             isRefresh,
             isEnableLoadMore
         )
-        _uiState.value = uiModel
+        _uiState.value = listUiState
     }
 }
-
-data class MyArticleUiModel(
-    val showLoading: Boolean,
-    val showError: String?,
-    val showSuccess: MyArticleEntity?,
-    val showEnd: Boolean, // 加载更多
-    val isRefresh: Boolean, // 刷新
-    val isEnableLoadMore: Boolean
-)

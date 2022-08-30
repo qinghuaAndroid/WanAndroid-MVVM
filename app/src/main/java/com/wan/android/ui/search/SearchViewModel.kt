@@ -7,7 +7,7 @@ import com.wan.android.bean.HotSearchEntity
 import com.wan.android.bean.SearchHistoryBean
 import com.wan.baselib.mvvm.BaseViewModel
 import com.wan.baselib.mvvm.Result
-import com.wan.common.base.BaseUiModel
+import com.wan.common.base.BaseUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.realm.kotlin.notifications.InitialResults
 import io.realm.kotlin.notifications.ResultsChange
@@ -21,8 +21,8 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(private val mRepository: SearchRepository) :
     BaseViewModel() {
 
-    private val _uiState = MutableLiveData<BaseUiModel<MutableList<HotSearchEntity>>>()
-    val uiState: LiveData<BaseUiModel<MutableList<HotSearchEntity>>>
+    private val _uiState = MutableLiveData<BaseUiState<MutableList<HotSearchEntity>>>()
+    val uiState: LiveData<BaseUiState<MutableList<HotSearchEntity>>>
         get() = _uiState
 
     private val _resultsChange = MutableLiveData<ResultsChange<SearchHistoryBean>>()
@@ -74,7 +74,7 @@ class SearchViewModel @Inject constructor(private val mRepository: SearchReposit
         showError: String? = null,
         showSuccess: MutableList<HotSearchEntity>? = null
     ) {
-        val uiModel = BaseUiModel(showLoading, showError, showSuccess)
-        _uiState.value = uiModel
+        val baseUiState = BaseUiState(showLoading, showError, showSuccess)
+        _uiState.value = baseUiState
     }
 }

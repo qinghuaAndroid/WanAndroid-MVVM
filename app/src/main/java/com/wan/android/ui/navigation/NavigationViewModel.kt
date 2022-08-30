@@ -20,8 +20,8 @@ import javax.inject.Inject
 class NavigationViewModel @Inject constructor(private val mRepository: NavigationRepository) :
     BaseViewModel() {
 
-    private val _uiState = MutableLiveData<NavigationUiModel>()
-    val uiState: LiveData<NavigationUiModel>
+    private val _uiState = MutableLiveData<NavigationUiState>()
+    val uiState: LiveData<NavigationUiState>
         get() = _uiState
 
     fun getNavigation() {
@@ -36,12 +36,12 @@ class NavigationViewModel @Inject constructor(private val mRepository: Navigatio
         showError: String? = null,
         showSuccess: MutableList<NavigationEntity>? = null
     ) {
-        val uiModel = NavigationUiModel(showError, showSuccess)
-        _uiState.value = uiModel
+        val navigationUiState = NavigationUiState(showError, showSuccess)
+        _uiState.value = navigationUiState
     }
 }
 
-data class NavigationUiModel(
+data class NavigationUiState(
     val showError: String?,
     val showSuccess: MutableList<NavigationEntity>?
 )

@@ -4,7 +4,7 @@ import androidx.lifecycle.*
 import com.tencent.mmkv.MMKV
 import com.wan.baselib.mvvm.BaseViewModel
 import com.wan.baselib.mvvm.Result
-import com.wan.common.base.BaseUiModel
+import com.wan.common.base.BaseUiState
 import com.wan.common.constant.Const
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -25,8 +25,8 @@ class AccountViewModel @Inject constructor(
     val isLogin: Boolean
         get() = mmkv.decodeBool(Const.IS_LOGIN, false)
 
-    private val _uiState = MutableLiveData<BaseUiModel<Boolean>>()
-    val uiState: LiveData<BaseUiModel<Boolean>>
+    private val _uiState = MutableLiveData<BaseUiState<Boolean>>()
+    val uiState: LiveData<BaseUiState<Boolean>>
         get() = _uiState
 
     init {
@@ -49,7 +49,7 @@ class AccountViewModel @Inject constructor(
         showError: String? = null,
         showSuccess: Boolean? = null
     ) {
-        val uiModel = BaseUiModel(showLoading, showError, showSuccess)
-        _uiState.value = uiModel
+        val baseUiState = BaseUiState(showLoading, showError, showSuccess)
+        _uiState.value = baseUiState
     }
 }

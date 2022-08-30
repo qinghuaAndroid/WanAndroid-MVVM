@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.wan.baselib.mvvm.BaseViewModel
 import com.wan.baselib.mvvm.Result
-import com.wan.common.base.BaseUiModel
+import com.wan.common.base.BaseUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,8 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class CollectViewModel @Inject constructor(private val mRepository: CollectRepository) : BaseViewModel() {
 
-    private val _uiState = MutableLiveData<BaseUiModel<Boolean>>()
-    val uiState: LiveData<BaseUiModel<Boolean>>
+    private val _uiState = MutableLiveData<BaseUiState<Boolean>>()
+    val uiState: LiveData<BaseUiState<Boolean>>
         get() = _uiState
 
     fun collect(id: Int) {
@@ -52,7 +52,7 @@ class CollectViewModel @Inject constructor(private val mRepository: CollectRepos
         showError: String? = null,
         showSuccess: Boolean? = null //true表示收藏成功，false表示取消收藏成功
     ) {
-        val uiModel = BaseUiModel(showLoading, showError, showSuccess)
-        _uiState.value = uiModel
+        val baseUiState = BaseUiState(showLoading, showError, showSuccess)
+        _uiState.value = baseUiState
     }
 }

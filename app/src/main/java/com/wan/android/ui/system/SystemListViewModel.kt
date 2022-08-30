@@ -19,8 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class SystemListViewModel @Inject constructor(private val mRepository: SystemListRepository) : BaseViewModel() {
 
-    private val _uiState = MutableLiveData<SystemListUiModel>()
-    val uiState: LiveData<SystemListUiModel>
+    private val _uiState = MutableLiveData<SystemListUiState>()
+    val uiState: LiveData<SystemListUiState>
         get() = _uiState
 
     fun getSystemList() {
@@ -35,13 +35,13 @@ class SystemListViewModel @Inject constructor(private val mRepository: SystemLis
         showError: String? = null,
         showSuccess: MutableList<SystemListEntity>? = null
     ) {
-        val uiModel =
-            SystemListUiModel(showError, showSuccess)
-        _uiState.value = uiModel
+        val listUiState =
+            SystemListUiState(showError, showSuccess)
+        _uiState.value = listUiState
     }
 }
 
-data class SystemListUiModel(
+data class SystemListUiState(
     val showError: String?,
     val showSuccess: MutableList<SystemListEntity>?
 )

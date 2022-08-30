@@ -1,5 +1,7 @@
 package com.wan.android.ui
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.wan.android.bean.ArticleEntity
 import com.wan.android.ui.collect.CollectRepository
@@ -9,8 +11,9 @@ import com.wan.android.ui.search.list.SearchListRepository
 import com.wan.android.ui.share.ShareListRepository
 import com.wan.android.ui.system.act.SystemRepository
 import com.wan.android.ui.tab.list.TabListRepository
+import com.wan.baselib.mvvm.BaseViewModel
 import com.wan.baselib.mvvm.Result
-import com.wan.common.base.BaseListViewModel
+import com.wan.common.base.ListUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,7 +33,7 @@ class ArticleViewModel @Inject constructor(
     private val tabListRepository: TabListRepository,
     private val collectRepository: CollectRepository,
     private val questionRepository: QuestionRepository
-) : BaseListViewModel<ArticleEntity>() {
+) : BaseViewModel() {
 
     sealed class ArticleType {
         object Home : ArticleType()                 // 首页
@@ -42,6 +45,10 @@ class ArticleViewModel @Inject constructor(
         object Search : ArticleType()           //搜索列表
         object Question : ArticleType()           //搜索列表
     }
+
+    private val _uiState = MutableLiveData<ListUiState<ArticleEntity>>()
+    val uiState: LiveData<ListUiState<ArticleEntity>>
+        get() = _uiState
 
     private var pageNum = 0
 
@@ -71,8 +78,8 @@ class ArticleViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.Main) {
             if (isRefresh) {
                 pageNum = 0
-                emitUiModel(showLoading = true)
-                emitUiModel(isEnableLoadMore = false)
+                emitUiState(showLoading = true)
+                emitUiState(isEnableLoadMore = false)
             }
             val result = withContext(Dispatchers.IO) {
                 when (articleType) {
@@ -88,7 +95,7 @@ class ArticleViewModel @Inject constructor(
             }
             if (result is Result.Success) {
                 val articleEntity = result.data
-                emitUiModel(
+                emitUiState(
                     showLoading = false,
                     showSuccess = articleEntity,
                     isRefresh = isRefresh,
@@ -96,18 +103,37 @@ class ArticleViewModel @Inject constructor(
                 )
                 articleEntity.run {
                     if (curPage >= pageCount) {
-                        emitUiModel(showEnd = true)
+                        emitUiState(showEnd = true)
                         return@launch
                     }
                 }
                 pageNum++
             } else if (result is Result.Error) {
-                emitUiModel(
+                emitUiState(
                     showLoading = false,
                     showError = result.exception.message,
                     isEnableLoadMore = true
                 )
             }
         }
+    }
+
+    private fun emitUiState(
+        showLoading: Boolean = false,
+        showError: String? = null,
+        showSuccess: ArticleEntity? = null,
+        showEnd: Boolean = false, // 加载更多
+        isRefresh: Boolean = false, // 刷新
+        isEnableLoadMore: Boolean = false
+    ) {
+        val listUiState = ListUiState(
+            showLoading,
+            showError,
+            showSuccess,
+            showEnd,
+            isRefresh,
+            isEnableLoadMore
+        )
+        _uiState.value = listUiState
     }
 }
