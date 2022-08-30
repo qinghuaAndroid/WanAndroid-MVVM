@@ -33,7 +33,7 @@ class ShareListActivity : BaseVMActivity<ArticleViewModel, ActivityShareListBind
     private val articleAdapter by lazy { ArticleAdapter() }
     private var curPosition = 0
 
-    override fun startObserve() {
+    override fun subscribeUi() {
         articleViewModel.uiState.observe(this, Observer {
             binding.swipeRefresh.isRefreshing = it.showLoading
             it.showSuccess?.let { articleEntity ->

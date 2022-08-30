@@ -3,7 +3,7 @@
     package="com.wan.login">
 
     <application>
-        <activity android:name="com.wan.login.LoginActivity" />
+        <activity android:name="com.wan.login.ui.LoginActivity" />
 
     </application>
 

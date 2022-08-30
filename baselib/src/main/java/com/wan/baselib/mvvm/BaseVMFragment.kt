@@ -13,10 +13,10 @@ abstract class BaseVMFragment<VM : BaseViewModel, B : ViewDataBinding> : BaseFra
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        startObserve()
+        subscribeUi()
     }
 
-    abstract fun startObserve()
+    abstract fun subscribeUi()
 
     open fun showProgressDialog() {
 

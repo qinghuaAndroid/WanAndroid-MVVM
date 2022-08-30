@@ -1,4 +1,4 @@
-package com.wan.login.repository
+package com.wan.login.ui.register
 
 import com.wan.baselib.mvvm.BaseRepository
 import com.wan.baselib.mvvm.Result

@@ -1,5 +1,6 @@
-package com.wan.login
+package com.wan.login.ui.register
 
+import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.wan.baselib.ext.showToast
 import com.wan.baselib.mvvm.BaseVMFragment
+import com.wan.login.R
 import com.wan.login.databinding.FragmentRegisterBinding
 import com.wan.login.viewmodel.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,7 +27,7 @@ class RegisterFragment : BaseVMFragment<RegisterViewModel, FragmentRegisterBindi
     private var isPasswordShow = false
     private var isRePasswordShow = false
 
-    override fun startObserve() {
+    override fun subscribeUi() {
         mViewModel.uiState.observe(viewLifecycleOwner) {
             if (it.showProgress) showProgressDialog()
             it.showSuccess?.let {
@@ -40,7 +42,7 @@ class RegisterFragment : BaseVMFragment<RegisterViewModel, FragmentRegisterBindi
 
     override fun attachLayoutRes(): Int = R.layout.fragment_register
 
-    override fun initData() {
+    override fun initData(savedInstanceState: Bundle?) {
         mViewModel.userName.set(args.account)
     }
 

@@ -1,4 +1,4 @@
-package com.wan.login.repository
+package com.wan.login.ui.login
 
 import android.content.Context
 import com.wan.baselib.di.getMMKV

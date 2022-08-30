@@ -83,7 +83,7 @@ class CollectActivity :
         articleViewModel.getCollectData(false)
     }
 
-    override fun startObserve() {
+    override fun subscribeUi() {
         articleViewModel.uiState.observe(this, Observer {
             binding.swipeRefresh.isRefreshing = it.showLoading
             it.showSuccess?.let { articleEntity ->

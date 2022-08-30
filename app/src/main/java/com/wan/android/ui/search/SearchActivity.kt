@@ -54,7 +54,7 @@ class SearchActivity : BaseVMActivity<SearchViewModel, ActivitySearchBinding>(){
         searchViewModel.queryAll()
     }
 
-    override fun startObserve() {
+    override fun subscribeUi() {
         searchViewModel.uiState.observe(this){
             if (it.showLoading) showProgressDialog() else dismissProgressDialog()
             it.showSuccess?.let { historyBeans -> showHotSearchData(historyBeans) }

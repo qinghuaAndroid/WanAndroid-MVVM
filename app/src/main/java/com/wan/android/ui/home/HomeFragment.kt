@@ -1,5 +1,6 @@
 package com.wan.android.ui.home
 
+import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -37,7 +38,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel, FragmentHomeBinding>() {
 
     override fun attachLayoutRes(): Int = R.layout.fragment_home
 
-    override fun initData() {
+    override fun initData(savedInstanceState: Bundle?) {
 
     }
 
@@ -100,7 +101,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel, FragmentHomeBinding>() {
         binding.banner.stop()
     }
 
-    override fun startObserve() {
+    override fun subscribeUi() {
         homeViewModel.bannerUiState.observe(viewLifecycleOwner, Observer {
             it.showSuccess?.let { list ->
                 binding.banner.adapter = ImageNetAdapter(list)

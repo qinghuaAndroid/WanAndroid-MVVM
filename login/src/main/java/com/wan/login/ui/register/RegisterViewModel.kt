@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.wan.baselib.mvvm.BaseViewModel
 import com.wan.baselib.mvvm.Result
-import com.wan.login.repository.RegisterRepository
+import com.wan.login.ui.register.RegisterRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

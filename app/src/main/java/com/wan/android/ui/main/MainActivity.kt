@@ -43,7 +43,7 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>() {
     override fun getLayoutId(): Int = R.layout.activity_main
 
     override fun initData() {
-        receiveNotice()
+
     }
 
     override fun initView() {
@@ -70,9 +70,8 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>() {
     private fun initNavigation() {
         val navView: BottomNavigationView = binding.btmNavigation
         val drawerLayout: DrawerLayout = binding.drawerLayout
-        val navHost =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
-        val navController = navHost.navController
+        val fragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)
+        val navController = (fragment as NavHostFragment).navController
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val topLevelDestinationIds = setOf(
@@ -216,7 +215,7 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>() {
         binding.navView.menu.findItem(R.id.nav_logout).isVisible = (coinInfo != null)
     }
 
-    private fun receiveNotice() {
+    override fun subscribeEvent() {
         LiveEventBus.get(com.wan.common.constant.Const.THEME_COLOR, Int::class.java)
             .observe(this) { setThemeColor() }
     }
@@ -225,7 +224,7 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>() {
         navHeaderMainBinding.root.backgroundColor = getThemeColor()
     }
 
-    override fun startObserve() {
+    override fun subscribeUi() {
         mainViewModel.uiState.observe(this) {
             if (it.showLoading) showProgressDialog() else dismissProgressDialog()
             it.showSuccess?.let { userInfoEntity ->

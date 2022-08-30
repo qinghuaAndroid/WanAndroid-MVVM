@@ -34,7 +34,7 @@ class IntegralActivity : BaseVMActivity<IntegralViewModel, ActivityIntegralBindi
     private val integralAdapter by lazy { IntegralAdapter() }
     private lateinit var headerView: View
 
-    override fun startObserve() {
+    override fun subscribeUi() {
         mainViewModel.uiState.observe(this) {
             it.showSuccess?.let { userInfoEntity ->
                 userInfoEntity.coinInfo?.let { coinInfo ->

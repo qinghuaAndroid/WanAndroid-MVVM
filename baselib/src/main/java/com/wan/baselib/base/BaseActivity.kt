@@ -30,6 +30,7 @@ abstract class BaseActivity<B : ViewDataBinding> : RxAppCompatActivity(),
         initToolbar()
         initData()
         initView()
+        subscribeEvent()
         loadData()
     }
 
@@ -63,10 +64,10 @@ abstract class BaseActivity<B : ViewDataBinding> : RxAppCompatActivity(),
         }
     }
 
-
     protected abstract fun getLayoutId(): Int
     protected abstract fun initData()
     protected abstract fun initView()
+    protected open fun subscribeEvent() {}
     protected abstract fun loadData()
 
     override fun onDestroy() {

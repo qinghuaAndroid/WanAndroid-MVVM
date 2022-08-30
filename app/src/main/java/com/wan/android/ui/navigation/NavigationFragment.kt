@@ -1,5 +1,6 @@
 package com.wan.android.ui.navigation
 
+import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,7 +25,7 @@ class NavigationFragment : BaseVMFragment<NavigationViewModel, FragmentSystemLis
 
     override fun attachLayoutRes(): Int = R.layout.fragment_system_list
 
-    override fun initData() {
+    override fun initData(savedInstanceState: Bundle?) {
 
     }
 
@@ -37,7 +38,7 @@ class NavigationFragment : BaseVMFragment<NavigationViewModel, FragmentSystemLis
         mViewModel.getNavigation()
     }
 
-    override fun startObserve() {
+    override fun subscribeUi() {
         mViewModel.uiState.observe(viewLifecycleOwner) { baseUiState ->
             baseUiState.showSuccess?.let { navigationAdapter.setList(it) }
             baseUiState.showError?.let { showToast(it) }

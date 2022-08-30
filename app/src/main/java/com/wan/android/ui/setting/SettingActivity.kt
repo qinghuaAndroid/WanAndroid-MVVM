@@ -68,7 +68,7 @@ class SettingActivity : BaseVMActivity<SettingViewModel, ActivitySettingBinding>
         settingViewModel.getCacheSize()
     }
 
-    override fun startObserve() {
+    override fun subscribeUi() {
         settingViewModel.cacheValue.observe(this) { cacheValue ->
             binding.tvClearValue.text = cacheValue
         }

@@ -15,10 +15,10 @@ abstract class BaseVMActivity<VM : BaseViewModel, B : ViewDataBinding> : BaseAct
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        startObserve()
+        subscribeUi()
     }
 
-    abstract fun startObserve()
+    abstract fun subscribeUi()
 
     open fun showProgressDialog() {
         if (progressBar == null) {

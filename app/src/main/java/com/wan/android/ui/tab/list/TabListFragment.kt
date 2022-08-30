@@ -1,5 +1,6 @@
 package com.wan.android.ui.tab.list
 
+import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -38,7 +39,7 @@ class TabListFragment :
 
     override fun attachLayoutRes(): Int = R.layout.fragment_article_list
 
-    override fun initData() {
+    override fun initData(savedInstanceState: Bundle?) {
         type = arguments?.getInt(Const.TYPE)
         projectId = arguments?.getInt(Const.ID) ?: 0
         name = arguments?.getString(Const.NAME) ?: ""
@@ -97,7 +98,7 @@ class TabListFragment :
         }
     }
 
-    override fun startObserve() {
+    override fun subscribeUi() {
         articleViewModel.uiState.observe(viewLifecycleOwner, Observer {
             binding.swipeRefresh.isRefreshing = it.showLoading
             it.showSuccess?.let { articleEntity ->

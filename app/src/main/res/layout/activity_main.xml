@@ -51,7 +51,7 @@
             app:headerLayout="@layout/nav_header_main"
             app:itemIconTint="@color/item_nav_color_tv"
             app:itemTextColor="@color/item_nav_color_tv"
-            app:menu="@menu/nav_menu" />
+            app:menu="@menu/activity_main_drawer" />
 
     </androidx.drawerlayout.widget.DrawerLayout>
 

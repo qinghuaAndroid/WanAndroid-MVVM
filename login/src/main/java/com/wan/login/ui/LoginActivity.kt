@@ -1,11 +1,14 @@
-package com.wan.login
+package com.wan.login.ui
 
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.wan.baselib.base.BaseActivity
 import com.wan.common.arouter.ArouterPath
+import com.wan.login.R
 import com.wan.login.databinding.ActivityLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,9 +26,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     override fun getLayoutId(): Int = R.layout.activity_login
 
     override fun initView() {
-        val navHost =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHost.navController
+        val fragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_login)
+        val navController = (fragment as NavHostFragment).navController
         appBarConfiguration = AppBarConfiguration(setOf())
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
@@ -36,6 +39,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
     override fun initData() {
 
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment_activity_login)
+        return navController.navigateUp(appBarConfiguration)
+                || super.onSupportNavigateUp()
     }
 
 }
