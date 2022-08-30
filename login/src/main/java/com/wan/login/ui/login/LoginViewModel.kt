@@ -1,4 +1,4 @@
-package com.wan.login.viewmodel
+package com.wan.login.ui.login
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
@@ -7,9 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.wan.baselib.mvvm.BaseViewModel
 import com.wan.baselib.mvvm.Result
 import com.wan.login.bean.User
-import com.wan.login.ui.login.LoginRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -28,6 +29,15 @@ class LoginViewModel @Inject constructor(private val mRepository: LoginRepositor
     private val _uiState = MutableLiveData<LoginUiState>()
     val uiState: LiveData<LoginUiState>
         get() = _uiState
+
+    private val _navigateToRegister = MutableSharedFlow<Boolean>()
+
+    val navigateToRegister: SharedFlow<Boolean>
+        get() = _navigateToRegister
+
+    fun userClicksOnButton() {
+        viewModelScope.launch { _navigateToRegister.emit(true) }
+    }
 
     val verifyInput: (String) -> Unit = { loginDataChanged() }
 

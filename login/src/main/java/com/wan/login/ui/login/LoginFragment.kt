@@ -5,12 +5,13 @@ import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
+import androidx.lifecycle.asLiveData
+import androidx.navigation.fragment.findNavController
+import com.wan.baselib.ext.onClick
 import com.wan.baselib.ext.showToast
 import com.wan.baselib.mvvm.BaseVMFragment
 import com.wan.login.R
 import com.wan.login.databinding.FragmentLoginBinding
-import com.wan.login.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import splitties.views.onClick
 
@@ -25,6 +26,13 @@ class LoginFragment : BaseVMFragment<LoginViewModel, FragmentLoginBinding>() {
     private var isPasswordShow = false
 
     override fun subscribeUi() {
+        mViewModel.navigateToRegister.asLiveData().observe(viewLifecycleOwner) {
+            findNavController().navigate(
+                LoginFragmentDirections.actionLoginFragmentToRegisterFragment(
+                    mViewModel.userName.get()
+                )
+            )
+        }
         mViewModel.uiState.observe(viewLifecycleOwner) {
             if (it.showProgress) showProgressDialog()
             it.showSuccess?.let {
@@ -47,12 +55,8 @@ class LoginFragment : BaseVMFragment<LoginViewModel, FragmentLoginBinding>() {
         binding.lifecycleOwner = this
         binding.viewModel = mViewModel
 
-        binding.tvRegister.setOnClickListener {
-            val direction =
-                LoginFragmentDirections.actionLoginFragmentToRegisterFragment(mViewModel.userName.get())
-            Navigation.findNavController(it).navigate(direction)
-            //不传参数可用下面这种
-//            Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_registerFragment)
+        binding.tvRegister.onClick {
+           mViewModel.userClicksOnButton()
         }
 
         binding.ivClear.onClick {

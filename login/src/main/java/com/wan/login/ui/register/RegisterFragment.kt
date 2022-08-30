@@ -11,7 +11,6 @@ import com.wan.baselib.ext.showToast
 import com.wan.baselib.mvvm.BaseVMFragment
 import com.wan.login.R
 import com.wan.login.databinding.FragmentRegisterBinding
-import com.wan.login.viewmodel.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import splitties.views.onClick
 
