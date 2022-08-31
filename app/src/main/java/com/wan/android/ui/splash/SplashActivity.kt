@@ -2,6 +2,7 @@ package com.wan.android.ui.splash
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
 import com.alibaba.android.arouter.launcher.ARouter
@@ -22,7 +23,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
     override fun getLayoutId(): Int = R.layout.activity_splash
 
-    override fun initData() {
+    override fun initData(savedInstanceState: Bundle?) {
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
             if (granted) {
                 enterMain()

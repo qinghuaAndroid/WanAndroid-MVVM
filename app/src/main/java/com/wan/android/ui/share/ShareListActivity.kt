@@ -1,5 +1,6 @@
 package com.wan.android.ui.share
 
+import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -62,7 +63,7 @@ class ShareListActivity : BaseVMActivity<ArticleViewModel, ActivityShareListBind
 
     override fun getLayoutId(): Int = R.layout.activity_share_list
 
-    override fun initData() {
+    override fun initData(savedInstanceState: Bundle?) {
 
     }
 

@@ -15,11 +15,13 @@ import kotlinx.coroutines.cancel
  * Created by Cy on 2018/9/27.
  */
 abstract class BaseFragment<B : ViewDataBinding> : RxFragment(), CoroutineScope by MainScope() {
-    protected lateinit var binding: B
+    private var _binding: B? = null
+    protected val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initData(savedInstanceState)
+        subscribeEvent()
         loadData()
     }
 
@@ -31,14 +33,14 @@ abstract class BaseFragment<B : ViewDataBinding> : RxFragment(), CoroutineScope 
         if (attachLayoutRes() == 0) {
             throw RuntimeException("Please set the page layout")
         }
-        binding = DataBindingUtil.inflate(inflater, attachLayoutRes(), container, false)
+        _binding = DataBindingUtil.inflate(inflater, attachLayoutRes(), container, false)
+        _binding?.lifecycleOwner = viewLifecycleOwner //xml中若有使用livedata
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView(view)
-        subscribeEvent()
     }
 
     protected abstract fun attachLayoutRes(): Int
@@ -46,6 +48,12 @@ abstract class BaseFragment<B : ViewDataBinding> : RxFragment(), CoroutineScope 
     protected abstract fun initView(view: View)
     protected abstract fun loadData()
     protected open fun subscribeEvent() {}
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding?.unbind()
+        _binding = null
+    }
 
     override fun onDestroy() {
         super.onDestroy()

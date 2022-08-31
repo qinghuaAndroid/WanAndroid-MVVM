@@ -1,6 +1,7 @@
 package com.wan.android.ui.browser
 
 import android.graphics.Bitmap
+import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import android.webkit.WebResourceRequest
@@ -37,7 +38,7 @@ class BrowserNormalActivity : BaseActivity<ActivityBrowserNormalBinding>() {
 
     override fun getLayoutId(): Int = R.layout.activity_browser_normal
 
-    override fun initData() {
+    override fun initData(savedInstanceState: Bundle?) {
         ARouter.getInstance().inject(this)
     }
 

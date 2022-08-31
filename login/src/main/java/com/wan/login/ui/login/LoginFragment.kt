@@ -5,7 +5,7 @@ import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.wan.baselib.ext.onClick
 import com.wan.baselib.ext.showToast
@@ -13,7 +13,7 @@ import com.wan.baselib.mvvm.BaseVMFragment
 import com.wan.login.R
 import com.wan.login.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
-import splitties.views.onClick
+import kotlinx.coroutines.launch
 
 /**
  * @author FQH
@@ -26,12 +26,14 @@ class LoginFragment : BaseVMFragment<LoginViewModel, FragmentLoginBinding>() {
     private var isPasswordShow = false
 
     override fun subscribeUi() {
-        mViewModel.navigateToRegister.asLiveData().observe(viewLifecycleOwner) {
-            findNavController().navigate(
-                LoginFragmentDirections.actionLoginFragmentToRegisterFragment(
-                    mViewModel.userName.get()
+        viewLifecycleOwner.lifecycleScope.launch {
+            mViewModel.navigateToRegister.collect {
+                findNavController().navigate(
+                    LoginFragmentDirections.actionLoginFragmentToRegisterFragment(
+                        mViewModel.userName.get()
+                    )
                 )
-            )
+            }
         }
         mViewModel.uiState.observe(viewLifecycleOwner) {
             if (it.showProgress) showProgressDialog()
@@ -56,7 +58,7 @@ class LoginFragment : BaseVMFragment<LoginViewModel, FragmentLoginBinding>() {
         binding.viewModel = mViewModel
 
         binding.tvRegister.onClick {
-           mViewModel.userClicksOnButton()
+            mViewModel.userClicksOnButton()
         }
 
         binding.ivClear.onClick {

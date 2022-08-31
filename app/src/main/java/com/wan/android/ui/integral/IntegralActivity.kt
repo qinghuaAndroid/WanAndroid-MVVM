@@ -1,6 +1,7 @@
 package com.wan.android.ui.integral
 
 import android.animation.ValueAnimator
+import android.os.Bundle
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import androidx.activity.viewModels
@@ -63,7 +64,7 @@ class IntegralActivity : BaseVMActivity<IntegralViewModel, ActivityIntegralBindi
 
     override fun getLayoutId(): Int = R.layout.activity_integral
 
-    override fun initData() {
+    override fun initData(savedInstanceState: Bundle?) {
         ARouter.getInstance().inject(this)
     }
 

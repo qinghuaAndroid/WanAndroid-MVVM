@@ -1,5 +1,6 @@
 package com.wan.android.ui.search
 
+import android.os.Bundle
 import android.view.Menu
 import android.widget.ImageView
 import androidx.activity.viewModels
@@ -30,7 +31,7 @@ class SearchActivity : BaseVMActivity<SearchViewModel, ActivitySearchBinding>(){
 
     override fun getLayoutId(): Int = R.layout.activity_search
 
-    override fun initData() {
+    override fun initData(savedInstanceState: Bundle?) {
 
     }
 

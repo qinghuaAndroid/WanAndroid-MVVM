@@ -1,5 +1,6 @@
 package com.wan.android.ui.question
 
+import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -61,7 +62,7 @@ class QuestionActivity : BaseVMActivity<ArticleViewModel, ActivityQuestionBindin
 
     override fun getLayoutId(): Int = R.layout.activity_question
 
-    override fun initData() {
+    override fun initData(savedInstanceState: Bundle?) {
 
     }
 

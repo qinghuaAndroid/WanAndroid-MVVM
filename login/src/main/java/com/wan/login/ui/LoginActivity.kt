@@ -1,5 +1,6 @@
 package com.wan.login.ui
 
+import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -37,7 +38,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
     }
 
-    override fun initData() {
+    override fun initData(savedInstanceState: Bundle?) {
 
     }
 

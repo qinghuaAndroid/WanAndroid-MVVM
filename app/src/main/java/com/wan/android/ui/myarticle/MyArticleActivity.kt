@@ -1,5 +1,6 @@
 package com.wan.android.ui.myarticle
 
+import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -58,7 +59,7 @@ class MyArticleActivity : BaseVMActivity<MyArticleViewModel, ActivityMyArticleBi
 
     override fun getLayoutId(): Int = R.layout.activity_my_article
 
-    override fun initData() {
+    override fun initData(savedInstanceState: Bundle?) {
 
     }
 

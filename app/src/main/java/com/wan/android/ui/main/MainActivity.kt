@@ -1,5 +1,6 @@
 package com.wan.android.ui.main
 
+import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
@@ -15,7 +16,6 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
-import com.jeremyliao.liveeventbus.LiveEventBus
 import com.wan.android.R
 import com.wan.android.bean.CoinInfo
 import com.wan.android.databinding.ActivityMainBinding
@@ -23,6 +23,7 @@ import com.wan.android.databinding.NavHeaderMainBinding
 import com.wan.android.ui.account.AccountViewModel
 import com.wan.baselib.ext.getThemeColor
 import com.wan.baselib.ext.showToast
+import com.wan.baselib.flowbus.SharedFlowBus
 import com.wan.baselib.mvvm.BaseVMActivity
 import com.wan.baselib.utils.SettingUtil
 import com.wan.common.arouter.ArouterPath
@@ -42,7 +43,7 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>() {
 
     override fun getLayoutId(): Int = R.layout.activity_main
 
-    override fun initData() {
+    override fun initData(savedInstanceState: Bundle?) {
 
     }
 
@@ -216,7 +217,7 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>() {
     }
 
     override fun subscribeEvent() {
-        LiveEventBus.get(com.wan.common.constant.Const.THEME_COLOR, Int::class.java)
+        SharedFlowBus.on<Int>(com.wan.common.constant.Const.THEME_COLOR)
             .observe(this) { setThemeColor() }
     }
 

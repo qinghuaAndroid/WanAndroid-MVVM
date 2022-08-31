@@ -1,18 +1,16 @@
 package com.wan.android.ui.setting
 
 import android.annotation.SuppressLint
-import android.view.View
+import android.os.Bundle
 import androidx.activity.viewModels
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.color.ColorPalette
 import com.afollestad.materialdialogs.color.colorChooser
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.jeremyliao.liveeventbus.LiveEventBus
 import com.wan.android.R
 import com.wan.android.databinding.ActivitySettingBinding
-import com.wan.android.ui.account.AccountViewModel
-import com.wan.baselib.ext.showToast
+import com.wan.baselib.flowbus.SharedFlowBus
 import com.wan.baselib.mvvm.BaseVMActivity
 import com.wan.baselib.utils.SettingUtil
 import com.wan.baselib.utils.StringUtils
@@ -35,7 +33,7 @@ class SettingActivity : BaseVMActivity<SettingViewModel, ActivitySettingBinding>
 
     override fun getLayoutId(): Int = R.layout.activity_setting
 
-    override fun initData() {
+    override fun initData(savedInstanceState: Bundle?) {
 
     }
 
@@ -56,7 +54,7 @@ class SettingActivity : BaseVMActivity<SettingViewModel, ActivitySettingBinding>
             ) { _, color ->
                 SettingUtil.setColor(color)
                 initColor()
-                LiveEventBus.get<Int>(Const.THEME_COLOR).post(color)
+                SharedFlowBus.with<Int>(Const.THEME_COLOR).tryEmit(color)
             }
             positiveButton(R.string.done)
             negativeButton(android.R.string.cancel)

@@ -26,9 +26,10 @@ abstract class BaseActivity<B : ViewDataBinding> : RxAppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         AutoDensityUtils.setCustomDensity(this, application)
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView<B>(this, getLayoutId())
+        binding = DataBindingUtil.setContentView(this, getLayoutId())
+        binding.lifecycleOwner = this //xml中若有使用livedata
         initToolbar()
-        initData()
+        initData(savedInstanceState)
         initView()
         subscribeEvent()
         loadData()
@@ -65,7 +66,7 @@ abstract class BaseActivity<B : ViewDataBinding> : RxAppCompatActivity(),
     }
 
     protected abstract fun getLayoutId(): Int
-    protected abstract fun initData()
+    protected abstract fun initData(savedInstanceState: Bundle?)
     protected abstract fun initView()
     protected open fun subscribeEvent() {}
     protected abstract fun loadData()

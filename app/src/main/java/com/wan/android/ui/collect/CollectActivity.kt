@@ -1,5 +1,6 @@
 package com.wan.android.ui.collect
 
+import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,7 +34,7 @@ class CollectActivity :
 
     override fun getLayoutId(): Int = R.layout.activity_collect
 
-    override fun initData() {
+    override fun initData(savedInstanceState: Bundle?) {
 
     }
 

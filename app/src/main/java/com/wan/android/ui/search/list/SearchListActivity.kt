@@ -1,5 +1,6 @@
 package com.wan.android.ui.search.list
 
+import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -66,7 +67,7 @@ class SearchListActivity : BaseVMActivity<ArticleViewModel, ActivitySystemBindin
 
     override fun getLayoutId(): Int = R.layout.activity_system
 
-    override fun initData() {
+    override fun initData(savedInstanceState: Bundle?) {
         ARouter.getInstance().inject(this)
     }
 
