@@ -8,19 +8,19 @@ import java.util.concurrent.ConcurrentHashMap
 
 object SharedFlowBus {
 
-    private var events = ConcurrentHashMap<String, MutableSharedFlow<Any>>()
-    private var stickyEvents = ConcurrentHashMap<Any, MutableSharedFlow<Any>>()
+    private val events = ConcurrentHashMap<String, MutableSharedFlow<*>>()
+    private val stickyEvents = ConcurrentHashMap<String, MutableSharedFlow<*>>()
 
     fun <T> with(key: String): MutableSharedFlow<T> {
         if (!events.containsKey(key)) {
-            events[key] = MutableSharedFlow(0, 1, BufferOverflow.DROP_OLDEST)
+            events[key] = MutableSharedFlow<T>(0, 1, BufferOverflow.DROP_OLDEST)
         }
         return events[key] as MutableSharedFlow<T>
     }
 
     fun <T> withSticky(key: String): MutableSharedFlow<T> {
         if (!stickyEvents.containsKey(key)) {
-            stickyEvents[key] = MutableSharedFlow(1, 1, BufferOverflow.DROP_OLDEST)
+            stickyEvents[key] = MutableSharedFlow<T>(1, 1, BufferOverflow.DROP_OLDEST)
         }
         return stickyEvents[key] as MutableSharedFlow<T>
     }

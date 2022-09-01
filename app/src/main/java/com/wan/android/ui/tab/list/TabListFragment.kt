@@ -3,21 +3,20 @@ package com.wan.android.ui.tab.list
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.launcher.ARouter
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
-import com.wan.baselib.ext.showToast
-import com.wan.baselib.mvvm.BaseVMFragment
-import com.wan.baselib.widget.LoadMoreView
 import com.wan.android.R
 import com.wan.android.adapter.ArticleAdapter
-import com.wan.common.arouter.ArouterPath
 import com.wan.android.constant.Const
 import com.wan.android.databinding.FragmentArticleListBinding
 import com.wan.android.ui.ArticleViewModel
 import com.wan.android.ui.collect.CollectViewModel
+import com.wan.baselib.ext.showToast
+import com.wan.baselib.mvvm.BaseVMFragment
+import com.wan.baselib.widget.LoadMoreView
+import com.wan.common.arouter.ArouterPath
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -99,7 +98,7 @@ class TabListFragment :
     }
 
     override fun subscribeUi() {
-        articleViewModel.uiState.observe(viewLifecycleOwner, Observer {
+        articleViewModel.uiState.observe(viewLifecycleOwner) {
             binding.swipeRefresh.isRefreshing = it.showLoading
             it.showSuccess?.let { articleEntity ->
                 articleEntity.datas?.let { list ->
@@ -114,15 +113,15 @@ class TabListFragment :
             }
             if (it.showEnd) articleAdapter.loadMoreModule.loadMoreEnd()
             articleAdapter.loadMoreModule.isEnableLoadMore = it.isEnableLoadMore
-        })
-        collectViewModel.uiState.observe(viewLifecycleOwner, Observer {
+        }
+        collectViewModel.uiState.observe(viewLifecycleOwner) {
             if (it.showLoading) showProgressDialog() else dismissProgressDialog()
             it.showSuccess?.let { collect ->
                 articleAdapter.data[curPosition].collect = collect
                 articleAdapter.notifyItemChanged(curPosition)
             }
             it.showError?.let { errorMsg -> showToast(errorMsg) }
-        })
+        }
     }
 
 }

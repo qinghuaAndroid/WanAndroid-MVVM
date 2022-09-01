@@ -2,21 +2,20 @@ package com.wan.android.ui.collect
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
-import com.wan.common.constant.Const
+import com.wan.android.R
+import com.wan.android.adapter.CollectAdapter
+import com.wan.android.databinding.ActivityCollectBinding
+import com.wan.android.ui.ArticleViewModel
 import com.wan.baselib.ext.showToast
 import com.wan.baselib.mvvm.BaseVMActivity
 import com.wan.baselib.widget.LoadMoreView
-import com.wan.android.R
-import com.wan.android.adapter.CollectAdapter
 import com.wan.common.arouter.ArouterPath
-import com.wan.android.databinding.ActivityCollectBinding
-import com.wan.android.ui.ArticleViewModel
+import com.wan.common.constant.Const
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -85,7 +84,7 @@ class CollectActivity :
     }
 
     override fun subscribeUi() {
-        articleViewModel.uiState.observe(this, Observer {
+        articleViewModel.uiState.observe(this) {
             binding.swipeRefresh.isRefreshing = it.showLoading
             it.showSuccess?.let { articleEntity ->
                 articleEntity.datas?.let { list ->
@@ -100,8 +99,8 @@ class CollectActivity :
             }
             if (it.showEnd) collectAdapter.loadMoreModule.loadMoreEnd()
             collectAdapter.loadMoreModule.isEnableLoadMore = it.isEnableLoadMore
-        })
-        collectViewModel.uiState.observe(this, Observer {
+        }
+        collectViewModel.uiState.observe(this) {
             if (it.showLoading) showProgressDialog() else dismissProgressDialog()
             it.showSuccess?.let { collect ->
                 if (collect.not()) {
@@ -109,6 +108,6 @@ class CollectActivity :
                 }
             }
             it.showError?.let { errorMsg -> showToast(errorMsg) }
-        })
+        }
     }
 }

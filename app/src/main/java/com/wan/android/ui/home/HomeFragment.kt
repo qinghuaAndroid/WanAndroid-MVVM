@@ -3,7 +3,6 @@ package com.wan.android.ui.home
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.launcher.ARouter
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
@@ -102,19 +101,19 @@ class HomeFragment : BaseVMFragment<ArticleViewModel, FragmentHomeBinding>() {
     }
 
     override fun subscribeUi() {
-        homeViewModel.bannerUiState.observe(viewLifecycleOwner, Observer {
+        homeViewModel.bannerUiState.observe(viewLifecycleOwner) {
             it.showSuccess?.let { list ->
                 binding.banner.adapter = ImageNetAdapter(list)
             }
             it.showError?.let { errorMsg -> showToast(errorMsg) }
-        })
-        homeViewModel.topArticleUiState.observe(viewLifecycleOwner, Observer {
+        }
+        homeViewModel.topArticleUiState.observe(viewLifecycleOwner) {
             it.showSuccess?.let { list ->
                 articleAdapter.setList(list)
             }
             it.showError?.let { errorMsg -> showToast(errorMsg) }
-        })
-        articleViewModel.uiState.observe(viewLifecycleOwner, Observer {
+        }
+        articleViewModel.uiState.observe(viewLifecycleOwner) {
             binding.swipeRefresh.isRefreshing = it.showLoading
             it.showSuccess?.let { articleEntity ->
                 articleEntity.datas?.let { list ->
@@ -129,14 +128,14 @@ class HomeFragment : BaseVMFragment<ArticleViewModel, FragmentHomeBinding>() {
             }
             if (it.showEnd) articleAdapter.loadMoreModule.loadMoreEnd()
             articleAdapter.loadMoreModule.isEnableLoadMore = it.isEnableLoadMore
-        })
-        collectViewModel.uiState.observe(viewLifecycleOwner, Observer {
+        }
+        collectViewModel.uiState.observe(viewLifecycleOwner) {
             if (it.showLoading) showProgressDialog() else dismissProgressDialog()
             it.showSuccess?.let { collect ->
                 articleAdapter.data[curPosition].collect = collect
                 articleAdapter.notifyItemChanged(curPosition)
             }
             it.showError?.let { errorMsg -> showToast(errorMsg) }
-        })
+        }
     }
 }

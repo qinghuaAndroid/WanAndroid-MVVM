@@ -2,7 +2,6 @@ package com.wan.android.ui.question
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
@@ -34,7 +33,7 @@ class QuestionActivity : BaseVMActivity<ArticleViewModel, ActivityQuestionBindin
     private var curPosition = 0
 
     override fun subscribeUi() {
-        articleViewModel.uiState.observe(this, Observer {
+        articleViewModel.uiState.observe(this) {
             binding.swipeRefresh.isRefreshing = it.showLoading
             it.showSuccess?.let { articleEntity ->
                 articleEntity.datas?.let { list ->
@@ -49,15 +48,15 @@ class QuestionActivity : BaseVMActivity<ArticleViewModel, ActivityQuestionBindin
             }
             if (it.showEnd) articleAdapter.loadMoreModule.loadMoreEnd()
             articleAdapter.loadMoreModule.isEnableLoadMore = it.isEnableLoadMore
-        })
-        collectViewModel.uiState.observe(this, Observer {
+        }
+        collectViewModel.uiState.observe(this) {
             if (it.showLoading) showProgressDialog() else dismissProgressDialog()
             it.showSuccess?.let { collect ->
                 articleAdapter.data[curPosition].collect = collect
                 articleAdapter.notifyItemChanged(curPosition)
             }
             it.showError?.let { errorMsg -> showToast(errorMsg) }
-        })
+        }
     }
 
     override fun getLayoutId(): Int = R.layout.activity_question
