@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit
  * Created by Cy on 25/6/2021.
  */
 
-inline fun View.onSingleClick(crossinline onClick: (view: View) -> Unit) {
+inline fun <reified T : View> T.onThrottledClick(crossinline onClick: (view: View) -> Unit) {
     setOnClickListener {
         isClickable = false
         onClick(it)
@@ -16,21 +16,15 @@ inline fun View.onSingleClick(crossinline onClick: (view: View) -> Unit) {
     }
 }
 
-inline fun View.onClick(crossinline onClick: (view: View) -> Unit) {
-    setOnClickListener {
-        onClick(it)
+inline fun <reified T : View> T.onRxClick(crossinline onClick: (view: T) -> Unit) {
+    this.clicks().subscribe {
+        onClick(this)
     }
 }
 
-inline fun <T : View> T.onRxSingleClick(crossinline onClick: (view: T) -> Unit) {
+inline fun <reified T : View> T.onRxThrottledClick(crossinline onClick: (view: T) -> Unit) {
     this.clicks().throttleFirst(1, TimeUnit.SECONDS)
         .subscribe {
             onClick(this)
         }
-}
-
-inline fun <T : View> T.onRxClick(crossinline onClick: (view: T) -> Unit) {
-    this.clicks().subscribe {
-        onClick(this)
-    }
 }

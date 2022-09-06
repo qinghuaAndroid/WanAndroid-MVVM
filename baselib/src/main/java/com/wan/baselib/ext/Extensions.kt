@@ -1,9 +1,9 @@
 package com.wan.baselib.ext
 
 import com.wan.baselib.R
-import com.wan.baselib.app.App
 import com.wan.baselib.utils.SettingUtil
 import com.wan.baselib.utils.ToastUtils
+import splitties.init.appCtx
 import splitties.resources.color
 
 /**
@@ -19,7 +19,7 @@ fun showLongToast(content: String) {
 }
 
 fun getThemeColor() = if (SettingUtil.getIsNightMode()) {
-    splitties.init.appCtx.color(R.color.Grey800)
+    appCtx.color(R.color.Grey800)
 } else {
     SettingUtil.getColor()
 }

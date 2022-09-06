@@ -7,7 +7,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.wan.baselib.ext.onClick
+import com.wan.baselib.ext.onThrottledClick
 import com.wan.baselib.ext.showToast
 import com.wan.baselib.mvvm.BaseVMFragment
 import com.wan.login.R
@@ -57,15 +57,15 @@ class LoginFragment : BaseVMFragment<LoginViewModel, FragmentLoginBinding>() {
         binding.lifecycleOwner = this
         binding.viewModel = mViewModel
 
-        binding.tvRegister.onClick {
+        binding.tvRegister.onThrottledClick {
             mViewModel.userClicksOnButton()
         }
 
-        binding.ivClear.onClick {
+        binding.ivClear.onThrottledClick {
             binding.etUsername.requestFocus()
             binding.etUsername.setText("")
         }
-        binding.ivPasswordVisibility.onClick {
+        binding.ivPasswordVisibility.onThrottledClick {
             binding.etPassword.requestFocus()
             binding.etPassword.transformationMethod = if (isPasswordShow) {
                 isPasswordShow = false
