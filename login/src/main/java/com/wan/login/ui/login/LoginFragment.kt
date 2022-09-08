@@ -57,10 +57,6 @@ class LoginFragment : BaseVMFragment<LoginViewModel, FragmentLoginBinding>() {
         binding.lifecycleOwner = this
         binding.viewModel = mViewModel
 
-        binding.tvRegister.onThrottledClick {
-            mViewModel.userClicksOnButton()
-        }
-
         binding.ivClear.onThrottledClick {
             binding.etUsername.requestFocus()
             binding.etUsername.setText("")
