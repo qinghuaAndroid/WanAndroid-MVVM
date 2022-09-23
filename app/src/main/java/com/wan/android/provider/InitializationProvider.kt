@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.startup.Initializer
 import com.alibaba.android.arouter.launcher.ARouter
 import com.didichuxing.doraemonkit.DoKit
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.kingja.loadsir.core.LoadSir
 import com.tencent.mmkv.MMKV
 import com.wan.android.BuildConfig
@@ -29,6 +30,9 @@ class InitializationProvider : Initializer<Unit> {
         initARouter(context)
         initTheme()
         initLoadSir()
+        LiveEventBus.config()
+            .lifecycleObserverAlwaysActive(false)
+            .autoClear(true)
     }
 
     override fun dependencies(): List<Class<out Initializer<*>>> {
