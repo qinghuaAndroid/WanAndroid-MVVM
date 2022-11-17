@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -17,6 +18,8 @@ import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.wan.android.R
+import com.wan.android.app.GlobalViewModel
+import com.wan.android.app.WanApplication
 import com.wan.android.bean.CoinInfo
 import com.wan.android.databinding.ActivityMainBinding
 import com.wan.android.databinding.NavHeaderMainBinding
@@ -36,6 +39,13 @@ import splitties.views.onClick
 @AndroidEntryPoint
 @Route(path = ArouterPath.ACTIVITY_MAIN)
 class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>() {
+
+    private val globalViewModel by lazy {
+        ViewModelProvider(
+            application as WanApplication,
+            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
+        )[GlobalViewModel::class.java]
+    }
 
     private val accountViewModel by viewModels<AccountViewModel>()
     private val mainViewModel by viewModels<MainViewModel>()
