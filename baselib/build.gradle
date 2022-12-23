@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         minSdk 21
-        targetSdk 32
+        targetSdk 33
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -37,15 +37,15 @@ android {
 
 dependencies {
     // Android support
-    api 'androidx.core:core-ktx:1.7.0'
-    api 'androidx.appcompat:appcompat:1.4.2'
-    api 'com.google.android.material:material:1.6.1'
+    api 'androidx.core:core-ktx:1.9.0'
+    api 'androidx.appcompat:appcompat:1.5.1'
+    api 'com.google.android.material:material:1.7.0'
     api 'androidx.constraintlayout:constraintlayout:2.1.4'
     api 'androidx.recyclerview:recyclerview:1.2.1'
 
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 
     // splitties
     def splitties_version = "3.0.0"
@@ -72,7 +72,7 @@ dependencies {
     api 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
 
     // RxJava
-    api "io.reactivex.rxjava3:rxjava:3.0.6"
+    api "io.reactivex.rxjava3:rxjava:3.1.5"
     api "io.reactivex.rxjava3:rxandroid:3.0.0"
     api "com.jakewharton.rxbinding4:rxbinding:4.0.0"
 
@@ -83,7 +83,7 @@ dependencies {
     api "com.trello.rxlifecycle4:rxlifecycle-components:4.0.2"
 
     // Glide
-    def glide_version = "4.13.2"
+    def glide_version = "4.14.2"
     api "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
 
@@ -100,19 +100,19 @@ dependencies {
     api "io.coil-kt:coil-svg:$coil_version"//svg
 
     //navigation
-    def nav_version = "2.5.1"
+    def nav_version = "2.5.3"
     api "androidx.navigation:navigation-fragment-ktx:$nav_version"
     api "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     //jetpack
-    def lifecycle_version = "2.6.0-alpha01"
+    def lifecycle_version = "2.6.0-alpha03"
     // ViewModel
     api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     // LiveData
     api "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
 
     //jetpack - startup
-    api "androidx.startup:startup-runtime:1.1.0"
+    api "androidx.startup:startup-runtime:1.1.1"
 
     //realm
     api 'io.realm.kotlin:library-base:1.0.0'
@@ -147,7 +147,7 @@ dependencies {
     api 'com.kingja.loadsir:loadsir:1.3.8'
 
     //agentweb
-    api 'com.just.agentweb:agentweb:4.1.3'
+    api 'com.github.Justson.AgentWeb:agentweb-core:v5.0.6-androidx'
 
     //banner
     api 'com.youth.banner:banner:2.1.0'
@@ -163,5 +163,5 @@ dependencies {
     api 'com.alibaba:arouter-api:1.5.2'
 
     //MMKV(tencent出品，类似sp)
-    api 'com.tencent:mmkv-static:1.2.10'
+    api 'com.tencent:mmkv:1.2.14'
 }
