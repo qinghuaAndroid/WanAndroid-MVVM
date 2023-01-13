@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.wan.android.bean.ArticleEntity
 import com.wan.android.ui.collect.CollectRepository
 import com.wan.android.ui.home.HomeRepository
-import com.wan.android.ui.question.QuestionRepository
 import com.wan.android.ui.search.list.SearchListRepository
 import com.wan.android.ui.share.ShareListRepository
 import com.wan.android.ui.system.act.SystemRepository
@@ -31,8 +30,7 @@ class ArticleViewModel @Inject constructor(
     private val systemRepository: SystemRepository,
     private val searchListRepository: SearchListRepository,
     private val tabListRepository: TabListRepository,
-    private val collectRepository: CollectRepository,
-    private val questionRepository: QuestionRepository
+    private val collectRepository: CollectRepository
 ) : BaseViewModel() {
 
     sealed class ArticleType {
@@ -43,7 +41,6 @@ class ArticleViewModel @Inject constructor(
         object System : ArticleType()           // 体系分类
         object Blog : ArticleType()                 // 公众号
         object Search : ArticleType()           //搜索列表
-        object Question : ArticleType()           //搜索列表
     }
 
     private val _uiState = MutableLiveData<ListUiState<ArticleEntity>>()
@@ -67,7 +64,6 @@ class ArticleViewModel @Inject constructor(
         getArticleList(ArticleType.Blog, isRefresh, cid = cid)
 
     fun getCollectData(isRefresh: Boolean) = getArticleList(ArticleType.Collection, isRefresh)
-    fun getQuestionList(isRefresh: Boolean) = getArticleList(ArticleType.Question, isRefresh)
 
     private fun getArticleList(
         articleType: ArticleType,
@@ -90,7 +86,6 @@ class ArticleViewModel @Inject constructor(
                     ArticleType.Project -> tabListRepository.getProjectList(pageNum, cid)
                     ArticleType.Blog -> tabListRepository.getAccountList(cid, pageNum)
                     ArticleType.Collection -> collectRepository.getCollectData(pageNum)
-                    ArticleType.Question -> questionRepository.getQuestionList(pageNum)
                 }
             }
             if (result is Result.Success) {

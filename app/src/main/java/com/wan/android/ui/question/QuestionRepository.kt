@@ -1,23 +1,25 @@
 package com.wan.android.ui.question
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.wan.android.bean.ArticleEntity
 import com.wan.android.http.ApiService
-import com.wan.baselib.mvvm.BaseRepository
-import com.wan.baselib.mvvm.Result
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 /**
  * @author cy
  * Create at 2020/4/15.
  */
-class QuestionRepository @Inject constructor(private val apiService: ApiService) :
-    BaseRepository() {
+class QuestionRepository @Inject constructor(private val apiService: ApiService) {
 
-    suspend fun getQuestionList(pageNum: Int): Result<ArticleEntity> {
-        return safeApiCall { requestQuestionList(pageNum) }
-    }
+    private val pageSize = 10
 
-    private suspend fun requestQuestionList(pageNum: Int): Result<ArticleEntity> {
-        return executeResponse(apiService.getQuestionList(pageNum))
+    fun getPagingData(): Flow<PagingData<ArticleEntity.DatasBean>> {
+        return Pager(
+            config = PagingConfig(pageSize),
+            pagingSourceFactory = { RepoPagingSource(apiService) }
+        ).flow
     }
 }

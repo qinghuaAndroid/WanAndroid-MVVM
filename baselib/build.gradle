@@ -164,4 +164,7 @@ dependencies {
 
     //MMKV(tencent出品，类似sp)
     api 'com.tencent:mmkv:1.2.14'
+
+    def paging_version = "3.0.0"
+    api "androidx.paging:paging-runtime-ktx:$paging_version"
 }
