@@ -13,5 +13,4 @@ class ApiException : RuntimeException {
         this.errorCode = errorCode
     }
 
-    constructor(message: String?, cause: Throwable?) : super(message, cause)
 }

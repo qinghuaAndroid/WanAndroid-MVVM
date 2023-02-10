@@ -11,7 +11,7 @@ import com.wan.android.bean.TabEntity
  */
 class TabPresenter : BasePresenter<TabContract.Model, TabContract.View>(), TabContract.Presenter {
 
-    override fun createModel(): TabContract.Model? = TabModel()
+    override fun createModel(): TabContract.Model = TabModel()
 
     override fun loadData(type: Int) {
         mView?.showLoading()
@@ -23,7 +23,7 @@ class TabPresenter : BasePresenter<TabContract.Model, TabContract.View>(), TabCo
                     t?.let { mView?.showList(it) }
                 }
 
-                override fun onFail(errorCode: Int, errorMsg: String?) {
+                override fun onFailed(errorCode: Int, errorMsg: String?) {
                     mView?.hideLoading()
                     mView?.showError(errorMsg)
                 }

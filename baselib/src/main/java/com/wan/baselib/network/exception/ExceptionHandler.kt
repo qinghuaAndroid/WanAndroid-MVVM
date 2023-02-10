@@ -18,33 +18,38 @@ import java.text.ParseException
 class ExceptionHandler {
 
     companion object {
-         var errorCode = ErrorStatus.UNKNOWN_ERROR
-         var errorMsg = "请求失败，请稍后重试"
+         private var errorCode = ErrorStatus.UNKNOWN_ERROR
+         private var errorMsg = "请求失败，请稍后重试"
 
-        fun handleException(e: Throwable): String {
+        fun handleException(e: Throwable): ApiException {
             e.printStackTrace()
-            if (e is SocketTimeoutException) {//网络超时
-                errorMsg = "网络连接异常"
-                errorCode = ErrorStatus.NETWORK_ERROR
-            } else if (e is ConnectException) { //均视为网络错误
-                errorMsg = "网络连接异常"
-                errorCode = ErrorStatus.NETWORK_ERROR
-            } else if (e is JsonParseException
-                    || e is JSONException
-                    || e is ParseException) {   //均视为解析错误
-                errorMsg = "数据解析异常"
-                errorCode = ErrorStatus.SERVER_ERROR
-            } else if (e is UnknownHostException) {
-                errorMsg = "网络连接异常"
-                errorCode = ErrorStatus.NETWORK_ERROR
-            } else if (e is IllegalArgumentException) {
-                errorMsg = "参数错误"
-                errorCode = ErrorStatus.SERVER_ERROR
-            } else {//未知错误
-                errorMsg = "请求失败，请稍后重试"
-                errorCode = ErrorStatus.UNKNOWN_ERROR
+            when (e) {
+                is SocketTimeoutException -> {//网络超时
+                    errorMsg = "网络连接异常"
+                    errorCode = ErrorStatus.NETWORK_ERROR
+                }
+                is ConnectException -> { //均视为网络错误
+                    errorMsg = "网络连接异常"
+                    errorCode = ErrorStatus.NETWORK_ERROR
+                }
+                is JsonParseException, is JSONException, is ParseException -> {   //均视为解析错误
+                    errorMsg = "数据解析异常"
+                    errorCode = ErrorStatus.SERVER_ERROR
+                }
+                is UnknownHostException -> {
+                    errorMsg = "网络连接异常"
+                    errorCode = ErrorStatus.NETWORK_ERROR
+                }
+                is IllegalArgumentException -> {
+                    errorMsg = "参数错误"
+                    errorCode = ErrorStatus.SERVER_ERROR
+                }
+                else -> {//未知错误
+                    errorMsg = "请求失败，请稍后重试"
+                    errorCode = ErrorStatus.UNKNOWN_ERROR
+                }
             }
-            return errorMsg
+            return ApiException(errorCode, errorMsg)
         }
     }
 }

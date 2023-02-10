@@ -1,5 +1,6 @@
 package com.wan.baselib.network
 
+import androidx.annotation.NonNull
 import com.wan.baselib.network.exception.ApiException
 import com.wan.baselib.network.exception.ExceptionHandler
 import io.reactivex.rxjava3.observers.DisposableObserver
@@ -7,12 +8,16 @@ import io.reactivex.rxjava3.observers.DisposableObserver
 /**
  * Created by fanqh on 2017/11/14.
  */
-abstract class RxObserver<T> : DisposableObserver<HttpResult<T>>() {
+abstract class RxNonNullObserver<T> : DisposableObserver<HttpResult<T>>() {
 
     override fun onStart() {}
 
     override fun onNext(tBaseModel: HttpResult<T>) {
-        onSuccess(tBaseModel.data)
+        if (tBaseModel.data != null) {
+            onSuccess(tBaseModel.data)
+        } else {
+            onFailed(-1,"data cannot be null")
+        }
     }
 
     /**
@@ -20,7 +25,7 @@ abstract class RxObserver<T> : DisposableObserver<HttpResult<T>>() {
      *
      * @param t 响应对象
      */
-    protected abstract fun onSuccess(t: T?)
+    protected abstract fun onSuccess(@NonNull t: T)
 
     override fun onError(e: Throwable) {
         e.printStackTrace()

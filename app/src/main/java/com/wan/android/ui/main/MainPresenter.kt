@@ -1,9 +1,10 @@
 package com.wan.android.ui.main
 
+import com.wan.android.bean.UserInfoEntity
 import com.wan.baselib.mvp.BasePresenter
 import com.wan.baselib.network.RxHelper
+import com.wan.baselib.network.RxNonNullObserver
 import com.wan.baselib.network.RxObserver
-import com.wan.android.bean.UserInfoEntity
 
 /**
  * @author cy
@@ -12,7 +13,7 @@ import com.wan.android.bean.UserInfoEntity
 class MainPresenter : BasePresenter<MainContract.Model, MainContract.View>(),
     MainContract.Presenter {
 
-    override fun createModel(): MainContract.Model? {
+    override fun createModel(): MainContract.Model {
         return MainModel()
     }
 
@@ -25,7 +26,7 @@ class MainPresenter : BasePresenter<MainContract.Model, MainContract.View>(),
                     mView?.showLogoutSuccess(true)
                 }
 
-                override fun onFail(errorCode: Int, errorMsg: String?) {
+                override fun onFailed(errorCode: Int, errorMsg: String?) {
                     mView?.hideLoading()
                     mView?.showLogoutSuccess(false)
                 }
@@ -36,13 +37,13 @@ class MainPresenter : BasePresenter<MainContract.Model, MainContract.View>(),
     override fun getUserInfo() {
         mView?.showLoading()
         val disposableObserver = mModel?.getUserInfo()?.compose(RxHelper.handleResult())
-            ?.subscribeWith(object : RxObserver<UserInfoEntity>() {
-                override fun onSuccess(t: UserInfoEntity?) {
+            ?.subscribeWith(object : RxNonNullObserver<UserInfoEntity>() {
+                override fun onSuccess(t: UserInfoEntity) {
                     mView?.hideLoading()
-                    t?.let { mView?.showUserInfo(t) }
+                    mView?.showUserInfo(t)
                 }
 
-                override fun onFail(errorCode: Int, errorMsg: String?) {
+                override fun onFailed(errorCode: Int, errorMsg: String?) {
                     mView?.hideLoading()
                     mView?.showError(errorMsg)
                 }

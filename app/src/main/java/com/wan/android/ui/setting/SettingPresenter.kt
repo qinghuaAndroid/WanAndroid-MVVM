@@ -11,7 +11,7 @@ import com.wan.baselib.network.RxObserver
 class SettingPresenter : BasePresenter<SettingContract.Model, SettingContract.View>(),
     SettingContract.Presenter {
 
-    override fun createModel(): SettingContract.Model? {
+    override fun createModel(): SettingContract.Model {
         return SettingModel()
     }
 
@@ -24,7 +24,7 @@ class SettingPresenter : BasePresenter<SettingContract.Model, SettingContract.Vi
                     mView?.logoutSuccess()
                 }
 
-                override fun onFail(errorCode: Int, errorMsg: String?) {
+                override fun onFailed(errorCode: Int, errorMsg: String?) {
                     mView?.hideLoading()
                     mView?.showError(errorMsg)
                 }

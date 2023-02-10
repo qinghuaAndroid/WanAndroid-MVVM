@@ -49,7 +49,7 @@ class SearchPresenter : BasePresenter<SearchContract.Model, SearchContract.View>
                     t?.let { mView?.showHotSearchData(it) }
                 }
 
-                override fun onFail(errorCode: Int, errorMsg: String?) {
+                override fun onFailed(errorCode: Int, errorMsg: String?) {
                     mView?.showError(errorMsg)
                 }
             })
