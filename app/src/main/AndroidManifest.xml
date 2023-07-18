@@ -22,7 +22,7 @@
             android:authorities="${applicationId}.androidx-startup"
             android:exported="false">
             <meta-data
-                android:name="com.wan.android.provider.InitializationProvider"
+                android:name="com.wan.android.provider.WanAppInitializer"
                 android:value="androidx.startup" />
         </provider>
 
