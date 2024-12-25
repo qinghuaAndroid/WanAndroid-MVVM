@@ -156,7 +156,7 @@ dependencies {
     api 'com.github.Justson.AgentWeb:agentweb-core:v5.0.6-androidx'
 
     //banner
-    api 'com.youth.banner:banner:2.1.0'
+    api 'io.github.youth5201314:banner:2.2.3'
 
     //标签控件
     api 'com.github.donkingliang:LabelsView:1.6.5'

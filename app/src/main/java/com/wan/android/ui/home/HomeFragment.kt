@@ -103,7 +103,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel, FragmentHomeBinding>() {
     override fun subscribeUi() {
         homeViewModel.bannerUiState.observe(viewLifecycleOwner) {
             it.showSuccess?.let { list ->
-                binding.banner.adapter = ImageNetAdapter(list)
+                binding.banner.setAdapter(ImageNetAdapter(list))
             }
             it.showError?.let { errorMsg -> showToast(errorMsg) }
         }
