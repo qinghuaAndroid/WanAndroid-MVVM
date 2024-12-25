@@ -84,6 +84,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel, FragmentHomeBinding>() {
     override fun loadData() {
         homeViewModel.getBanner()
         homeViewModel.getTopArticles()
+        articleViewModel.getArticles(true)
     }
 
     private fun loadMore() {
