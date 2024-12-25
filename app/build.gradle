@@ -9,6 +9,9 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
+apply plugin: "class-res-guard"
+apply from: 'classResGuard.gradle'
+
 kapt {
     arguments {
         arg("AROUTER_MODULE_NAME", project.getName())
