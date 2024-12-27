@@ -10,7 +10,10 @@ plugins {
 }
 
 apply plugin: "class-res-guard"
+apply plugin: "xml-class-guard"
+
 apply from: 'classResGuard.gradle'
+apply from: 'xmlClassGuard.gradle'
 
 kapt {
     arguments {
