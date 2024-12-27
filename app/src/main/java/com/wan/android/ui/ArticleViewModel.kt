@@ -11,11 +11,13 @@ import com.wan.android.ui.search.list.SearchListRepository
 import com.wan.android.ui.share.ShareListRepository
 import com.wan.android.ui.system.act.SystemRepository
 import com.wan.android.ui.tab.list.TabListRepository
+import com.wan.baselib.di.IoDispatcher
+import com.wan.baselib.di.MainDispatcher
 import com.wan.baselib.mvvm.BaseViewModel
 import com.wan.baselib.mvvm.Result
 import com.wan.common.base.ListUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -32,7 +34,9 @@ class ArticleViewModel @Inject constructor(
     private val searchListRepository: SearchListRepository,
     private val tabListRepository: TabListRepository,
     private val collectRepository: CollectRepository,
-    private val questionRepository: QuestionRepository
+    private val questionRepository: QuestionRepository,
+    @MainDispatcher private val mainDispatcher: CoroutineDispatcher,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : BaseViewModel() {
 
     sealed class ArticleType {
@@ -75,13 +79,13 @@ class ArticleViewModel @Inject constructor(
         cid: Int = 0,
         queryTxt: String = ""
     ) {
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(mainDispatcher) {
             if (isRefresh) {
                 pageNum = 0
                 emitUiState(showLoading = true)
                 emitUiState(isEnableLoadMore = false)
             }
-            val result = withContext(Dispatchers.IO) {
+            val result = withContext(ioDispatcher) {
                 when (articleType) {
                     ArticleType.Home -> homeRepository.loadArticles(pageNum)
                     ArticleType.Share -> shareListRepository.getShareArticle(pageNum)
