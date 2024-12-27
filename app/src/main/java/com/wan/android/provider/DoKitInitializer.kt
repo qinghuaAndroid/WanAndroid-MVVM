@@ -1,9 +1,9 @@
 package com.wan.android.provider
 
-import android.app.Application
 import android.content.Context
 import androidx.startup.Initializer
-import com.didichuxing.doraemonkit.DoKit
+
+//import com.didichuxing.doraemonkit.DoKit
 
 /**
  *
@@ -11,8 +11,8 @@ import com.didichuxing.doraemonkit.DoKit
  */
 class DoKitInitializer : Initializer<Unit> {
     override fun create(context: Context) {
-        DoKit.Builder(context as Application)
-            .build()
+//        DoKit.Builder(context as Application)
+//            .build()
     }
 
     override fun dependencies(): List<Class<out Initializer<*>>> {

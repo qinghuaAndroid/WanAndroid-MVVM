@@ -4,7 +4,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
-    id 'com.didi.dokit'
+//    id 'com.didi.dokit'
     id 'io.realm.kotlin'
     id 'dagger.hilt.android.plugin'
 }
@@ -54,9 +54,9 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
-    //DoKit
-    debugImplementation "io.github.didi.dokit:dokitx:3.5.0"
-    releaseImplementation "io.github.didi.dokit:dokitx-no-op:3.5.0"
+//    //DoKit
+//    debugImplementation "io.github.didi.dokit:dokitx:3.5.0"
+//    releaseImplementation "io.github.didi.dokit:dokitx-no-op:3.5.0"
     //leakcanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.9.1'
     //使用ARouter的模块都要配置
