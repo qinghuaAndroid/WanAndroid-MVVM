@@ -1,22 +1,21 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.devtools.ksp'
     id 'kotlin-android'
     id 'kotlin-kapt'
 }
 
-kapt {
-    arguments {
-        arg("AROUTER_MODULE_NAME", project.getName())
-    }
-}
+ksp { arg("AROUTER_MODULE_NAME", project.getName()) }
 
 android {
-    compileSdk 33
+    namespace "com.wan.common"
+
+    compileSdk 34
 
     defaultConfig {
-        minSdk 21
-        targetSdk 33
+        minSdk 23
+        targetSdk 34
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -42,9 +41,10 @@ android {
 
 dependencies {
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
     // arouter
-    kapt 'com.alibaba:arouter-compiler:1.5.2'
+//    kapt 'com.alibaba:arouter-compiler:1.5.2'
+    ksp 'com.github.JailedBird:ArouterKspCompiler:1.9.20-1.0.7'
     api project(path: ':baselib')
 }

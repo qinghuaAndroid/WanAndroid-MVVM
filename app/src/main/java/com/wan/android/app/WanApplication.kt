@@ -24,8 +24,7 @@ class WanApplication : App(), ViewModelStoreOwner {
         ProcessLifecycleOwner.get().lifecycle.addObserver(LifecycleChecker())
     }
 
-    override fun getViewModelStore(): ViewModelStore {
-        return mAppViewModelStore
-    }
+    override val viewModelStore: ViewModelStore
+        get() = mAppViewModelStore
 
 }

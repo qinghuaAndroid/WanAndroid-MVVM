@@ -5,32 +5,28 @@ plugins {
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs.kotlin'
-    id 'dagger.hilt.android.plugin'
+    id 'com.google.dagger.hilt.android'
+    id 'com.google.devtools.ksp'
 }
 
-kapt {
-    arguments {
-        arg("AROUTER_MODULE_NAME", project.getName())
-    }
-}
+ksp { arg("AROUTER_MODULE_NAME", project.getName()) }
 
 android {
-    compileSdk 33
+    namespace "com.wan.login"
+
+    compileSdk 34
 
     defaultConfig {
-        minSdk 21
-        targetSdk 33
+        minSdk 23
+        targetSdk 34
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
 
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments += [
-                        "room.schemaLocation":"$projectDir/schemas".toString(),
-                        "room.incremental":"true",
-                        "room.expandProjection":"true"]
-            }
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas".toString())
+            arg("room.incremental", "true")
+            arg("room.expandProjection", "true")
         }
     }
 
@@ -54,19 +50,20 @@ android {
 
 dependencies {
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
     //arouter
-    kapt 'com.alibaba:arouter-compiler:1.5.2'
+//    kapt 'com.alibaba:arouter-compiler:1.5.2'
+    ksp 'com.github.JailedBird:ArouterKspCompiler:1.9.20-1.0.7'
     //hilt
-    def hilt_version = '2.42'
+    def hilt_version = '2.51.1'
     implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    ksp "com.google.dagger:hilt-compiler:$hilt_version"
     //room
-    def roomVersion = "2.4.3"
+    def roomVersion = "2.6.1"
     implementation("androidx.room:room-runtime:$roomVersion")
     // To use Kotlin annotation processing tool (kapt)
-    kapt("androidx.room:room-compiler:$roomVersion")
+    ksp("androidx.room:room-compiler:$roomVersion")
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:$roomVersion")
     //login module

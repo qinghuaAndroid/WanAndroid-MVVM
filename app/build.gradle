@@ -6,7 +6,8 @@ plugins {
     id 'kotlin-parcelize'
 //    id 'com.didi.dokit'
     id 'io.realm.kotlin'
-    id 'dagger.hilt.android.plugin'
+    id 'com.google.dagger.hilt.android'
+    id 'com.google.devtools.ksp'
 }
 
 apply plugin: "class-res-guard"
@@ -15,19 +16,17 @@ apply plugin: "xml-class-guard"
 apply from: 'classResGuard.gradle'
 apply from: 'xmlClassGuard.gradle'
 
-kapt {
-    arguments {
-        arg("AROUTER_MODULE_NAME", project.getName())
-    }
-}
+ksp { arg("AROUTER_MODULE_NAME", project.getName()) }
 
 android {
-    compileSdk 33
+    namespace "com.wan.android"
+    compileSdk 34
+
 
     defaultConfig {
         applicationId "com.wan.android"
-        minSdk 21
-        targetSdk 33
+        minSdk 23
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -55,20 +54,26 @@ android {
 
 dependencies {
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+
 //    //DoKit
 //    debugImplementation "io.github.didi.dokit:dokitx:3.5.0"
 //    releaseImplementation "io.github.didi.dokit:dokitx-no-op:3.5.0"
+
     //leakcanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.9.1'
+
     //使用ARouter的模块都要配置
-    kapt 'com.alibaba:arouter-compiler:1.5.2'
+//    kapt 'com.alibaba:arouter-compiler:1.5.2'
+    ksp 'com.github.JailedBird:ArouterKspCompiler:1.9.20-1.0.7'
+
     //login模块
     implementation project(path: ':login')
+
     //hilt
-    def hilt_version = '2.42'
+    def hilt_version = '2.51.1'
     implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    ksp "com.google.dagger:hilt-compiler:$hilt_version"
 
 }

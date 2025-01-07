@@ -2,16 +2,18 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android'
-    id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
+    id 'com.google.dagger.hilt.android'
+    id 'com.google.devtools.ksp'
 }
 
 android {
-    compileSdk 33
+    namespace "com.wan.baselib"
+
+    compileSdk 34
 
     defaultConfig {
-        minSdk 21
-        targetSdk 33
+        minSdk 23
+        targetSdk 34
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -37,11 +39,11 @@ android {
 
 dependencies {
     // Android support
-    api 'androidx.core:core-ktx:1.9.0'
-    api 'androidx.appcompat:appcompat:1.5.1'
-    api 'com.google.android.material:material:1.7.0'
-    api 'androidx.constraintlayout:constraintlayout:2.1.4'
-    api 'androidx.recyclerview:recyclerview:1.2.1'
+    api 'androidx.core:core-ktx:1.13.1'
+    api 'androidx.appcompat:appcompat:1.7.0'
+    api 'com.google.android.material:material:1.12.0'
+    api 'androidx.constraintlayout:constraintlayout:2.2.0'
+    api 'androidx.recyclerview:recyclerview:1.3.2'
 
     implementation files('libs/app-start-1.0.2-beta-sources.jar')
     implementation files('libs/logger-1.0.1-sources.jar')
@@ -50,8 +52,8 @@ dependencies {
     implementation files('libs/player_kit-1.0.3-sources.jar')
 
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
 
     // splitties
     def splitties_version = "3.0.0"
@@ -63,13 +65,13 @@ dependencies {
     api("com.louiscad.splitties:splitties-resources:$splitties_version")
 
     // Retrofit
-    def retrofit_version = "2.9.0"
+    def retrofit_version = "2.11.0"
     api "com.squareup.retrofit2:retrofit:$retrofit_version"
     api "com.squareup.retrofit2:converter-gson:$retrofit_version"
     api "com.squareup.retrofit2:adapter-rxjava3:$retrofit_version"
 
     // define a BOM and its version
-    api(platform("com.squareup.okhttp3:okhttp-bom:4.9.1"))
+    api(platform("com.squareup.okhttp3:okhttp-bom:4.12.0"))
     // define any required OkHttp artifacts without version
     api("com.squareup.okhttp3:okhttp")
     api("com.squareup.okhttp3:logging-interceptor")
@@ -78,8 +80,8 @@ dependencies {
     api 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
 
     // RxJava
-    api "io.reactivex.rxjava3:rxjava:3.1.5"
-    api "io.reactivex.rxjava3:rxandroid:3.0.0"
+    api "io.reactivex.rxjava3:rxjava:3.1.8"
+    api "io.reactivex.rxjava3:rxandroid:3.0.2"
     api "com.jakewharton.rxbinding4:rxbinding:4.0.0"
 
     //rxpermissions
@@ -89,9 +91,9 @@ dependencies {
     api "com.trello.rxlifecycle4:rxlifecycle-components:4.0.2"
 
     // Glide
-    def glide_version = "4.14.2"
+    def glide_version = "4.16.0"
     api "com.github.bumptech.glide:glide:$glide_version"
-    kapt "com.github.bumptech.glide:compiler:$glide_version"
+    ksp "com.github.bumptech.glide:ksp:$glide_version"
 
     /**
      * 这应该是一个很新的一个图片加载库，完全使用kotlin编写，使用了kotlin的协程，图片网络请求方式默认为Okhttp,相比较于我们常用的Picasso，Glide或者Fresco，它有以下几个特点：
@@ -100,33 +102,33 @@ dependencies {
      * 足够轻量，只有大概1500个核心方法，当然也是相对于PGF而言的；
      * 足够新，也足够现代！使用了最新的Koltin协程所编写，充分发挥了CPU的性能，同时也使用了OKHttp、Okio、LifeCycle等比较新式的Android库。
      */
-    def coil_version = "2.1.0"
+    def coil_version = "2.4.0"
     api "io.coil-kt:coil:$coil_version"//base
     api "io.coil-kt:coil-gif:$coil_version"//gif
     api "io.coil-kt:coil-svg:$coil_version"//svg
 
     //navigation
-    def nav_version = "2.5.3"
+    def nav_version = "2.8.5"
     api "androidx.navigation:navigation-fragment-ktx:$nav_version"
     api "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     //jetpack
-    def lifecycle_version = "2.6.0-alpha03"
+    def lifecycle_version = "2.8.7"
     // ViewModel
     api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     // LiveData
     api "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
 
     //jetpack - startup
-    api "androidx.startup:startup-runtime:1.1.1"
+    api "androidx.startup:startup-runtime:1.2.0"
 
     //realm
-    api 'io.realm.kotlin:library-base:1.0.0'
+    api 'io.realm.kotlin:library-base:1.16.0'
 
     //hilt
-    def hilt_version = '2.42'
+    def hilt_version = '2.51.1'
     implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    ksp "com.google.dagger:hilt-compiler:$hilt_version"
 
     //Logger
     api "com.orhanobut:logger:2.2.0"
@@ -169,5 +171,5 @@ dependencies {
     api 'com.alibaba:arouter-api:1.5.2'
 
     //MMKV(tencent出品，类似sp)
-    api 'com.tencent:mmkv:1.2.14'
+    api 'com.tencent:mmkv:2.0.1'
 }
