@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.wan.android.bean.IntegralRecordEntity.DatasBean" />
+            type="o.CB.DatasBean" />
 
     </data>
 

@@ -5,8 +5,8 @@ import androidx.databinding.BindingAdapter
 import coil.load
 import com.donkingliang.labels.LabelsView
 import com.wan.android.R
-import com.wan.android.bean.ArticleEntity
-import com.wan.android.bean.SystemListEntity
+import o.BY
+import o.Q
 
 @BindingAdapter(value = ["imageUrl"])
 fun ImageView.loadImage(url: String) {
@@ -22,31 +22,31 @@ fun ImageView.loadCollectIcon(collect: Boolean) {
 }
 
 @BindingAdapter(value = ["systemLabels"])
-fun LabelsView.loadSystemLabels(labels: List<SystemListEntity.ChildrenBean>) {
+fun LabelsView.loadSystemLabels(labels: List<Q.ChildrenBean>) {
     setLabels(labels) { _, _, data ->
         data.name
     }
 }
 
 @BindingAdapter(value = ["onSystemLabelClickListener"])
-fun LabelsView.onSystemLabelClickListener(action: (SystemListEntity.ChildrenBean) -> Unit) {
+fun LabelsView.onSystemLabelClickListener(action: (Q.ChildrenBean) -> Unit) {
     setOnLabelClickListener { label, data, position ->
-        val childrenBean = data as SystemListEntity.ChildrenBean
+        val childrenBean = data as Q.ChildrenBean
         action(childrenBean)
     }
 }
 
 @BindingAdapter(value = ["navigationLabels"])
-fun LabelsView.loadNavigationLabels(labels: List<ArticleEntity.DatasBean>?) {
+fun LabelsView.loadNavigationLabels(labels: List<BY.DatasBean>?) {
     setLabels(labels) { _, _, data ->
         data.title
     }
 }
 
 @BindingAdapter(value = ["onNavigationLabelClickListener"])
-fun LabelsView.onNavigationLabelClickListener(action: (ArticleEntity.DatasBean) -> Unit) {
+fun LabelsView.onNavigationLabelClickListener(action: (BY.DatasBean) -> Unit) {
     setOnLabelClickListener { label, data, position ->
-        val datasBean = data as ArticleEntity.DatasBean
+        val datasBean = data as BY.DatasBean
         action(datasBean)
     }
 }

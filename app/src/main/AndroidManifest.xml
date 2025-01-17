@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".app.WanApplication"
+        android:name="r.W"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -27,7 +27,7 @@
         </provider>
 
         <activity
-            android:name="com.wan.android.ui.splash.SplashActivity"
+            android:name="j.J"
             android:theme="@style/SplashTheme"
             android:exported="true">
             <intent-filter>
@@ -37,27 +37,27 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.wan.android.ui.main.MainActivity" />
+        <activity android:name="d.D" />
 
-        <activity android:name="com.wan.android.ui.system.act.SystemActivity" />
+        <activity android:name="k.K" />
 
-        <activity android:name="com.wan.android.ui.browser.BrowserNormalActivity" />
+        <activity android:name="a.A" />
 
-        <activity android:name="com.wan.android.ui.integral.IntegralActivity" />
+        <activity android:name="c.C" />
 
-        <activity android:name="com.wan.android.ui.setting.SettingActivity" />
+        <activity android:name="h.H" />
 
-        <activity android:name="com.wan.android.ui.collect.CollectActivity"/>
+        <activity android:name="b.B"/>
 
-        <activity android:name="com.wan.android.ui.search.SearchActivity"/>
+        <activity android:name="g.G"/>
 
-        <activity android:name="com.wan.android.ui.search.list.SearchListActivity"/>
+        <activity android:name="s.X"/>
 
-        <activity android:name="com.wan.android.ui.myarticle.MyArticleActivity"/>
+        <activity android:name="e.E"/>
 
-        <activity android:name="com.wan.android.ui.share.ShareListActivity"/>
+        <activity android:name="i.I"/>
 
-        <activity android:name="com.wan.android.ui.question.QuestionActivity"/>
+        <activity android:name="f.F"/>
     </application>
 
 </manifest>

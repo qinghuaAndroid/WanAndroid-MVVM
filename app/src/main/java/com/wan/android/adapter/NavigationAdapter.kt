@@ -4,21 +4,21 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.wan.android.R
-import com.wan.android.bean.NavigationEntity
+import o.O
 import com.wan.android.databinding.ItemNavigationBinding
-import com.wan.android.ui.navigation.NavigationPresenter
+import p.P
 
 /**
  * @author cy
  * Create at 2020/4/8.
  */
 class NavigationAdapter :
-    BaseQuickAdapter<NavigationEntity,
+    BaseQuickAdapter<O,
             BaseDataBindingHolder<ItemNavigationBinding>>(R.layout.item_navigation), LoadMoreModule {
 
-    private val presenter: NavigationPresenter by lazy { NavigationPresenter() }
+    private val presenter: P by lazy { P() }
 
-    override fun convert(holder: BaseDataBindingHolder<ItemNavigationBinding>, item: NavigationEntity) {
+    override fun convert(holder: BaseDataBindingHolder<ItemNavigationBinding>, item: O) {
         holder.dataBinding?.let {
             it.navigationEntity = item
             it.presenter = presenter

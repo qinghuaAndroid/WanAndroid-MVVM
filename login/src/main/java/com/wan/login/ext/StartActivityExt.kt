@@ -7,7 +7,7 @@ import com.wan.common.constant.Const
 import com.wan.baselib.ext.showToast
 import com.tencent.mmkv.MMKV
 import com.wan.login.R
-import com.wan.login.ui.LoginActivity
+import t.Y
 
 /**
  * @author cy
@@ -17,7 +17,7 @@ internal fun Fragment.startActivity(clazz: Class<*>, needLogin: Boolean = false)
     val isLogin = MMKV.defaultMMKV()!!.decodeBool(Const.IS_LOGIN, false)
     if (needLogin && isLogin.not()) {
         showToast(resources.getString(R.string.login_tint))
-        startActivity(Intent(activity, LoginActivity::class.java))
+        startActivity(Intent(activity, Y::class.java))
     } else {
         startActivity(Intent(activity, clazz))
     }
@@ -27,7 +27,7 @@ internal fun Activity.startActivity(clazz: Class<*>, needLogin: Boolean = false)
     val isLogin = MMKV.defaultMMKV()!!.decodeBool(Const.IS_LOGIN, false)
     if (needLogin && isLogin.not()) {
         showToast(resources.getString(R.string.login_tint))
-        startActivity(Intent(this, LoginActivity::class.java))
+        startActivity(Intent(this, Y::class.java))
     } else {
         startActivity(Intent(this, clazz))
     }

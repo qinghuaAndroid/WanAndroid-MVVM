@@ -3,14 +3,14 @@ package com.wan.android.ui
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.wan.android.bean.ArticleEntity
-import com.wan.android.ui.collect.CollectRepository
-import com.wan.android.ui.home.HomeRepository
-import com.wan.android.ui.question.QuestionRepository
-import com.wan.android.ui.search.list.SearchListRepository
-import com.wan.android.ui.share.ShareListRepository
-import com.wan.android.ui.system.act.SystemRepository
-import com.wan.android.ui.tab.list.TabListRepository
+import o.BY
+import b.BD
+import m.BU
+import f.BL
+import s.CN
+import i.BQ
+import k.BS
+import l.BT
 import com.wan.baselib.di.IoDispatcher
 import com.wan.baselib.di.MainDispatcher
 import com.wan.baselib.mvvm.BaseViewModel
@@ -28,13 +28,13 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class ArticleViewModel @Inject constructor(
-    private val homeRepository: HomeRepository,
-    private val shareListRepository: ShareListRepository,
-    private val systemRepository: SystemRepository,
-    private val searchListRepository: SearchListRepository,
-    private val tabListRepository: TabListRepository,
-    private val collectRepository: CollectRepository,
-    private val questionRepository: QuestionRepository,
+    private val homeRepository: BU,
+    private val shareListRepository: BQ,
+    private val systemRepository: BS,
+    private val searchListRepository: CN,
+    private val tabListRepository: BT,
+    private val collectRepository: BD,
+    private val questionRepository: BL,
     @MainDispatcher private val mainDispatcher: CoroutineDispatcher,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : BaseViewModel() {
@@ -50,8 +50,8 @@ class ArticleViewModel @Inject constructor(
         object Question : ArticleType()           //搜索列表
     }
 
-    private val _uiState = MutableLiveData<ListUiState<ArticleEntity>>()
-    val uiState: LiveData<ListUiState<ArticleEntity>>
+    private val _uiState = MutableLiveData<ListUiState<BY>>()
+    val uiState: LiveData<ListUiState<BY>>
         get() = _uiState
 
     private var pageNum = 0
@@ -125,7 +125,7 @@ class ArticleViewModel @Inject constructor(
     private fun emitUiState(
         showLoading: Boolean = false,
         showError: String? = null,
-        showSuccess: ArticleEntity? = null,
+        showSuccess: BY? = null,
         showEnd: Boolean = false, // 加载更多
         isRefresh: Boolean = false, // 刷新
         isEnableLoadMore: Boolean = false

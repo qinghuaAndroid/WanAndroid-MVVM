@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.wan.login.ui.register.RegisterViewModel" />
+            type="v.BA" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -4,21 +4,21 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.wan.android.R
-import com.wan.android.bean.SystemListEntity
+import o.Q
 import com.wan.android.databinding.ItemSystemBinding
-import com.wan.android.ui.system.SystemListPresenter
+import q.S
 
 /**
  * @author cy
  * Create at 2020/4/8.
  */
 class SystemListAdapter :
-    BaseQuickAdapter<SystemListEntity,
+    BaseQuickAdapter<Q,
             BaseDataBindingHolder<ItemSystemBinding>>(R.layout.item_system), LoadMoreModule {
 
-    private val presenter: SystemListPresenter by lazy { SystemListPresenter() }
+    private val presenter: S by lazy { S() }
 
-    override fun convert(holder: BaseDataBindingHolder<ItemSystemBinding>, item: SystemListEntity) {
+    override fun convert(holder: BaseDataBindingHolder<ItemSystemBinding>, item: Q) {
         holder.dataBinding?.let {
             it.systemListEntity = item
             it.presenter = presenter

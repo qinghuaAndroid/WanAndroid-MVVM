@@ -1,6 +1,6 @@
 package com.wan.android.http
 
-import com.wan.android.bean.*
+import o.*
 import com.wan.baselib.network.HttpResult
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.*
@@ -15,19 +15,19 @@ interface ApiService {
      * banner
      */
     @GET("/banner/json")
-    suspend fun getBanner(): HttpResult<MutableList<BannerEntity>>
+    suspend fun getBanner(): HttpResult<MutableList<BZ>>
 
     /**
      * 获取首页置顶文章数据
      */
     @GET("/article/top/json")
-    suspend fun getTopList(): HttpResult<MutableList<ArticleEntity.DatasBean>>
+    suspend fun getTopList(): HttpResult<MutableList<BY.DatasBean>>
 
     /**
      * 获取首页文章数据
      */
     @GET("/article/list/{page}/json")
-    suspend fun getHomeList(@Path("page") pageNo: Int): HttpResult<ArticleEntity>
+    suspend fun getHomeList(@Path("page") pageNo: Int): HttpResult<BY>
 
     /**
      * 收藏
@@ -52,33 +52,33 @@ interface ApiService {
      * 获取项目tab
      */
     @GET("/project/tree/json")
-    suspend fun getProjectTabList(): HttpResult<MutableList<TabEntity>>
+    suspend fun getProjectTabList(): HttpResult<MutableList<CF>>
 
     /**
      * 获取项目tab
      */
     @GET("/wxarticle/chapters/json  ")
-    suspend fun getAccountTabList(): HttpResult<MutableList<TabEntity>>
+    suspend fun getAccountTabList(): HttpResult<MutableList<CF>>
 
     /**
      * 获取项目列表
      */
     @GET("/project/list/{pageNum}/json")
     suspend fun getProjectList(@Path("pageNum") pageNum: Int, @Query("cid") cid: Int)
-            : HttpResult<ArticleEntity>
+            : HttpResult<BY>
 
     /**
      * 获取公众号列表
      */
     @GET("/wxarticle/list/{id}/{pageNum}/json")
     suspend fun getAccountList(@Path("id") cid: Int, @Path("pageNum") pageNum: Int)
-            : HttpResult<ArticleEntity>
+            : HttpResult<BY>
 
     /**
      * 体系
      */
     @GET("/tree/json")
-    suspend fun getSystemList(): HttpResult<MutableList<SystemListEntity>>
+    suspend fun getSystemList(): HttpResult<MutableList<Q>>
 
 
     /**
@@ -86,43 +86,43 @@ interface ApiService {
      */
     @GET("/article/list/{pageNum}/json")
     suspend fun getSystemArticle(@Path("pageNum") pageNum: Int, @Query("cid") cid: Int)
-            : HttpResult<ArticleEntity>
+            : HttpResult<BY>
 
     /**
      * 导航
      */
     @GET("/navi/json")
-    suspend fun getNavigation(): HttpResult<MutableList<NavigationEntity>>
+    suspend fun getNavigation(): HttpResult<MutableList<O>>
 
     /**
      * 排名
      */
     @GET("/coin/rank/{pageNum}/json")
-    fun getRank(@Path("pageNum") pageNum: Int): Observable<HttpResult<RankEntity>>
+    fun getRank(@Path("pageNum") pageNum: Int): Observable<HttpResult<CD>>
 
     /**
      * 获取个人信息
      */
     @GET("/user/lg/userinfo/json")
-    suspend fun getUserInfo(): HttpResult<UserInfoEntity>
+    suspend fun getUserInfo(): HttpResult<CG>
 
     /**
      * 积分记录
      */
     @GET("/lg/coin/list/{pageNum}/json")
-    suspend fun getIntegralRecord(@Path("pageNum") pageNum: Int): HttpResult<IntegralRecordEntity>
+    suspend fun getIntegralRecord(@Path("pageNum") pageNum: Int): HttpResult<CB>
 
     /**
      * 广场列表
      */
     @GET("/user_article/list/{pageNum}/json")
-    suspend fun getShareArticle(@Path("pageNum") pageNum: Int): HttpResult<ArticleEntity>
+    suspend fun getShareArticle(@Path("pageNum") pageNum: Int): HttpResult<BY>
 
     /**
      * 我分享的文章
      */
     @GET("/user/lg/private_articles/{pageNum}/json")
-    suspend fun getMyArticle(@Path("pageNum") pageNum: Int): HttpResult<MyArticleEntity>
+    suspend fun getMyArticle(@Path("pageNum") pageNum: Int): HttpResult<CC>
 
     /**
      * 删除我分享的文章
@@ -144,7 +144,7 @@ interface ApiService {
      */
     @GET("/lg/collect/list/{page}/json")
     suspend fun getCollectData(@Path("page") pageNo: Int):
-            HttpResult<ArticleEntity>
+            HttpResult<BY>
 
     /**
      * 退出登录
@@ -157,7 +157,7 @@ interface ApiService {
      * http://www.wanandroid.com/hotkey/json
      */
     @GET("hotkey/json")
-    suspend fun getHotSearchData(): HttpResult<MutableList<HotSearchEntity>>
+    suspend fun getHotSearchData(): HttpResult<MutableList<CA>>
 
     /**
      * 搜索
@@ -170,12 +170,12 @@ interface ApiService {
     suspend fun queryBySearchKey(
         @Path("page") page: Int,
         @Field("k") key: String
-    ): HttpResult<ArticleEntity>
+    ): HttpResult<BY>
 
     /**
      * 问答
      */
     @GET("/wenda/list/{pageNum}/json")
-    suspend fun getQuestionList(@Path("pageNum") pageNum: Int): HttpResult<ArticleEntity>
+    suspend fun getQuestionList(@Path("pageNum") pageNum: Int): HttpResult<BY>
 
 }

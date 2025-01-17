@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.wan.android.ui.home.HomeFragment"
+        android:name="m.M"
         android:label="@string/tab_1"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_system"
-        android:name="com.wan.android.ui.system.SystemListFragment"
+        android:name="q.U"
         android:label="@string/tab_2"
         tools:layout="@layout/fragment_system_list" />
 
     <fragment
         android:id="@+id/navigation_official"
-        android:name="com.wan.android.ui.tab.TabFragment"
+        android:name="n.N"
         android:label="@string/tab_3"
         tools:layout="@layout/fragment_tab">
         <argument
@@ -31,13 +31,13 @@
 
     <fragment
         android:id="@+id/navigation_navigation"
-        android:name="com.wan.android.ui.navigation.NavigationFragment"
+        android:name="p.V"
         android:label="@string/tab_4"
         tools:layout="@layout/fragment_system_list" />
 
     <fragment
         android:id="@+id/navigation_project"
-        android:name="com.wan.android.ui.tab.TabFragment"
+        android:name="n.N"
         android:label="@string/tab_5"
         tools:layout="@layout/fragment_tab">
         <argument

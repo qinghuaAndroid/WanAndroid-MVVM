@@ -4,15 +4,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import coil.load
 import com.wan.android.R
-import com.wan.android.bean.BannerEntity
+import o.BZ
 import com.youth.banner.adapter.BannerAdapter
 import com.youth.banner.util.BannerUtils
 
 /**
  * 自定义布局，网络图片
  */
-class ImageNetAdapter(mDatas: List<BannerEntity>?) :
-    BannerAdapter<BannerEntity, ImageHolder>(mDatas) {
+class ImageNetAdapter(mDatas: List<BZ>?) :
+    BannerAdapter<BZ, ImageHolder>(mDatas) {
     override fun onCreateHolder(parent: ViewGroup, viewType: Int): ImageHolder {
         val imageView =
             BannerUtils.getView(parent, R.layout.banner_image) as ImageView
@@ -21,7 +21,7 @@ class ImageNetAdapter(mDatas: List<BannerEntity>?) :
 
     override fun onBindView(
         holder: ImageHolder,
-        data: BannerEntity,
+        data: BZ,
         position: Int,
         size: Int
     ) {
