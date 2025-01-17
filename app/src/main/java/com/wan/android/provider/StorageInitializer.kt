@@ -15,6 +15,6 @@ class StorageInitializer : Initializer<Unit> {
     }
 
     override fun dependencies(): List<Class<out Initializer<*>>> {
-        return listOf(LiveBusInitializer::class.java)
+        return listOf(LoadSirInitializer::class.java)
     }
 }

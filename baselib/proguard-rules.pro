@@ -20,11 +20,6 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--dontwarn com.jeremyliao.liveeventbus.**
--keep class com.jeremyliao.liveeventbus.** { *; }
--keep class androidx.lifecycle.** { *; }
--keep class androidx.arch.core.** { *; }
-
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep class * extends com.bumptech.glide.module.AppGlideModule {
  <init>(...);

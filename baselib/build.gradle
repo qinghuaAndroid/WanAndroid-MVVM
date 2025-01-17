@@ -148,9 +148,6 @@ dependencies {
     //PhotoView
     api "com.github.chrisbanes:PhotoView:2.3.0"
 
-    //live-event-bus
-    api 'io.github.jeremyliao:live-event-bus-x:1.8.0'
-
     //loadsir
     api 'com.kingja.loadsir:loadsir:1.3.8'
 
