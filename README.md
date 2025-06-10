@@ -1,4 +1,4 @@
-# WanAndroid-qh
+# WanAndroid
 WanAndroid, kotlin、mvvm、jetpack
 
 # 一个基于 Kotlin + MVVM + Jetpack + DataBinding + 协程的 玩Android 客户端
