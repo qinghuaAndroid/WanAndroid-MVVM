@@ -1,15 +1,15 @@
 package com.wan.android.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.wan.android.bean.ArticleEntity
+import com.wan.android.bean.BannerEntity
 import com.wan.baselib.mvvm.BaseViewModel
 import com.wan.baselib.mvvm.Result
 import com.wan.common.base.BaseUiState
-import com.wan.android.bean.ArticleEntity
-import com.wan.android.bean.BannerEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -21,11 +21,12 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val mRepository: HomeRepository) : BaseViewModel() {
 
-    private val _topArticleUiState = MutableLiveData<BaseUiState<MutableList<ArticleEntity.DatasBean>>>()
-    val topArticleUiState: LiveData<BaseUiState<MutableList<ArticleEntity.DatasBean>>>
+    private val _topArticleUiState =
+        MutableSharedFlow<BaseUiState<MutableList<ArticleEntity.DatasBean>>>()
+    val topArticleUiState: SharedFlow<BaseUiState<MutableList<ArticleEntity.DatasBean>>>
         get() = _topArticleUiState
-    private val _bannerUiState = MutableLiveData<BaseUiState<MutableList<BannerEntity>>>()
-    val bannerUiState: LiveData<BaseUiState<MutableList<BannerEntity>>>
+    private val _bannerUiState = MutableSharedFlow<BaseUiState<MutableList<BannerEntity>>>()
+    val bannerUiState: SharedFlow<BaseUiState<MutableList<BannerEntity>>>
         get() = _bannerUiState
 
     fun getTopArticles() {
@@ -44,21 +45,21 @@ class HomeViewModel @Inject constructor(private val mRepository: HomeRepository)
         }
     }
 
-    private fun emitTopArticleUiState(
+    private suspend fun emitTopArticleUiState(
         showLoading: Boolean = false,
         showError: String? = null,
         showSuccess: MutableList<ArticleEntity.DatasBean>? = null
     ) {
         val baseUiState = BaseUiState(showLoading, showError, showSuccess)
-        _topArticleUiState.value = baseUiState
+        _topArticleUiState.emit(baseUiState)
     }
 
-    private fun emitBannerUiState(
+    private suspend fun emitBannerUiState(
         showLoading: Boolean = false,
         showError: String? = null,
         showSuccess: MutableList<BannerEntity>? = null
     ) {
         val baseUiState = BaseUiState(showLoading, showError, showSuccess)
-        _bannerUiState.value = baseUiState
+        _bannerUiState.emit(baseUiState)
     }
 }

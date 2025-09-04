@@ -10,6 +10,7 @@ import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.wan.android.R
 import com.wan.android.databinding.ActivitySettingBinding
+import com.wan.baselib.ext.collectOnLifecycle
 import com.wan.baselib.flowbus.SharedFlowBus
 import com.wan.baselib.mvvm.BaseVMActivity
 import com.wan.baselib.utils.SettingUtil
@@ -67,7 +68,7 @@ class SettingActivity : BaseVMActivity<SettingViewModel, ActivitySettingBinding>
     }
 
     override fun subscribeUi() {
-        settingViewModel.cacheValue.observe(this) { cacheValue ->
+        settingViewModel.cacheValue.collectOnLifecycle(this) { cacheValue ->
             binding.tvClearValue.text = cacheValue
         }
     }

@@ -24,6 +24,7 @@ import com.wan.android.bean.CoinInfo
 import com.wan.android.databinding.ActivityMainBinding
 import com.wan.android.databinding.NavHeaderMainBinding
 import com.wan.android.ui.account.AccountViewModel
+import com.wan.baselib.ext.collectOnLifecycle
 import com.wan.baselib.ext.getThemeColor
 import com.wan.baselib.ext.showToast
 import com.wan.baselib.flowbus.SharedFlowBus
@@ -236,7 +237,7 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>() {
     }
 
     override fun subscribeUi() {
-        mainViewModel.uiState.observe(this) {
+        mainViewModel.uiState.collectOnLifecycle(this) {
             if (it.showLoading) showProgressDialog() else dismissProgressDialog()
             it.showSuccess?.let { userInfoEntity ->
                 showUserInfo(userInfoEntity.coinInfo)

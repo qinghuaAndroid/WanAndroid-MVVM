@@ -1,7 +1,5 @@
 package com.wan.android.ui.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.wan.android.bean.UserInfoEntity
 import com.wan.baselib.mvvm.BaseViewModel
@@ -9,6 +7,8 @@ import com.wan.baselib.mvvm.Result
 import com.wan.common.base.BaseUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -16,8 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(private val mRepository: MainRepository) : BaseViewModel() {
 
-    private val _uiState = MutableLiveData<BaseUiState<UserInfoEntity>>()
-    val uiState: LiveData<BaseUiState<UserInfoEntity>>
+    private val _uiState = MutableSharedFlow<BaseUiState<UserInfoEntity>>()
+    val uiState: SharedFlow<BaseUiState<UserInfoEntity>>
         get() = _uiState
 
 
@@ -32,12 +32,12 @@ class MainViewModel @Inject constructor(private val mRepository: MainRepository)
         }
     }
 
-    private fun emitUiState(
+    private suspend fun emitUiState(
         showLoading: Boolean = false,
         showError: String? = null,
         showSuccess: UserInfoEntity? = null
     ) {
         val baseUiState = BaseUiState(showLoading, showError, showSuccess)
-        _uiState.value = baseUiState
+        _uiState.emit(baseUiState)
     }
 }

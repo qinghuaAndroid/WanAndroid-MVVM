@@ -12,6 +12,7 @@ import com.wan.android.adapter.ArticleAdapter
 import com.wan.android.databinding.ActivityQuestionBinding
 import com.wan.android.ui.ArticleViewModel
 import com.wan.android.ui.collect.CollectViewModel
+import com.wan.baselib.ext.collectOnLifecycle
 import com.wan.baselib.ext.showToast
 import com.wan.baselib.mvvm.BaseVMActivity
 import com.wan.baselib.widget.LoadMoreView
@@ -33,7 +34,7 @@ class QuestionActivity : BaseVMActivity<ArticleViewModel, ActivityQuestionBindin
     private var curPosition = 0
 
     override fun subscribeUi() {
-        articleViewModel.uiState.observe(this) {
+        articleViewModel.uiState.collectOnLifecycle(this) {
             binding.swipeRefresh.isRefreshing = it.showLoading
             it.showSuccess?.let { articleEntity ->
                 articleEntity.datas?.let { list ->
@@ -49,7 +50,7 @@ class QuestionActivity : BaseVMActivity<ArticleViewModel, ActivityQuestionBindin
             if (it.showEnd) articleAdapter.loadMoreModule.loadMoreEnd()
             articleAdapter.loadMoreModule.isEnableLoadMore = it.isEnableLoadMore
         }
-        collectViewModel.uiState.observe(this) {
+        collectViewModel.uiState.collectOnLifecycle(this) {
             if (it.showLoading) showProgressDialog() else dismissProgressDialog()
             it.showSuccess?.let { collect ->
                 articleAdapter.data[curPosition].collect = collect

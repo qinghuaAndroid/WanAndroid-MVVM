@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.wan.android.R
 import com.wan.android.adapter.NavigationAdapter
 import com.wan.android.databinding.FragmentSystemListBinding
+import com.wan.baselib.ext.collectOnLifecycle
 import com.wan.baselib.ext.showToast
 import com.wan.baselib.mvvm.BaseVMFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,7 +40,7 @@ class NavigationFragment : BaseVMFragment<NavigationViewModel, FragmentSystemLis
     }
 
     override fun subscribeUi() {
-        mViewModel.uiState.observe(viewLifecycleOwner) { baseUiState ->
+        mViewModel.uiState.collectOnLifecycle(viewLifecycleOwner) { baseUiState ->
             baseUiState.showSuccess?.let { navigationAdapter.setList(it) }
             baseUiState.showError?.let { showToast(it) }
         }

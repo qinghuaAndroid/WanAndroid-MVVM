@@ -1,13 +1,13 @@
 package com.wan.android.ui.collect
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.wan.baselib.mvvm.BaseViewModel
 import com.wan.baselib.mvvm.Result
 import com.wan.common.base.BaseUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -17,10 +17,11 @@ import javax.inject.Inject
  * Create at 2020/4/16.
  */
 @HiltViewModel
-class CollectViewModel @Inject constructor(private val mRepository: CollectRepository) : BaseViewModel() {
+class CollectViewModel @Inject constructor(private val mRepository: CollectRepository) :
+    BaseViewModel() {
 
-    private val _uiState = MutableLiveData<BaseUiState<Boolean>>()
-    val uiState: LiveData<BaseUiState<Boolean>>
+    private val _uiState = MutableSharedFlow<BaseUiState<Boolean>>()
+    val uiState: SharedFlow<BaseUiState<Boolean>>
         get() = _uiState
 
     fun collect(id: Int) {
@@ -47,12 +48,12 @@ class CollectViewModel @Inject constructor(private val mRepository: CollectRepos
         }
     }
 
-    private fun emitUiState(
+    private suspend fun emitUiState(
         showLoading: Boolean = false,
         showError: String? = null,
         showSuccess: Boolean? = null //true表示收藏成功，false表示取消收藏成功
     ) {
         val baseUiState = BaseUiState(showLoading, showError, showSuccess)
-        _uiState.value = baseUiState
+        _uiState.emit(baseUiState)
     }
 }

@@ -7,6 +7,8 @@ import com.wan.baselib.mvvm.BaseViewModel
 import com.wan.baselib.utils.CacheUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 @HiltViewModel
@@ -14,8 +16,8 @@ class SettingViewModel @Inject constructor(
     private val mRepository: SettingRepository
 ) : BaseViewModel() {
 
-    private val _cacheValue = MutableLiveData<String>()
-    val cacheValue: LiveData<String> get() = _cacheValue
+    private val _cacheValue = MutableStateFlow("")
+    val cacheValue: StateFlow<String> get() = _cacheValue
 
     fun getCacheSize() {
         _cacheValue.value = mRepository.getCacheSize()

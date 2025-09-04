@@ -8,12 +8,12 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import com.google.android.material.appbar.AppBarLayout
 import com.wan.android.R
 import com.wan.android.adapter.IntegralAdapter
 import com.wan.android.bean.CoinInfo
 import com.wan.android.databinding.ActivityIntegralBinding
 import com.wan.android.ui.main.MainViewModel
+import com.wan.baselib.ext.collectOnLifecycle
 import com.wan.baselib.ext.showToast
 import com.wan.baselib.mvvm.BaseVMActivity
 import com.wan.baselib.widget.LoadMoreView
@@ -36,7 +36,7 @@ class IntegralActivity : BaseVMActivity<IntegralViewModel, ActivityIntegralBindi
     private lateinit var headerView: View
 
     override fun subscribeUi() {
-        mainViewModel.uiState.observe(this) {
+        mainViewModel.uiState.collectOnLifecycle(this) {
             it.showSuccess?.let { userInfoEntity ->
                 userInfoEntity.coinInfo?.let { coinInfo ->
                     startAnim(coinInfo)
@@ -44,7 +44,7 @@ class IntegralActivity : BaseVMActivity<IntegralViewModel, ActivityIntegralBindi
             }
         }
 
-        integralViewModel.uiState.observe(this) {
+        integralViewModel.uiState.collectOnLifecycle(this) {
             binding.swipeRefresh.isRefreshing = it.showLoading
             it.showSuccess?.let { articleEntity ->
                 articleEntity.datas?.let { list ->
@@ -72,10 +72,9 @@ class IntegralActivity : BaseVMActivity<IntegralViewModel, ActivityIntegralBindi
         title = getString(R.string.my_integral)
         initRecyclerView()
         binding.swipeRefresh.setOnRefreshListener { loadData() }
-        binding.appBar.addOnOffsetChangedListener(
-            AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
-                binding.swipeRefresh.isEnabled = verticalOffset >= 0
-            })
+        binding.appBar.addOnOffsetChangedListener { _, verticalOffset ->
+            binding.swipeRefresh.isEnabled = verticalOffset >= 0
+        }
     }
 
     /**

@@ -1,7 +1,5 @@
 package com.wan.android.ui.integral
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.wan.android.bean.IntegralRecordEntity
 import com.wan.baselib.mvvm.BaseViewModel
@@ -9,6 +7,8 @@ import com.wan.baselib.mvvm.Result
 import com.wan.common.base.ListUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -18,10 +18,11 @@ import javax.inject.Inject
  * Create at 2020/4/10.
  */
 @HiltViewModel
-class IntegralViewModel @Inject constructor(private val mRepository: IntegralRepository) : BaseViewModel() {
+class IntegralViewModel @Inject constructor(private val mRepository: IntegralRepository) :
+    BaseViewModel() {
 
-    private val _uiState = MutableLiveData<ListUiState<IntegralRecordEntity>>()
-    val uiState: LiveData<ListUiState<IntegralRecordEntity>>
+    private val _uiState = MutableSharedFlow<ListUiState<IntegralRecordEntity>>()
+    val uiState: SharedFlow<ListUiState<IntegralRecordEntity>>
         get() = _uiState
 
     private var pageNum = 1
@@ -57,7 +58,7 @@ class IntegralViewModel @Inject constructor(private val mRepository: IntegralRep
         }
     }
 
-    private fun emitUiState(
+    private suspend fun emitUiState(
         showLoading: Boolean = false,
         showError: String? = null,
         showSuccess: IntegralRecordEntity? = null,
@@ -73,6 +74,6 @@ class IntegralViewModel @Inject constructor(private val mRepository: IntegralRep
             isRefresh,
             isEnableLoadMore
         )
-        _uiState.value = listUiState
+        _uiState.emit(listUiState)
     }
 }

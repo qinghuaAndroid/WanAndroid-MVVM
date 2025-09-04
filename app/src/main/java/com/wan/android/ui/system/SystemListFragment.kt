@@ -9,6 +9,7 @@ import com.kingja.loadsir.core.LoadSir
 import com.wan.android.R
 import com.wan.android.adapter.SystemListAdapter
 import com.wan.android.databinding.FragmentSystemListBinding
+import com.wan.baselib.ext.collectOnLifecycle
 import com.wan.baselib.ext.showToast
 import com.wan.baselib.mvvm.BaseVMFragment
 import com.wan.common.callback.EmptyCallback
@@ -49,7 +50,7 @@ class SystemListFragment : BaseVMFragment<SystemListViewModel, FragmentSystemLis
 
     override fun subscribeUi() {
         loadService.showCallback(LoadingCallback::class.java)
-        mViewModel.uiState.observe(viewLifecycleOwner) { baseUiState ->
+        mViewModel.uiState.collectOnLifecycle(viewLifecycleOwner) { baseUiState ->
             baseUiState.showSuccess?.let {
                 if (it.isEmpty()) {
                     loadService.showCallback(EmptyCallback::class.java)

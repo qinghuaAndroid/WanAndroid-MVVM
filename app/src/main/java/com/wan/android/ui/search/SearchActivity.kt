@@ -12,6 +12,7 @@ import com.wan.android.bean.HotSearchEntity
 import com.wan.android.bean.SearchHistoryBean
 import com.wan.android.constant.Const
 import com.wan.android.databinding.ActivitySearchBinding
+import com.wan.baselib.ext.collectOnLifecycle
 import com.wan.baselib.ext.listener.queryTextListener
 import com.wan.baselib.ext.showToast
 import com.wan.baselib.mvvm.BaseVMActivity
@@ -25,7 +26,7 @@ import splitties.views.onClick
  */
 @AndroidEntryPoint
 @Route(path = ArouterPath.ACTIVITY_SEARCH)
-class SearchActivity : BaseVMActivity<SearchViewModel, ActivitySearchBinding>(){
+class SearchActivity : BaseVMActivity<SearchViewModel, ActivitySearchBinding>() {
 
     private val searchViewModel by viewModels<SearchViewModel>()
 
@@ -56,13 +57,13 @@ class SearchActivity : BaseVMActivity<SearchViewModel, ActivitySearchBinding>(){
     }
 
     override fun subscribeUi() {
-        searchViewModel.uiState.observe(this){
+        searchViewModel.uiState.collectOnLifecycle(this) {
             if (it.showLoading) showProgressDialog() else dismissProgressDialog()
             it.showSuccess?.let { historyBeans -> showHotSearchData(historyBeans) }
             it.showError?.let { errorMsg -> showToast(errorMsg) }
         }
-        searchViewModel.resultsChange.observe(this) { resultsChange->
-            showHistoryData(resultsChange.list)
+        searchViewModel.historyList.collectOnLifecycle(this) { list ->
+            showHistoryData(list)
         }
     }
 

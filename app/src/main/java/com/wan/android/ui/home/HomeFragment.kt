@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.launcher.ARouter
 import com.chad.library.adapter.base.listener.OnItemChildClickListener
 import com.chad.library.adapter.base.listener.OnItemClickListener
-import com.google.android.material.appbar.AppBarLayout
 import com.wan.android.R
 import com.wan.android.adapter.ArticleAdapter
 import com.wan.android.adapter.ImageNetAdapter
 import com.wan.android.databinding.FragmentHomeBinding
 import com.wan.android.ui.ArticleViewModel
 import com.wan.android.ui.collect.CollectViewModel
+import com.wan.baselib.ext.collectOnLifecycle
 import com.wan.baselib.ext.showToast
 import com.wan.baselib.mvvm.BaseVMFragment
 import com.wan.baselib.widget.LoadMoreView
@@ -44,10 +44,9 @@ class HomeFragment : BaseVMFragment<ArticleViewModel, FragmentHomeBinding>() {
     override fun initView(view: View) {
         initRecyclerView()
         binding.swipeRefresh.setOnRefreshListener { loadData() }
-        binding.appBarLayout.addOnOffsetChangedListener(
-            AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
-                binding.swipeRefresh.isEnabled = verticalOffset >= 0
-            })
+        binding.appBarLayout.addOnOffsetChangedListener { _, verticalOffset ->
+            binding.swipeRefresh.isEnabled = verticalOffset >= 0
+        }
     }
 
     private fun initRecyclerView() {
@@ -102,19 +101,19 @@ class HomeFragment : BaseVMFragment<ArticleViewModel, FragmentHomeBinding>() {
     }
 
     override fun subscribeUi() {
-        homeViewModel.bannerUiState.observe(viewLifecycleOwner) {
+        homeViewModel.bannerUiState.collectOnLifecycle(viewLifecycleOwner) {
             it.showSuccess?.let { list ->
                 binding.banner.setAdapter(ImageNetAdapter(list))
             }
             it.showError?.let { errorMsg -> showToast(errorMsg) }
         }
-        homeViewModel.topArticleUiState.observe(viewLifecycleOwner) {
+        homeViewModel.topArticleUiState.collectOnLifecycle(viewLifecycleOwner) {
             it.showSuccess?.let { list ->
                 articleAdapter.setList(list)
             }
             it.showError?.let { errorMsg -> showToast(errorMsg) }
         }
-        articleViewModel.uiState.observe(viewLifecycleOwner) {
+        articleViewModel.uiState.collectOnLifecycle(viewLifecycleOwner) {
             binding.swipeRefresh.isRefreshing = it.showLoading
             it.showSuccess?.let { articleEntity ->
                 articleEntity.datas?.let { list ->
@@ -130,7 +129,7 @@ class HomeFragment : BaseVMFragment<ArticleViewModel, FragmentHomeBinding>() {
             if (it.showEnd) articleAdapter.loadMoreModule.loadMoreEnd()
             articleAdapter.loadMoreModule.isEnableLoadMore = it.isEnableLoadMore
         }
-        collectViewModel.uiState.observe(viewLifecycleOwner) {
+        collectViewModel.uiState.collectOnLifecycle(viewLifecycleOwner) {
             if (it.showLoading) showProgressDialog() else dismissProgressDialog()
             it.showSuccess?.let { collect ->
                 articleAdapter.data[curPosition].collect = collect

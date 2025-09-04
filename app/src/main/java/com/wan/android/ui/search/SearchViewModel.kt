@@ -1,7 +1,5 @@
 package com.wan.android.ui.search
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.wan.android.bean.HotSearchEntity
 import com.wan.android.bean.SearchHistoryBean
@@ -13,6 +11,10 @@ import io.realm.kotlin.notifications.InitialResults
 import io.realm.kotlin.notifications.ResultsChange
 import io.realm.kotlin.notifications.UpdatedResults
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -21,19 +23,17 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(private val mRepository: SearchRepository) :
     BaseViewModel() {
 
-    private val _uiState = MutableLiveData<BaseUiState<MutableList<HotSearchEntity>>>()
-    val uiState: LiveData<BaseUiState<MutableList<HotSearchEntity>>>
-        get() = _uiState
+    private val _uiState = MutableSharedFlow<BaseUiState<MutableList<HotSearchEntity>>>()
+    val uiState: SharedFlow<BaseUiState<MutableList<HotSearchEntity>>> get() = _uiState
 
-    private val _resultsChange = MutableLiveData<ResultsChange<SearchHistoryBean>>()
-    val resultsChange: LiveData<ResultsChange<SearchHistoryBean>>
-        get() = _resultsChange
+    private val _historyList = MutableStateFlow<List<SearchHistoryBean>>(emptyList())
+    val historyList: StateFlow<List<SearchHistoryBean>> get() = _historyList
 
     fun queryAll() {
         viewModelScope.launch {
             mRepository.queryAll()
                 .collect { resultsChange: ResultsChange<SearchHistoryBean> ->
-                    _resultsChange.value = resultsChange
+                    _historyList.value = resultsChange.list
                     when (resultsChange) {
                         is InitialResults -> println("Initial results size: ${resultsChange.list.size}")
                         is UpdatedResults ->
@@ -69,12 +69,12 @@ class SearchViewModel @Inject constructor(private val mRepository: SearchReposit
         }
     }
 
-    private fun emitUiState(
+    private suspend fun emitUiState(
         showLoading: Boolean = false,
         showError: String? = null,
         showSuccess: MutableList<HotSearchEntity>? = null
     ) {
         val baseUiState = BaseUiState(showLoading, showError, showSuccess)
-        _uiState.value = baseUiState
+        _uiState.emit(baseUiState)
     }
 }

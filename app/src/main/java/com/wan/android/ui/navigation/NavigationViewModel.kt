@@ -1,13 +1,13 @@
 package com.wan.android.ui.navigation
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.wan.android.bean.NavigationEntity
 import com.wan.baselib.mvvm.BaseViewModel
 import com.wan.baselib.mvvm.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -20,8 +20,8 @@ import javax.inject.Inject
 class NavigationViewModel @Inject constructor(private val mRepository: NavigationRepository) :
     BaseViewModel() {
 
-    private val _uiState = MutableLiveData<NavigationUiState>()
-    val uiState: LiveData<NavigationUiState>
+    private val _uiState = MutableSharedFlow<NavigationUiState>()
+    val uiState: SharedFlow<NavigationUiState>
         get() = _uiState
 
     fun getNavigation() {
@@ -32,12 +32,12 @@ class NavigationViewModel @Inject constructor(private val mRepository: Navigatio
         }
     }
 
-    private fun emitNavigationUiState(
+    private suspend fun emitNavigationUiState(
         showError: String? = null,
         showSuccess: MutableList<NavigationEntity>? = null
     ) {
         val navigationUiState = NavigationUiState(showError, showSuccess)
-        _uiState.value = navigationUiState
+        _uiState.emit(navigationUiState)
     }
 }
 

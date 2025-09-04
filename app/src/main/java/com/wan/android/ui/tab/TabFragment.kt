@@ -9,6 +9,7 @@ import com.wan.android.adapter.TabPagerAdapter
 import com.wan.android.bean.TabEntity
 import com.wan.android.constant.Const
 import com.wan.android.databinding.FragmentTabBinding
+import com.wan.baselib.ext.collectOnLifecycle
 import com.wan.baselib.ext.getThemeColor
 import com.wan.baselib.ext.showToast
 import com.wan.baselib.flowbus.SharedFlowBus
@@ -51,7 +52,7 @@ class TabFragment : BaseVMFragment<TabViewModel, FragmentTabBinding>() {
     }
 
     override fun subscribeUi() {
-        tabViewModel.uiState.observe(viewLifecycleOwner) {
+        tabViewModel.uiState.collectOnLifecycle(viewLifecycleOwner) {
             if (it.showLoading) showProgressDialog() else dismissProgressDialog()
             it.showSuccess?.let { tabList -> showList(tabList) }
             it.showError?.let { errorMsg -> showToast(errorMsg) }

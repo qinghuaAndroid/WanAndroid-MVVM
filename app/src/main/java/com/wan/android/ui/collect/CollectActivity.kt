@@ -11,6 +11,7 @@ import com.wan.android.R
 import com.wan.android.adapter.CollectAdapter
 import com.wan.android.databinding.ActivityCollectBinding
 import com.wan.android.ui.ArticleViewModel
+import com.wan.baselib.ext.collectOnLifecycle
 import com.wan.baselib.ext.showToast
 import com.wan.baselib.mvvm.BaseVMActivity
 import com.wan.baselib.widget.LoadMoreView
@@ -84,7 +85,7 @@ class CollectActivity :
     }
 
     override fun subscribeUi() {
-        articleViewModel.uiState.observe(this) {
+        articleViewModel.uiState.collectOnLifecycle(this) {
             binding.swipeRefresh.isRefreshing = it.showLoading
             it.showSuccess?.let { articleEntity ->
                 articleEntity.datas?.let { list ->
@@ -100,7 +101,7 @@ class CollectActivity :
             if (it.showEnd) collectAdapter.loadMoreModule.loadMoreEnd()
             collectAdapter.loadMoreModule.isEnableLoadMore = it.isEnableLoadMore
         }
-        collectViewModel.uiState.observe(this) {
+        collectViewModel.uiState.collectOnLifecycle(this) {
             if (it.showLoading) showProgressDialog() else dismissProgressDialog()
             it.showSuccess?.let { collect ->
                 if (collect.not()) {

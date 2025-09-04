@@ -1,7 +1,5 @@
 package com.wan.android.ui
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.wan.android.bean.ArticleEntity
 import com.wan.android.ui.collect.CollectRepository
@@ -18,6 +16,8 @@ import com.wan.baselib.mvvm.Result
 import com.wan.common.base.ListUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -50,9 +50,8 @@ class ArticleViewModel @Inject constructor(
         object Question : ArticleType()           //搜索列表
     }
 
-    private val _uiState = MutableLiveData<ListUiState<ArticleEntity>>()
-    val uiState: LiveData<ListUiState<ArticleEntity>>
-        get() = _uiState
+    private val _uiState = MutableSharedFlow<ListUiState<ArticleEntity>>()
+    val uiState: SharedFlow<ListUiState<ArticleEntity>> get() = _uiState
 
     private var pageNum = 0
 
@@ -122,7 +121,7 @@ class ArticleViewModel @Inject constructor(
         }
     }
 
-    private fun emitUiState(
+    private suspend fun emitUiState(
         showLoading: Boolean = false,
         showError: String? = null,
         showSuccess: ArticleEntity? = null,
@@ -138,6 +137,6 @@ class ArticleViewModel @Inject constructor(
             isRefresh,
             isEnableLoadMore
         )
-        _uiState.value = listUiState
+        _uiState.emit(listUiState)
     }
 }
