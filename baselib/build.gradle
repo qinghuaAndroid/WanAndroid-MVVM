@@ -84,9 +84,6 @@ dependencies {
     api "io.reactivex.rxjava3:rxandroid:3.0.2"
     api "com.jakewharton.rxbinding4:rxbinding:4.0.0"
 
-    //rxpermissions
-    api "com.github.tbruyelle:rxpermissions:0.12"
-
     //rxlifecycle-components
     api "com.trello.rxlifecycle4:rxlifecycle-components:4.0.2"
 
