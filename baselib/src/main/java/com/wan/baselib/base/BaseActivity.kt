@@ -1,9 +1,13 @@
 package com.wan.baselib.base
 
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.OnApplyWindowInsetsListener
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.trello.rxlifecycle4.components.support.RxAppCompatActivity
@@ -14,6 +18,7 @@ import com.wan.baselib.utils.StatusBarUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
+import androidx.core.graphics.drawable.toDrawable
 
 /**
  *
@@ -21,18 +26,31 @@ import kotlinx.coroutines.cancel
  * @date 2018/9/20
  */
 abstract class BaseActivity<B : ViewDataBinding> : RxAppCompatActivity(),
-    CoroutineScope by MainScope() {
+    CoroutineScope by MainScope(), OnApplyWindowInsetsListener {
     protected lateinit var binding: B
     override fun onCreate(savedInstanceState: Bundle?) {
         AutoDensityUtils.setCustomDensity(this, application)
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, getLayoutId())
         binding.lifecycleOwner = this //xml中若有使用livedata
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        // 通过该监听可实时感知状态栏、导航栏、键盘高度
+        ViewCompat.setOnApplyWindowInsetsListener(window.decorView, this)
         initToolbar()
         initData(savedInstanceState)
         initView()
         subscribeEvent()
         loadData()
+    }
+
+    override fun onApplyWindowInsets(v: View, insets: WindowInsetsCompat): WindowInsetsCompat {
+        val insets1 = insets.getInsets(WindowInsetsCompat.Type.ime())
+        println("软键盘: ${insets1.left}, ${insets1.top}, ${insets1.right}, ${insets1.bottom}")
+        val insets2 = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+        println("导航栏: ${insets2.left}, ${insets2.top}, ${insets2.right}, ${insets2.bottom}")
+        val insets3 = insets.getInsets(WindowInsetsCompat.Type.statusBars())
+        println("状态栏: ${insets3.left}, ${insets3.top}, ${insets3.right}, ${insets3.bottom}")
+        return WindowInsetsCompat.CONSUMED
     }
 
     override fun onResume() {
@@ -61,18 +79,19 @@ abstract class BaseActivity<B : ViewDataBinding> : RxAppCompatActivity(),
         val themeColor = getThemeColor()
         StatusBarUtil.setColor(this, themeColor, 0)
         if (this.supportActionBar != null) {
-            this.supportActionBar?.setBackgroundDrawable(ColorDrawable(themeColor))
+            this.supportActionBar?.setBackgroundDrawable(themeColor.toDrawable())
         }
     }
-
     protected abstract fun getLayoutId(): Int
     protected abstract fun initData(savedInstanceState: Bundle?)
     protected abstract fun initView()
     protected open fun subscribeEvent() {}
+
     protected abstract fun loadData()
 
     override fun onDestroy() {
         super.onDestroy()
+        ViewCompat.setOnApplyWindowInsetsListener(window.decorView, null)
         binding.unbind()
         cancel()
     }
