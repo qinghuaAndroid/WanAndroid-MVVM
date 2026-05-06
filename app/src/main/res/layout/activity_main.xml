@@ -8,16 +8,15 @@
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
         tools:openDrawer="start">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@color/viewBackground">
+            android:background="@color/viewBackground"
+            android:orientation="vertical">
 
-            <include layout="@layout/toolbar"/>
+            <include layout="@layout/toolbar" />
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/nav_host_fragment_activity_main"
@@ -33,10 +32,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
                 android:background="@color/viewBackground"
-                app:labelVisibilityMode="selected"
+                app:elevation="0dp"
                 app:itemHorizontalTranslationEnabled="true"
                 app:itemIconTint="@drawable/bottom_navigation_item_selector"
                 app:itemTextColor="@drawable/bottom_navigation_item_selector"
+                app:labelVisibilityMode="selected"
                 app:menu="@menu/bottom_nav_menu" />
 
         </LinearLayout>
@@ -47,7 +47,6 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:background="@color/viewBackground"
-            android:fitsSystemWindows="true"
             app:headerLayout="@layout/nav_header_main"
             app:itemIconTint="@color/item_nav_color_tv"
             app:itemTextColor="@color/item_nav_color_tv"

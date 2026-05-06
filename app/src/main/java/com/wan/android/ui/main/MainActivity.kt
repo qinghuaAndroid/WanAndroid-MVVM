@@ -3,9 +3,13 @@ package com.wan.android.ui.main
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.graphics.Insets
+import androidx.core.view.updateLayoutParams
+import androidx.core.view.updatePadding
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
@@ -25,6 +29,7 @@ import com.wan.android.databinding.ActivityMainBinding
 import com.wan.android.databinding.NavHeaderMainBinding
 import com.wan.android.ui.account.AccountViewModel
 import com.wan.baselib.ext.collectOnLifecycle
+import com.wan.baselib.ext.dp
 import com.wan.baselib.ext.getThemeColor
 import com.wan.baselib.ext.showToast
 import com.wan.baselib.flowbus.SharedFlowBus
@@ -102,6 +107,16 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>() {
 
     }
 
+    override fun dispatchWindowInsets(insets: Insets) {
+        super.dispatchWindowInsets(insets)
+        navHeaderMainBinding.navViewHeader.apply {
+            updatePadding(top = 36.dp + insets.top)
+        }
+        binding.btmNavigation.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+            bottomMargin = insets.bottom
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
@@ -144,6 +159,7 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>() {
                         }
                     }
                 }
+
                 R.id.nav_collect -> {
                     ARouter.getInstance().build(ArouterPath.ACTIVITY_COLLECT).navigation(this) {
                         onInterrupt {
@@ -152,24 +168,31 @@ class MainActivity : BaseVMActivity<MainViewModel, ActivityMainBinding>() {
                         }
                     }
                 }
+
                 R.id.nav_question -> {
                     ARouter.getInstance().build(ArouterPath.ACTIVITY_QUESTION).navigation()
                 }
+
                 R.id.nav_setting -> {
                     ARouter.getInstance().build(ArouterPath.ACTIVITY_SETTING).navigation()
                 }
+
                 R.id.nav_about_us -> {
 
                 }
+
                 R.id.nav_logout -> {
                     logout()
                 }
+
                 R.id.nav_night_mode -> {
                     switchNightMode()
                 }
+
                 R.id.nav_todo -> {
 
                 }
+
                 R.id.nav_square -> {
                     ARouter.getInstance().build(ArouterPath.ACTIVITY_SHARE_LIST).navigation()
                 }

@@ -2,22 +2,22 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.wan.android.ui.setting.SettingActivity">
+    tools:context=".ui.setting.SettingActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/viewBackground"
-        android:fitsSystemWindows="true">
+        android:background="@color/viewBackground">
 
-        <include layout="@layout/toolbar" />
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvClear"
             style="@style/text_1"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="58dp"
             android:background="@drawable/ripple_bg"
             android:drawableEnd="@mipmap/arrow_right"
             android:gravity="center_vertical"
@@ -25,7 +25,7 @@
             android:paddingEnd="@dimen/padding_right"
             android:text="清除缓存"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
         <TextView
             android:id="@+id/tvClearValue"

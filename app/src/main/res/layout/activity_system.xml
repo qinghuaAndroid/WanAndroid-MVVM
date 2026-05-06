@@ -6,21 +6,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:background="@color/viewBackground"
-        android:fitsSystemWindows="true">
+        android:orientation="vertical">
 
         <include layout="@layout/toolbar" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/swipeRefresh">
+            android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSystem"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/rvSystem"
                 android:overScrollMode="never" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>

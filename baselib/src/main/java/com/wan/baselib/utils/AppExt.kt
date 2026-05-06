@@ -11,7 +11,7 @@ import java.util.*
  */
 
 val Context.versionName: String
-    get() = packageManager.getPackageInfo(packageName, 0).versionName
+    get() = packageManager.getPackageInfo(packageName, 0).versionName ?: ""
 
 val Context.versionCode: Long
     get() = with(packageManager.getPackageInfo(packageName, 0)) {
@@ -61,7 +61,7 @@ fun Context.getAppSignature(packageName: String = this.packageName): ByteArray? 
     val packageInfo: PackageInfo =
         packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNATURES)
     val signatures = packageInfo.signatures
-    return signatures[0].toByteArray()
+    return signatures?.get(0)?.toByteArray()
 }
 
 /**
