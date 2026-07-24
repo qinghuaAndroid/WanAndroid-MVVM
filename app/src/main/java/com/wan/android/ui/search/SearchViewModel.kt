@@ -10,13 +10,11 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.realm.kotlin.notifications.InitialResults
 import io.realm.kotlin.notifications.ResultsChange
 import io.realm.kotlin.notifications.UpdatedResults
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -62,8 +60,8 @@ class SearchViewModel @Inject constructor(private val mRepository: SearchReposit
     }
 
     fun getHotSearchData() {
-        viewModelScope.launch(Dispatchers.Main) {
-            val result = withContext(Dispatchers.IO) { mRepository.getHotSearchData() }
+        viewModelScope.launch {
+            val result = mRepository.getHotSearchData()
             if (result is Result.Success) emitUiState(showSuccess = result.data)
             else if (result is Result.Error) emitUiState(showError = result.exception.message)
         }

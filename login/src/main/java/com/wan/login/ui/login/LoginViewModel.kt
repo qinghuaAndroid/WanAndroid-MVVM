@@ -8,11 +8,9 @@ import com.wan.baselib.mvvm.BaseViewModel
 import com.wan.baselib.mvvm.Result
 import com.wan.login.bean.User
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 /**
@@ -55,14 +53,7 @@ class LoginViewModel @Inject constructor(private val mRepository: LoginRepositor
                 return@launch
             }
             emitUiState(true)
-
-            val result = withContext(Dispatchers.Main) {
-                mRepository.login(
-                    userName.get() ?: "",
-                    passWord.get() ?: ""
-                )
-            }
-
+            val result = mRepository.login(userName.get() ?: "", passWord.get() ?: "")
             if (result is Result.Success) {
                 emitUiState(showSuccess = result.data, enableLoginButton = true)
             } else if (result is Result.Error) {

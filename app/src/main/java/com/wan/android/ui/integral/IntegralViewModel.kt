@@ -6,11 +6,9 @@ import com.wan.baselib.mvvm.BaseViewModel
 import com.wan.baselib.mvvm.Result
 import com.wan.common.base.ListUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 /**
@@ -28,13 +26,13 @@ class IntegralViewModel @Inject constructor(private val mRepository: IntegralRep
     private var pageNum = 1
 
     fun getIntegralRecord(isRefresh: Boolean) {
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch {
             emitUiState(showLoading = true)
             if (isRefresh) {
                 pageNum = 1
                 emitUiState(isEnableLoadMore = false)
             }
-            val result = withContext(Dispatchers.IO) { mRepository.getIntegralRecord(pageNum) }
+            val result = mRepository.getIntegralRecord(pageNum)
             if (result is Result.Success) {
                 val data = result.data
                 emitUiState(

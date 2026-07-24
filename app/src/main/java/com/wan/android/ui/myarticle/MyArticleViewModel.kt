@@ -6,11 +6,9 @@ import com.wan.baselib.mvvm.BaseViewModel
 import com.wan.baselib.mvvm.Result
 import com.wan.common.base.ListUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 /**
@@ -28,13 +26,13 @@ class MyArticleViewModel @Inject constructor(private val mRepository: MyArticleR
     private var pageNum = 0
 
     fun getMyArticle(isRefresh: Boolean) {
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch {
             emitUiState(showLoading = true)
             if (isRefresh) {
                 pageNum = 0
                 emitUiState(isEnableLoadMore = false)
             }
-            val result = withContext(Dispatchers.IO) { mRepository.getMyArticle(pageNum) }
+            val result = mRepository.getMyArticle(pageNum)
             if (result is Result.Success) {
                 val myArticleEntity = result.data
                 emitUiState(

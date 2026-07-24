@@ -9,17 +9,13 @@ import com.wan.android.ui.search.list.SearchListRepository
 import com.wan.android.ui.share.ShareListRepository
 import com.wan.android.ui.system.act.SystemRepository
 import com.wan.android.ui.tab.list.TabListRepository
-import com.wan.baselib.di.IoDispatcher
-import com.wan.baselib.di.MainDispatcher
 import com.wan.baselib.mvvm.BaseViewModel
 import com.wan.baselib.mvvm.Result
 import com.wan.common.base.ListUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 /**
@@ -35,8 +31,6 @@ class ArticleViewModel @Inject constructor(
     private val tabListRepository: TabListRepository,
     private val collectRepository: CollectRepository,
     private val questionRepository: QuestionRepository,
-    @MainDispatcher private val mainDispatcher: CoroutineDispatcher,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : BaseViewModel() {
 
     sealed class ArticleType {
@@ -78,23 +72,21 @@ class ArticleViewModel @Inject constructor(
         cid: Int = 0,
         queryTxt: String = ""
     ) {
-        viewModelScope.launch(mainDispatcher) {
+        viewModelScope.launch {
             if (isRefresh) {
                 pageNum = 0
                 emitUiState(showLoading = true)
                 emitUiState(isEnableLoadMore = false)
             }
-            val result = withContext(ioDispatcher) {
-                when (articleType) {
-                    ArticleType.Home -> homeRepository.loadArticles(pageNum)
-                    ArticleType.Share -> shareListRepository.getShareArticle(pageNum)
-                    ArticleType.System -> systemRepository.getSystemArticle(pageNum, cid)
-                    ArticleType.Search -> searchListRepository.queryBySearchKey(pageNum, queryTxt)
-                    ArticleType.Project -> tabListRepository.getProjectList(pageNum, cid)
-                    ArticleType.Blog -> tabListRepository.getAccountList(cid, pageNum)
-                    ArticleType.Collection -> collectRepository.getCollectData(pageNum)
-                    ArticleType.Question -> questionRepository.getQuestionList(pageNum)
-                }
+            val result = when (articleType) {
+                ArticleType.Home -> homeRepository.loadArticles(pageNum)
+                ArticleType.Share -> shareListRepository.getShareArticle(pageNum)
+                ArticleType.System -> systemRepository.getSystemArticle(pageNum, cid)
+                ArticleType.Search -> searchListRepository.queryBySearchKey(pageNum, queryTxt)
+                ArticleType.Project -> tabListRepository.getProjectList(pageNum, cid)
+                ArticleType.Blog -> tabListRepository.getAccountList(cid, pageNum)
+                ArticleType.Collection -> collectRepository.getCollectData(pageNum)
+                ArticleType.Question -> questionRepository.getQuestionList(pageNum)
             }
             if (result is Result.Success) {
                 val articleEntity = result.data

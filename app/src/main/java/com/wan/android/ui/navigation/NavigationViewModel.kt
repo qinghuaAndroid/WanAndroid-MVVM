@@ -5,11 +5,9 @@ import com.wan.android.bean.NavigationEntity
 import com.wan.baselib.mvvm.BaseViewModel
 import com.wan.baselib.mvvm.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 /**
@@ -25,8 +23,8 @@ class NavigationViewModel @Inject constructor(private val mRepository: Navigatio
         get() = _uiState
 
     fun getNavigation() {
-        viewModelScope.launch(Dispatchers.Main) {
-            val result = withContext(Dispatchers.IO) { mRepository.getNavigation() }
+        viewModelScope.launch {
+            val result = mRepository.getNavigation()
             if (result is Result.Success) emitNavigationUiState(showSuccess = result.data)
             else if (result is Result.Error) emitNavigationUiState(showError = result.exception.message)
         }

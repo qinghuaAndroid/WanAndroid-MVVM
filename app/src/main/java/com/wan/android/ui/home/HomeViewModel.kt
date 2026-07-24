@@ -7,11 +7,9 @@ import com.wan.baselib.mvvm.BaseViewModel
 import com.wan.baselib.mvvm.Result
 import com.wan.common.base.BaseUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 /**
@@ -30,16 +28,16 @@ class HomeViewModel @Inject constructor(private val mRepository: HomeRepository)
         get() = _bannerUiState
 
     fun getTopArticles() {
-        viewModelScope.launch(Dispatchers.Main) {
-            val result = withContext(Dispatchers.IO) { mRepository.loadTopArticles() }
+        viewModelScope.launch {
+            val result = mRepository.loadTopArticles()
             if (result is Result.Success) emitTopArticleUiState(showSuccess = result.data)
             else if (result is Result.Error) emitTopArticleUiState(showError = result.exception.message)
         }
     }
 
     fun getBanner() {
-        viewModelScope.launch(Dispatchers.Main) {
-            val result = withContext(Dispatchers.IO) { mRepository.loadBanner() }
+        viewModelScope.launch {
+            val result = mRepository.loadBanner()
             if (result is Result.Success) emitBannerUiState(showSuccess = result.data)
             else if (result is Result.Error) emitBannerUiState(showError = result.exception.message)
         }

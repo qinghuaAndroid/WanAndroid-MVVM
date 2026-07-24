@@ -6,11 +6,9 @@ import com.wan.baselib.mvvm.BaseViewModel
 import com.wan.baselib.mvvm.Result
 import com.wan.common.base.BaseUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,8 +20,8 @@ class MainViewModel @Inject constructor(private val mRepository: MainRepository)
 
 
     fun getUserInfo() {
-        viewModelScope.launch(Dispatchers.Main) {
-            val result = withContext(Dispatchers.IO) { mRepository.getUserInfo() }
+        viewModelScope.launch {
+            val result = mRepository.getUserInfo()
             if (result is Result.Success) {
                 emitUiState(showSuccess = result.data)
             } else if (result is Result.Error) {

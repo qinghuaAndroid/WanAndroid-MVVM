@@ -37,7 +37,7 @@ class AccountViewModel @Inject constructor(
 
     fun logout() {
         viewModelScope.launch(Dispatchers.Main) {
-            val result = withContext(Dispatchers.IO) { mRepository.logout() }
+            val result = mRepository.logout()
             if (result is Result.Success) {
                 emitUiState(showSuccess = true)
             } else if (result is Result.Error) emitUiState(showError = result.exception.message)

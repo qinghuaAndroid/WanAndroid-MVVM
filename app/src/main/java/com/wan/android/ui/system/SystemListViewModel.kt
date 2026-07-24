@@ -6,11 +6,9 @@ import com.wan.baselib.mvvm.BaseViewModel
 import com.wan.baselib.mvvm.Result
 import com.wan.common.base.BaseUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 /**
@@ -26,8 +24,8 @@ class SystemListViewModel @Inject constructor(private val mRepository: SystemLis
         get() = _uiState
 
     fun getSystemList() {
-        viewModelScope.launch(Dispatchers.Main) {
-            val result = withContext(Dispatchers.IO) { mRepository.getSystemList() }
+        viewModelScope.launch {
+            val result = mRepository.getSystemList()
             if (result is Result.Success) emitSystemListUiState(showSuccess = result.data)
             else if (result is Result.Error) emitSystemListUiState(showError = result.exception.message)
         }
